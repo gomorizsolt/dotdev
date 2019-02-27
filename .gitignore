@@ -3,3 +3,6 @@
 
 # Generated .next folder
 /.next
+
+# Jest test coverage
+/coverage

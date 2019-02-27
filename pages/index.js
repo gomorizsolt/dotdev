@@ -1,18 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
-
-const Header = styled.div`
-  width: 100%;
-`;
-
-const Title = styled.h1`
-  font-size: 3em;
-`;
+import App from '../components/App/App';
 
 const indexPage = () => (
-  <Header>
-    <Title>C-Hive</Title>
-  </Header>
+  <React.Fragment>
+    <App />
+  </React.Fragment>
 );
 
 export default indexPage;

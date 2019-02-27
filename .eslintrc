@@ -2,7 +2,8 @@
     "env": {
       "browser": true,
       "es6": true,
-      "commonjs": true
+      "commonjs": true,
+      "jest": true
     },
     "extends": "airbnb",
     "parserOptions": {
@@ -15,6 +16,8 @@
     "plugins": ["react"],
     "rules": {
       "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-      "react/prop-types": 0
+      "react/prop-types": 0,
+      "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+      "import/prefer-default-export": 0
     }
 }
