@@ -1,7 +1,7 @@
 # Node modules
 /node_modules
 
-# Generated .next folder
+# Generated .next folder by next
 /.next
 
 # Jest test coverage
