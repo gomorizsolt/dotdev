@@ -19,6 +19,6 @@ describe('<App />', () => {
   });
 
   it('renders the `C-Hive` text', () => {
-
+    expect(appWrapper.find(Title).text()).toEqual('C-Hive');
   });
 });
