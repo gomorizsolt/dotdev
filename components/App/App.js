@@ -1,9 +1,10 @@
 import React from 'react';
-import { Header, Title } from './App.style';
+import { Header } from './App.style';
 
 const app = () => (
   <Header>
-    <Title>C-Hive</Title>
+    <img src="/static/logo/logo.png" alt="C-Hive" />
+    <p>C-Hive</p>
   </Header>
 );
 
