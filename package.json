@@ -6,8 +6,7 @@
     "build": "next build",
     "start": "next start -p $PORT",
     "test": "jest --coverage",
-    "lint": "eslint . --ext .js",
-    "heroku-postbuild": "npm run build"
+    "lint": "eslint . --ext .js"
   },
   "dependencies": {
     "next": "8.0.3",
