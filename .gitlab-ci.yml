@@ -14,4 +14,4 @@ pages:
     paths:
     - public 
   only:
-  - master
+  - issue-1_basic-layout
