@@ -9,7 +9,7 @@ pages:
   - npm install
   - npm run build
   - rm -rf public
-  - mv .next public
+  - mv build public
   artifacts:
     paths:
     - public 
