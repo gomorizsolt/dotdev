@@ -15,4 +15,4 @@ pages:
     paths:
     - public 
   only:
-  - issue-1_basic-layout
+  - issue-3_fix-logo
