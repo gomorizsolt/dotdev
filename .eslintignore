@@ -1,0 +1,7 @@
+# In order to avoid testing the generated folders.
+/coverage
+
+/build
+/out
+
+/node_modules
