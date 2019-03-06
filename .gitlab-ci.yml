@@ -11,6 +11,7 @@ pages:
   - npm run export
   - rm -rf public
   - mv out public
+  - cd public && touch .nojekyll
   artifacts:
     paths:
     - public 
