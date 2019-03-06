@@ -1,0 +1,18 @@
+image: node:8
+
+pages:
+  stage: deploy
+  cache:
+    paths:
+    - node_modules/
+  script:
+  - npm install
+  - npm run build
+  - npm run export
+  - rm -rf public
+  - mv out public
+  artifacts:
+    paths:
+    - public 
+  only:
+  - issue-1_basic-layout

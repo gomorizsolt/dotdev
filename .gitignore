@@ -1,0 +1,9 @@
+# Node modules
+/node_modules
+
+# Generated build and out folder by next
+/build
+/out
+
+# Jest test coverage
+/coverage
