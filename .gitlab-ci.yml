@@ -11,8 +11,9 @@ pages:
   - npm run export
   - rm -rf public
   - mv out public
+  - cd public && touch .nojekyll
   artifacts:
     paths:
     - public 
   only:
-  - issue-1_basic-layout
+  - issue-3_fix-logo
