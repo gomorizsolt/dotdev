@@ -1,6 +1,6 @@
 # c-hive.dev
 
-A website to showcase ourselves.
+A website to showcase ourselves: https://c-hive.gitlab.io/c-hive.dev/
 
 ## MVP proposal
 
