@@ -4,6 +4,7 @@
 # Generated build and out folder by next
 /build
 /out
+.next
 
 # Jest test coverage
 /coverage
