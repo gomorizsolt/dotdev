@@ -1,7 +1,9 @@
 import GetProxyUrl from '../GetProxyUrl/GetProxyUrl';
 
-const getUserSVG = async (username) => {
-  const userUrl = GetProxyUrl(username);
+// The plan is to create another SVG fetcher for GitLab.
+
+export const GetGitHubUserSVG = async (userName) => {
+  const userUrl = GetProxyUrl(userName);
   const responseData = await fetch(userUrl);
 
   return responseData.text()
@@ -13,5 +15,3 @@ const getUserSVG = async (username) => {
       return cal;
     });
 };
-
-export default getUserSVG;
