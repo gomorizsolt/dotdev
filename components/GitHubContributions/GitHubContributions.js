@@ -7,7 +7,7 @@ class GitHubContributions extends Component {
     super(props);
 
     this.state = {
-      contributionsData: null,
+      contributionsData: [],
     };
   }
 
@@ -26,7 +26,7 @@ class GitHubContributions extends Component {
 
     let contributionsDisplayer = <p>Loading ...</p>;
 
-    if (contributionsData) {
+    if (contributionsData.length !== 0) {
       contributionsDisplayer = <GitHubDataDisplayer contributionsData={contributionsData} />;
     }
 

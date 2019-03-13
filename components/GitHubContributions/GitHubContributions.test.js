@@ -30,10 +30,10 @@ describe('<GitHubContributions />', () => {
     expect(gitHubContributionsWrapper.state('contributionsData')).toEqual(parsedContributionsData);
   });
 
-  describe('when `contributionsData` is null', () => {
+  describe('when `contributionsData` is empty', () => {
     beforeEach(() => {
       gitHubContributionsWrapper.setState({
-        contributionsData: null,
+        contributionsData: [],
       });
     });
 
@@ -44,7 +44,7 @@ describe('<GitHubContributions />', () => {
     });
   });
 
-  describe('when `contributionsData` is not null', () => {
+  describe('when `contributionsData` is filled', () => {
     beforeEach(() => {
       gitHubContributionsWrapper.setState({
         contributionsData: parsedContributionsData,
