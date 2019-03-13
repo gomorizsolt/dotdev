@@ -51,7 +51,7 @@ describe('<GitHubContributions />', () => {
       });
     });
 
-    it('renders GitHubDisplayer', () => {
+    it('renders GitHubDataDisplayer', () => {
       expect(gitHubContributionsWrapper.find(GitHubDataDisplayer)).toHaveLength(1);
     });
   });
