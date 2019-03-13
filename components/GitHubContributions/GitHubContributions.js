@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import GithubDataDisplayer from './GithubDataDisplayer/GithubDataDisplayer';
+import GitHubDataDisplayer from './GitHubDataDisplayer/GitHubDataDisplayer';
 import GetParsedContributionsData from '../../utils/GetParsedContributionsData/GetParsedContributionsData';
 
-class GithubContributions extends Component {
+class GitHubContributions extends Component {
   constructor(props) {
     super(props);
 
@@ -27,11 +27,11 @@ class GithubContributions extends Component {
     let contributionsDisplayer = <p>Loading ...</p>;
 
     if (contributionsData) {
-      contributionsDisplayer = <GithubDataDisplayer contributionsData={contributionsData} />;
+      contributionsDisplayer = <GitHubDataDisplayer contributionsData={contributionsData} />;
     }
 
     return contributionsDisplayer;
   }
 }
 
-export default GithubContributions;
+export default GitHubContributions;

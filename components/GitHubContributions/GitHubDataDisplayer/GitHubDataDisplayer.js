@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   ContributionsContainer, Element, Title, Value,
-} from './GithubDataDisplayer.style';
+} from './GitHubDataDisplayer.style';
 
 const sumData = (contributionsData, propName) => {
   const test = contributionsData.reduce((a, b) => a + b[propName], 0);
@@ -9,7 +9,7 @@ const sumData = (contributionsData, propName) => {
   return test;
 };
 
-const githubDataDisplayer = ({ contributionsData }) => (
+const gitHubDataDisplayer = ({ contributionsData }) => (
   <ContributionsContainer>
     <Element>
       <Title>Contributions in the last year</Title>
@@ -26,4 +26,4 @@ const githubDataDisplayer = ({ contributionsData }) => (
   </ContributionsContainer>
 );
 
-export default githubDataDisplayer;
+export default gitHubDataDisplayer;
