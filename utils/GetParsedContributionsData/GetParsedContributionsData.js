@@ -1,9 +1,9 @@
 import SvgParser from 'github-calendar-parser';
-import { GetGitHubUserSVG } from '../GetUserSvgUtils/GetUserSvgUtils';
+import * as SVGUtils from '../SvgUtils/SvgUtils';
 
 const getParsedContributionsData = async (userNames) => {
   const parsedData = userNames.map(async (userName) => {
-    const userSVG = await GetGitHubUserSVG(userName);
+    const userSVG = await SVGUtils.GetGitHubUserSVG(userName);
 
     return SvgParser(userSVG.outerHTML);
   });
