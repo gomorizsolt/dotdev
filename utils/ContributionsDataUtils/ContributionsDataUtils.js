@@ -11,8 +11,8 @@ export const GetParsedData = async (userNames) => {
   return Promise.all(parsedData).then(contributionsData => contributionsData);
 };
 
-export const SumPropValues = (contributionsData, propName) => {
-  const sum = contributionsData.reduce((a, b) => a + b[propName], 0);
+export const SumValuesByProp = (data, propName) => {
+  const sum = data.reduce((a, b) => a + b[propName], 0);
 
   return sum;
 };

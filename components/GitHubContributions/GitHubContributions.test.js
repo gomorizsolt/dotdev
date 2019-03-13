@@ -5,7 +5,7 @@ import GitHubDataDisplayer from './GitHubDataDisplayer/GitHubDataDisplayer';
 import * as ContributionsDataUtils from '../../utils/ContributionsDataUtils/ContributionsDataUtils';
 import { GithubUsernames } from '../../resources/Users/Users';
 
-jest.mock('../../utils/ContributionsDataUtils/ContributionsDataUtils.js', () => require
+jest.mock('../../utils/ContributionsDataUtils/ContributionsDataUtils', () => require
   .requireActual('../../utils/TestUtils/TestUtils')
   .mockOriginalFunctionality('../ContributionsDataUtils/ContributionsDataUtils'));
 

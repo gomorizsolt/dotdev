@@ -8,15 +8,15 @@ const gitHubDataDisplayer = ({ contributionsData }) => (
   <ContributionsContainer>
     <Element>
       <Title>Contributions in the last year</Title>
-      <Value>{ContributionsDataUtils.SumPropValues(contributionsData, 'last_year')}</Value>
+      <Value>{ContributionsDataUtils.SumValuesByProp(contributionsData, 'last_year')}</Value>
     </Element>
     <Element>
       <Title>Current streak</Title>
-      <Value>{ContributionsDataUtils.SumPropValues(contributionsData, 'current_streak')}</Value>
+      <Value>{ContributionsDataUtils.SumValuesByProp(contributionsData, 'current_streak')}</Value>
     </Element>
     <Element>
       <Title>Longest streak</Title>
-      <Value>{ContributionsDataUtils.SumPropValues(contributionsData, 'longest_streak')}</Value>
+      <Value>{ContributionsDataUtils.SumValuesByProp(contributionsData, 'longest_streak')}</Value>
     </Element>
   </ContributionsContainer>
 );
