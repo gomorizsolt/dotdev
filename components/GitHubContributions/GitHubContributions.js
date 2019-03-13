@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import GitHubDataDisplayer from './GitHubDataDisplayer/GitHubDataDisplayer';
-import GetParsedContributionsData from '../../utils/GetParsedContributionsData/GetParsedContributionsData';
+import * as ContributionsDataUtils from '../../utils/ContributionsDataUtils/ContributionsDataUtils';
 
 class GitHubContributions extends Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class GitHubContributions extends Component {
   async componentDidMount() {
     const { userNames } = this.props;
 
-    const parsedContributionsData = await GetParsedContributionsData(userNames);
+    const parsedContributionsData = await ContributionsDataUtils.GetParsedData(userNames);
 
     this.setState({
       contributionsData: parsedContributionsData,

@@ -2,12 +2,12 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import GitHubContributions from './GitHubContributions';
 import GitHubDataDisplayer from './GitHubDataDisplayer/GitHubDataDisplayer';
-import GetParsedContributionsData from '../../utils/GetParsedContributionsData/GetParsedContributionsData';
+import * as ContributionsDataUtils from '../../utils/ContributionsDataUtils/ContributionsDataUtils';
 import { GithubUsernames } from '../../resources/Users/Users';
 
-jest.mock('../../utils/GetParsedContributionsData/GetParsedContributionsData', () => require
+jest.mock('../../utils/ContributionsDataUtils/ContributionsDataUtils.js', () => require
   .requireActual('../../utils/TestUtils/TestUtils')
-  .mockOriginalFunctionality('../GetParsedContributionsData/GetParsedContributionsData'));
+  .mockOriginalFunctionality('../ContributionsDataUtils/ContributionsDataUtils'));
 
 describe('<GitHubContributions />', () => {
   let gitHubContributionsWrapper;
@@ -17,13 +17,13 @@ describe('<GitHubContributions />', () => {
   ];
 
   beforeEach(async () => {
-    GetParsedContributionsData.mockImplementationOnce(() => parsedContributionsData);
+    ContributionsDataUtils.GetParsedData.mockImplementationOnce(() => parsedContributionsData);
 
     gitHubContributionsWrapper = await shallow(<GitHubContributions userNames={GithubUsernames} />);
   });
 
-  it('calls GetParsedContributionsData', () => {
-    expect(GetParsedContributionsData).toHaveBeenCalled();
+  it('calls ContributionsDataUtils.GetParsedData', () => {
+    expect(ContributionsDataUtils.GetParsedData).toHaveBeenCalled();
   });
 
   it('sets the parsed data into the state', () => {

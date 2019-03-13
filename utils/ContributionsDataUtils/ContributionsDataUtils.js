@@ -1,7 +1,7 @@
 import SvgParser from 'github-calendar-parser';
 import * as SVGUtils from '../SvgUtils/SvgUtils';
 
-const getParsedContributionsData = async (userNames) => {
+export const GetParsedData = async (userNames) => {
   const parsedData = userNames.map(async (userName) => {
     const userSVG = await SVGUtils.GetGitHubUserSVG(userName);
 
@@ -11,4 +11,8 @@ const getParsedContributionsData = async (userNames) => {
   return Promise.all(parsedData).then(contributionsData => contributionsData);
 };
 
-export default getParsedContributionsData;
+export const SumPropValues = (contributionsData, propName) => {
+  const sum = contributionsData.reduce((a, b) => a + b[propName], 0);
+
+  return sum;
+};
