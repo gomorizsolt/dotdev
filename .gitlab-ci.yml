@@ -15,5 +15,3 @@ pages:
   artifacts:
     paths:
     - public 
-  only:
-  - issue-3_fix-logo
