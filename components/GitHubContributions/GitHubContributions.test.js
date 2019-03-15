@@ -16,17 +16,19 @@ describe('<GitHubContributions />', () => {
     { last_year: 989 },
   ];
 
-  beforeEach(async () => {
+  beforeEach(() => {
+    gitHubContributionsWrapper = shallow(<GitHubContributions userNames={GithubUsernames} />);
+  });
+
+  it('calls ContributionsDataUtils.GetParsedData with `props.userNames`', () => {
+    expect(ContributionsDataUtils.GetParsedData).toHaveBeenCalledWith(GithubUsernames);
+  });
+
+  it('sets the parsed data into the state', async () => {
     ContributionsDataUtils.GetParsedData.mockImplementationOnce(() => parsedContributionsData);
 
     gitHubContributionsWrapper = await shallow(<GitHubContributions userNames={GithubUsernames} />);
-  });
 
-  it('calls ContributionsDataUtils.GetParsedData', () => {
-    expect(ContributionsDataUtils.GetParsedData).toHaveBeenCalled();
-  });
-
-  it('sets the parsed data into the state', () => {
     expect(gitHubContributionsWrapper.state('contributionsData')).toEqual(parsedContributionsData);
   });
 
