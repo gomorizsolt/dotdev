@@ -16,5 +16,5 @@ pages:
     paths:
     - public 
   only:
-  - master
+  - issue-6_get-user-svg
   
