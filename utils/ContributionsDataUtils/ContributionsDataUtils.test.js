@@ -1,5 +1,6 @@
 import * as ContributionsDataUtils from './ContributionsDataUtils';
 import * as SVGUtils from '../SvgUtils/SvgUtils';
+import { GetFakeContributionsData } from '../TestUtils/TestUtils';
 import { GithubUsernames } from '../../resources/Users/Users';
 
 jest.mock('../SvgUtils/SvgUtils', () => require
@@ -15,18 +16,14 @@ describe('ContributionsDataUtils', () => {
     });
   });
 
-  describe('SumPropValues', () => {
-    const data = [
-      { last_year: 500 },
-      { last_year: 600 },
-    ];
+  describe('SumContributionsValues', () => {
+    it('returns the sum of contributions', () => {
+      const fakeContributionsData = GetFakeContributionsData();
+      const expectedSum = 12; // 5 + 7
 
-    it('summarizes the values based on the given property name ', () => {
-      const expectedValue = data[0].last_year + data[1].last_year;
+      const actualSum = ContributionsDataUtils.SumContributionsValues(fakeContributionsData);
 
-      const actualValue = ContributionsDataUtils.SumValuesByProp(data, 'last_year');
-
-      expect(actualValue).toEqual(expectedValue);
+      expect(actualSum).toEqual(expectedSum);
     });
   });
 });

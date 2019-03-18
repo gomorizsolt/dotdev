@@ -1,18 +1,33 @@
-import SvgParser from 'github-calendar-parser';
+import svgson from 'svgson';
 import * as SVGUtils from '../SvgUtils/SvgUtils';
 
 export const GetParsedData = async (userNames) => {
   const parsedData = userNames.map(async (userName) => {
     const userSVG = await SVGUtils.GetGitHubUserSVG(userName);
 
-    return SvgParser(userSVG.outerHTML);
+    return svgson.parse(userSVG.outerHTML);
   });
 
   return Promise.all(parsedData).then(contributionsData => contributionsData);
 };
 
-export const SumValuesByProp = (data, propName) => {
-  const sum = data.reduce((a, b) => a + b[propName], 0);
+const SumWeekData = (weekData) => {
+  const sum = weekData.reduce((a, b) => {
+    if (b.attributes['data-count']) {
+      return a + Number(b.attributes['data-count']);
+    }
+
+    return a + 0;
+  }, 0);
 
   return sum;
+};
+
+// eslint-disable-next-line arrow-body-style
+export const SumContributionsValues = (contributionsData) => {
+  return contributionsData.map(svgData => svgData.children[0].children.map((weekData) => {
+    const weekDataSum = SumWeekData(weekData.children);
+
+    return weekDataSum;
+  })).reduce((a, b) => a.concat(b), []).reduce((a, b) => a + b, 0);
 };
