@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import GitHubDataDisplayer from './GitHubDataDisplayer';
 import * as ContributionsDataUtils from '../../../utils/ContributionsDataUtils/ContributionsDataUtils';
-import { GetFakeContributionsData } from '../../../utils/TestUtils/TestUtils';
+import * as TestUtils from '../../../utils/TestUtils/TestUtils';
 import { ContributionsContainer } from './GitHubDataDisplayer.style';
 
 jest.mock('../../../utils/ContributionsDataUtils/ContributionsDataUtils', () => require
@@ -12,7 +12,7 @@ jest.mock('../../../utils/ContributionsDataUtils/ContributionsDataUtils', () => 
 describe('<GitHubDataDisplayer />', () => {
   let githubDataDisplayerWrapper;
 
-  const contributionsData = GetFakeContributionsData();
+  const contributionsData = TestUtils.getFakeContributionsObjectWithDailyCounts([5, 7, 0]);
 
   beforeEach(() => {
     ContributionsDataUtils.SumContributionsValues.mockImplementationOnce(() => jest.fn());

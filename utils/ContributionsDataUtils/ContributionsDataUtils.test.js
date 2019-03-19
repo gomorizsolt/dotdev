@@ -1,6 +1,6 @@
 import * as ContributionsDataUtils from './ContributionsDataUtils';
 import * as SVGUtils from '../SvgUtils/SvgUtils';
-import { GetFakeContributionsData } from '../TestUtils/TestUtils';
+import * as TestUtils from '../TestUtils/TestUtils';
 import { GithubUsernames } from '../../resources/Users/Users';
 
 jest.mock('../SvgUtils/SvgUtils', () => require
@@ -18,8 +18,8 @@ describe('ContributionsDataUtils', () => {
 
   describe('SumContributionsValues', () => {
     it('returns the sum of contributions', () => {
-      const fakeContributionsData = GetFakeContributionsData();
-      const expectedSum = 12; // 5 + 7
+      const fakeContributionsData = TestUtils.getFakeContributionsObjectWithDailyCounts([5, 7, 0]);
+      const expectedSum = 12;
 
       const actualSum = ContributionsDataUtils.SumContributionsValues(fakeContributionsData);
 

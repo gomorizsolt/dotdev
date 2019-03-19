@@ -10,7 +10,7 @@ export const mockOriginalFunctionality = (name) => {
   };
 };
 
-export const GetFakeContributionsData = () => [{
+export const getFakeContributionsObjectWithDailyCounts = dailyCounts => dailyCounts.map(count => ({
   children: [
     {
       children: [
@@ -19,19 +19,7 @@ export const GetFakeContributionsData = () => [{
             {
               attributes: {
                 class: 'day',
-                'data-count': '5',
-                'data-date': '2018-03-18',
-                fill: '#ebedf0',
-                height: '10',
-                width: '10',
-                x: '13',
-                y: '0',
-              },
-            },
-            {
-              attributes: {
-                class: 'day',
-                'data-count': '7',
+                'data-count': count,
                 'data-date': '2018-03-18',
                 fill: '#ebedf0',
                 height: '10',
@@ -45,4 +33,4 @@ export const GetFakeContributionsData = () => [{
       ],
     },
   ],
-}];
+}));
