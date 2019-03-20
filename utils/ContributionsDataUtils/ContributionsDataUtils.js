@@ -23,11 +23,9 @@ const SumWeekData = (weekData) => {
   return sum;
 };
 
-// eslint-disable-next-line arrow-body-style
-export const SumContributionsValues = (contributionsData) => {
-  return contributionsData.map(svgData => svgData.children[0].children.map((weekData) => {
+export const SumContributionsValues = contributionsData => contributionsData
+  .map(svgData => svgData.children[0].children.map((weekData) => {
     const weekDataSum = SumWeekData(weekData.children);
 
     return weekDataSum;
   })).reduce((a, b) => a.concat(b), []).reduce((a, b) => a + b, 0);
-};
