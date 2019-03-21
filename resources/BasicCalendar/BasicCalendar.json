@@ -6443,7 +6443,8 @@
             "attributes": {
               "x": "13",
               "y": "-10",
-              "class": "month"
+              "class": "month",
+              "font-size": "13"
             },
             "children": [
               {
@@ -6462,7 +6463,8 @@
             "attributes": {
               "x": "55",
               "y": "-10",
-              "class": "month"
+              "class": "month",
+              "font-size": "13"
             },
             "children": [
               {
@@ -6481,7 +6483,8 @@
             "attributes": {
               "x": "97",
               "y": "-10",
-              "class": "month"
+              "class": "month",
+              "font-size": "13"
             },
             "children": [
               {
@@ -6500,7 +6503,8 @@
             "attributes": {
               "x": "145",
               "y": "-10",
-              "class": "month"
+              "class": "month",
+              "font-size": "13"
             },
             "children": [
               {
@@ -6519,7 +6523,8 @@
             "attributes": {
               "x": "200",
               "y": "-10",
-              "class": "month"
+              "class": "month",
+              "font-size": "13"
             },
             "children": [
               {
@@ -6538,7 +6543,8 @@
             "attributes": {
               "x": "253",
               "y": "-10",
-              "class": "month"
+              "class": "month",
+              "font-size": "13"
             },
             "children": [
               {
@@ -6557,7 +6563,8 @@
             "attributes": {
               "x": "301",
               "y": "-10",
-              "class": "month"
+              "class": "month",
+              "font-size": "13"
             },
             "children": [
               {
@@ -6576,7 +6583,8 @@
             "attributes": {
               "x": "355",
               "y": "-10",
-              "class": "month"
+              "class": "month",
+              "font-size": "13"
             },
             "children": [
               {
@@ -6595,7 +6603,8 @@
             "attributes": {
               "x": "409",
               "y": "-10",
-              "class": "month"
+              "class": "month",
+              "font-size": "13"
             },
             "children": [
               {
@@ -6614,7 +6623,8 @@
             "attributes": {
               "x": "457",
               "y": "-10",
-              "class": "month"
+              "class": "month",
+              "font-size": "13"
             },
             "children": [
               {
@@ -6633,7 +6643,8 @@
             "attributes": {
               "x": "517",
               "y": "-10",
-              "class": "month"
+              "class": "month",
+              "font-size": "13"
             },
             "children": [
               {
@@ -6652,7 +6663,8 @@
             "attributes": {
               "x": "565",
               "y": "-10",
-              "class": "month"
+              "class": "month",
+              "font-size": "13"
             },
             "children": [
               {
@@ -6671,7 +6683,8 @@
             "attributes": {
               "x": "613",
               "y": "-10",
-              "class": "month"
+              "class": "month",
+              "font-size": "13"
             },
             "children": [
               {
@@ -6712,7 +6725,8 @@
               "text-anchor": "start",
               "class": "wday",
               "dx": "-20",
-              "dy": "20"
+              "dy": "20",
+              "font-size": "13"
             },
             "children": [
               {
@@ -6753,7 +6767,8 @@
               "text-anchor": "start",
               "class": "wday",
               "dx": "-20",
-              "dy": "44"
+              "dy": "44",
+              "font-size": "13"
             },
             "children": [
               {
@@ -6794,7 +6809,8 @@
               "text-anchor": "start",
               "class": "wday",
               "dx": "-14",
-              "dy": "69"
+              "dy": "69",
+              "font-size": "13"
             },
             "children": [
               {
