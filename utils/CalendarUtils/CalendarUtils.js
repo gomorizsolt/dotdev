@@ -1,11 +1,11 @@
+import DateFormat from 'dateformat';
 import BasicCalendar from '../../resources/BasicCalendar/BasicCalendar.json';
 
-const GetCurrentDateOneYearAgo = () => new Date(new Date().setFullYear(new Date().getFullYear() - 1)).toLocaleDateString().replace(/. /g, '-').slice(0, 10);
+const GetCurrentDateOneYearAgo = () => DateFormat(new Date(new Date().setFullYear(new Date().getFullYear() - 1)), 'yyyy-mm-dd');
 
-const IncrementDateByOneDay = date => new Date(new Date(date)
-  .setDate(new Date(date).getDate() + 1)).toLocaleDateString().replace(/. /g, '-').slice(0, 10);
+const IncrementDateByOneDay = date => DateFormat(new Date(new Date(date).setDate(new Date(date).getDate() + 1)), 'yyyy-mm-dd');
 
-const GetUpToDateCalendar = () => {
+export const GetTodaysCalendar = () => {
   const basicCalendarCopy = { ...BasicCalendar };
   let contributionDate = GetCurrentDateOneYearAgo();
 
@@ -26,5 +26,3 @@ const GetUpToDateCalendar = () => {
     ...basicCalendarCopy,
   };
 };
-
-export default GetUpToDateCalendar;

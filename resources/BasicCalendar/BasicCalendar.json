@@ -6401,38 +6401,6 @@
                   "data-date": "2019-03-18"
                 },
                 "children": []
-              },
-              {
-                "name": "rect",
-                "type": "element",
-                "value": "",
-                "attributes": {
-                  "class": "day",
-                  "width": "10",
-                  "height": "10",
-                  "x": "-39",
-                  "y": "24",
-                  "fill": "#eee",
-                  "data-count": "0",
-                  "data-date": "2019-03-19"
-                },
-                "children": []
-              },
-              {
-                "name": "rect",
-                "type": "element",
-                "value": "",
-                "attributes": {
-                  "class": "day",
-                  "width": "10",
-                  "height": "10",
-                  "x": "-39",
-                  "y": "36",
-                  "fill": "#eee",
-                  "data-count": "0",
-                  "data-date": "2019-03-20"
-                },
-                "children": []
               }
             ]
           },
