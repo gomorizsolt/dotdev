@@ -16,11 +16,11 @@ describe('CalendarUtils', () => {
       const todaysBasicCalendar = CalendarUtils.GetTodaysCalendar();
       const expectedDate = DateFormat(new Date(), 'yyyy-mm-dd');
 
-      const daysWithoutMonthAndDayNames = todaysBasicCalendar.children[0].children
+      const datesWithoutMonthAndDayNames = todaysBasicCalendar.children[0].children
         .filter(el => !el.attributes.class);
 
-      const actualDate = daysWithoutMonthAndDayNames[daysWithoutMonthAndDayNames.length - 1]
-        .children[daysWithoutMonthAndDayNames[daysWithoutMonthAndDayNames.length - 1]
+      const actualDate = datesWithoutMonthAndDayNames[datesWithoutMonthAndDayNames.length - 1]
+        .children[datesWithoutMonthAndDayNames[datesWithoutMonthAndDayNames.length - 1]
           .children.length - 1].attributes['data-date'];
 
       expect(actualDate).toEqual(expectedDate);
