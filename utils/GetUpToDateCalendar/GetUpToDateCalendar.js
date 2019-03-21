@@ -5,7 +5,7 @@ const GetCurrentDateOneYearAgo = () => new Date(new Date().setFullYear(new Date(
 const IncrementDateByOneDay = date => new Date(new Date(date)
   .setDate(new Date(date).getDate() + 1)).toLocaleDateString().replace(/. /g, '-').slice(0, 10);
 
-const GetUpdatedBasicCalendar = () => {
+const GetUpToDateCalendar = () => {
   const basicCalendarCopy = { ...BasicCalendar };
   let contributionDate = GetCurrentDateOneYearAgo();
 
@@ -27,4 +27,4 @@ const GetUpdatedBasicCalendar = () => {
   };
 };
 
-export default GetUpdatedBasicCalendar;
+export default GetUpToDateCalendar;
