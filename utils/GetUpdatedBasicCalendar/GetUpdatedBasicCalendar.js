@@ -5,18 +5,26 @@ const GetCurrentDateOneYearAgo = () => new Date(new Date().setFullYear(new Date(
 const IncrementDateByOneDay = date => new Date(new Date(date)
   .setDate(new Date(date).getDate() + 1)).toLocaleDateString().replace(/. /g, '-').slice(0, 10);
 
-export const GetUpdatedBasicCalendar = () => {
+const GetUpdatedBasicCalendar = () => {
+  const basicCalendarCopy = { ...BasicCalendar };
   let contributionDate = GetCurrentDateOneYearAgo();
 
-  BasicCalendar.children[0].children.map(element => element.children.forEach((day) => {
-    if (day.attributes['data-date']) {
-      const currentDay = { ...day };
+  basicCalendarCopy.children[0].children
+    .map((week, weekIndex) => week.children.forEach((day, dayIndex) => {
+      if (day.attributes['data-date']) {
+        basicCalendarCopy.children[0].children[weekIndex].children[dayIndex].attributes = {
+          ...day.attributes,
+          'data-date': contributionDate,
+        };
 
-      currentDay.attributes['data-date'] = contributionDate;
+        contributionDate = IncrementDateByOneDay(contributionDate);
+      }
+    }));
 
-      contributionDate = IncrementDateByOneDay(contributionDate);
-    }
-  }));
-
-  return BasicCalendar;
+  return {
+    ...BasicCalendar,
+    ...basicCalendarCopy,
+  };
 };
+
+export default GetUpdatedBasicCalendar;
