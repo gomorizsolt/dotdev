@@ -1,7 +1,7 @@
 import GetUpToDateCalendar from './GetUpToDateCalendar';
 
 describe('GetUpToDateCalendar', () => {
-  it('sets the first date to the current date substacted by one year', () => {
+  it('sets the first date to the current date subtracted by one year', () => {
     const updatedBasicCalendar = GetUpToDateCalendar();
     const expectedDate = new Date(new Date().setFullYear(new Date().getFullYear() - 1)).toLocaleDateString().replace(/. /g, '-').slice(0, 10);
 
