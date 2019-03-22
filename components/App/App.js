@@ -1,11 +1,13 @@
 import React from 'react';
-import { Header } from './App.style';
+import Header from '../UI/Header/Header';
+import GitHubContributions from '../GitHubContributions/GitHubContributions';
+import { GithubUsernames } from '../../resources/Users/Users';
 
 const app = () => (
-  <Header>
-    <img src="static/logo/logo.png" alt="C-Hive" />
-    <p>C-Hive</p>
-  </Header>
+  <div>
+    <Header />
+    <GitHubContributions userNames={GithubUsernames} />
+  </div>
 );
 
 export default app;
