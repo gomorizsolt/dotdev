@@ -1,13 +1,9 @@
+import moment from 'moment';
 import BasicCalendar from '../../resources/BasicCalendar/BasicCalendar.json';
 
-const GetCurrentDateOneYearAgo = () => new Date(new Date().setFullYear(new Date().getFullYear() - 1)).toLocaleDateString().replace(/. /g, '-').slice(0, 10);
-
-const IncrementDateByOneDay = date => new Date(new Date(date)
-  .setDate(new Date(date).getDate() + 1)).toLocaleDateString().replace(/. /g, '-').slice(0, 10);
-
-const GetUpToDateCalendar = () => {
+export const GetTodaysCalendar = () => {
   const basicCalendarCopy = { ...BasicCalendar };
-  let contributionDate = GetCurrentDateOneYearAgo();
+  let contributionDate = moment().subtract(1, 'years').format('YYYY-MM-DD');
 
   basicCalendarCopy.children[0].children
     .map((week, weekIndex) => week.children.forEach((day, dayIndex) => {
@@ -17,7 +13,7 @@ const GetUpToDateCalendar = () => {
           'data-date': contributionDate,
         };
 
-        contributionDate = IncrementDateByOneDay(contributionDate);
+        contributionDate = moment(contributionDate).add(1, 'days').format('YYYY-MM-DD');
       }
     }));
 
@@ -26,5 +22,3 @@ const GetUpToDateCalendar = () => {
     ...basicCalendarCopy,
   };
 };
-
-export default GetUpToDateCalendar;
