@@ -1,11 +1,11 @@
-import DateFormat from 'dateformat';
+import moment from 'moment';
 import * as CalendarUtils from './CalendarUtils';
 
 describe('CalendarUtils', () => {
   describe('GetTodaysCalendar', () => {
     it('sets the first date to the current date subtracted by one year', () => {
       const todaysBasicCalendar = CalendarUtils.GetTodaysCalendar();
-      const expectedDate = DateFormat(new Date(new Date().setFullYear(new Date().getFullYear() - 1)), 'yyyy-mm-dd');
+      const expectedDate = moment().subtract(1, 'years').format('YYYY-MM-DD');
 
       const actualDate = todaysBasicCalendar.children[0].children[0].children[0].attributes['data-date'];
 
@@ -14,7 +14,7 @@ describe('CalendarUtils', () => {
 
     it('sets the last date to the current date', () => {
       const todaysBasicCalendar = CalendarUtils.GetTodaysCalendar();
-      const expectedDate = DateFormat(new Date(), 'yyyy-mm-dd');
+      const expectedDate = moment().format('YYYY-MM-DD');
 
       const weeksWithoutMonthAndDayNames = todaysBasicCalendar.children[0].children
         .filter(el => !el.attributes.class);
