@@ -1,7 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import App from './App';
-import { Header } from './App.style';
+import Header from '../UI/Header/Header';
+import SvgDisplayer from '../SvgDisplayer/SvgDisplayer';
 
 describe('<App />', () => {
   let appWrapper;
@@ -10,15 +11,11 @@ describe('<App />', () => {
     appWrapper = shallow(<App />);
   });
 
-  it('renders a Header', () => {
+  it('renders Header', () => {
     expect(appWrapper.find(Header)).toHaveLength(1);
   });
 
-  it('renders the logo', () => {
-    expect(appWrapper.find('img')).toHaveLength(1);
-  });
-
-  it('renders the `C-Hive` text', () => {
-    expect(appWrapper.find('p').text()).toEqual('C-Hive');
+  it('renders SvgDisplayer', () => {
+    expect(appWrapper.find(SvgDisplayer)).toHaveLength(1);
   });
 });

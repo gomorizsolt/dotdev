@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import SvgDisplayer from '../SvgDisplayer/SvgDisplayer';
-import { Header } from './App.style';
+import Header from '../UI/Header/Header';
 
 const app = () => (
   <Fragment>
