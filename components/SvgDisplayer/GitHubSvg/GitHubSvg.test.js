@@ -2,9 +2,12 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { stringify } from 'svgson';
 import GitHubSvg from './GitHubSvg';
+import ContributionsValueDisplayer from '../../UI/ContributionsValueDisplayer/ContributionsValueDisplayer';
 import { ContributionsFooter, ColorsList } from './GitHubSvg.style';
 import * as ColorSchemas from '../../../resources/ColorSchemas/ColorSchemas';
 import * as CalendarUtils from '../../../utils/CalendarUtils/CalendarUtils';
+import * as ContributionsDataUtils from '../../../utils/ContributionsDataUtils/ContributionsDataUtils';
+import * as Users from '../../../resources/Users/Users';
 
 jest.mock('../../../utils/CalendarUtils/CalendarUtils', () => require
   .requireActual('../../../utils/TestUtils/TestUtils')
@@ -12,13 +15,17 @@ jest.mock('../../../utils/CalendarUtils/CalendarUtils', () => require
     '../CalendarUtils/CalendarUtils',
   ));
 
+jest.mock('../../../utils/ContributionsDataUtils/ContributionsDataUtils', () => require
+  .requireActual('../../../utils/TestUtils/TestUtils')
+  .mockOriginalFunctionality('../ContributionsDataUtils/ContributionsDataUtils'));
+
 describe('<GitHubSvg />', () => {
   let gitHubSvgDisplayerWrapper;
 
   // Reason for using `mount` instead of `shallow`:
   // https://stackoverflow.com/a/48088725/9599137
-  beforeEach(() => {
-    gitHubSvgDisplayerWrapper = mount(<GitHubSvg />);
+  beforeEach(async () => {
+    gitHubSvgDisplayerWrapper = await mount(<GitHubSvg />);
   });
 
   it('calls CalendarUtils.GetTodaysCalendar', () => {
@@ -33,6 +40,18 @@ describe('<GitHubSvg />', () => {
     const actualSvgText = gitHubSvgDisplayerWrapper.instance().container.innerHTML;
 
     expect(actualSvgText).toBe(expectedSvgText);
+  });
+
+  it('calls ContributionsDataUtils.GetParsedData with `GithubUsernames`', () => {
+    expect(ContributionsDataUtils.GetParsedData).toHaveBeenCalledWith(Users.GithubUsernames);
+  });
+
+  it('sets `isLoading` to false', () => {
+    expect(gitHubSvgDisplayerWrapper.state('isLoading')).toBeTruthy();
+  });
+
+  it('renders ContributionsValueDisplayer', () => {
+    expect(gitHubSvgDisplayerWrapper.find(ContributionsValueDisplayer)).toHaveLength(1);
   });
 
   it('renders ContributionsFooter', () => {
