@@ -8,7 +8,6 @@ export const ContributionsFooter = styled.div`
 `;
 
 export const ColorsList = styled.ul`
-    display: inline-block;
     list-style: none;
 
     &:before {
