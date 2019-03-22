@@ -1,8 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { stringify } from 'svgson';
 import ContributionsValueDisplayer from '../../UI/ContributionsValueDisplayer/ContributionsValueDisplayer';
-import { ContributionsFooter, ColorsList } from './GitHubSvg.style';
-import * as ColorSchemas from '../../../resources/ColorSchemas/ColorSchemas';
+import GitHubFooter from './GitHubFooter/GitHubFooter';
 import * as CalendarUtils from '../../../utils/CalendarUtils/CalendarUtils';
 import * as ContributionsDataUtils from '../../../utils/ContributionsDataUtils/ContributionsDataUtils';
 import * as Users from '../../../resources/Users/Users';
@@ -33,7 +32,6 @@ class GitHubSvg extends Component {
   }
 
   render() {
-    // Proposal: GitHubFooter component?
     const { contributionsData: [...contributionsData], isLoading } = this.state;
     return (
       <Fragment>
@@ -45,15 +43,7 @@ class GitHubSvg extends Component {
           this.container = el;
         }}
         />
-        <ContributionsFooter>
-          <p>
-            Learn how we count contributions.
-          </p>
-          <ColorsList>
-            {ColorSchemas.GitHubColorSchema
-              .map(backgroundColor => <li key={backgroundColor} style={{ backgroundColor }} />)}
-          </ColorsList>
-        </ContributionsFooter>
+        <GitHubFooter />
       </Fragment>
     );
   }

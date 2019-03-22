@@ -2,9 +2,8 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { stringify } from 'svgson';
 import GitHubSvg from './GitHubSvg';
+import GitHubFooter from './GitHubFooter/GitHubFooter';
 import ContributionsValueDisplayer from '../../UI/ContributionsValueDisplayer/ContributionsValueDisplayer';
-import { ContributionsFooter, ColorsList } from './GitHubSvg.style';
-import * as ColorSchemas from '../../../resources/ColorSchemas/ColorSchemas';
 import * as CalendarUtils from '../../../utils/CalendarUtils/CalendarUtils';
 import * as ContributionsDataUtils from '../../../utils/ContributionsDataUtils/ContributionsDataUtils';
 import * as Users from '../../../resources/Users/Users';
@@ -54,15 +53,7 @@ describe('<GitHubSvg />', () => {
     expect(gitHubSvgDisplayerWrapper.find(ContributionsValueDisplayer)).toHaveLength(1);
   });
 
-  it('renders ContributionsFooter', () => {
-    expect(gitHubSvgDisplayerWrapper.find(ContributionsFooter)).toHaveLength(1);
-  });
-
-  it('renders ColorsList', () => {
-    expect(gitHubSvgDisplayerWrapper.find(ColorsList)).toHaveLength(1);
-  });
-
-  it('renders GitHubColorSchema colors', () => {
-    expect(gitHubSvgDisplayerWrapper.find('li')).toHaveLength(ColorSchemas.GitHubColorSchema.length);
+  it('renders GitHubFooter', () => {
+    expect(gitHubSvgDisplayerWrapper.find(GitHubFooter)).toHaveLength(1);
   });
 });
