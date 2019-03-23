@@ -26,13 +26,14 @@ class GitHubSvg extends Component {
     const parsedData = await ContributionsDataUtils.GetParsedData(Users.GithubUsernames);
 
     this.setState({
-      contributionsData: parsedData,
+      contributionsData: [...parsedData],
       isLoading: false,
     });
   }
 
   render() {
     const { contributionsData: [...contributionsData], isLoading } = this.state;
+
     return (
       <Fragment>
         <ContributionsValueDisplayer
