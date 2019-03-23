@@ -1,14 +1,15 @@
 import styled from 'styled-components';
 
-export const ContributionsFooter = styled.div`
+export const Header = styled.div`
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 670px;
-    font-size: 12px;
 `;
 
 export const ColorsList = styled.ul`
     list-style: none;
+    font-size: 12px;
 
     &:before {
         content: "Less";

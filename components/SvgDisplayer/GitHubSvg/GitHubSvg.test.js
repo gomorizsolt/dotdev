@@ -2,8 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { stringify } from 'svgson';
 import GitHubSvg from './GitHubSvg';
-import GitHubFooter from './GitHubFooter/GitHubFooter';
-import ContributionsValueDisplayer from '../../UI/ContributionsValueDisplayer/ContributionsValueDisplayer';
+import GitHubHeader from './GitHubHeader/GitHubHeader';
 import * as CalendarUtils from '../../../utils/CalendarUtils/CalendarUtils';
 import * as ContributionsDataUtils from '../../../utils/ContributionsDataUtils/ContributionsDataUtils';
 import * as Users from '../../../resources/Users/Users';
@@ -63,11 +62,7 @@ describe('<GitHubSvg />', () => {
     expect(gitHubSvgDisplayerWrapper.state('isLoading')).toBeTruthy();
   });
 
-  it('renders ContributionsValueDisplayer', () => {
-    expect(gitHubSvgDisplayerWrapper.find(ContributionsValueDisplayer)).toHaveLength(1);
-  });
-
-  it('renders GitHubFooter', () => {
-    expect(gitHubSvgDisplayerWrapper.find(GitHubFooter)).toHaveLength(1);
+  it('renders GitHubHeader', () => {
+    expect(gitHubSvgDisplayerWrapper.find(GitHubHeader)).toHaveLength(1);
   });
 });
