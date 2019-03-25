@@ -6385,22 +6385,6 @@
                   "data-date": "2019-03-17"
                 },
                 "children": []
-              },
-              {
-                "name": "rect",
-                "type": "element",
-                "value": "",
-                "attributes": {
-                  "class": "day",
-                  "width": "10",
-                  "height": "10",
-                  "x": "-39",
-                  "y": "12",
-                  "fill": "#eee",
-                  "data-count": "0",
-                  "data-date": "2019-03-18"
-                },
-                "children": []
               }
             ]
           },
@@ -6418,7 +6402,7 @@
               {
                 "name": "",
                 "type": "text",
-                "value": "Mar",
+                "value": "",
                 "attributes": {},
                 "children": []
               }
@@ -6438,7 +6422,7 @@
               {
                 "name": "",
                 "type": "text",
-                "value": "Apr",
+                "value": "",
                 "attributes": {},
                 "children": []
               }
@@ -6458,7 +6442,7 @@
               {
                 "name": "",
                 "type": "text",
-                "value": "May",
+                "value": "",
                 "attributes": {},
                 "children": []
               }
@@ -6478,7 +6462,7 @@
               {
                 "name": "",
                 "type": "text",
-                "value": "Jun",
+                "value": "",
                 "attributes": {},
                 "children": []
               }
@@ -6498,7 +6482,7 @@
               {
                 "name": "",
                 "type": "text",
-                "value": "Jul",
+                "value": "",
                 "attributes": {},
                 "children": []
               }
@@ -6518,7 +6502,7 @@
               {
                 "name": "",
                 "type": "text",
-                "value": "Aug",
+                "value": "",
                 "attributes": {},
                 "children": []
               }
@@ -6538,7 +6522,7 @@
               {
                 "name": "",
                 "type": "text",
-                "value": "Sep",
+                "value": "",
                 "attributes": {},
                 "children": []
               }
@@ -6558,7 +6542,7 @@
               {
                 "name": "",
                 "type": "text",
-                "value": "Oct",
+                "value": "",
                 "attributes": {},
                 "children": []
               }
@@ -6578,7 +6562,7 @@
               {
                 "name": "",
                 "type": "text",
-                "value": "Nov",
+                "value": "",
                 "attributes": {},
                 "children": []
               }
@@ -6598,7 +6582,7 @@
               {
                 "name": "",
                 "type": "text",
-                "value": "Dec",
+                "value": "",
                 "attributes": {},
                 "children": []
               }
@@ -6618,7 +6602,7 @@
               {
                 "name": "",
                 "type": "text",
-                "value": "Jan",
+                "value": "",
                 "attributes": {},
                 "children": []
               }
@@ -6638,7 +6622,7 @@
               {
                 "name": "",
                 "type": "text",
-                "value": "Feb",
+                "value": "",
                 "attributes": {},
                 "children": []
               }
@@ -6658,7 +6642,7 @@
               {
                 "name": "",
                 "type": "text",
-                "value": "Mar",
+                "value": "",
                 "attributes": {},
                 "children": []
               }
