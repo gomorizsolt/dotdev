@@ -21,18 +21,17 @@ class GitHubSvg extends Component {
 
   async componentDidMount() {
     let svg = stringify(BasicCalendar);
-
     this.container.innerHTML = svg;
 
     const parsedData = await ContributionsDataUtils.GetParsedData(Users.GithubUsernames);
-    svg = stringify(CalendarUtils.TransformCalendarStyle(parsedData[0]));
-
-    this.container.innerHTML = svg;
 
     this.setState({
       contributionsData: [...parsedData],
       isLoading: false,
     });
+
+    svg = CalendarUtils.AdjustFetchedCalendarStyle(parsedData[0]);
+    this.container.innerHTML = stringify(svg);
   }
 
   render() {

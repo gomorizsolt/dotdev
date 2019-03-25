@@ -7,6 +7,7 @@ import * as CalendarUtils from '../../../utils/CalendarUtils/CalendarUtils';
 import * as ContributionsDataUtils from '../../../utils/ContributionsDataUtils/ContributionsDataUtils';
 import * as Users from '../../../resources/Users/Users';
 import * as TestUtils from '../../../utils/TestUtils/TestUtils';
+import BasicCalendar from '../../../resources/BasicCalendar/BasicCalendar.json';
 
 jest.mock('../../../utils/CalendarUtils/CalendarUtils', () => require
   .requireActual('../../../utils/TestUtils/TestUtils')
@@ -27,14 +28,10 @@ describe('<GitHubSvg />', () => {
     gitHubSvgDisplayerWrapper = mount(<GitHubSvg />);
   });
 
-  it('calls CalendarUtils.GetTodaysCalendar', () => {
-    expect(CalendarUtils.GetTodaysCalendar).toHaveBeenCalled();
-  });
-
-  it('sets the stringified SVG to the container`s innerHTML', () => {
+  it('sets the stringified `BasicCalendar` to the container`s innerHTML', () => {
     // Reason for `selfClose`: innerHTML doesn't apply self closing tags automatically
     // while stringify does it, thereby the texts would be different.
-    const expectedSvgText = stringify(CalendarUtils.GetTodaysCalendar(), { selfClose: false });
+    const expectedSvgText = stringify(BasicCalendar, { selfClose: false });
 
     const actualSvgText = gitHubSvgDisplayerWrapper.instance().container.innerHTML;
 
@@ -60,6 +57,19 @@ describe('<GitHubSvg />', () => {
 
   it('sets `isLoading` to false', () => {
     expect(gitHubSvgDisplayerWrapper.state('isLoading')).toBeTruthy();
+  });
+
+  it('calls CalendarUtils.AdjustFetchedCalendarStyle with the first SVG', async () => {
+    const parsedData = TestUtils.getFakeContributionsObjectWithDailyCounts([2, 4, 1]);
+
+    ContributionsDataUtils.GetParsedData.mockImplementationOnce(() => parsedData);
+    // Something is wrong with `mockOriginalFunctionality` when it mocks an array.
+    // It creates another array around the original array. [ [ { children: ...} ] ].
+    ContributionsDataUtils.SumContributionsValues.mockImplementationOnce(() => jest.fn());
+
+    gitHubSvgDisplayerWrapper = await mount(<GitHubSvg />);
+
+    expect(CalendarUtils.AdjustFetchedCalendarStyle).toHaveBeenCalledWith(parsedData[0]);
   });
 
   it('renders GitHubHeader', () => {

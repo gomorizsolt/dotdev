@@ -1,8 +1,8 @@
 import BasicCalendar from '../../resources/BasicCalendar/BasicCalendar.json';
 
 // Deep copies the given nested object, but it won't work in the case of arrays.
-// We may use lodash, that provides the `cloneDeep` function to copy extremely nested structures
-// and also supports arrays.
+// We may use `lodash`, that provides the `cloneDeep` function to copy extremely nested structures
+// - and also supports arrays.
 const DeepCopyObject = object => JSON.parse(JSON.stringify(object));
 
 const UpdateMonthAttributes = monthData => ({
@@ -16,7 +16,7 @@ const UpdateDayAttributes = dayData => ({
   dx: '-20',
 });
 
-export const TransformCalendarStyle = (calendar) => {
+export const AdjustFetchedCalendarStyle = (calendar) => {
   const deepCopiedCalendar = DeepCopyObject(calendar);
 
   deepCopiedCalendar.attributes.width = BasicCalendar.attributes.width;
