@@ -4,7 +4,6 @@ import GitHubHeader from './GitHubHeader/GitHubHeader';
 import * as ContributionsDataUtils from '../../../utils/ContributionsDataUtils/ContributionsDataUtils';
 import * as Users from '../../../resources/Users/Users';
 import BasicCalendar from '../../../resources/BasicCalendar/BasicCalendar.json';
-
 import * as CalendarUtils from '../../../utils/CalendarUtils/CalendarUtils';
 
 class GitHubSvg extends Component {
