@@ -1,9 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import { stringify } from 'svgson';
 import GitHubHeader from './GitHubHeader/GitHubHeader';
-import * as CalendarUtils from '../../../utils/CalendarUtils/CalendarUtils';
 import * as ContributionsDataUtils from '../../../utils/ContributionsDataUtils/ContributionsDataUtils';
 import * as Users from '../../../resources/Users/Users';
+import BasicCalendar from '../../../resources/BasicCalendar/BasicCalendar.json';
+
+import * as CalendarUtils from '../../../utils/CalendarUtils/CalendarUtils';
 
 class GitHubSvg extends Component {
   constructor(props) {
@@ -18,11 +20,14 @@ class GitHubSvg extends Component {
   }
 
   async componentDidMount() {
-    const svg = stringify(CalendarUtils.GetTodaysCalendar());
+    let svg = stringify(BasicCalendar);
 
     this.container.innerHTML = svg;
 
     const parsedData = await ContributionsDataUtils.GetParsedData(Users.GithubUsernames);
+    svg = stringify(CalendarUtils.TransformCalendarStyle(parsedData[0]));
+
+    this.container.innerHTML = svg;
 
     this.setState({
       contributionsData: [...parsedData],

@@ -6395,8 +6395,7 @@
             "attributes": {
               "x": "13",
               "y": "-10",
-              "class": "month",
-              "font-size": "13"
+              "class": "month"
             },
             "children": [
               {
@@ -6415,8 +6414,7 @@
             "attributes": {
               "x": "58",
               "y": "-10",
-              "class": "month",
-              "font-size": "13"
+              "class": "month"
             },
             "children": [
               {
@@ -6435,8 +6433,7 @@
             "attributes": {
               "x": "105",
               "y": "-10",
-              "class": "month",
-              "font-size": "13"
+              "class": "month"
             },
             "children": [
               {
@@ -6455,8 +6452,7 @@
             "attributes": {
               "x": "158",
               "y": "-10",
-              "class": "month",
-              "font-size": "13"
+              "class": "month"
             },
             "children": [
               {
@@ -6475,8 +6471,7 @@
             "attributes": {
               "x": "210",
               "y": "-10",
-              "class": "month",
-              "font-size": "13"
+              "class": "month"
             },
             "children": [
               {
@@ -6495,8 +6490,7 @@
             "attributes": {
               "x": "257",
               "y": "-10",
-              "class": "month",
-              "font-size": "13"
+              "class": "month"
             },
             "children": [
               {
@@ -6515,8 +6509,7 @@
             "attributes": {
               "x": "306",
               "y": "-10",
-              "class": "month",
-              "font-size": "13"
+              "class": "month"
             },
             "children": [
               {
@@ -6535,8 +6528,7 @@
             "attributes": {
               "x": "360",
               "y": "-10",
-              "class": "month",
-              "font-size": "13"
+              "class": "month"
             },
             "children": [
               {
@@ -6555,8 +6547,7 @@
             "attributes": {
               "x": "409",
               "y": "-10",
-              "class": "month",
-              "font-size": "13"
+              "class": "month"
             },
             "children": [
               {
@@ -6575,8 +6566,7 @@
             "attributes": {
               "x": "457",
               "y": "-10",
-              "class": "month",
-              "font-size": "13"
+              "class": "month"
             },
             "children": [
               {
@@ -6595,8 +6585,7 @@
             "attributes": {
               "x": "513",
               "y": "-10",
-              "class": "month",
-              "font-size": "13"
+              "class": "month"
             },
             "children": [
               {
@@ -6615,8 +6604,7 @@
             "attributes": {
               "x": "565",
               "y": "-10",
-              "class": "month",
-              "font-size": "13"
+              "class": "month"
             },
             "children": [
               {
@@ -6635,8 +6623,7 @@
             "attributes": {
               "x": "620",
               "y": "-10",
-              "class": "month",
-              "font-size": "13"
+              "class": "month"
             },
             "children": [
               {
@@ -6760,7 +6747,7 @@
             "attributes": {
               "text-anchor": "start",
               "class": "wday",
-              "dx": "-14",
+              "dx": "-20",
               "dy": "69",
               "font-size": "13"
             },
