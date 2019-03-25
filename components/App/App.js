@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import SvgDisplayer from '../SvgDisplayer/SvgDisplayer';
 import Header from '../UI/Header/Header';
-import GitHubContributions from '../GitHubContributions/GitHubContributions';
-import { GithubUsernames } from '../../resources/Users/Users';
 
 const app = () => (
-  <div>
-    <Header />
-    <GitHubContributions userNames={GithubUsernames} />
-  </div>
+  <Fragment>
+    <Header>
+      <img src="static/logo/logo.png" alt="C-Hive" />
+      <p>C-Hive</p>
+    </Header>
+    <SvgDisplayer />
+  </Fragment>
 );
 
 export default app;
