@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import { stringify } from 'svgson';
 import GitHubSvg from './GitHubSvg';
 import GitHubHeader from './GitHubHeader/GitHubHeader';
@@ -21,10 +21,8 @@ jest.mock('../../../utils/ContributionsDataUtils/ContributionsDataUtils', () => 
 describe('<GitHubSvg />', () => {
   let gitHubSvgDisplayerWrapper;
 
-  // Reason for using `mount` instead of `shallow`:
-  // https://stackoverflow.com/a/48088725/9599137
   beforeEach(() => {
-    gitHubSvgDisplayerWrapper = mount(<GitHubSvg />);
+    gitHubSvgDisplayerWrapper = shallow(<GitHubSvg />);
   });
 
   it('calls CalendarUtils.GetTodaysCalendar', () => {
@@ -47,11 +45,8 @@ describe('<GitHubSvg />', () => {
     const parsedData = TestUtils.getFakeContributionsObjectWithDailyCounts([5, 3, 8]);
 
     ContributionsDataUtils.GetParsedData.mockImplementationOnce(() => parsedData);
-    // Something is wrong with `mockOriginalFunctionality` when it mocks an array.
-    // It creates another array around the original array. [ [ { children: ...} ] ].
-    ContributionsDataUtils.SumContributionsValues.mockImplementationOnce(() => jest.fn());
 
-    gitHubSvgDisplayerWrapper = await mount(<GitHubSvg />);
+    gitHubSvgDisplayerWrapper = await shallow(<GitHubSvg />);
 
     expect(gitHubSvgDisplayerWrapper.state('contributionsData')).toEqual(parsedData);
   });
