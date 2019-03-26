@@ -32,11 +32,9 @@ describe('<GitHubSvg />', () => {
   });
 
   it('sets the stringified SVG to the container`s innerHTML', () => {
-    // Reason for `selfClose`: innerHTML doesn't apply self closing tags automatically
-    // while stringify does it, thereby the texts would be different.
-    const expectedSvgText = stringify(CalendarUtils.GetTodaysCalendar(), { selfClose: false });
+    const expectedSvgText = stringify(CalendarUtils.GetTodaysCalendar());
 
-    const actualSvgText = gitHubSvgDisplayerWrapper.instance().container.innerHTML;
+    const actualSvgText = gitHubSvgDisplayerWrapper.instance().container;
 
     expect(actualSvgText).toBe(expectedSvgText);
   });
