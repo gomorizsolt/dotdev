@@ -31,7 +31,7 @@ describe('<GitHubSvg />', () => {
     expect(CalendarUtils.GetTodaysCalendar).toHaveBeenCalled();
   });
 
-  it('sets the stringified SVG to the container`s innerHTML', () => {
+  it('sets the stringified calendar to `container`', () => {
     const expectedSvgText = stringify(CalendarUtils.GetTodaysCalendar());
 
     const actualSvgText = gitHubSvgDisplayerWrapper.instance().container;
