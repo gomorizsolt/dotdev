@@ -1,82 +1,85 @@
 import * as CalendarUtils from './CalendarUtils';
-import BasicCalendar from '../../resources/BasicCalendar/BasicCalendar.json';
+import * as TestUtils from '../TestUtils/TestUtils';
+
+const GetObjectValueByAttribute = (object, attribute) => (
+  object.children[0].children[0].children[0].attributes[attribute]
+);
 
 describe('CalendarUtils', () => {
-  describe('AdjustFetchedCalendarStyle', () => {
-    const fakeCalendar = {
-      attributes: {
-        width: '700',
-        height: '150',
-      },
-      children: [
-        {
-          attributes: {
-            transform: 'translate(0, 0)',
-          },
-          children: [
-            {
-              attributes: {
-                class: 'month',
-              },
-            },
-            {
-              attributes: {
-                class: 'wday',
-              },
-            },
-          ],
-        },
-      ],
-    };
+  describe('MergeSvgs', () => {
+    describe('when the contributions value is 0', () => {
+      const calendars = TestUtils.getFakeContributionsObjectWithDailyCounts([0, 0]);
 
-    it('sets the width to the BasicCalendar`s width', () => {
-      const expectedWidth = BasicCalendar.attributes.width;
-      const actualWidth = CalendarUtils.AdjustFetchedCalendarStyle(fakeCalendar).attributes.width;
+      it('sets the default color', () => {
+        const expectedFillColor = '#ebedf0';
 
-      expect(actualWidth).toEqual(expectedWidth);
-    });
+        const mergedSvg = CalendarUtils.MergeSvgs(calendars[0], calendars[1]);
+        const actualFillColor = GetObjectValueByAttribute(mergedSvg, 'fill');
 
-    it('sets the height to the BasicCalendar`s height', () => {
-      const expectedHeight = BasicCalendar.attributes.height;
-      const actualHeight = CalendarUtils.AdjustFetchedCalendarStyle(fakeCalendar).attributes.height;
-
-      expect(actualHeight).toEqual(expectedHeight);
-    });
-
-    it('sets `transform` to the BasicCalendar`s transform', () => {
-      const expectedTransform = BasicCalendar.children[0].attributes.transform;
-      const actualTransform = CalendarUtils.AdjustFetchedCalendarStyle(fakeCalendar)
-        .children[0].attributes.transform;
-
-      expect(actualTransform).toEqual(expectedTransform);
-    });
-
-    describe('month names', () => {
-      it('sets the `font-size` attribute to 13', () => {
-        const adjustedCalendar = CalendarUtils.AdjustFetchedCalendarStyle(fakeCalendar);
-
-        const fontSize = adjustedCalendar.children[0].children[0].attributes['font-size'];
-
-        expect(fontSize).toEqual('13');
+        expect(actualFillColor).toEqual(expectedFillColor);
       });
     });
 
-    describe('day names', () => {
-      it('sets the `font-size` attribute to 13', () => {
-        const adjustedCalendar = CalendarUtils.AdjustFetchedCalendarStyle(fakeCalendar);
+    describe('when the contributions value is higher than 0 and less than 10', () => {
+      const calendars = TestUtils.getFakeContributionsObjectWithDailyCounts([5, 4]);
 
-        const fontSize = adjustedCalendar.children[0].children[1].attributes['font-size'];
+      it('sets the `#c6e48b` color', () => {
+        const expectedFillColor = '#c6e48b';
 
-        expect(fontSize).toEqual('13');
+        const mergedSvg = CalendarUtils.MergeSvgs(calendars[0], calendars[1]);
+        const actualFillColor = GetObjectValueByAttribute(mergedSvg, 'fill');
+
+        expect(actualFillColor).toEqual(expectedFillColor);
       });
+    });
 
-      it('sets the `dx` attribute to -20', () => {
-        const adjustedCalendar = CalendarUtils.AdjustFetchedCalendarStyle(fakeCalendar);
+    describe('when the contributions value is higher than or equal to 10 and less than 20', () => {
+      const calendars = TestUtils.getFakeContributionsObjectWithDailyCounts([11, 8]);
 
-        const { dx } = adjustedCalendar.children[0].children[1].attributes;
+      it('sets the `#7bc96f` color', () => {
+        const expectedFillColor = '#7bc96f';
 
-        expect(dx).toEqual('-20');
+        const mergedSvg = CalendarUtils.MergeSvgs(calendars[0], calendars[1]);
+        const actualFillColor = GetObjectValueByAttribute(mergedSvg, 'fill');
+
+        expect(actualFillColor).toEqual(expectedFillColor);
       });
+    });
+
+    describe('when the contributions value is higher than or equal to 20 and less than 30', () => {
+      const calendars = TestUtils.getFakeContributionsObjectWithDailyCounts([21, 8]);
+
+      it('sets the `#239a3b` color', () => {
+        const expectedFillColor = '#239a3b';
+
+        const mergedSvg = CalendarUtils.MergeSvgs(calendars[0], calendars[1]);
+        const actualFillColor = GetObjectValueByAttribute(mergedSvg, 'fill');
+
+        expect(actualFillColor).toEqual(expectedFillColor);
+      });
+    });
+
+    describe('when the contributions value is higher than or equal to 30', () => {
+      const calendars = TestUtils.getFakeContributionsObjectWithDailyCounts([22, 8]);
+
+      it('sets the `#196127` color', () => {
+        const expectedFillColor = '#196127';
+
+        const mergedSvg = CalendarUtils.MergeSvgs(calendars[0], calendars[1]);
+        const actualFillColor = GetObjectValueByAttribute(mergedSvg, 'fill');
+
+        expect(actualFillColor).toEqual(expectedFillColor);
+      });
+    });
+
+    it('sets the stringified `data-count` property', () => {
+      const calendars = TestUtils.getFakeContributionsObjectWithDailyCounts([22, 8]);
+      const expectedContributionsValue = '30';
+
+      const mergedSvg = CalendarUtils.MergeSvgs(calendars[0], calendars[1]);
+      const actualContributionsValue = GetObjectValueByAttribute(mergedSvg, 'data-count');
+
+      expect(actualContributionsValue).toEqual(expectedContributionsValue);
     });
   });
 });

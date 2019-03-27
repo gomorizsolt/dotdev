@@ -12,7 +12,7 @@ class GitHubSvg extends Component {
     super(props);
 
     this.state = {
-      contributionsData: [],
+      usersParsedCalendarGraphs: [],
       actualCalendar: BasicCalendar,
       isLoading: true,
     };
@@ -20,37 +20,36 @@ class GitHubSvg extends Component {
 
   componentDidMount() {
     Users.GithubUsernames.map(async (userName) => {
-      const userSVG = await SvgUtils.GetGitHubUserSVG(userName);
+      const rawUserSVG = await SvgUtils.GetGitHubUserSVG(userName);
 
-      this.setCalendar(svgson.parse(userSVG.outerHTML));
+      this.setActualCalendar(svgson.parse(rawUserSVG.outerHTML));
     });
   }
 
-  // Missing tests.
-  setCalendar(data) {
-    // Error handling
-    const { contributionsData: [...contributionsData] } = this.state;
+  setActualCalendar(calendarGraphPromise) {
+    const { usersParsedCalendarGraphs: [...usersParsedCalendarGraphs] } = this.state;
     let { actualCalendar: { ...actualCalendar } } = this.state;
 
-    data.then((parsedSvgData) => {
-      contributionsData.push(parsedSvgData);
+    calendarGraphPromise.then((parsedCalendarGraph) => {
+      usersParsedCalendarGraphs.push(parsedCalendarGraph);
 
-      if (contributionsData.length === 1) {
-        actualCalendar = CalendarUtils.AdjustFetchedCalendarStyle(parsedSvgData);
+      if (usersParsedCalendarGraphs.length === 1) {
+        actualCalendar = parsedCalendarGraph;
       } else {
-        actualCalendar = CalendarUtils.MergeSvgs(actualCalendar, parsedSvgData);
+        actualCalendar = CalendarUtils.MergeSvgs(actualCalendar, parsedCalendarGraph);
       }
 
       this.setState({
-        contributionsData,
+        usersParsedCalendarGraphs,
         actualCalendar,
+        isLoading: usersParsedCalendarGraphs.length !== Users.GithubUsernames.length,
       });
     });
   }
 
   render() {
     const {
-      contributionsData: [...contributionsData],
+      usersParsedCalendarGraphs: [...usersParsedCalendarGraphs],
       actualCalendar: { ...actualCalendar },
       isLoading,
     } = this.state;
@@ -59,7 +58,7 @@ class GitHubSvg extends Component {
       <Fragment>
         <GitHubHeader
           isLoading={isLoading}
-          contributionsData={contributionsData}
+          contributionSvgs={usersParsedCalendarGraphs}
         />
         {parser(stringify(actualCalendar))}
       </Fragment>
