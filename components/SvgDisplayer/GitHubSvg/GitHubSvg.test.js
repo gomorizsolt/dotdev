@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import { stringify } from 'svgson';
 import GitHubSvg from './GitHubSvg';
 import GitHubHeader from './GitHubHeader/GitHubHeader';
@@ -21,22 +21,18 @@ jest.mock('../../../utils/ContributionsDataUtils/ContributionsDataUtils', () => 
 describe('<GitHubSvg />', () => {
   let gitHubSvgDisplayerWrapper;
 
-  // Reason for using `mount` instead of `shallow`:
-  // https://stackoverflow.com/a/48088725/9599137
   beforeEach(() => {
-    gitHubSvgDisplayerWrapper = mount(<GitHubSvg />);
+    gitHubSvgDisplayerWrapper = shallow(<GitHubSvg />);
   });
 
   it('calls CalendarUtils.GetTodaysCalendar', () => {
     expect(CalendarUtils.GetTodaysCalendar).toHaveBeenCalled();
   });
 
-  it('sets the stringified SVG to the container`s innerHTML', () => {
-    // Reason for `selfClose`: innerHTML doesn't apply self closing tags automatically
-    // while stringify does it, thereby the texts would be different.
-    const expectedSvgText = stringify(CalendarUtils.GetTodaysCalendar(), { selfClose: false });
+  it('sets the stringified calendar to `container`', () => {
+    const expectedSvgText = stringify(CalendarUtils.GetTodaysCalendar());
 
-    const actualSvgText = gitHubSvgDisplayerWrapper.instance().container.innerHTML;
+    const actualSvgText = gitHubSvgDisplayerWrapper.instance().container;
 
     expect(actualSvgText).toBe(expectedSvgText);
   });
@@ -49,11 +45,8 @@ describe('<GitHubSvg />', () => {
     const parsedData = TestUtils.getFakeContributionsObjectWithDailyCounts([5, 3, 8]);
 
     ContributionsDataUtils.GetParsedData.mockImplementationOnce(() => parsedData);
-    // Something is wrong with `mockOriginalFunctionality` when it mocks an array.
-    // It creates another array around the original array. [ [ { children: ...} ] ].
-    ContributionsDataUtils.SumContributionsValues.mockImplementationOnce(() => jest.fn());
 
-    gitHubSvgDisplayerWrapper = await mount(<GitHubSvg />);
+    gitHubSvgDisplayerWrapper = await shallow(<GitHubSvg />);
 
     expect(gitHubSvgDisplayerWrapper.state('contributionsData')).toEqual(parsedData);
   });
