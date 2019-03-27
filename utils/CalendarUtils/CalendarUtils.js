@@ -11,6 +11,7 @@ const UpdateMonthAttributes = monthData => ({
   'font-size': '13',
 });
 
+// SMALLER CALENDARS DO NOT FIT THE BASIC CALENDAR.
 const UpdateDayAttributes = dayData => ({
   ...dayData.attributes,
   'font-size': '13',
@@ -40,4 +41,49 @@ export const AdjustFetchedCalendarStyle = (calendar) => {
   });
 
   return deepCopiedCalendar;
+};
+
+const SetFillColor = (dataCountValue) => {
+  let fillColor = '#ebedf0';
+
+  if (dataCountValue > 0 && dataCountValue < 10) {
+    fillColor = '#c6e48b';
+  }
+
+  if (dataCountValue >= 10 && dataCountValue < 20) {
+    fillColor = '#7bc96f';
+  }
+
+  if (dataCountValue >= 20 && dataCountValue < 30) {
+    fillColor = '#239a3b';
+  }
+
+  if (dataCountValue >= 30) {
+    fillColor = '#196127';
+  }
+
+  return fillColor;
+};
+
+const GetSvgCountValue = (svgData, weekIndex, dayIndex) => Number(svgData.children[0].children[weekIndex].children[dayIndex].attributes['data-count']);
+
+export const MergeSvgs = (actualCalendar, parsedSvgData) => {
+  const deepCopiedActualCalendar = DeepCopyObject(actualCalendar);
+
+  deepCopiedActualCalendar.children[0].children.forEach((weeklyData, weekIndex) => {
+    weeklyData.children.forEach((dailyData, dayIndex) => {
+      if (dailyData.attributes['data-count']) {
+        const sumOfCountValues = GetSvgCountValue(actualCalendar, weekIndex, dayIndex)
+          + GetSvgCountValue(parsedSvgData, weekIndex, dayIndex);
+
+        deepCopiedActualCalendar.children[0].children[weekIndex].children[dayIndex].attributes = {
+          ...deepCopiedActualCalendar.children[0].children[weekIndex].children[dayIndex].attributes,
+          'data-count': String(sumOfCountValues),
+          fill: SetFillColor(sumOfCountValues),
+        };
+      }
+    });
+  });
+
+  return deepCopiedActualCalendar;
 };

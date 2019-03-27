@@ -1,10 +1,11 @@
 import React, { Component, Fragment } from 'react';
-import { stringify } from 'svgson';
+import svgson, { stringify } from 'svgson';
+import parser from 'html-react-parser';
 import GitHubHeader from './GitHubHeader/GitHubHeader';
-import * as ContributionsDataUtils from '../../../utils/ContributionsDataUtils/ContributionsDataUtils';
 import * as Users from '../../../resources/Users/Users';
 import BasicCalendar from '../../../resources/BasicCalendar/BasicCalendar.json';
 import * as CalendarUtils from '../../../utils/CalendarUtils/CalendarUtils';
+import * as SvgUtils from '../../../utils/SvgUtils/SvgUtils';
 
 class GitHubSvg extends Component {
   constructor(props) {
@@ -12,29 +13,47 @@ class GitHubSvg extends Component {
 
     this.state = {
       contributionsData: [],
+      actualCalendar: BasicCalendar,
       isLoading: true,
     };
-
-    this.container = null;
   }
 
-  async componentDidMount() {
-    let svg = stringify(BasicCalendar);
-    this.container.innerHTML = svg;
+  componentDidMount() {
+    Users.GithubUsernames.map(async (userName) => {
+      const userSVG = await SvgUtils.GetGitHubUserSVG(userName);
 
-    const parsedData = await ContributionsDataUtils.GetParsedData(Users.GithubUsernames);
-
-    this.setState({
-      contributionsData: [...parsedData],
-      isLoading: false,
+      this.setCalendar(svgson.parse(userSVG.outerHTML));
     });
+  }
 
-    svg = CalendarUtils.AdjustFetchedCalendarStyle(parsedData[0]);
-    this.container.innerHTML = stringify(svg);
+  // Missing tests.
+  setCalendar(data) {
+    // Error handling
+    const { contributionsData: [...contributionsData] } = this.state;
+    let { actualCalendar: { ...actualCalendar } } = this.state;
+
+    data.then((parsedSvgData) => {
+      contributionsData.push(parsedSvgData);
+
+      if (contributionsData.length === 1) {
+        actualCalendar = CalendarUtils.AdjustFetchedCalendarStyle(parsedSvgData);
+      } else {
+        actualCalendar = CalendarUtils.MergeSvgs(actualCalendar, parsedSvgData);
+      }
+
+      this.setState({
+        contributionsData,
+        actualCalendar,
+      });
+    });
   }
 
   render() {
-    const { contributionsData: [...contributionsData], isLoading } = this.state;
+    const {
+      contributionsData: [...contributionsData],
+      actualCalendar: { ...actualCalendar },
+      isLoading,
+    } = this.state;
 
     return (
       <Fragment>
@@ -42,10 +61,7 @@ class GitHubSvg extends Component {
           isLoading={isLoading}
           contributionsData={contributionsData}
         />
-        <div ref={(el) => {
-          this.container = el;
-        }}
-        />
+        {parser(stringify(actualCalendar))}
       </Fragment>
     );
   }
