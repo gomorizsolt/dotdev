@@ -42,7 +42,7 @@ class GitHubSvg extends Component {
       this.setState({
         usersParsedCalendarGraphs,
         actualCalendar,
-        isLoading: usersParsedCalendarGraphs.length !== Users.GithubUsernames.length,
+        isLoading: false,
       });
     });
   }
