@@ -5,6 +5,7 @@ export const SvgDisplayerContainer = styled.div`
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     border: 1px solid #E1E4E8;
-    padding: 10px 5px 10px 20px;
+    padding: 10px 0 10px 20px;
     margin: 20px auto;
+    font-size: 10px;
 `;

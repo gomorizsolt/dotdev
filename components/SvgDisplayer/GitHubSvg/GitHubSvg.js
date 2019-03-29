@@ -1,42 +1,66 @@
 import React, { Component, Fragment } from 'react';
-import { stringify } from 'svgson';
+import svgson, { stringify } from 'svgson';
 import parser from 'html-react-parser';
 import GitHubHeader from './GitHubHeader/GitHubHeader';
-import * as CalendarUtils from '../../../utils/CalendarUtils/CalendarUtils';
-import * as ContributionsDataUtils from '../../../utils/ContributionsDataUtils/ContributionsDataUtils';
 import * as Users from '../../../resources/Users/Users';
+import BasicCalendar from '../../../resources/BasicCalendar/BasicCalendar.json';
+import * as CalendarUtils from '../../../utils/CalendarUtils/CalendarUtils';
+import * as SvgUtils from '../../../utils/SvgUtils/SvgUtils';
 
 class GitHubSvg extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      contributionsData: [],
+      usersParsedCalendarGraphs: [],
+      actualCalendar: BasicCalendar,
       isLoading: true,
     };
-
-    this.container = stringify(CalendarUtils.GetTodaysCalendar());
   }
 
-  async componentDidMount() {
-    const parsedData = await ContributionsDataUtils.GetParsedData(Users.GithubUsernames);
+  componentDidMount() {
+    Users.GithubUsernames.map(async (userName) => {
+      const rawUserSVG = await SvgUtils.GetGitHubUserSVG(userName);
 
-    this.setState({
-      contributionsData: [...parsedData],
-      isLoading: false,
+      this.setActualCalendar(svgson.parse(rawUserSVG.outerHTML));
+    });
+  }
+
+  setActualCalendar(calendarGraphPromise) {
+    const { usersParsedCalendarGraphs: [...usersParsedCalendarGraphs] } = this.state;
+    let { actualCalendar: { ...actualCalendar } } = this.state;
+
+    calendarGraphPromise.then((parsedCalendarGraph) => {
+      usersParsedCalendarGraphs.push(parsedCalendarGraph);
+
+      if (usersParsedCalendarGraphs.length === 1) {
+        actualCalendar = parsedCalendarGraph;
+      } else {
+        actualCalendar = CalendarUtils.MergeSvgs(actualCalendar, parsedCalendarGraph);
+      }
+
+      this.setState({
+        usersParsedCalendarGraphs,
+        actualCalendar,
+        isLoading: usersParsedCalendarGraphs.length !== Users.GithubUsernames.length,
+      });
     });
   }
 
   render() {
-    const { contributionsData: [...contributionsData], isLoading } = this.state;
+    const {
+      usersParsedCalendarGraphs: [...usersParsedCalendarGraphs],
+      actualCalendar: { ...actualCalendar },
+      isLoading,
+    } = this.state;
 
     return (
       <Fragment>
         <GitHubHeader
           isLoading={isLoading}
-          contributionsData={contributionsData}
+          contributionSvgs={usersParsedCalendarGraphs}
         />
-        {parser(this.container)}
+        {parser(stringify(actualCalendar))}
       </Fragment>
     );
   }

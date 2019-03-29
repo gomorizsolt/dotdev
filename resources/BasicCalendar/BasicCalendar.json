@@ -13,7 +13,7 @@
         "type": "element",
         "value": "",
         "attributes": {
-          "transform": "translate(20, 25)",
+          "transform": "translate(16, 20)",
           "data-hydro-click": "{&quot;event_type&quot;:&quot;user_profile.click&quot;,&quot;payload&quot;:{&quot;profile_user_id&quot;:30864202,&quot;target&quot;:&quot;CONTRIBUTION_CALENDAR_SQUARE&quot;,&quot;user_id&quot;:null,&quot;client_id&quot;:null,&quot;originating_request_id&quot;:&quot;9050:0190:309E49:5F6AB6:5C91E860&quot;,&quot;originating_url&quot;:&quot;https://github.com/gomorizsolt&quot;}}",
           "data-hydro-click-hmac": "259d23323160543fe97290cfe34c80b6c6ce9d6850ac1ce193a01626c7c0bd2e"
         },
@@ -6385,22 +6385,6 @@
                   "data-date": "2019-03-17"
                 },
                 "children": []
-              },
-              {
-                "name": "rect",
-                "type": "element",
-                "value": "",
-                "attributes": {
-                  "class": "day",
-                  "width": "10",
-                  "height": "10",
-                  "x": "-39",
-                  "y": "12",
-                  "fill": "#eee",
-                  "data-count": "0",
-                  "data-date": "2019-03-18"
-                },
-                "children": []
               }
             ]
           },
@@ -6411,14 +6395,13 @@
             "attributes": {
               "x": "13",
               "y": "-10",
-              "class": "month",
-              "font-size": "13"
+              "class": "month"
             },
             "children": [
               {
                 "name": "",
                 "type": "text",
-                "value": "Mar",
+                "value": "",
                 "attributes": {},
                 "children": []
               }
@@ -6431,14 +6414,13 @@
             "attributes": {
               "x": "58",
               "y": "-10",
-              "class": "month",
-              "font-size": "13"
+              "class": "month"
             },
             "children": [
               {
                 "name": "",
                 "type": "text",
-                "value": "Apr",
+                "value": "",
                 "attributes": {},
                 "children": []
               }
@@ -6451,14 +6433,13 @@
             "attributes": {
               "x": "105",
               "y": "-10",
-              "class": "month",
-              "font-size": "13"
+              "class": "month"
             },
             "children": [
               {
                 "name": "",
                 "type": "text",
-                "value": "May",
+                "value": "",
                 "attributes": {},
                 "children": []
               }
@@ -6471,14 +6452,13 @@
             "attributes": {
               "x": "158",
               "y": "-10",
-              "class": "month",
-              "font-size": "13"
+              "class": "month"
             },
             "children": [
               {
                 "name": "",
                 "type": "text",
-                "value": "Jun",
+                "value": "",
                 "attributes": {},
                 "children": []
               }
@@ -6491,14 +6471,13 @@
             "attributes": {
               "x": "210",
               "y": "-10",
-              "class": "month",
-              "font-size": "13"
+              "class": "month"
             },
             "children": [
               {
                 "name": "",
                 "type": "text",
-                "value": "Jul",
+                "value": "",
                 "attributes": {},
                 "children": []
               }
@@ -6511,14 +6490,13 @@
             "attributes": {
               "x": "257",
               "y": "-10",
-              "class": "month",
-              "font-size": "13"
+              "class": "month"
             },
             "children": [
               {
                 "name": "",
                 "type": "text",
-                "value": "Aug",
+                "value": "",
                 "attributes": {},
                 "children": []
               }
@@ -6531,14 +6509,13 @@
             "attributes": {
               "x": "306",
               "y": "-10",
-              "class": "month",
-              "font-size": "13"
+              "class": "month"
             },
             "children": [
               {
                 "name": "",
                 "type": "text",
-                "value": "Sep",
+                "value": "",
                 "attributes": {},
                 "children": []
               }
@@ -6551,14 +6528,13 @@
             "attributes": {
               "x": "360",
               "y": "-10",
-              "class": "month",
-              "font-size": "13"
+              "class": "month"
             },
             "children": [
               {
                 "name": "",
                 "type": "text",
-                "value": "Oct",
+                "value": "",
                 "attributes": {},
                 "children": []
               }
@@ -6571,14 +6547,13 @@
             "attributes": {
               "x": "409",
               "y": "-10",
-              "class": "month",
-              "font-size": "13"
+              "class": "month"
             },
             "children": [
               {
                 "name": "",
                 "type": "text",
-                "value": "Nov",
+                "value": "",
                 "attributes": {},
                 "children": []
               }
@@ -6591,14 +6566,13 @@
             "attributes": {
               "x": "457",
               "y": "-10",
-              "class": "month",
-              "font-size": "13"
+              "class": "month"
             },
             "children": [
               {
                 "name": "",
                 "type": "text",
-                "value": "Dec",
+                "value": "",
                 "attributes": {},
                 "children": []
               }
@@ -6611,14 +6585,13 @@
             "attributes": {
               "x": "513",
               "y": "-10",
-              "class": "month",
-              "font-size": "13"
+              "class": "month"
             },
             "children": [
               {
                 "name": "",
                 "type": "text",
-                "value": "Jan",
+                "value": "",
                 "attributes": {},
                 "children": []
               }
@@ -6631,14 +6604,13 @@
             "attributes": {
               "x": "565",
               "y": "-10",
-              "class": "month",
-              "font-size": "13"
+              "class": "month"
             },
             "children": [
               {
                 "name": "",
                 "type": "text",
-                "value": "Feb",
+                "value": "",
                 "attributes": {},
                 "children": []
               }
@@ -6651,14 +6623,13 @@
             "attributes": {
               "x": "620",
               "y": "-10",
-              "class": "month",
-              "font-size": "13"
+              "class": "month"
             },
             "children": [
               {
                 "name": "",
                 "type": "text",
-                "value": "Mar",
+                "value": "",
                 "attributes": {},
                 "children": []
               }
@@ -6692,9 +6663,8 @@
             "attributes": {
               "text-anchor": "start",
               "class": "wday",
-              "dx": "-20",
-              "dy": "20",
-              "font-size": "13"
+              "dx": "-14",
+              "dy": "20"
             },
             "children": [
               {
@@ -6713,7 +6683,7 @@
             "attributes": {
               "text-anchor": "start",
               "class": "wday",
-              "dx": "-20",
+              "dx": "-14",
               "dy": "32",
               "style": "display: none;"
             },
@@ -6734,9 +6704,8 @@
             "attributes": {
               "text-anchor": "start",
               "class": "wday",
-              "dx": "-20",
-              "dy": "44",
-              "font-size": "13"
+              "dx": "-14",
+              "dy": "44"
             },
             "children": [
               {
@@ -6777,8 +6746,7 @@
               "text-anchor": "start",
               "class": "wday",
               "dx": "-14",
-              "dy": "69",
-              "font-size": "13"
+              "dy": "69"
             },
             "children": [
               {

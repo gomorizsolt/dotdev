@@ -3,11 +3,11 @@ import ContributionsValueDisplayer from '../../../UI/ContributionsValueDisplayer
 import { Header, ColorsList } from './GitHubHeader.style';
 import * as ColorSchemas from '../../../../resources/ColorSchemas/ColorSchemas';
 
-const gitHubHeader = ({ isLoading, contributionsData }) => (
+const gitHubHeader = ({ isLoading, contributionSvgs }) => (
   <Header>
     <ContributionsValueDisplayer
       isLoading={isLoading}
-      contributionsData={contributionsData}
+      contributionSvgs={contributionSvgs}
     />
     <ColorsList>
       {ColorSchemas.GitHubColorSchema

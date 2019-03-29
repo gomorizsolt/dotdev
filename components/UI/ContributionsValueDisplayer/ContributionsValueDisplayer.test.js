@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import ContributionsValueDisplayer from './ContributionsValueDisplayer';
 import * as ContributionsDataUtils from '../../../utils/ContributionsDataUtils/ContributionsDataUtils';
+import { ContributionsDisplayerContainer } from './ContributionsValueDisplayer.style';
 
 jest.mock('../../../utils/ContributionsDataUtils/ContributionsDataUtils', () => require
   .requireActual('../../../utils/TestUtils/TestUtils')
@@ -10,11 +11,20 @@ jest.mock('../../../utils/ContributionsDataUtils/ContributionsDataUtils', () => 
 describe('<ContributionsValueDisplayer />', () => {
   let contributionsValueDisplayerWrapper;
 
+  beforeEach(() => {
+    contributionsValueDisplayerWrapper = shallow(<ContributionsValueDisplayer isLoading />);
+  });
+
+  it('renders ContributionsDisplayerContainer', () => {
+    expect(contributionsValueDisplayerWrapper
+      .find(ContributionsDisplayerContainer)).toHaveLength(1);
+  });
+
   describe('when `isLoading` is true', () => {
     beforeEach(() => {
-      contributionsValueDisplayerWrapper = shallow(
-        <ContributionsValueDisplayer isLoading />,
-      );
+      contributionsValueDisplayerWrapper.setProps({
+        isLoading: true,
+      });
     });
 
     it('renders the loading text', () => {
@@ -33,9 +43,9 @@ describe('<ContributionsValueDisplayer />', () => {
       ContributionsDataUtils.SumContributionsValues
         .mockImplementationOnce(() => sumOfContributions);
 
-      contributionsValueDisplayerWrapper = shallow(
-        <ContributionsValueDisplayer isLoading={false} />,
-      );
+      contributionsValueDisplayerWrapper.setProps({
+        isLoading: false,
+      });
     });
 
     it('calls ContributionsDataUtils.SumContributionsValues', () => {
