@@ -5,8 +5,8 @@ import GitHubHeader from './GitHubHeader/GitHubHeader';
 import * as CalendarUtils from '../../../utils/CalendarUtils/CalendarUtils';
 import * as Users from '../../../resources/Users/Users';
 import * as TestUtils from '../../../utils/TestUtils/TestUtils';
-import * as SvgUtils from '../../../utils/SvgUtils/SvgUtils';
 import BasicCalendar from '../../../resources/BasicCalendar/BasicCalendar.json';
+import * as JavaScriptUtils from '../../../utils/JavaScriptUtils/JavaScriptUtils';
 
 jest.mock('../../../utils/CalendarUtils/CalendarUtils', () => require
   .requireActual('../../../utils/TestUtils/TestUtils')
@@ -20,69 +20,132 @@ jest.mock('../../../utils/SvgUtils/SvgUtils', () => require
     '../SvgUtils/SvgUtils',
   ));
 
+jest.mock('../../../utils/JavaScriptUtils/JavaScriptUtils', () => require
+  .requireActual('../../../utils/TestUtils/TestUtils')
+  .mockOriginalFunctionality(
+    '../JavaScriptUtils/JavaScriptUtils',
+  ));
+
+// These should be mocked out because they're being used during the rendering.
+jest.mock('svgson');
+jest.mock('html-react-parser');
+
 describe('<GitHubSvg />', () => {
-  let gitHubSvgDisplayerWrapper;
+  let gitHubSvgWrapper;
 
   beforeEach(() => {
-    gitHubSvgDisplayerWrapper = shallow(<GitHubSvg />);
+    gitHubSvgWrapper = shallow(<GitHubSvg />);
   });
 
   it('renders GitHubHeader', () => {
-    expect(gitHubSvgDisplayerWrapper.find(GitHubHeader)).toHaveLength(1);
+    expect(gitHubSvgWrapper.find(GitHubHeader)).toHaveLength(1);
   });
 
   it('sets `BasicCalendar` to `actualCalendar` by default', () => {
-    expect(gitHubSvgDisplayerWrapper.state('actualCalendar')).toEqual(BasicCalendar);
-  });
-
-  it('calls SvgUtils.GetGitHubUserSVG', () => {
-    // Reason for `mockClear`: the function would be called 9 times instead of 3
-    // becase of the previous rendering by the other test cases.
-    SvgUtils.GetGitHubUserSVG.mockClear();
-
-    gitHubSvgDisplayerWrapper = shallow(<GitHubSvg />);
-
-    expect(SvgUtils.GetGitHubUserSVG).toHaveBeenCalledTimes(Users.GithubUsernames.length);
+    expect(gitHubSvgWrapper.state('actualCalendar')).toEqual(BasicCalendar);
   });
 
   describe('setActualCalendar', () => {
-    const calendarData = TestUtils.getFakeContributionsObjectWithDailyCounts([5]);
-    const resolvedCalendarData = Promise.resolve(calendarData);
+    const calendarGraph = TestUtils.getFakeContributionsObjectWithDailyCounts([5]);
+    const calendarGraphPromise = Promise.resolve(calendarGraph[0]);
 
-    it('increases the length of `usersParsedCalendarGraphs` by 1', async () => {
-      const expectedLength = gitHubSvgDisplayerWrapper.state('usersParsedCalendarGraphs').length + 1;
+    it('calls CalendarUtils.MergeSvgs with `actualCalendar` and the resolved calendar', async () => {
+      await gitHubSvgWrapper.instance().setActualCalendar(calendarGraphPromise);
 
-      await gitHubSvgDisplayerWrapper.instance().setActualCalendar(resolvedCalendarData);
-
-      const actualLength = gitHubSvgDisplayerWrapper.state('usersParsedCalendarGraphs').length;
-
-      expect(actualLength).toEqual(expectedLength);
+      expect(CalendarUtils.MergeSvgs).toHaveBeenCalled();
     });
 
-    describe('when `usersParsedCalendarGraphs` contains a single element', () => {
-      it('sets `actualCalendar` to the parsed calendar', async () => {
-        await gitHubSvgDisplayerWrapper.instance().setActualCalendar(resolvedCalendarData);
+    it('calls `writeState` with the updated actual calendar and the resolved calendar', async () => {
+      const writeStateSpy = jest.spyOn(gitHubSvgWrapper.instance(), 'writeState');
+      CalendarUtils.MergeSvgs.mockImplementationOnce(() => calendarGraph[0]);
 
-        expect(gitHubSvgDisplayerWrapper.state('actualCalendar')).toEqual(calendarData);
+      await gitHubSvgWrapper.instance().setActualCalendar(calendarGraphPromise);
+
+      const expectedObject = {
+        newParsedCalendar: calendarGraph[0],
+        updatedActualCalendar: calendarGraph[0],
+      };
+
+      expect(writeStateSpy).toHaveBeenCalledWith(expectedObject);
+    });
+  });
+
+  describe('fetchFirstUserCalendar', () => {
+    const parsedGitHubCalendar = TestUtils.getFakeContributionsObjectWithDailyCounts([3]);
+
+    beforeEach(() => {
+      CalendarUtils.getParsedGitHubCalendarSync.mockImplementationOnce(
+        () => parsedGitHubCalendar[0],
+      );
+    });
+
+    it('calls CalendarUtils.getParsedGitHubCalendarSync with the first GH user', async () => {
+      const expectedUser = Users.GithubUsernames[0];
+
+      await gitHubSvgWrapper.instance().fetchFirstUserCalendar();
+
+      expect(CalendarUtils.getParsedGitHubCalendarSync).toHaveBeenCalledWith(expectedUser);
+    });
+
+    it('calls `writeState` with `isLoading` false and the parsed calendar', async () => {
+      const writeStateSpy = jest.spyOn(gitHubSvgWrapper.instance(), 'writeState');
+
+      await gitHubSvgWrapper.instance().fetchFirstUserCalendar();
+
+      const expectedObject = {
+        newParsedCalendar: parsedGitHubCalendar[0],
+        updatedActualCalendar: parsedGitHubCalendar[0],
+        isLoading: false,
+      };
+
+      expect(writeStateSpy).toHaveBeenCalledWith(expectedObject);
+    });
+  });
+
+  describe('writeState', () => {
+    describe('when `isLoading` is defined', () => {
+      const dataWithIsLoading = { isLoading: false };
+
+      it('updates `isLoading` state field to the given value', () => {
+        gitHubSvgWrapper.instance().writeState(dataWithIsLoading);
+
+        expect(gitHubSvgWrapper.state('isLoading')).toEqual(dataWithIsLoading.isLoading);
       });
     });
 
-    describe('when `usersParsedCalendarGraphs` contains more than one element', () => {
-      beforeEach(() => {
-        gitHubSvgDisplayerWrapper.setState({
-          usersParsedCalendarGraphs: [
-            { ...calendarData },
-            { ...calendarData },
-          ],
-        });
-      });
+    describe('when `isLoading` is not defined', () => {
+      it('does not update `isLoading` state field', () => {
+        const originalIsLoading = gitHubSvgWrapper.state('isLoading');
+        JavaScriptUtils.isDefined.mockImplementationOnce(() => false);
 
-      it('calls CalendarUtils.MergeSvgs with `actualCalendar` and the parsed calendar', async () => {
-        const actualCalendar = gitHubSvgDisplayerWrapper.state('actualCalendar');
-        await gitHubSvgDisplayerWrapper.instance().setActualCalendar(resolvedCalendarData);
+        gitHubSvgWrapper.instance().writeState({});
 
-        expect(CalendarUtils.MergeSvgs).toHaveBeenCalledWith(actualCalendar, calendarData);
+        expect(gitHubSvgWrapper.state('isLoading')).toEqual(originalIsLoading);
       });
+    });
+
+    it('extends `usersParsedCalendarGraphs` with the fetched calendar', () => {
+      const calendarGraph = TestUtils.getFakeContributionsObjectWithDailyCounts([3]);
+      const data = {
+        newParsedCalendar: calendarGraph[0],
+      };
+
+      gitHubSvgWrapper.instance().writeState(data);
+
+      const expectedUsersParsedCalendarGraphs = [data.newParsedCalendar];
+
+      expect(gitHubSvgWrapper.state('usersParsedCalendarGraphs')).toEqual(expectedUsersParsedCalendarGraphs);
+    });
+
+    it('updates `actualCalendar`', () => {
+      const calendarGraph = TestUtils.getFakeContributionsObjectWithDailyCounts([3]);
+      const data = {
+        updatedActualCalendar: calendarGraph[0],
+      };
+
+      gitHubSvgWrapper.instance().writeState(data);
+
+      expect(gitHubSvgWrapper.state('actualCalendar')).toEqual(data.updatedActualCalendar);
     });
   });
 });
