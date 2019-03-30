@@ -50,9 +50,11 @@ describe('<GitHubSvg />', () => {
     const calendarGraphPromise = Promise.resolve(calendarGraph[0]);
 
     it('calls CalendarUtils.MergeSvgs with `actualCalendar` and the resolved calendar', async () => {
+      const actualCalendar = gitHubSvgWrapper.state('actualCalendar');
+
       await gitHubSvgWrapper.instance().setActualCalendar(calendarGraphPromise);
 
-      expect(CalendarUtils.MergeSvgs).toHaveBeenCalled();
+      expect(CalendarUtils.MergeSvgs).toHaveBeenCalledWith(actualCalendar, calendarGraph[0]);
     });
 
     it('calls `writeState` with the updated actual calendar and the resolved calendar', async () => {
