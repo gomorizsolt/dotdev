@@ -43,7 +43,6 @@ class GitHubSvg extends Component {
 
   async fetchFirstUserCalendar() {
     const firstUser = Users.GithubUsernames[0];
-    // TODO: RESTRUCTURE FUNCTION NAMES TO LOWER CAMEL CASE.
     const parsedGitHubCalendar = await CalendarUtils.getParsedGitHubCalendarSync(firstUser);
 
     this.writeState({
