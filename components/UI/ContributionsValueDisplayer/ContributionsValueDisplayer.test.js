@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 import ContributionsValueDisplayer from './ContributionsValueDisplayer';
 import * as ContributionsDataUtils from '../../../utils/ContributionsDataUtils/ContributionsDataUtils';
 import { ContributionsDisplayerContainer } from './ContributionsValueDisplayer.style';
+import LoaderIcon from '../../../resources/assets/SVG/LoaderIcon/LoaderIcon';
 
 jest.mock('../../../utils/ContributionsDataUtils/ContributionsDataUtils', () => require
   .requireActual('../../../utils/TestUtils/TestUtils')
@@ -27,8 +28,8 @@ describe('<ContributionsValueDisplayer />', () => {
       });
     });
 
-    it('renders the loading text', () => {
-      expect(contributionsValueDisplayerWrapper.find('p').text()).toEqual('Loading ...');
+    it('renders LoaderIcon', () => {
+      expect(contributionsValueDisplayerWrapper.find(LoaderIcon)).toHaveLength(1);
     });
 
     it('does not call ContributionsDataUtils.SumContributionsValues', () => {
