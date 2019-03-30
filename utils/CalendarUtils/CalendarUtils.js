@@ -2,8 +2,6 @@ import { parseSync } from 'svgson';
 import * as SvgUtils from '../SvgUtils/SvgUtils';
 import * as JavaScriptUtils from '../JavaScriptUtils/JavaScriptUtils';
 
-const DeepCopyObject = object => JSON.parse(JSON.stringify(object));
-
 const GetFillColor = (dataCountValue) => {
   let fillColor = '#ebedf0';
 
@@ -42,7 +40,7 @@ export const getParsedGitHubCalendarSync = async (userName) => {
 };
 
 export const MergeSvgs = (actualCalendar, nextCalendar) => {
-  const copiedActualCalendar = DeepCopyObject(actualCalendar);
+  const copiedActualCalendar = JavaScriptUtils.deepCopyObject(actualCalendar);
 
   nextCalendar.children[0].children.forEach((weeklyData, weekIndex) => {
     weeklyData.children.forEach((dailyData, dayIndex) => {
