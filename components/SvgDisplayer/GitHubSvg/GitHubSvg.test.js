@@ -128,9 +128,7 @@ describe('<GitHubSvg />', () => {
 
     it('extends `usersParsedCalendarGraphs` with the fetched calendar', () => {
       const calendarGraph = TestUtils.getFakeContributionsObjectWithDailyCounts([3]);
-      const data = {
-        newParsedCalendar: calendarGraph[0],
-      };
+      const data = { newParsedCalendar: calendarGraph[0] };
 
       gitHubSvgWrapper.instance().writeState(data);
 
@@ -141,9 +139,7 @@ describe('<GitHubSvg />', () => {
 
     it('updates `actualCalendar`', () => {
       const calendarGraph = TestUtils.getFakeContributionsObjectWithDailyCounts([3]);
-      const data = {
-        updatedActualCalendar: calendarGraph[0],
-      };
+      const data = { updatedActualCalendar: calendarGraph[0] };
 
       gitHubSvgWrapper.instance().writeState(data);
 
