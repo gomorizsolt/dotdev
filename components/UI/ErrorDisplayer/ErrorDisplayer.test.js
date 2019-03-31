@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import ErrorDisplayer from './ErrorDisplayer';
+import { ErrorMessageContainer } from './ErrorDisplayer.style';
 
 describe('<ErrorDisplayer />', () => {
   let errorDispalyerWrapper;
@@ -12,8 +13,12 @@ describe('<ErrorDisplayer />', () => {
       errorDispalyerWrapper = shallow(<ErrorDisplayer errorMessage={errorMessage} />);
     });
 
+    it('renders ErrorMessageContainer', () => {
+      expect(errorDispalyerWrapper.find(ErrorMessageContainer)).toHaveLength(1);
+    });
+
     it('renders the given text', () => {
-      expect(errorDispalyerWrapper.find('p').text()).toEqual(errorMessage);
+      expect(errorDispalyerWrapper.find(ErrorMessageContainer).text()).toEqual(errorMessage);
     });
   });
 

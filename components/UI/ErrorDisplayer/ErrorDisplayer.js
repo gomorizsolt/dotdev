@@ -1,8 +1,13 @@
 import React from 'react';
+import { ErrorMessageContainer } from './ErrorDisplayer.style';
 
 const errorDisplayer = ({ errorMessage }) => {
   if (errorMessage) {
-    return <p>{errorMessage}</p>;
+    return (
+      <ErrorMessageContainer>
+        {errorMessage}
+      </ErrorMessageContainer>
+    );
   }
 
   return null;
