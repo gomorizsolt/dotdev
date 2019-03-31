@@ -47,7 +47,7 @@ export const getParsedGitHubCalendarSync = async (userName) => {
   return null;
 };
 
-export const getIncorrectFirstUserCalendarErrorMessage = () => 'We restrict the first user in the list. Please read the related phase in README.md so that get more information about the reason for the error.';
+export const getIncorrectFirstUserCalendarErrorMessage = () => 'The first user\'s calendar in the list is incorrect. Please read the related phase in README.md so that get further information about the reason for the error.';
 
 
 export const MergeSvgs = (actualCalendar, nextCalendar) => {
