@@ -95,14 +95,11 @@ describe('<GitHubSvg />', () => {
 
     describe('when the first user`s calendar meets the requirement', async () => {
       const parsedGitHubCalendar = TestUtils.getFakeContributionsObjectWithDailyCounts([3])[0];
-      let fetchRemainingCalendarsSpy;
 
       beforeEach(() => {
         CalendarUtils.getParsedGitHubCalendarSync.mockImplementationOnce(
           () => parsedGitHubCalendar,
         );
-
-        fetchRemainingCalendarsSpy = jest.spyOn(gitHubSvgWrapper.instance(), 'fetchRemainingCalendars');
       });
 
       it('calls writeState with the parsed calendar', async () => {
@@ -119,6 +116,8 @@ describe('<GitHubSvg />', () => {
       });
 
       it('calls `fetchRemainingCalendars`', async () => {
+        const fetchRemainingCalendarsSpy = jest.spyOn(gitHubSvgWrapper.instance(), 'fetchRemainingCalendars');
+
         await gitHubSvgWrapper.instance().fetchFirstUserCalendar();
 
         expect(fetchRemainingCalendarsSpy).toHaveBeenCalled();
