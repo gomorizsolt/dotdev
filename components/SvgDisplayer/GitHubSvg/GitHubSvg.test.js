@@ -2,11 +2,11 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import GitHubSvg from './GitHubSvg';
 import GitHubHeader from './GitHubHeader/GitHubHeader';
+import ErrorDisplayer from '../../UI/ErrorDisplayer/ErrorDisplayer';
 import * as CalendarUtils from '../../../utils/CalendarUtils/CalendarUtils';
 import * as Users from '../../../resources/Users/Users';
 import * as TestUtils from '../../../utils/TestUtils/TestUtils';
 import BasicCalendar from '../../../resources/BasicCalendar/BasicCalendar.json';
-import * as JavaScriptUtils from '../../../utils/JavaScriptUtils/JavaScriptUtils';
 
 jest.mock('../../../utils/CalendarUtils/CalendarUtils', () => require
   .requireActual('../../../utils/TestUtils/TestUtils')
@@ -26,7 +26,6 @@ jest.mock('../../../utils/JavaScriptUtils/JavaScriptUtils', () => require
     '../JavaScriptUtils/JavaScriptUtils',
   ));
 
-// These should be mocked out because they're being used during the rendering.
 jest.mock('svgson');
 jest.mock('html-react-parser');
 
@@ -37,12 +36,16 @@ describe('<GitHubSvg />', () => {
     gitHubSvgWrapper = shallow(<GitHubSvg />);
   });
 
+  it('sets `BasicCalendar` to `actualCalendar` by default', () => {
+    expect(gitHubSvgWrapper.state('actualCalendar')).toEqual(BasicCalendar);
+  });
+
   it('renders GitHubHeader', () => {
     expect(gitHubSvgWrapper.find(GitHubHeader)).toHaveLength(1);
   });
 
-  it('sets `BasicCalendar` to `actualCalendar` by default', () => {
-    expect(gitHubSvgWrapper.state('actualCalendar')).toEqual(BasicCalendar);
+  it('renders ErrorDisplayer', () => {
+    expect(gitHubSvgWrapper.find(ErrorDisplayer)).toHaveLength(1);
   });
 
   describe('setActualCalendar', () => {
@@ -73,15 +76,8 @@ describe('<GitHubSvg />', () => {
   });
 
   describe('fetchFirstUserCalendar', () => {
-    const parsedGitHubCalendar = TestUtils.getFakeContributionsObjectWithDailyCounts([3]);
-
-    beforeEach(() => {
-      CalendarUtils.getParsedGitHubCalendarSync.mockImplementationOnce(
-        () => parsedGitHubCalendar[0],
-      );
-    });
-
     it('calls CalendarUtils.getParsedGitHubCalendarSync with the first GH user', async () => {
+      CalendarUtils.getParsedGitHubCalendarSync.mockImplementationOnce(() => jest.fn());
       const expectedUser = Users.GithubUsernames[0];
 
       await gitHubSvgWrapper.instance().fetchFirstUserCalendar();
@@ -89,43 +85,64 @@ describe('<GitHubSvg />', () => {
       expect(CalendarUtils.getParsedGitHubCalendarSync).toHaveBeenCalledWith(expectedUser);
     });
 
-    it('calls `writeState` with `isLoading` false and parsed calendar', async () => {
-      const writeStateSpy = jest.spyOn(gitHubSvgWrapper.instance(), 'writeState');
+    it('sets `isLoading` to false', async () => {
+      CalendarUtils.getParsedGitHubCalendarSync.mockImplementationOnce(() => jest.fn());
 
       await gitHubSvgWrapper.instance().fetchFirstUserCalendar();
 
-      const expectedObject = {
-        newParsedCalendar: parsedGitHubCalendar[0],
-        updatedActualCalendar: parsedGitHubCalendar[0],
-        isLoading: false,
-      };
+      expect(gitHubSvgWrapper.state('isLoading')).toBeFalsy();
+    });
 
-      expect(writeStateSpy).toHaveBeenCalledWith(expectedObject);
+    describe('when the first user`s calendar meets the requirement', async () => {
+      const parsedGitHubCalendar = TestUtils.getFakeContributionsObjectWithDailyCounts([3])[0];
+      let fetchRemainingCalendarsSpy;
+
+      beforeEach(() => {
+        CalendarUtils.getParsedGitHubCalendarSync.mockImplementationOnce(
+          () => parsedGitHubCalendar,
+        );
+
+        fetchRemainingCalendarsSpy = jest.spyOn(gitHubSvgWrapper.instance(), 'fetchRemainingCalendars');
+      });
+
+      it('calls writeState with the parsed calendar', async () => {
+        const writeStateSpy = jest.spyOn(gitHubSvgWrapper.instance(), 'writeState');
+
+        await gitHubSvgWrapper.instance().fetchFirstUserCalendar();
+
+        const expectedObject = {
+          newParsedCalendar: parsedGitHubCalendar,
+          updatedActualCalendar: parsedGitHubCalendar,
+        };
+
+        expect(writeStateSpy).toHaveBeenCalledWith(expectedObject);
+      });
+
+      it('calls `fetchRemainingCalendars`', async () => {
+        await gitHubSvgWrapper.instance().fetchFirstUserCalendar();
+
+        expect(fetchRemainingCalendarsSpy).toHaveBeenCalled();
+      });
+    });
+
+    describe('when the first user`s calendar does not meet the requirement', () => {
+      beforeEach(() => {
+        CalendarUtils.getParsedGitHubCalendarSync.mockImplementationOnce(
+          () => null,
+        );
+      });
+
+      it('sets `error` to the returned value of `CalendarUtils.getIncorrectFirstUserCalendarErrorMessage`', async () => {
+        const expectedError = CalendarUtils.getIncorrectFirstUserCalendarErrorMessage();
+
+        await gitHubSvgWrapper.instance().fetchFirstUserCalendar();
+
+        expect(gitHubSvgWrapper.state('error')).toEqual(expectedError);
+      });
     });
   });
 
   describe('writeState', () => {
-    describe('when `isLoading` is defined', () => {
-      const dataWithIsLoading = { isLoading: false };
-
-      it('updates `isLoading` state field to the given value', () => {
-        gitHubSvgWrapper.instance().writeState(dataWithIsLoading);
-
-        expect(gitHubSvgWrapper.state('isLoading')).toEqual(dataWithIsLoading.isLoading);
-      });
-    });
-
-    describe('when `isLoading` is not defined', () => {
-      it('does not update `isLoading` state field', () => {
-        const originalIsLoading = gitHubSvgWrapper.state('isLoading');
-        JavaScriptUtils.isDefined.mockImplementationOnce(() => false);
-
-        gitHubSvgWrapper.instance().writeState({});
-
-        expect(gitHubSvgWrapper.state('isLoading')).toEqual(originalIsLoading);
-      });
-    });
-
     it('extends `usersParsedCalendarGraphs` with the fetched calendar', () => {
       const calendarGraph = TestUtils.getFakeContributionsObjectWithDailyCounts([3]);
       const data = { newParsedCalendar: calendarGraph[0] };

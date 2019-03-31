@@ -2,11 +2,11 @@ import React, { Component, Fragment } from 'react';
 import { stringify, parse } from 'svgson';
 import HtmlReactParser from 'html-react-parser';
 import GitHubHeader from './GitHubHeader/GitHubHeader';
+import ErrorDisplayer from '../../UI/ErrorDisplayer/ErrorDisplayer';
 import * as Users from '../../../resources/Users/Users';
-import BasicCalendar from '../../../resources/BasicCalendar/BasicCalendar.json';
 import * as CalendarUtils from '../../../utils/CalendarUtils/CalendarUtils';
 import * as SvgUtils from '../../../utils/SvgUtils/SvgUtils';
-import * as JavaScriptUtils from '../../../utils/JavaScriptUtils/JavaScriptUtils';
+import BasicCalendar from '../../../resources/BasicCalendar/BasicCalendar.json';
 
 class GitHubSvg extends Component {
   constructor(props) {
@@ -16,17 +16,12 @@ class GitHubSvg extends Component {
       usersParsedCalendarGraphs: [],
       actualCalendar: BasicCalendar,
       isLoading: true,
+      error: null,
     };
   }
 
-  async componentDidMount() {
-    await this.fetchFirstUserCalendar();
-
-    Users.GithubUsernames.slice(1).map(async (userName) => {
-      const rawUserSVG = await SvgUtils.GetGitHubUserSVG(userName);
-
-      this.setActualCalendar(parse(rawUserSVG.outerHTML));
-    });
+  componentDidMount() {
+    this.fetchFirstUserCalendar();
   }
 
   setActualCalendar(calendarGraphPromise) {
@@ -45,21 +40,34 @@ class GitHubSvg extends Component {
     const firstUser = Users.GithubUsernames[0];
     const parsedGitHubCalendar = await CalendarUtils.getParsedGitHubCalendarSync(firstUser);
 
-    this.writeState({
-      newParsedCalendar: parsedGitHubCalendar,
-      updatedActualCalendar: parsedGitHubCalendar,
+    this.setState({
       isLoading: false,
+    });
+
+    if (parsedGitHubCalendar) {
+      this.writeState({
+        newParsedCalendar: parsedGitHubCalendar,
+        updatedActualCalendar: parsedGitHubCalendar,
+      });
+
+      this.fetchRemainingCalendars();
+    } else {
+      this.setState({
+        error: CalendarUtils.getIncorrectFirstUserCalendarErrorMessage(),
+      });
+    }
+  }
+
+  fetchRemainingCalendars() {
+    Users.GithubUsernames.slice(1).map(async (userName) => {
+      const rawUserSVG = await SvgUtils.GetGitHubUserSVG(userName);
+
+      this.setActualCalendar(parse(rawUserSVG.outerHTML));
     });
   }
 
   writeState(data) {
-    const { newParsedCalendar, updatedActualCalendar, isLoading } = data;
-
-    if (JavaScriptUtils.isDefined(isLoading)) {
-      this.setState({
-        isLoading,
-      });
-    }
+    const { newParsedCalendar, updatedActualCalendar } = data;
 
     this.setState(prevState => ({
       usersParsedCalendarGraphs: [
@@ -77,6 +85,7 @@ class GitHubSvg extends Component {
       usersParsedCalendarGraphs: [...usersParsedCalendarGraphs],
       actualCalendar: { ...actualCalendar },
       isLoading,
+      error,
     } = this.state;
 
     const stringifiedHTMLContent = stringify(actualCalendar);
@@ -88,6 +97,7 @@ class GitHubSvg extends Component {
           contributionSvgs={usersParsedCalendarGraphs}
         />
         {HtmlReactParser(stringifiedHTMLContent)}
+        <ErrorDisplayer errorMessage={error} />
       </Fragment>
     );
   }

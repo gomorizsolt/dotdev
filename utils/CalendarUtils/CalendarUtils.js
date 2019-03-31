@@ -33,11 +33,22 @@ const GetCalendarData = (calendarData, weekIndex, dayIndex) => {
   return calendarData.children[0].children[weekIndex];
 };
 
+const normalSizedCalendarWidth = '669';
+
 export const getParsedGitHubCalendarSync = async (userName) => {
   const userCalendar = await SvgUtils.GetGitHubUserSVG(userName);
 
-  return parseSync(userCalendar.outerHTML);
+  const parsedUserCalendar = parseSync(userCalendar.outerHTML);
+
+  if (parsedUserCalendar.attributes.width === normalSizedCalendarWidth) {
+    return parsedUserCalendar;
+  }
+
+  return null;
 };
+
+export const getIncorrectFirstUserCalendarErrorMessage = () => 'We restrict the first user in the list. Please read the related phase in README.md so that get more information about the reason for the error.';
+
 
 export const MergeSvgs = (actualCalendar, nextCalendar) => {
   const copiedActualCalendar = JavaScriptUtils.deepCopyObject(actualCalendar);
