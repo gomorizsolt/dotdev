@@ -33,6 +33,8 @@ const GetCalendarData = (calendarData, weekIndex, dayIndex) => {
   return calendarData.children[0].children[weekIndex];
 };
 
+export const getIncorrectFirstUserCalendarErrorMessage = () => 'The first user\'s calendar in the list is incorrect. Please read the Constraint phase in README.md so that get further information about the reason for the error.';
+
 const normalSizedCalendarWidth = '669';
 
 export const getParsedGitHubCalendarSync = async (userName) => {
@@ -44,10 +46,8 @@ export const getParsedGitHubCalendarSync = async (userName) => {
     return parsedUserCalendar;
   }
 
-  return null;
+  throw new Error(getIncorrectFirstUserCalendarErrorMessage());
 };
-
-export const getIncorrectFirstUserCalendarErrorMessage = () => 'The first user\'s calendar in the list is incorrect. Please read the Constraint phase in README.md so that get further information about the reason for the error.';
 
 export const MergeSvgs = (actualCalendar, nextCalendar) => {
   const copiedActualCalendar = JavaScriptUtils.deepCopyObject(actualCalendar);

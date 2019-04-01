@@ -2,7 +2,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import GitHubSvg from './GitHubSvg';
 import GitHubHeader from './GitHubHeader/GitHubHeader';
-import ErrorDisplayer from '../../UI/ErrorDisplayer/ErrorDisplayer';
 import * as CalendarUtils from '../../../utils/CalendarUtils/CalendarUtils';
 import * as Users from '../../../resources/Users/Users';
 import * as TestUtils from '../../../utils/TestUtils/TestUtils';
@@ -42,10 +41,6 @@ describe('<GitHubSvg />', () => {
 
   it('renders GitHubHeader', () => {
     expect(gitHubSvgWrapper.find(GitHubHeader)).toHaveLength(1);
-  });
-
-  it('renders ErrorDisplayer', () => {
-    expect(gitHubSvgWrapper.find(ErrorDisplayer)).toHaveLength(1);
   });
 
   describe('setActualCalendar', () => {
@@ -125,18 +120,24 @@ describe('<GitHubSvg />', () => {
     });
 
     describe('when the first user`s calendar does not meet the requirement', () => {
+      let spyConsoleError;
+
       beforeEach(() => {
         CalendarUtils.getParsedGitHubCalendarSync.mockImplementationOnce(
-          () => null,
+          () => {
+            throw new Error(CalendarUtils.getIncorrectFirstUserCalendarErrorMessage());
+          },
         );
+
+        spyConsoleError = jest.spyOn(console, 'error');
       });
 
-      it('sets `error` to the returned value of `CalendarUtils.getIncorrectFirstUserCalendarErrorMessage`', async () => {
-        const expectedError = CalendarUtils.getIncorrectFirstUserCalendarErrorMessage();
+      it('calls `console.error` with the returned value of `CalendarUtils.getIncorrectFirstUserCalendarErrorMessage`', async () => {
+        const expectedErrorMessage = CalendarUtils.getIncorrectFirstUserCalendarErrorMessage();
 
         await gitHubSvgWrapper.instance().fetchFirstUserCalendar();
 
-        expect(gitHubSvgWrapper.state('error')).toEqual(expectedError);
+        expect(spyConsoleError).toHaveBeenCalledWith(expectedErrorMessage);
       });
     });
   });
