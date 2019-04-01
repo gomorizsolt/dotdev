@@ -28,7 +28,7 @@ class GitHubSvg extends Component {
       const updatedActualCalendar = GithubContributionsCalendarUtils
         .MergeSvgs(actualCalendar, parsedGitHubCalendar);
       const sumOfCurrentUserContributions = GithubContributionsCalendarUtils
-        .SumGitHubContributions(parsedGitHubCalendar);
+        .SumGitHubCalendarContributions(parsedGitHubCalendar);
 
       this.writeState({
         sumOfCurrentUserContributions,
@@ -49,7 +49,7 @@ class GitHubSvg extends Component {
       });
 
       const sumOfCurrentUserContributions = GithubContributionsCalendarUtils
-        .SumGitHubContributions(parsedGitHubCalendar);
+        .SumGitHubCalendarContributions(parsedGitHubCalendar);
 
       this.writeState({
         sumOfCurrentUserContributions,

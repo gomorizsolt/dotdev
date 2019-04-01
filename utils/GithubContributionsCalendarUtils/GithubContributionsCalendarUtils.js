@@ -70,7 +70,7 @@ export const MergeSvgs = (actualCalendar, nextCalendar) => {
   return copiedActualCalendar;
 };
 
-export const SumGitHubContributions = (parsedGitHubCalendar) => {
+export const SumGitHubCalendarContributions = (parsedGitHubCalendar) => {
   let sum = 0;
 
   parsedGitHubCalendar.children[0].children.forEach((weeklyData) => {

@@ -47,7 +47,7 @@ describe('<GitHubSvg />', () => {
     const gitHubCalendar = TestUtils.getFakeContributionsObjectWithDailyCounts([5]);
     const gitHubCalendarPromise = Promise.resolve(gitHubCalendar[0]);
 
-    it('calls CaGithubContributionsCalendarUtilslendarUtils.MergeSvgs with `actualCalendar` and resolved calendar', async () => {
+    it('calls GithubContributionsCalendarUtils.MergeSvgs with `actualCalendar` and resolved calendar', async () => {
       const actualCalendar = gitHubSvgWrapper.state('actualCalendar');
 
       await gitHubSvgWrapper.instance().setActualCalendar(gitHubCalendarPromise);
@@ -58,7 +58,7 @@ describe('<GitHubSvg />', () => {
 
     it('calls `writeState` with the sum of the contributions of the current user and the updated actual calendar', async () => {
       const sumOfCurrentUserContributions = 512;
-      GithubContributionsCalendarUtils.SumGitHubContributions.mockImplementationOnce(
+      GithubContributionsCalendarUtils.SumGitHubCalendarContributions.mockImplementationOnce(
         () => sumOfCurrentUserContributions,
       );
       GithubContributionsCalendarUtils.MergeSvgs.mockImplementationOnce(() => gitHubCalendar[0]);
@@ -108,7 +108,7 @@ describe('<GitHubSvg />', () => {
           () => parsedGitHubCalendar,
         );
 
-        GithubContributionsCalendarUtils.SumGitHubContributions.mockImplementationOnce(
+        GithubContributionsCalendarUtils.SumGitHubCalendarContributions.mockImplementationOnce(
           () => sumOfCurrentUserContributions,
         );
       });
