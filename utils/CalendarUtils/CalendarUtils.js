@@ -42,11 +42,11 @@ export const getParsedGitHubCalendarSync = async (userName) => {
 
   const parsedUserCalendar = parseSync(userCalendar.outerHTML);
 
-  if (parsedUserCalendar.attributes.width === normalSizedCalendarWidth) {
-    return parsedUserCalendar;
+  if (parsedUserCalendar.attributes.width !== normalSizedCalendarWidth) {
+    throw new Error(getIncorrectFirstUserCalendarErrorMessage());
   }
 
-  throw new Error(getIncorrectFirstUserCalendarErrorMessage());
+  return parsedUserCalendar;
 };
 
 export const MergeSvgs = (actualCalendar, nextCalendar) => {

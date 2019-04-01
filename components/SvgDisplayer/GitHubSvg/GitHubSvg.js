@@ -36,6 +36,7 @@ class GitHubSvg extends Component {
 
   async fetchFirstUserCalendar() {
     const firstUser = Users.GithubUsernames[0];
+
     try {
       const parsedGitHubCalendar = await CalendarUtils.getParsedGitHubCalendarSync(firstUser);
 
