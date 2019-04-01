@@ -3,7 +3,7 @@ import { stringify, parse } from 'svgson';
 import HtmlReactParser from 'html-react-parser';
 import GitHubHeader from './GitHubHeader/GitHubHeader';
 import * as Users from '../../../resources/Users/Users';
-import * as CalendarUtils from '../../../utils/CalendarUtils/CalendarUtils';
+import * as GithubContributionsCalendarUtils from '../../../utils/GithubContributionsCalendarUtils/GithubContributionsCalendarUtils';
 import * as SvgUtils from '../../../utils/SvgUtils/SvgUtils';
 import BasicCalendar from '../../../resources/BasicCalendar/BasicCalendar.json';
 
@@ -12,7 +12,7 @@ class GitHubSvg extends Component {
     super(props);
 
     this.state = {
-      usersParsedCalendarGraphs: [],
+      sumOfContributions: 0,
       actualCalendar: BasicCalendar,
       isLoading: true,
     };
@@ -22,13 +22,16 @@ class GitHubSvg extends Component {
     this.fetchFirstUserCalendar();
   }
 
-  setActualCalendar(calendarGraphPromise) {
+  setActualCalendar(gitHubCalendarGraphPromise) {
     const { actualCalendar: { ...actualCalendar } } = this.state;
-    calendarGraphPromise.then((parsedCalendarGraph) => {
-      const updatedActualCalendar = CalendarUtils.MergeSvgs(actualCalendar, parsedCalendarGraph);
+    gitHubCalendarGraphPromise.then((parsedGitHubCalendar) => {
+      const updatedActualCalendar = GithubContributionsCalendarUtils
+        .MergeSvgs(actualCalendar, parsedGitHubCalendar);
+      const sumOfCurrentUserContributions = GithubContributionsCalendarUtils
+        .SumGitHubContributions(parsedGitHubCalendar);
 
       this.writeState({
-        newParsedCalendar: parsedCalendarGraph,
+        sumOfCurrentUserContributions,
         updatedActualCalendar,
       });
     });
@@ -38,14 +41,18 @@ class GitHubSvg extends Component {
     const firstUser = Users.GithubUsernames[0];
 
     try {
-      const parsedGitHubCalendar = await CalendarUtils.getParsedGitHubCalendarSync(firstUser);
+      const parsedGitHubCalendar = await GithubContributionsCalendarUtils
+        .getParsedGitHubCalendarSync(firstUser);
 
       this.setState({
         isLoading: false,
       });
 
+      const sumOfCurrentUserContributions = GithubContributionsCalendarUtils
+        .SumGitHubContributions(parsedGitHubCalendar);
+
       this.writeState({
-        newParsedCalendar: parsedGitHubCalendar,
+        sumOfCurrentUserContributions,
         updatedActualCalendar: parsedGitHubCalendar,
       });
 
@@ -69,13 +76,10 @@ class GitHubSvg extends Component {
   }
 
   writeState(data) {
-    const { newParsedCalendar, updatedActualCalendar } = data;
+    const { sumOfCurrentUserContributions, updatedActualCalendar } = data;
 
     this.setState(prevState => ({
-      usersParsedCalendarGraphs: [
-        ...prevState.usersParsedCalendarGraphs,
-        newParsedCalendar,
-      ],
+      sumOfContributions: prevState.sumOfContributions + sumOfCurrentUserContributions,
       actualCalendar: {
         ...updatedActualCalendar,
       },
@@ -84,7 +88,7 @@ class GitHubSvg extends Component {
 
   render() {
     const {
-      usersParsedCalendarGraphs: [...usersParsedCalendarGraphs],
+      sumOfContributions,
       actualCalendar: { ...actualCalendar },
       isLoading,
     } = this.state;
@@ -95,7 +99,7 @@ class GitHubSvg extends Component {
       <Fragment>
         <GitHubHeader
           isLoading={isLoading}
-          contributionSvgs={usersParsedCalendarGraphs}
+          sumOfContributions={sumOfContributions}
         />
         {HtmlReactParser(stringifiedHTMLContent)}
       </Fragment>

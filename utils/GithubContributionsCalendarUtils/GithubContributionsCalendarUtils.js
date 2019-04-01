@@ -69,3 +69,17 @@ export const MergeSvgs = (actualCalendar, nextCalendar) => {
 
   return copiedActualCalendar;
 };
+
+export const SumGitHubContributions = (parsedGitHubCalendar) => {
+  let sum = 0;
+
+  parsedGitHubCalendar.children[0].children.forEach((weeklyData) => {
+    weeklyData.children.forEach((dailyData) => {
+      if (dailyData.attributes['data-count']) {
+        sum += Number(dailyData.attributes['data-count']);
+      }
+    });
+  });
+
+  return sum;
+};
