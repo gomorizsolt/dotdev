@@ -47,7 +47,7 @@ describe('<GitHubSvg />', () => {
     const calendarGraph = TestUtils.getFakeContributionsObjectWithDailyCounts([5]);
     const calendarGraphPromise = Promise.resolve(calendarGraph[0]);
 
-    it('calls CalendarUtils.MergeSvgs with `actualCalendar` and resolved calendar', async () => {
+    it('merges the actual and resolved calendar', async () => {
       const actualCalendar = gitHubSvgWrapper.state('actualCalendar');
 
       await gitHubSvgWrapper.instance().setActualCalendar(calendarGraphPromise);
@@ -71,7 +71,7 @@ describe('<GitHubSvg />', () => {
   });
 
   describe('fetchFirstUserCalendar', () => {
-    it('calls CalendarUtils.getParsedGitHubCalendarSync with the first GH user', async () => {
+    it('fetches synchronously the first GH user`s calendar', async () => {
       CalendarUtils.getParsedGitHubCalendarSync.mockImplementationOnce(() => jest.fn());
       const expectedUser = Users.GithubUsernames[0];
 
@@ -97,7 +97,7 @@ describe('<GitHubSvg />', () => {
         );
       });
 
-      it('calls writeState with the parsed calendar', async () => {
+      it('calls `writeState` with the parsed calendar', async () => {
         const writeStateSpy = jest.spyOn(gitHubSvgWrapper.instance(), 'writeState');
 
         await gitHubSvgWrapper.instance().fetchFirstUserCalendar();
@@ -110,7 +110,7 @@ describe('<GitHubSvg />', () => {
         expect(writeStateSpy).toHaveBeenCalledWith(expectedObject);
       });
 
-      it('calls `fetchRemainingCalendars`', async () => {
+      it('fetches the remaining calendars', async () => {
         const fetchRemainingCalendarsSpy = jest.spyOn(gitHubSvgWrapper.instance(), 'fetchRemainingCalendars');
 
         await gitHubSvgWrapper.instance().fetchFirstUserCalendar();
@@ -132,7 +132,7 @@ describe('<GitHubSvg />', () => {
         spyConsoleError = jest.spyOn(console, 'error');
       });
 
-      it('calls `console.error` with the returned value of `CalendarUtils.getIncorrectFirstUserCalendarErrorMessage`', async () => {
+      it('logs the returned value of `CalendarUtils.getIncorrectFirstUserCalendarErrorMessage` as an error', async () => {
         const expectedErrorMessage = CalendarUtils.getIncorrectFirstUserCalendarErrorMessage();
 
         await gitHubSvgWrapper.instance().fetchFirstUserCalendar();
@@ -154,7 +154,7 @@ describe('<GitHubSvg />', () => {
       expect(gitHubSvgWrapper.state('usersParsedCalendarGraphs')).toEqual(expectedUsersParsedCalendarGraphs);
     });
 
-    it('updates `actualCalendar`', () => {
+    it('updates the actual calendar', () => {
       const calendarGraph = TestUtils.getFakeContributionsObjectWithDailyCounts([3]);
       const data = { updatedActualCalendar: calendarGraph[0] };
 
