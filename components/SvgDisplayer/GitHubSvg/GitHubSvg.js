@@ -3,10 +3,9 @@ import { stringify, parse } from 'svgson';
 import HtmlReactParser from 'html-react-parser';
 import GitHubHeader from './GitHubHeader/GitHubHeader';
 import * as Users from '../../../resources/Users/Users';
-import BasicCalendar from '../../../resources/BasicCalendar/BasicCalendar.json';
 import * as CalendarUtils from '../../../utils/CalendarUtils/CalendarUtils';
 import * as SvgUtils from '../../../utils/SvgUtils/SvgUtils';
-import * as JavaScriptUtils from '../../../utils/JavaScriptUtils/JavaScriptUtils';
+import BasicCalendar from '../../../resources/BasicCalendar/BasicCalendar.json';
 
 class GitHubSvg extends Component {
   constructor(props) {
@@ -19,14 +18,8 @@ class GitHubSvg extends Component {
     };
   }
 
-  async componentDidMount() {
-    await this.fetchFirstUserCalendar();
-
-    Users.GithubUsernames.slice(1).map(async (userName) => {
-      const rawUserSVG = await SvgUtils.GetGitHubUserSVG(userName);
-
-      this.setActualCalendar(parse(rawUserSVG.outerHTML));
-    });
+  componentDidMount() {
+    this.fetchFirstUserCalendar();
   }
 
   setActualCalendar(calendarGraphPromise) {
@@ -43,23 +36,40 @@ class GitHubSvg extends Component {
 
   async fetchFirstUserCalendar() {
     const firstUser = Users.GithubUsernames[0];
-    const parsedGitHubCalendar = await CalendarUtils.getParsedGitHubCalendarSync(firstUser);
 
-    this.writeState({
-      newParsedCalendar: parsedGitHubCalendar,
-      updatedActualCalendar: parsedGitHubCalendar,
-      isLoading: false,
+    try {
+      const parsedGitHubCalendar = await CalendarUtils.getParsedGitHubCalendarSync(firstUser);
+
+      this.setState({
+        isLoading: false,
+      });
+
+      this.writeState({
+        newParsedCalendar: parsedGitHubCalendar,
+        updatedActualCalendar: parsedGitHubCalendar,
+      });
+
+      this.fetchRemainingCalendars();
+    } catch (err) {
+      this.setState({
+        isLoading: false,
+      });
+
+      // eslint-disable-next-line no-console
+      console.error(err.message);
+    }
+  }
+
+  fetchRemainingCalendars() {
+    Users.GithubUsernames.slice(1).map(async (userName) => {
+      const rawUserSVG = await SvgUtils.GetGitHubUserSVG(userName);
+
+      this.setActualCalendar(parse(rawUserSVG.outerHTML));
     });
   }
 
   writeState(data) {
-    const { newParsedCalendar, updatedActualCalendar, isLoading } = data;
-
-    if (JavaScriptUtils.isDefined(isLoading)) {
-      this.setState({
-        isLoading,
-      });
-    }
+    const { newParsedCalendar, updatedActualCalendar } = data;
 
     this.setState(prevState => ({
       usersParsedCalendarGraphs: [
