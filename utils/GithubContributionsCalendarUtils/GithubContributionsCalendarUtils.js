@@ -2,7 +2,7 @@ import { parseSync } from 'svgson';
 import * as SvgUtils from '../SvgUtils/SvgUtils';
 import * as JavaScriptUtils from '../JavaScriptUtils/JavaScriptUtils';
 
-const GetFillColor = (dataCountValue) => {
+const getFillColor = (dataCountValue) => {
   let fillColor = '#ebedf0';
 
   if (dataCountValue > 0 && dataCountValue < 10) {
@@ -25,7 +25,7 @@ const GetFillColor = (dataCountValue) => {
 };
 
 
-const GetCalendarData = (calendarData, weekIndex, dayIndex) => {
+const getCalendarData = (calendarData, weekIndex, dayIndex) => {
   if (JavaScriptUtils.isDefined(dayIndex)) {
     return calendarData.children[0].children[weekIndex].children[dayIndex];
   }
@@ -38,7 +38,7 @@ export const getIncorrectFirstUserCalendarErrorMessage = () => 'The first user\'
 const normalSizedCalendarWidth = '669';
 
 export const getParsedGitHubCalendarSync = async (userName) => {
-  const userCalendar = await SvgUtils.GetGitHubUserSVG(userName);
+  const userCalendar = await SvgUtils.getGitHubUserSVG(userName);
 
   const parsedUserCalendar = parseSync(userCalendar.outerHTML);
 
@@ -49,23 +49,37 @@ export const getParsedGitHubCalendarSync = async (userName) => {
   return parsedUserCalendar;
 };
 
-export const MergeSvgs = (actualCalendar, nextCalendar) => {
+export const mergeSvgs = (actualCalendar, nextCalendar) => {
   const copiedActualCalendar = JavaScriptUtils.deepCopyObject(actualCalendar);
 
   nextCalendar.children[0].children.forEach((weeklyData, weekIndex) => {
     weeklyData.children.forEach((dailyData, dayIndex) => {
       if (dailyData.attributes['data-count']) {
-        const actualCalendarDailyData = GetCalendarData(copiedActualCalendar, weekIndex, dayIndex);
+        const actualCalendarDailyData = getCalendarData(copiedActualCalendar, weekIndex, dayIndex);
         const sumOfContributions = Number(actualCalendarDailyData.attributes['data-count']) + Number(dailyData.attributes['data-count']);
 
         copiedActualCalendar.children[0].children[weekIndex].children[dayIndex].attributes = {
           ...actualCalendarDailyData.attributes,
           'data-count': String(sumOfContributions),
-          fill: GetFillColor(sumOfContributions),
+          fill: getFillColor(sumOfContributions),
         };
       }
     });
   });
 
   return copiedActualCalendar;
+};
+
+export const sumGitHubCalendarContributions = (parsedGitHubCalendar) => {
+  let sum = 0;
+
+  parsedGitHubCalendar.children[0].children.forEach((weeklyData) => {
+    weeklyData.children.forEach((dailyData) => {
+      if (dailyData.attributes['data-count']) {
+        sum += Number(dailyData.attributes['data-count']);
+      }
+    });
+  });
+
+  return sum;
 };

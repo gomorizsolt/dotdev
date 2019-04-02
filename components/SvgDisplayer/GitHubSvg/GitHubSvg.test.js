@@ -2,15 +2,15 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import GitHubSvg from './GitHubSvg';
 import GitHubHeader from './GitHubHeader/GitHubHeader';
-import * as CalendarUtils from '../../../utils/CalendarUtils/CalendarUtils';
+import * as GithubContributionsCalendarUtils from '../../../utils/GithubContributionsCalendarUtils/GithubContributionsCalendarUtils';
 import * as Users from '../../../resources/Users/Users';
 import * as TestUtils from '../../../utils/TestUtils/TestUtils';
 import BasicCalendar from '../../../resources/BasicCalendar/BasicCalendar.json';
 
-jest.mock('../../../utils/CalendarUtils/CalendarUtils', () => require
+jest.mock('../../../utils/GithubContributionsCalendarUtils/GithubContributionsCalendarUtils', () => require
   .requireActual('../../../utils/TestUtils/TestUtils')
   .mockOriginalFunctionality(
-    '../CalendarUtils/CalendarUtils',
+    '../GithubContributionsCalendarUtils/GithubContributionsCalendarUtils',
   ));
 
 jest.mock('../../../utils/SvgUtils/SvgUtils', () => require
@@ -44,44 +44,57 @@ describe('<GitHubSvg />', () => {
   });
 
   describe('setActualCalendar', () => {
-    const calendarGraph = TestUtils.getFakeContributionsObjectWithDailyCounts([5]);
-    const calendarGraphPromise = Promise.resolve(calendarGraph[0]);
+    const parsedGitHubCalendar = TestUtils.getFakeContributionsObjectWithDailyCounts([5]);
+    const gitHubCalendarPromise = Promise.resolve(parsedGitHubCalendar[0]);
 
-    it('merges the actual and resolved calendar', async () => {
+    it('merges the actual and parsed calendar', async () => {
       const actualCalendar = gitHubSvgWrapper.state('actualCalendar');
 
-      await gitHubSvgWrapper.instance().setActualCalendar(calendarGraphPromise);
+      await gitHubSvgWrapper.instance().setActualCalendar(gitHubCalendarPromise);
 
-      expect(CalendarUtils.MergeSvgs).toHaveBeenCalledWith(actualCalendar, calendarGraph[0]);
+      expect(GithubContributionsCalendarUtils.mergeSvgs)
+        .toHaveBeenCalledWith(actualCalendar, parsedGitHubCalendar[0]);
     });
 
-    it('calls `writeState` with the updated actual calendar and resolved calendar', async () => {
+    it('calls `writeState` with the total contributions of the current user and the updated actual calendar', async () => {
+      const currentUserTotalContributions = 512;
+      GithubContributionsCalendarUtils.sumGitHubCalendarContributions.mockImplementationOnce(
+        () => currentUserTotalContributions,
+      );
+      GithubContributionsCalendarUtils.mergeSvgs.mockImplementationOnce(
+        () => parsedGitHubCalendar[0],
+      );
+
       const writeStateSpy = jest.spyOn(gitHubSvgWrapper.instance(), 'writeState');
-      CalendarUtils.MergeSvgs.mockImplementationOnce(() => calendarGraph[0]);
 
-      await gitHubSvgWrapper.instance().setActualCalendar(calendarGraphPromise);
+      await gitHubSvgWrapper.instance().setActualCalendar(gitHubCalendarPromise);
 
-      const expectedObject = {
-        newParsedCalendar: calendarGraph[0],
-        updatedActualCalendar: calendarGraph[0],
+      const expectedWriteStateObject = {
+        currentUserTotalContributions,
+        updatedActualCalendar: parsedGitHubCalendar[0],
       };
 
-      expect(writeStateSpy).toHaveBeenCalledWith(expectedObject);
+      expect(writeStateSpy).toHaveBeenCalledWith(expectedWriteStateObject);
     });
   });
 
   describe('fetchFirstUserCalendar', () => {
     it('fetches synchronously the first GH user`s calendar', async () => {
-      CalendarUtils.getParsedGitHubCalendarSync.mockImplementationOnce(() => jest.fn());
+      GithubContributionsCalendarUtils.getParsedGitHubCalendarSync.mockImplementationOnce(
+        () => jest.fn(),
+      );
       const expectedUser = Users.GithubUsernames[0];
 
       await gitHubSvgWrapper.instance().fetchFirstUserCalendar();
 
-      expect(CalendarUtils.getParsedGitHubCalendarSync).toHaveBeenCalledWith(expectedUser);
+      expect(GithubContributionsCalendarUtils.getParsedGitHubCalendarSync)
+        .toHaveBeenCalledWith(expectedUser);
     });
 
     it('sets `isLoading` to false', async () => {
-      CalendarUtils.getParsedGitHubCalendarSync.mockImplementationOnce(() => jest.fn());
+      GithubContributionsCalendarUtils.getParsedGitHubCalendarSync.mockImplementationOnce(
+        () => jest.fn(),
+      );
 
       await gitHubSvgWrapper.instance().fetchFirstUserCalendar();
 
@@ -90,24 +103,29 @@ describe('<GitHubSvg />', () => {
 
     describe('when the first user`s calendar meets the requirement', async () => {
       const parsedGitHubCalendar = TestUtils.getFakeContributionsObjectWithDailyCounts([3])[0];
+      const currentUserTotalContributions = 1024;
 
       beforeEach(() => {
-        CalendarUtils.getParsedGitHubCalendarSync.mockImplementationOnce(
+        GithubContributionsCalendarUtils.getParsedGitHubCalendarSync.mockImplementationOnce(
           () => parsedGitHubCalendar,
+        );
+
+        GithubContributionsCalendarUtils.sumGitHubCalendarContributions.mockImplementationOnce(
+          () => currentUserTotalContributions,
         );
       });
 
-      it('calls `writeState` with the parsed calendar', async () => {
+      it('calls `writeState` with the total contributions of the current user and parsed calendar', async () => {
         const writeStateSpy = jest.spyOn(gitHubSvgWrapper.instance(), 'writeState');
 
         await gitHubSvgWrapper.instance().fetchFirstUserCalendar();
 
-        const expectedObject = {
-          newParsedCalendar: parsedGitHubCalendar,
+        const expectedWriteStateObject = {
+          currentUserTotalContributions,
           updatedActualCalendar: parsedGitHubCalendar,
         };
 
-        expect(writeStateSpy).toHaveBeenCalledWith(expectedObject);
+        expect(writeStateSpy).toHaveBeenCalledWith(expectedWriteStateObject);
       });
 
       it('fetches the remaining calendars', async () => {
@@ -123,17 +141,20 @@ describe('<GitHubSvg />', () => {
       let spyConsoleError;
 
       beforeEach(() => {
-        CalendarUtils.getParsedGitHubCalendarSync.mockImplementationOnce(
+        GithubContributionsCalendarUtils.getParsedGitHubCalendarSync.mockImplementationOnce(
           () => {
-            throw new Error(CalendarUtils.getIncorrectFirstUserCalendarErrorMessage());
+            throw new Error(
+              GithubContributionsCalendarUtils.getIncorrectFirstUserCalendarErrorMessage(),
+            );
           },
         );
 
         spyConsoleError = jest.spyOn(console, 'error');
       });
 
-      it('logs the returned value of `CalendarUtils.getIncorrectFirstUserCalendarErrorMessage` as an error', async () => {
-        const expectedErrorMessage = CalendarUtils.getIncorrectFirstUserCalendarErrorMessage();
+      it('logs the returned value of `GithubContributionsCalendarUtils.getIncorrectFirstUserCalendarErrorMessage` as an error', async () => {
+        const expectedErrorMessage = GithubContributionsCalendarUtils
+          .getIncorrectFirstUserCalendarErrorMessage();
 
         await gitHubSvgWrapper.instance().fetchFirstUserCalendar();
 
@@ -143,15 +164,13 @@ describe('<GitHubSvg />', () => {
   });
 
   describe('writeState', () => {
-    it('extends `usersParsedCalendarGraphs` with the fetched calendar', () => {
-      const calendarGraph = TestUtils.getFakeContributionsObjectWithDailyCounts([3]);
-      const data = { newParsedCalendar: calendarGraph[0] };
+    it('adds the received total contributions value to `totalContributions`', () => {
+      const data = { currentUserTotalContributions: 50 };
+      const expectedTotalContributions = gitHubSvgWrapper.state('totalContributions') + data.currentUserTotalContributions;
 
       gitHubSvgWrapper.instance().writeState(data);
 
-      const expectedUsersParsedCalendarGraphs = [data.newParsedCalendar];
-
-      expect(gitHubSvgWrapper.state('usersParsedCalendarGraphs')).toEqual(expectedUsersParsedCalendarGraphs);
+      expect(gitHubSvgWrapper.state('totalContributions')).toEqual(expectedTotalContributions);
     });
 
     it('updates the actual calendar', () => {

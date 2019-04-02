@@ -13,11 +13,11 @@ window.fetch = jest.fn().mockImplementation(() => ({
 }));
 
 describe('SVGUtils', () => {
-  describe('GetGitHubUserSVG', () => {
+  describe('getGitHubUserSVG', () => {
     it('calls GetProxyUrl with `userName`', () => {
       const userName = 'test_user';
 
-      SVGUtils.GetGitHubUserSVG(userName);
+      SVGUtils.getGitHubUserSVG(userName);
 
       expect(GetProxyUrl).toHaveBeenCalledWith(userName);
     });
@@ -25,7 +25,7 @@ describe('SVGUtils', () => {
     it('calls `text`', () => {
       const userName = 'test_user';
 
-      SVGUtils.GetGitHubUserSVG(userName);
+      SVGUtils.getGitHubUserSVG(userName);
 
       expect(text).toHaveBeenCalled();
     });
