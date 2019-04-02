@@ -26,9 +26,9 @@ class GitHubSvg extends Component {
     const { actualCalendar: { ...actualCalendar } } = this.state;
     gitHubCalendarGraphPromise.then((parsedGitHubCalendar) => {
       const updatedActualCalendar = GithubContributionsCalendarUtils
-        .MergeSvgs(actualCalendar, parsedGitHubCalendar);
+        .mergeSvgs(actualCalendar, parsedGitHubCalendar);
       const sumOfCurrentUserContributions = GithubContributionsCalendarUtils
-        .SumGitHubCalendarContributions(parsedGitHubCalendar);
+        .sumGitHubCalendarContributions(parsedGitHubCalendar);
 
       this.writeState({
         sumOfCurrentUserContributions,
@@ -49,7 +49,7 @@ class GitHubSvg extends Component {
       });
 
       const sumOfCurrentUserContributions = GithubContributionsCalendarUtils
-        .SumGitHubCalendarContributions(parsedGitHubCalendar);
+        .sumGitHubCalendarContributions(parsedGitHubCalendar);
 
       this.writeState({
         sumOfCurrentUserContributions,
@@ -69,7 +69,7 @@ class GitHubSvg extends Component {
 
   fetchRemainingCalendars() {
     Users.GithubUsernames.slice(1).map(async (userName) => {
-      const rawUserSVG = await SvgUtils.GetGitHubUserSVG(userName);
+      const rawUserSVG = await SvgUtils.getGitHubUserSVG(userName);
 
       this.setActualCalendar(parse(rawUserSVG.outerHTML));
     });

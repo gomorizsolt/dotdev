@@ -6,14 +6,14 @@ const GetObjectValueByAttribute = (object, attribute) => (
 );
 
 describe('GithubContributionsCalendarUtils', () => {
-  describe('MergeSvgs', () => {
+  describe('mergeSvgs', () => {
     describe('when the contributions value is 0', () => {
       const calendars = TestUtils.getFakeContributionsObjectWithDailyCounts([0, 0]);
 
       it('sets the default color', () => {
         const expectedFillColor = '#ebedf0';
 
-        const mergedSvg = GithubContributionsCalendarUtils.MergeSvgs(calendars[0], calendars[1]);
+        const mergedSvg = GithubContributionsCalendarUtils.mergeSvgs(calendars[0], calendars[1]);
         const actualFillColor = GetObjectValueByAttribute(mergedSvg, 'fill');
 
         expect(actualFillColor).toEqual(expectedFillColor);
@@ -26,7 +26,7 @@ describe('GithubContributionsCalendarUtils', () => {
       it('sets the `#c6e48b` color', () => {
         const expectedFillColor = '#c6e48b';
 
-        const mergedSvg = GithubContributionsCalendarUtils.MergeSvgs(calendars[0], calendars[1]);
+        const mergedSvg = GithubContributionsCalendarUtils.mergeSvgs(calendars[0], calendars[1]);
         const actualFillColor = GetObjectValueByAttribute(mergedSvg, 'fill');
 
         expect(actualFillColor).toEqual(expectedFillColor);
@@ -39,7 +39,7 @@ describe('GithubContributionsCalendarUtils', () => {
       it('sets the `#7bc96f` color', () => {
         const expectedFillColor = '#7bc96f';
 
-        const mergedSvg = GithubContributionsCalendarUtils.MergeSvgs(calendars[0], calendars[1]);
+        const mergedSvg = GithubContributionsCalendarUtils.mergeSvgs(calendars[0], calendars[1]);
         const actualFillColor = GetObjectValueByAttribute(mergedSvg, 'fill');
 
         expect(actualFillColor).toEqual(expectedFillColor);
@@ -52,7 +52,7 @@ describe('GithubContributionsCalendarUtils', () => {
       it('sets the `#239a3b` color', () => {
         const expectedFillColor = '#239a3b';
 
-        const mergedSvg = GithubContributionsCalendarUtils.MergeSvgs(calendars[0], calendars[1]);
+        const mergedSvg = GithubContributionsCalendarUtils.mergeSvgs(calendars[0], calendars[1]);
         const actualFillColor = GetObjectValueByAttribute(mergedSvg, 'fill');
 
         expect(actualFillColor).toEqual(expectedFillColor);
@@ -65,7 +65,7 @@ describe('GithubContributionsCalendarUtils', () => {
       it('sets the `#196127` color', () => {
         const expectedFillColor = '#196127';
 
-        const mergedSvg = GithubContributionsCalendarUtils.MergeSvgs(calendars[0], calendars[1]);
+        const mergedSvg = GithubContributionsCalendarUtils.mergeSvgs(calendars[0], calendars[1]);
         const actualFillColor = GetObjectValueByAttribute(mergedSvg, 'fill');
 
         expect(actualFillColor).toEqual(expectedFillColor);
@@ -76,7 +76,7 @@ describe('GithubContributionsCalendarUtils', () => {
       const calendars = TestUtils.getFakeContributionsObjectWithDailyCounts([22, 8]);
       const expectedContributionsValue = '30';
 
-      const mergedSvg = GithubContributionsCalendarUtils.MergeSvgs(calendars[0], calendars[1]);
+      const mergedSvg = GithubContributionsCalendarUtils.mergeSvgs(calendars[0], calendars[1]);
       const actualContributionsValue = GetObjectValueByAttribute(mergedSvg, 'data-count');
 
       expect(actualContributionsValue).toEqual(expectedContributionsValue);

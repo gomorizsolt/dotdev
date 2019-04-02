@@ -1,6 +1,6 @@
 import GetProxyUrl from '../GetProxyUrl/GetProxyUrl';
 
-export const GetGitHubUserSVG = async (userName) => {
+export const getGitHubUserSVG = async (userName) => {
   const userUrl = GetProxyUrl(userName);
   const responseData = await fetch(userUrl);
 
