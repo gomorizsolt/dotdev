@@ -47,7 +47,7 @@ describe('<GitHubSvg />', () => {
     const gitHubCalendar = TestUtils.getFakeContributionsObjectWithDailyCounts([5]);
     const gitHubCalendarPromise = Promise.resolve(gitHubCalendar[0]);
 
-    it('calls GithubContributionsCalendarUtils.MergeSvgs with `actualCalendar` and resolved calendar', async () => {
+    it('merges the actual and resolved calendar', async () => {
       const actualCalendar = gitHubSvgWrapper.state('actualCalendar');
 
       await gitHubSvgWrapper.instance().setActualCalendar(gitHubCalendarPromise);
@@ -77,7 +77,7 @@ describe('<GitHubSvg />', () => {
   });
 
   describe('fetchFirstUserCalendar', () => {
-    it('calls GithubContributionsCalendarUtils.getParsedGitHubCalendarSync with the first GH user', async () => {
+    it('fetches synchronously the first GH user`s calendar', async () => {
       GithubContributionsCalendarUtils.getParsedGitHubCalendarSync.mockImplementationOnce(
         () => jest.fn(),
       );
@@ -126,7 +126,7 @@ describe('<GitHubSvg />', () => {
         expect(writeStateSpy).toHaveBeenCalledWith(expectedWriteStateObject);
       });
 
-      it('calls `fetchRemainingCalendars`', async () => {
+      it('fetches the remaining calendars', async () => {
         const fetchRemainingCalendarsSpy = jest.spyOn(gitHubSvgWrapper.instance(), 'fetchRemainingCalendars');
 
         await gitHubSvgWrapper.instance().fetchFirstUserCalendar();
@@ -150,7 +150,7 @@ describe('<GitHubSvg />', () => {
         spyConsoleError = jest.spyOn(console, 'error');
       });
 
-      it('calls `console.error` with the returned value of `GithubContributionsCalendarUtils.getIncorrectFirstUserCalendarErrorMessage`', async () => {
+      it('logs the returned value of `GithubContributionsCalendarUtils.getIncorrectFirstUserCalendarErrorMessage` as an error', async () => {
         const expectedErrorMessage = GithubContributionsCalendarUtils
           .getIncorrectFirstUserCalendarErrorMessage();
 
@@ -171,7 +171,7 @@ describe('<GitHubSvg />', () => {
       expect(gitHubSvgWrapper.state('sumOfContributions')).toEqual(expectedSumOfContributions);
     });
 
-    it('updates `actualCalendar`', () => {
+    it('updates the actual calendar', () => {
       const calendarGraph = TestUtils.getFakeContributionsObjectWithDailyCounts([3]);
       const data = { updatedActualCalendar: calendarGraph[0] };
 
