@@ -12,7 +12,7 @@ class GitHubSvg extends Component {
     super(props);
 
     this.state = {
-      sumOfContributions: 0,
+      totalContributions: 0,
       actualCalendar: BasicCalendar,
       isLoading: true,
     };
@@ -27,11 +27,11 @@ class GitHubSvg extends Component {
     gitHubCalendarGraphPromise.then((parsedGitHubCalendar) => {
       const updatedActualCalendar = GithubContributionsCalendarUtils
         .mergeSvgs(actualCalendar, parsedGitHubCalendar);
-      const sumOfCurrentUserContributions = GithubContributionsCalendarUtils
+      const currentUserTotalContributions = GithubContributionsCalendarUtils
         .sumGitHubCalendarContributions(parsedGitHubCalendar);
 
       this.writeState({
-        sumOfCurrentUserContributions,
+        currentUserTotalContributions,
         updatedActualCalendar,
       });
     });
@@ -48,11 +48,11 @@ class GitHubSvg extends Component {
         isLoading: false,
       });
 
-      const sumOfCurrentUserContributions = GithubContributionsCalendarUtils
+      const currentUserTotalContributions = GithubContributionsCalendarUtils
         .sumGitHubCalendarContributions(parsedGitHubCalendar);
 
       this.writeState({
-        sumOfCurrentUserContributions,
+        currentUserTotalContributions,
         updatedActualCalendar: parsedGitHubCalendar,
       });
 
@@ -76,10 +76,10 @@ class GitHubSvg extends Component {
   }
 
   writeState(data) {
-    const { sumOfCurrentUserContributions, updatedActualCalendar } = data;
+    const { currentUserTotalContributions, updatedActualCalendar } = data;
 
     this.setState(prevState => ({
-      sumOfContributions: prevState.sumOfContributions + sumOfCurrentUserContributions,
+      totalContributions: prevState.totalContributions + currentUserTotalContributions,
       actualCalendar: {
         ...updatedActualCalendar,
       },
@@ -88,7 +88,7 @@ class GitHubSvg extends Component {
 
   render() {
     const {
-      sumOfContributions,
+      totalContributions,
       actualCalendar: { ...actualCalendar },
       isLoading,
     } = this.state;
@@ -99,7 +99,7 @@ class GitHubSvg extends Component {
       <Fragment>
         <GitHubHeader
           isLoading={isLoading}
-          sumOfContributions={sumOfContributions}
+          totalContributions={totalContributions}
         />
         {HtmlReactParser(stringifiedHTMLContent)}
       </Fragment>

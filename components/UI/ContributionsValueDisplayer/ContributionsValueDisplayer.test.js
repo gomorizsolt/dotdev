@@ -29,17 +29,21 @@ describe('<ContributionsValueDisplayer />', () => {
   });
 
   describe('when `isLoading` is false', () => {
-    const sumOfContributions = 3514;
+    const totalContributions = 3514;
 
     beforeEach(() => {
       contributionsValueDisplayerWrapper.setProps({
         isLoading: false,
-        sumOfContributions,
+        totalContributions,
       });
     });
 
-    it('renders the summarized contributions text', () => {
-      const expectedText = `${sumOfContributions} contributions in the last year`;
+    it('does not render LoaderIcon', () => {
+      expect(contributionsValueDisplayerWrapper.find(LoaderIcon)).toHaveLength(0);
+    });
+
+    it('renders the total contributions', () => {
+      const expectedText = `${totalContributions} contributions in the last year`;
 
       expect(contributionsValueDisplayerWrapper.find('p').text()).toEqual(expectedText);
     });

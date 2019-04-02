@@ -56,10 +56,10 @@ describe('<GitHubSvg />', () => {
         .toHaveBeenCalledWith(actualCalendar, gitHubCalendar[0]);
     });
 
-    it('calls `writeState` with the sum of the contributions of the current user and the updated actual calendar', async () => {
-      const sumOfCurrentUserContributions = 512;
+    it('calls `writeState` with the total contributions of the current user and the updated actual calendar', async () => {
+      const currentUserTotalContributions = 512;
       GithubContributionsCalendarUtils.sumGitHubCalendarContributions.mockImplementationOnce(
-        () => sumOfCurrentUserContributions,
+        () => currentUserTotalContributions,
       );
       GithubContributionsCalendarUtils.mergeSvgs.mockImplementationOnce(() => gitHubCalendar[0]);
 
@@ -68,7 +68,7 @@ describe('<GitHubSvg />', () => {
       await gitHubSvgWrapper.instance().setActualCalendar(gitHubCalendarPromise);
 
       const expectedWriteStateObject = {
-        sumOfCurrentUserContributions,
+        currentUserTotalContributions,
         updatedActualCalendar: gitHubCalendar[0],
       };
 
@@ -101,7 +101,7 @@ describe('<GitHubSvg />', () => {
 
     describe('when the first user`s calendar meets the requirement', async () => {
       const parsedGitHubCalendar = TestUtils.getFakeContributionsObjectWithDailyCounts([3])[0];
-      const sumOfCurrentUserContributions = 1024;
+      const currentUserTotalContributions = 1024;
 
       beforeEach(() => {
         GithubContributionsCalendarUtils.getParsedGitHubCalendarSync.mockImplementationOnce(
@@ -109,17 +109,17 @@ describe('<GitHubSvg />', () => {
         );
 
         GithubContributionsCalendarUtils.sumGitHubCalendarContributions.mockImplementationOnce(
-          () => sumOfCurrentUserContributions,
+          () => currentUserTotalContributions,
         );
       });
 
-      it('calls `writeState` with the sum of the contributions of the current user and parsed calendar', async () => {
+      it('calls `writeState` with the total contributions of the current user and parsed calendar', async () => {
         const writeStateSpy = jest.spyOn(gitHubSvgWrapper.instance(), 'writeState');
 
         await gitHubSvgWrapper.instance().fetchFirstUserCalendar();
 
         const expectedWriteStateObject = {
-          sumOfCurrentUserContributions,
+          currentUserTotalContributions,
           updatedActualCalendar: parsedGitHubCalendar,
         };
 
@@ -162,13 +162,13 @@ describe('<GitHubSvg />', () => {
   });
 
   describe('writeState', () => {
-    it('adds the received contributions value to `sumOfContributions`', () => {
-      const data = { sumOfCurrentUserContributions: 50 };
-      const expectedSumOfContributions = gitHubSvgWrapper.state('sumOfContributions') + data.sumOfCurrentUserContributions;
+    it('adds the received total contributions value to `totalContributions`', () => {
+      const data = { currentUserTotalContributions: 50 };
+      const expectedTotalContributions = gitHubSvgWrapper.state('totalContributions') + data.currentUserTotalContributions;
 
       gitHubSvgWrapper.instance().writeState(data);
 
-      expect(gitHubSvgWrapper.state('sumOfContributions')).toEqual(expectedSumOfContributions);
+      expect(gitHubSvgWrapper.state('totalContributions')).toEqual(expectedTotalContributions);
     });
 
     it('updates the actual calendar', () => {
