@@ -22,10 +22,10 @@ class GitHubSvg extends Component {
     this.fetchFirstUserCalendar();
   }
 
-  setActualCalendar(gitHubCalendarGraphPromise) {
+  setActualCalendar(gitHubCalendarPromise) {
     const { actualCalendar: { ...actualCalendar } } = this.state;
 
-    gitHubCalendarGraphPromise.then((parsedGitHubCalendar) => {
+    gitHubCalendarPromise.then((parsedGitHubCalendar) => {
       const updatedActualCalendar = GithubContributionsCalendarUtils
         .mergeSvgs(actualCalendar, parsedGitHubCalendar);
       const currentUserTotalContributions = GithubContributionsCalendarUtils

@@ -44,16 +44,16 @@ describe('<GitHubSvg />', () => {
   });
 
   describe('setActualCalendar', () => {
-    const gitHubCalendar = TestUtils.getFakeContributionsObjectWithDailyCounts([5]);
-    const gitHubCalendarPromise = Promise.resolve(gitHubCalendar[0]);
+    const parsedGitHubCalendar = TestUtils.getFakeContributionsObjectWithDailyCounts([5]);
+    const gitHubCalendarPromise = Promise.resolve(parsedGitHubCalendar[0]);
 
-    it('merges the actual and resolved calendar', async () => {
+    it('merges the actual and parsed calendar', async () => {
       const actualCalendar = gitHubSvgWrapper.state('actualCalendar');
 
       await gitHubSvgWrapper.instance().setActualCalendar(gitHubCalendarPromise);
 
       expect(GithubContributionsCalendarUtils.mergeSvgs)
-        .toHaveBeenCalledWith(actualCalendar, gitHubCalendar[0]);
+        .toHaveBeenCalledWith(actualCalendar, parsedGitHubCalendar[0]);
     });
 
     it('calls `writeState` with the total contributions of the current user and the updated actual calendar', async () => {
@@ -61,7 +61,9 @@ describe('<GitHubSvg />', () => {
       GithubContributionsCalendarUtils.sumGitHubCalendarContributions.mockImplementationOnce(
         () => currentUserTotalContributions,
       );
-      GithubContributionsCalendarUtils.mergeSvgs.mockImplementationOnce(() => gitHubCalendar[0]);
+      GithubContributionsCalendarUtils.mergeSvgs.mockImplementationOnce(
+        () => parsedGitHubCalendar[0],
+      );
 
       const writeStateSpy = jest.spyOn(gitHubSvgWrapper.instance(), 'writeState');
 
@@ -69,7 +71,7 @@ describe('<GitHubSvg />', () => {
 
       const expectedWriteStateObject = {
         currentUserTotalContributions,
-        updatedActualCalendar: gitHubCalendar[0],
+        updatedActualCalendar: parsedGitHubCalendar[0],
       };
 
       expect(writeStateSpy).toHaveBeenCalledWith(expectedWriteStateObject);
