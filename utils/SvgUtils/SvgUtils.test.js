@@ -5,7 +5,7 @@ jest.mock('../GetProxyUrl/GetProxyUrl', () => require
   .requireActual('../TestUtils/TestUtils')
   .mockOriginalFunctionality('../GetProxyUrl/GetProxyUrl'));
 
-const text = jest.fn().mockImplementationOnce(() => jest.fn());
+const text = jest.fn().mockResolvedValue(() => jest.fn());
 
 window.fetch = jest.fn().mockImplementation(() => ({
   status: 200,
