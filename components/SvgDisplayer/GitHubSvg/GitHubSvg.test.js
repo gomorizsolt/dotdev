@@ -5,7 +5,7 @@ import GitHubHeader from './GitHubHeader/GitHubHeader';
 import * as GithubContributionsCalendarUtils from '../../../utils/GithubContributionsCalendarUtils/GithubContributionsCalendarUtils';
 import * as Users from '../../../resources/Users/Users';
 import * as TestUtils from '../../../utils/TestUtils/TestUtils';
-import BasicCalendar from '../../../resources/BasicCalendar/BasicCalendar.json';
+import * as SvgUtils from '../../../utils/SvgUtils/SvgUtils';
 
 jest.mock('../../../utils/GithubContributionsCalendarUtils/GithubContributionsCalendarUtils', () => require
   .requireActual('../../../utils/TestUtils/TestUtils')
@@ -25,18 +25,18 @@ jest.mock('../../../utils/JavaScriptUtils/JavaScriptUtils', () => require
     '../JavaScriptUtils/JavaScriptUtils',
   ));
 
-jest.mock('svgson');
 jest.mock('html-react-parser');
 
 describe('<GitHubSvg />', () => {
   let gitHubSvgWrapper;
 
+  // In order to get rid of TypeError: Cannot read property 'outerHTML' of null.
+  SvgUtils.getGitHubUserSVG.mockImplementation(() => ({
+    outerHTML: {},
+  }));
+
   beforeEach(() => {
     gitHubSvgWrapper = shallow(<GitHubSvg />);
-  });
-
-  it('sets `BasicCalendar` to `actualCalendar` by default', () => {
-    expect(gitHubSvgWrapper.state('actualCalendar')).toEqual(BasicCalendar);
   });
 
   it('renders GitHubHeader', () => {
@@ -79,10 +79,15 @@ describe('<GitHubSvg />', () => {
   });
 
   describe('fetchFirstUserCalendar', () => {
+    const parsedGitHubCalendar = TestUtils.getFakeContributionsObjectWithDailyCounts([3])[0];
+
     it('fetches synchronously the first GH user`s calendar', async () => {
+      // If it's placed into a `beforeEach` block above then it interferes
+      // the error throwing test case for some reason.
       GithubContributionsCalendarUtils.getParsedGitHubCalendarSync.mockImplementationOnce(
-        () => jest.fn(),
+        () => parsedGitHubCalendar,
       );
+
       const expectedUser = Users.GithubUsernames[0];
 
       await gitHubSvgWrapper.instance().fetchFirstUserCalendar();
@@ -93,7 +98,7 @@ describe('<GitHubSvg />', () => {
 
     it('sets `isLoading` to false', async () => {
       GithubContributionsCalendarUtils.getParsedGitHubCalendarSync.mockImplementationOnce(
-        () => jest.fn(),
+        () => parsedGitHubCalendar,
       );
 
       await gitHubSvgWrapper.instance().fetchFirstUserCalendar();
@@ -101,17 +106,16 @@ describe('<GitHubSvg />', () => {
       expect(gitHubSvgWrapper.state('isLoading')).toBeFalsy();
     });
 
-    describe('when the first user`s calendar meets the requirement', async () => {
-      const parsedGitHubCalendar = TestUtils.getFakeContributionsObjectWithDailyCounts([3])[0];
+    describe('when the first user`s calendar meets the requirement', () => {
       const currentUserTotalContributions = 1024;
 
       beforeEach(() => {
-        GithubContributionsCalendarUtils.getParsedGitHubCalendarSync.mockImplementationOnce(
-          () => parsedGitHubCalendar,
-        );
-
         GithubContributionsCalendarUtils.sumGitHubCalendarContributions.mockImplementationOnce(
           () => currentUserTotalContributions,
+        );
+
+        GithubContributionsCalendarUtils.getParsedGitHubCalendarSync.mockImplementationOnce(
+          () => parsedGitHubCalendar,
         );
       });
 
@@ -141,15 +145,12 @@ describe('<GitHubSvg />', () => {
       let spyConsoleError;
 
       beforeEach(() => {
-        GithubContributionsCalendarUtils.getParsedGitHubCalendarSync.mockImplementationOnce(
-          () => {
-            throw new Error(
-              GithubContributionsCalendarUtils.getIncorrectFirstUserCalendarErrorMessage(),
-            );
-          },
-        );
+        spyConsoleError = jest.spyOn(console, 'error').mockImplementationOnce(() => jest.fn());
 
-        spyConsoleError = jest.spyOn(console, 'error');
+        GithubContributionsCalendarUtils.getParsedGitHubCalendarSync
+          .mockRejectedValueOnce(new Error(
+            GithubContributionsCalendarUtils.getIncorrectFirstUserCalendarErrorMessage(),
+          ));
       });
 
       it('logs the returned value of `GithubContributionsCalendarUtils.getIncorrectFirstUserCalendarErrorMessage` as an error', async () => {
