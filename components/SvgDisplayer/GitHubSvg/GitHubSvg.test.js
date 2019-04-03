@@ -145,7 +145,7 @@ describe('<GitHubSvg />', () => {
       let spyConsoleError;
 
       beforeEach(() => {
-        spyConsoleError = jest.spyOn(console, 'error');
+        spyConsoleError = jest.spyOn(console, 'error').mockImplementationOnce(() => jest.fn());
 
         GithubContributionsCalendarUtils.getParsedGitHubCalendarSync
           .mockRejectedValueOnce(new Error(
