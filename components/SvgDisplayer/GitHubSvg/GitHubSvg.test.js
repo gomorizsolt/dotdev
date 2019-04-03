@@ -83,7 +83,7 @@ describe('<GitHubSvg />', () => {
 
     it('fetches synchronously the first GH user`s calendar', async () => {
       // If it's placed into a `beforeEach` block above then it interferes
-      // the error testing case for some reason.
+      // the error throwing test case for some reason.
       GithubContributionsCalendarUtils.getParsedGitHubCalendarSync.mockImplementationOnce(
         () => parsedGitHubCalendar,
       );
