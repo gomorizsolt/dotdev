@@ -30,7 +30,29 @@ jest.mock('html-react-parser');
 describe('<GitHubSvg />', () => {
   let gitHubSvgWrapper;
 
+  // In order to get rid of `Cannot read property outerHTML of undefined`.
+  const gitHubJsonCalendar = {
+    ...TestUtils.getFakeContributionsObjectWithDailyCounts([5])[0],
+    attributes: {
+      width: '669',
+    },
+  };
+
   beforeEach(() => {
+    GitHubContributionsCalendar.getJsonFormattedCalendar.mockImplementation(
+      () => gitHubJsonCalendar,
+    );
+
+    GitHubContributionsCalendar.getJsonFormattedCalendarSync.mockImplementation(
+      () => gitHubJsonCalendar,
+    );
+
+    GitLabContributionsCalendar.getJsonFormattedCalendar.mockImplementation(
+      () => ({
+        '2018-03-22': 12,
+      }),
+    );
+
     gitHubSvgWrapper = shallow(<GitHubSvg />);
   });
 
@@ -90,8 +112,7 @@ describe('<GitHubSvg />', () => {
         expect(GitHubContributionsCalendar.getTotalContributions).toHaveBeenCalled();
       });
 
-      // TODO: updated actual calendar? To be precise, it's not correct.
-      it('calls `writeState` with the total contributions of the current user and the updated actual calendar', async () => {
+      it('calls `writeState` with the total contributions and the first user`s calendar', async () => {
         const currentUserTotalContributions = 512;
         GitHubContributionsCalendar.getTotalContributions.mockImplementationOnce(
           () => currentUserTotalContributions,
@@ -121,6 +142,13 @@ describe('<GitHubSvg />', () => {
   describe('fetchRemainingCalendars', () => {
     describe('GitHub', () => {
       const expectedCalledTimes = Users.GithubUsernames.length - 1;
+      let processGitHubCalendarSpy;
+
+      beforeEach(() => {
+        // The reason for using `mockImplementation` here is to avoid calling
+        // `processGitHubCalendar` in each iteration with `undefined` param.
+        processGitHubCalendarSpy = jest.spyOn(gitHubSvgWrapper.instance(), 'processGitHubCalendar').mockImplementation(() => {});
+      });
 
       it('fetches the JSON formatted calendars', () => {
         // Resetting the mocked function as it'd return the wrong number of called times.
@@ -133,8 +161,6 @@ describe('<GitHubSvg />', () => {
       });
 
       it('processes the calendars', async () => {
-        const processGitHubCalendarSpy = jest.spyOn(gitHubSvgWrapper.instance(), 'processGitHubCalendar');
-
         await gitHubSvgWrapper.instance().fetchRemainingCalendars();
 
         expect(processGitHubCalendarSpy).toHaveBeenCalledTimes(expectedCalledTimes);
@@ -143,6 +169,11 @@ describe('<GitHubSvg />', () => {
 
     describe('GitLab', () => {
       const expectedCalledTimes = Users.GitlabUsernames.length;
+      let processGitLabCalendarSpy;
+
+      beforeEach(() => {
+        processGitLabCalendarSpy = jest.spyOn(gitHubSvgWrapper.instance(), 'processGitLabCalendar').mockImplementation(() => {});
+      });
 
       it('fetches the JSON formatted calendars', () => {
         // Resetting for the same reason.
@@ -155,8 +186,6 @@ describe('<GitHubSvg />', () => {
       });
 
       it('processes the calendars', async () => {
-        const processGitLabCalendarSpy = jest.spyOn(gitHubSvgWrapper.instance(), 'processGitLabCalendar');
-
         await gitHubSvgWrapper.instance().fetchRemainingCalendars();
 
         expect(processGitLabCalendarSpy).toHaveBeenCalledTimes(expectedCalledTimes);
