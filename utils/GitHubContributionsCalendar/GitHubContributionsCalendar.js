@@ -19,12 +19,6 @@ const getCurrentUserSvg = async (userName) => {
     });
 };
 
-export const getJsonFormattedCalendarSync = async (gitHubUsername) => {
-  const userCalendar = await getCurrentUserSvg(gitHubUsername);
-
-  return parseSync(userCalendar.outerHTML);
-};
-
 export const mergeCalendars = (actualCalendar, currentUserJsonCalendar) => {
   const copiedActualCalendar = JavaScriptUtils.deepCopyObject(actualCalendar);
 
@@ -33,12 +27,12 @@ export const mergeCalendars = (actualCalendar, currentUserJsonCalendar) => {
       if (dailyData.attributes['data-count']) {
         const actualCalendarDailyData = CalendarUtils
           .getCalendarDataByIndexes(copiedActualCalendar, weekIndex, dayIndex);
-        const dailyTotalContributions = Number(actualCalendarDailyData.attributes['data-count']) + Number(dailyData.attributes['data-count']);
+        const totalDailyContributions = Number(actualCalendarDailyData.attributes['data-count']) + Number(dailyData.attributes['data-count']);
 
         copiedActualCalendar.children[0].children[weekIndex].children[dayIndex].attributes = {
           ...actualCalendarDailyData.attributes,
-          'data-count': String(dailyTotalContributions),
-          fill: CalendarUtils.getFillColor(dailyTotalContributions),
+          'data-count': String(totalDailyContributions),
+          fill: CalendarUtils.getFillColor(totalDailyContributions),
         };
       }
     });
@@ -66,4 +60,10 @@ export const getJsonFormattedCalendar = async (gitHubUsername) => {
 
   return parse(rawUserSvg.outerHTML)
     .then(parsedGitHubCalendar => parsedGitHubCalendar);
+};
+
+export const getJsonFormattedCalendarSync = async (gitHubUsername) => {
+  const userCalendar = await getCurrentUserSvg(gitHubUsername);
+
+  return parseSync(userCalendar.outerHTML);
 };

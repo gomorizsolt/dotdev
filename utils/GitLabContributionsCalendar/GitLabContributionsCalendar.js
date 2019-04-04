@@ -26,12 +26,12 @@ export const mergeCalendars = (actualCalendar, gitLabCalendar) => {
       if (dailyData.attributes['data-count']) {
         const actualCalendarDailyData = CalendarUtils
           .getCalendarDataByIndexes(actualCalendar, weekIndex, dayIndex);
-        const dailyTotalContributions = Number(actualCalendarDailyData.attributes['data-count']) + getSpecificDateContributions(gitLabCalendar, actualCalendarDailyData.attributes['data-date']);
+        const totalDailyContributions = Number(actualCalendarDailyData.attributes['data-count']) + getSpecificDateContributions(gitLabCalendar, actualCalendarDailyData.attributes['data-date']);
 
         copiedActualCalendar.children[0].children[weekIndex].children[dayIndex].attributes = {
           ...actualCalendarDailyData.attributes,
-          'data-count': String(dailyTotalContributions),
-          fill: CalendarUtils.getFillColor(dailyTotalContributions),
+          'data-count': String(totalDailyContributions),
+          fill: CalendarUtils.getFillColor(totalDailyContributions),
         };
       }
     });
