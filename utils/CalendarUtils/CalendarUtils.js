@@ -1,21 +1,21 @@
 import * as JavaScriptUtils from '../JavaScriptUtils/JavaScriptUtils';
 
-export const getFillColor = (dailyContributions) => {
+export const getFillColor = (totalDailyContributions) => {
   let fillColor = '#ebedf0';
 
-  if (dailyContributions > 0 && dailyContributions < 10) {
+  if (totalDailyContributions > 0 && totalDailyContributions < 10) {
     fillColor = '#c6e48b';
   }
 
-  if (dailyContributions >= 10 && dailyContributions < 20) {
+  if (totalDailyContributions >= 10 && totalDailyContributions < 20) {
     fillColor = '#7bc96f';
   }
 
-  if (dailyContributions >= 20 && dailyContributions < 30) {
+  if (totalDailyContributions >= 20 && totalDailyContributions < 30) {
     fillColor = '#239a3b';
   }
 
-  if (dailyContributions >= 30) {
+  if (totalDailyContributions >= 30) {
     fillColor = '#196127';
   }
 
