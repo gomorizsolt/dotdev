@@ -3,7 +3,7 @@ import * as JavaScriptUtils from '../../JavaScriptUtils/JavaScriptUtils';
 import * as Common from '../Common/Common';
 import * as Proxy from '../../Proxy/Proxy';
 
-export const getIncorrectFirstUserCalendarErrorMessage = () => 'The first user\'s calendar in the list is incorrect. Please read the Constraint phase in README.md so that get further information about the reason for the error.';
+export const getIncorrectFirstUserCalendarErrorMessage = () => 'The first GitHub user\'s calendar in the list is incorrect. Please read the Constraint phase in README.md so that get further information about the reason for the error.';
 
 const getCurrentUserSvg = async (gitHubUsername) => {
   const userUrl = Proxy.getGitHubProxyUrl(gitHubUsername);
