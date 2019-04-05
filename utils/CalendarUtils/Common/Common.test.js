@@ -71,7 +71,7 @@ describe('Common', () => {
     describe('when the day index is defined', () => {
       const dayIndex = 0;
 
-      it('returns the daily data of the given week', () => {
+      it('returns the daily data', () => {
         const expectedDailyData = calendarData.children[0]
           .children[weekIndex].children[dayIndex];
 
