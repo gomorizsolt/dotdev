@@ -1,7 +1,7 @@
 import { parse, parseSync } from 'svgson';
-import * as JavaScriptUtils from '../JavaScriptUtils/JavaScriptUtils';
-import * as CalendarUtils from '../CalendarUtils/CalendarUtils';
-import * as Proxy from '../Proxy/Proxy';
+import * as JavaScriptUtils from '../../JavaScriptUtils/JavaScriptUtils';
+import * as Common from '../Common/Common';
+import * as Proxy from '../../Proxy/Proxy';
 
 export const getIncorrectFirstUserCalendarErrorMessage = () => 'The first user\'s calendar in the list is incorrect. Please read the Constraint phase in README.md so that get further information about the reason for the error.';
 
@@ -25,14 +25,14 @@ export const mergeCalendars = (actualCalendar, currentUserJsonCalendar) => {
   currentUserJsonCalendar.children[0].children.forEach((weeklyData, weekIndex) => {
     weeklyData.children.forEach((dailyData, dayIndex) => {
       if (dailyData.attributes['data-count']) {
-        const actualCalendarDailyData = CalendarUtils
+        const actualCalendarDailyData = Common
           .getCalendarDataByIndexes(copiedActualCalendar, weekIndex, dayIndex);
         const totalDailyContributions = Number(actualCalendarDailyData.attributes['data-count']) + Number(dailyData.attributes['data-count']);
 
         copiedActualCalendar.children[0].children[weekIndex].children[dayIndex].attributes = {
           ...actualCalendarDailyData.attributes,
           'data-count': String(totalDailyContributions),
-          fill: CalendarUtils.getFillColor(totalDailyContributions),
+          fill: Common.getFillColor(totalDailyContributions),
         };
       }
     });

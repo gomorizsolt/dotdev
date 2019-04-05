@@ -2,22 +2,22 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import GitHubSvg from './GitHubSvg';
 import GitHubHeader from './GitHubHeader/GitHubHeader';
-import * as GitHubContributionsCalendar from '../../../utils/GitHubContributionsCalendar/GitHubContributionsCalendar';
-import * as GitLabContributionsCalendar from '../../../utils/GitLabContributionsCalendar/GitLabContributionsCalendar';
+import * as CalendarUtils from '../../../utils/CalendarUtils';
 import * as Users from '../../../resources/Users/Users';
 import * as TestUtils from '../../../utils/TestUtils/TestUtils';
 
-jest.mock('../../../utils/GitHubContributionsCalendar/GitHubContributionsCalendar', () => require
+jest.mock('../../../utils/CalendarUtils/GitHub/GitHub', () => require
   .requireActual('../../../utils/TestUtils/TestUtils')
   .mockOriginalFunctionality(
-    '../GitHubContributionsCalendar/GitHubContributionsCalendar',
+    '../CalendarUtils/GitHub/GitHub',
   ));
 
-jest.mock('../../../utils/GitLabContributionsCalendar/GitLabContributionsCalendar', () => require
+jest.mock('../../../utils/CalendarUtils/GitLab/GitLab', () => require
   .requireActual('../../../utils/TestUtils/TestUtils')
   .mockOriginalFunctionality(
-    '../GitLabContributionsCalendar/GitLabContributionsCalendar',
+    '../CalendarUtils/GitLab/GitLab',
   ));
+
 
 jest.mock('../../../utils/JavaScriptUtils/JavaScriptUtils', () => require
   .requireActual('../../../utils/TestUtils/TestUtils')
@@ -39,15 +39,15 @@ describe('<GitHubSvg />', () => {
   };
 
   beforeEach(() => {
-    GitHubContributionsCalendar.getJsonFormattedCalendar.mockImplementation(
+    CalendarUtils.GitHub.getJsonFormattedCalendar.mockImplementation(
       () => gitHubJsonCalendar,
     );
 
-    GitHubContributionsCalendar.getJsonFormattedCalendarSync.mockImplementation(
+    CalendarUtils.GitHub.getJsonFormattedCalendarSync.mockImplementation(
       () => gitHubJsonCalendar,
     );
 
-    GitLabContributionsCalendar.getJsonFormattedCalendar.mockImplementation(
+    CalendarUtils.GitLab.getJsonFormattedCalendar.mockImplementation(
       () => ({
         '2018-03-22': 12,
       }),
@@ -72,7 +72,7 @@ describe('<GitHubSvg />', () => {
           },
         };
 
-        GitHubContributionsCalendar.getJsonFormattedCalendarSync.mockImplementationOnce(
+        CalendarUtils.GitHub.getJsonFormattedCalendarSync.mockImplementationOnce(
           () => ({
             ...notFullWidthUserCalendar,
           }),
@@ -81,7 +81,7 @@ describe('<GitHubSvg />', () => {
 
       it('logs the returned value of `GithubContributionsCalendar.getIncorrectFirstUserCalendarErrorMessage` as an error', async () => {
         const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementationOnce(() => {});
-        const expectedErrorMessage = GitHubContributionsCalendar
+        const expectedErrorMessage = CalendarUtils.GitHub
           .getIncorrectFirstUserCalendarErrorMessage();
 
         await gitHubSvgWrapper.instance().fetchFirstGitHubUserCalendar();
@@ -99,7 +99,7 @@ describe('<GitHubSvg />', () => {
       };
 
       beforeEach(() => {
-        GitHubContributionsCalendar.getJsonFormattedCalendarSync.mockImplementationOnce(
+        CalendarUtils.GitHub.getJsonFormattedCalendarSync.mockImplementationOnce(
           () => ({
             ...fullWidthUserCalendar,
           }),
@@ -109,12 +109,12 @@ describe('<GitHubSvg />', () => {
       it('calculates the total contributions of the current user', async () => {
         await gitHubSvgWrapper.instance().fetchFirstGitHubUserCalendar();
 
-        expect(GitHubContributionsCalendar.getTotalContributions).toHaveBeenCalled();
+        expect(CalendarUtils.GitHub.getTotalContributions).toHaveBeenCalled();
       });
 
       it('calls `writeState` with the total contributions and the first user`s calendar', async () => {
         const currentUserTotalContributions = 512;
-        GitHubContributionsCalendar.getTotalContributions.mockImplementationOnce(
+        CalendarUtils.GitHub.getTotalContributions.mockImplementationOnce(
           () => currentUserTotalContributions,
         );
 
@@ -152,11 +152,11 @@ describe('<GitHubSvg />', () => {
 
       it('fetches the JSON formatted calendars', () => {
         // Resetting the mocked function as it'd return the wrong number of called times.
-        GitHubContributionsCalendar.getJsonFormattedCalendar.mockReset();
+        CalendarUtils.GitHub.getJsonFormattedCalendar.mockReset();
 
         gitHubSvgWrapper.instance().fetchRemainingCalendars();
 
-        expect(GitHubContributionsCalendar.getJsonFormattedCalendar)
+        expect(CalendarUtils.GitHub.getJsonFormattedCalendar)
           .toHaveBeenCalledTimes(expectedCalledTimes);
       });
 
@@ -177,11 +177,11 @@ describe('<GitHubSvg />', () => {
 
       it('fetches the JSON formatted calendars', () => {
         // Resetting for the same reason.
-        GitLabContributionsCalendar.getJsonFormattedCalendar.mockReset();
+        CalendarUtils.GitLab.getJsonFormattedCalendar.mockReset();
 
         gitHubSvgWrapper.instance().fetchRemainingCalendars();
 
-        expect(GitLabContributionsCalendar.getJsonFormattedCalendar)
+        expect(CalendarUtils.GitLab.getJsonFormattedCalendar)
           .toHaveBeenCalledTimes(expectedCalledTimes);
       });
 
@@ -202,25 +202,25 @@ describe('<GitHubSvg />', () => {
 
       gitHubSvgWrapper.instance().processGitHubCalendar(currentUserJsonCalendar);
 
-      expect(GitHubContributionsCalendar.mergeCalendars)
+      expect(CalendarUtils.GitHub.mergeCalendars)
         .toHaveBeenCalledWith(currentActualCalendar, currentUserJsonCalendar);
     });
 
     it('calculates the total contributions', () => {
       gitHubSvgWrapper.instance().processGitHubCalendar(currentUserJsonCalendar);
 
-      expect(GitHubContributionsCalendar.getTotalContributions)
+      expect(CalendarUtils.GitHub.getTotalContributions)
         .toHaveBeenCalledWith(currentUserJsonCalendar);
     });
 
     it('calls `writeState` with the total contributions of the current user and the updated actual calendar', () => {
       const currentUserTotalContributions = 1024;
 
-      GitHubContributionsCalendar.mergeCalendars.mockImplementationOnce(
+      CalendarUtils.GitHub.mergeCalendars.mockImplementationOnce(
         () => exampleCalendars[1],
       );
 
-      GitHubContributionsCalendar.getTotalContributions.mockImplementationOnce(
+      CalendarUtils.GitHub.getTotalContributions.mockImplementationOnce(
         () => currentUserTotalContributions,
       );
 
@@ -247,14 +247,14 @@ describe('<GitHubSvg />', () => {
 
       gitHubSvgWrapper.instance().processGitLabCalendar(currentUserJsonCalendar);
 
-      expect(GitLabContributionsCalendar.mergeCalendars)
+      expect(CalendarUtils.GitLab.mergeCalendars)
         .toHaveBeenCalledWith(currentActualCalendar, currentUserJsonCalendar);
     });
 
     it('calculates the total contributions', () => {
       gitHubSvgWrapper.instance().processGitLabCalendar(currentUserJsonCalendar);
 
-      expect(GitLabContributionsCalendar.getTotalContributions)
+      expect(CalendarUtils.GitLab.getTotalContributions)
         .toHaveBeenCalledWith(currentUserJsonCalendar);
     });
 
@@ -262,11 +262,11 @@ describe('<GitHubSvg />', () => {
       const currentUserTotalContributions = 2048;
       const updatedActualCalendar = TestUtils.getFakeContributionsObjectWithDailyCounts([1])[0];
 
-      GitLabContributionsCalendar.mergeCalendars.mockImplementationOnce(
+      CalendarUtils.GitLab.mergeCalendars.mockImplementationOnce(
         () => updatedActualCalendar,
       );
 
-      GitLabContributionsCalendar.getTotalContributions.mockImplementationOnce(
+      CalendarUtils.GitLab.getTotalContributions.mockImplementationOnce(
         () => currentUserTotalContributions,
       );
 

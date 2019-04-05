@@ -1,6 +1,6 @@
-import * as Proxy from '../Proxy/Proxy';
-import * as JavaScriptUtils from '../JavaScriptUtils/JavaScriptUtils';
-import * as CalendarUtils from '../CalendarUtils/CalendarUtils';
+import * as Proxy from '../../Proxy/Proxy';
+import * as JavaScriptUtils from '../../JavaScriptUtils/JavaScriptUtils';
+import * as Common from '../Common/Common';
 
 export const getJsonFormattedCalendar = async (gitLabUsername) => {
   const url = Proxy.getGitLabProxyUrl(gitLabUsername);
@@ -24,14 +24,14 @@ export const mergeCalendars = (actualCalendar, gitLabCalendar) => {
   copiedActualCalendar.children[0].children.forEach((weeklyData, weekIndex) => {
     weeklyData.children.forEach((dailyData, dayIndex) => {
       if (dailyData.attributes['data-count']) {
-        const actualCalendarDailyData = CalendarUtils
+        const actualCalendarDailyData = Common
           .getCalendarDataByIndexes(actualCalendar, weekIndex, dayIndex);
         const totalDailyContributions = Number(actualCalendarDailyData.attributes['data-count']) + getSpecificDateContributions(gitLabCalendar, actualCalendarDailyData.attributes['data-date']);
 
         copiedActualCalendar.children[0].children[weekIndex].children[dayIndex].attributes = {
           ...actualCalendarDailyData.attributes,
           'data-count': String(totalDailyContributions),
-          fill: CalendarUtils.getFillColor(totalDailyContributions),
+          fill: Common.getFillColor(totalDailyContributions),
         };
       }
     });

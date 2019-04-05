@@ -1,4 +1,4 @@
-import * as JavaScriptUtils from '../JavaScriptUtils/JavaScriptUtils';
+import * as JavaScriptUtils from '../../JavaScriptUtils/JavaScriptUtils';
 
 export const getFillColor = (totalDailyContributions) => {
   let fillColor = '#ebedf0';

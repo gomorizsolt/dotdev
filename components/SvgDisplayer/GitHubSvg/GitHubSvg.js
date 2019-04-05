@@ -3,8 +3,7 @@ import { stringify } from 'svgson';
 import HtmlReactParser from 'html-react-parser';
 import GitHubHeader from './GitHubHeader/GitHubHeader';
 import * as Users from '../../../resources/Users/Users';
-import * as GitHubContributionsCalendar from '../../../utils/GitHubContributionsCalendar/GitHubContributionsCalendar';
-import * as GitLabContributionsCalendar from '../../../utils/GitLabContributionsCalendar/GitLabContributionsCalendar';
+import * as CalendarUtils from '../../../utils/CalendarUtils';
 import BasicCalendar from '../../../resources/BasicCalendar/BasicCalendar.json';
 
 class GitHubSvg extends Component {
@@ -25,10 +24,10 @@ class GitHubSvg extends Component {
   processGitHubCalendar(currentUserJsonCalendar) {
     const { actualCalendar: { ...actualCalendar } } = this.state;
 
-    const updatedActualCalendar = GitHubContributionsCalendar
+    const updatedActualCalendar = CalendarUtils.GitHub
       .mergeCalendars(actualCalendar, currentUserJsonCalendar);
 
-    const currentUserTotalContributions = GitHubContributionsCalendar
+    const currentUserTotalContributions = CalendarUtils.GitHub
       .getTotalContributions(currentUserJsonCalendar);
 
     this.writeState({
@@ -40,10 +39,10 @@ class GitHubSvg extends Component {
   processGitLabCalendar(currentUserJsonCalendar) {
     const { actualCalendar: { ...actualCalendar } } = this.state;
 
-    const updatedActualCalendar = GitLabContributionsCalendar
+    const updatedActualCalendar = CalendarUtils.GitLab
       .mergeCalendars(actualCalendar, currentUserJsonCalendar);
 
-    const currentUserTotalContributions = GitLabContributionsCalendar
+    const currentUserTotalContributions = CalendarUtils.GitLab
       .getTotalContributions(currentUserJsonCalendar);
 
     this.writeState({
@@ -56,7 +55,7 @@ class GitHubSvg extends Component {
     const firstGitHubUser = Users.GithubUsernames[0];
     const normalSizedCalendarWidth = '669';
 
-    const firstUserJsonCalendar = await GitHubContributionsCalendar
+    const firstUserJsonCalendar = await CalendarUtils.GitHub
       .getJsonFormattedCalendarSync(firstGitHubUser);
 
     this.setState({
@@ -68,10 +67,10 @@ class GitHubSvg extends Component {
     if (!isCalendarFullWidth) {
       // eslint-disable-next-line no-console
       console.error(
-        GitHubContributionsCalendar.getIncorrectFirstUserCalendarErrorMessage(),
+        CalendarUtils.GitHub.getIncorrectFirstUserCalendarErrorMessage(),
       );
     } else {
-      const currentUserTotalContributions = GitHubContributionsCalendar
+      const currentUserTotalContributions = CalendarUtils.GitHub
         .getTotalContributions(firstUserJsonCalendar);
 
       this.writeState({
@@ -85,14 +84,14 @@ class GitHubSvg extends Component {
 
   fetchRemainingCalendars() {
     Users.GithubUsernames.slice(1).map(async (gitHubUsername) => {
-      const currentUserJsonCalendar = await GitHubContributionsCalendar
+      const currentUserJsonCalendar = await CalendarUtils.GitHub
         .getJsonFormattedCalendar(gitHubUsername);
 
       this.processGitHubCalendar(currentUserJsonCalendar);
     });
 
     Users.GitlabUsernames.map(async (gitLabUsername) => {
-      const currentUserJsonCalendar = await GitLabContributionsCalendar
+      const currentUserJsonCalendar = await CalendarUtils.GitLab
         .getJsonFormattedCalendar(gitLabUsername);
 
       this.processGitLabCalendar(currentUserJsonCalendar);
