@@ -3,7 +3,7 @@ import * as TestUtils from '../../TestUtils/TestUtils';
 
 describe('GitHub', () => {
   describe('getTotalContributions', () => {
-    it('calculates the total contributions of the current user', () => {
+    it('returns the total contributions of the current user', () => {
       const currentUserJsonCalendar = TestUtils.getFakeContributionsObjectWithDailyCounts([12])[0];
       const expectedTotalContributions = 12;
 
@@ -23,7 +23,6 @@ describe('GitHub', () => {
       // that's why we expect '14' in this case.
       const expectedDataCountValue = '14';
 
-      // mergedCalendar(s)?
       const mergedCalendar = GitHub.mergeCalendars(actualCalendar, currentUserJsonCalendar);
       const actualDataCountValue = mergedCalendar.children[0].children[0].children[0].attributes['data-count'];
 

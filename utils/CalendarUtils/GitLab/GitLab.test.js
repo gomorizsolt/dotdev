@@ -17,4 +17,18 @@ describe('GitLab', () => {
       expect(Proxy.getGitLabProxyUrl).toHaveBeenCalledWith(gitLabUsername);
     });
   });
+
+  describe('getTotalContributions', () => {
+    it('returns the total contributions of the given user', () => {
+      const gitHubCalendar = {
+        '2018-02-03': 7,
+        '2018-02-09': 3,
+      };
+      const expectedTotalContributions = 10;
+
+      const actualTotalContributions = GitLab.getTotalContributions(gitHubCalendar);
+
+      expect(actualTotalContributions).toEqual(expectedTotalContributions);
+    });
+  });
 });
