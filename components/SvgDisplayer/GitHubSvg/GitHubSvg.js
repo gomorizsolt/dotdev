@@ -62,9 +62,9 @@ class GitHubSvg extends Component {
       isLoading: false,
     });
 
-    const isCalendarFullWidth = firstUserJsonCalendar.attributes.width === normalSizedCalendarWidth;
+    const calendarIsFullWidth = firstUserJsonCalendar.attributes.width === normalSizedCalendarWidth;
 
-    if (!isCalendarFullWidth) {
+    if (!calendarIsFullWidth) {
       // eslint-disable-next-line no-console
       console.error(
         CalendarUtils.GitHub.getIncorrectFirstUserCalendarErrorMessage(),
