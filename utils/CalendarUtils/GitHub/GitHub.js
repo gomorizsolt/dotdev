@@ -5,8 +5,8 @@ import * as Proxy from '../../Proxy/Proxy';
 
 export const getIncorrectFirstUserCalendarErrorMessage = () => 'The first user\'s calendar in the list is incorrect. Please read the Constraint phase in README.md so that get further information about the reason for the error.';
 
-const getCurrentUserSvg = async (userName) => {
-  const userUrl = Proxy.getGitHubProxyUrl(userName);
+const getCurrentUserSvg = async (gitHubUsername) => {
+  const userUrl = Proxy.getGitHubProxyUrl(gitHubUsername);
   const responseData = await fetch(userUrl);
 
   return responseData.text()
@@ -41,10 +41,10 @@ export const mergeCalendars = (actualCalendar, currentUserJsonCalendar) => {
   return copiedActualCalendar;
 };
 
-export const getTotalContributions = (parsedGitHubCalendar) => {
+export const getTotalContributions = (currentUserJsonCalendar) => {
   let sum = 0;
 
-  parsedGitHubCalendar.children[0].children.forEach((weeklyData) => {
+  currentUserJsonCalendar.children[0].children.forEach((weeklyData) => {
     weeklyData.children.forEach((dailyData) => {
       if (dailyData.attributes['data-count']) {
         sum += Number(dailyData.attributes['data-count']);

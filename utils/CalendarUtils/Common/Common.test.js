@@ -1,6 +1,7 @@
-import * as CalendarUtils from './Common';
+import * as Common from './Common';
+import * as TestUtils from '../../TestUtils/TestUtils';
 
-describe('CalendarUtils', () => {
+describe('Common', () => {
   describe('getFillColor', () => {
     describe('when the total of the daily contributions is 0', () => {
       const totalDailyContributions = 0;
@@ -8,7 +9,7 @@ describe('CalendarUtils', () => {
       it('sets the default color', () => {
         const expectedFillColor = '#ebedf0';
 
-        const actualFillColor = CalendarUtils.getFillColor(totalDailyContributions);
+        const actualFillColor = Common.getFillColor(totalDailyContributions);
 
         expect(actualFillColor).toEqual(expectedFillColor);
       });
@@ -20,7 +21,7 @@ describe('CalendarUtils', () => {
       it('sets the `#c6e48b` color', () => {
         const expectedFillColor = '#c6e48b';
 
-        const actualFillColor = CalendarUtils.getFillColor(totalDailyContributions);
+        const actualFillColor = Common.getFillColor(totalDailyContributions);
 
         expect(actualFillColor).toEqual(expectedFillColor);
       });
@@ -32,7 +33,7 @@ describe('CalendarUtils', () => {
       it('sets the `#7bc96f` color', () => {
         const expectedFillColor = '#7bc96f';
 
-        const actualFillColor = CalendarUtils.getFillColor(totalDailyContributions);
+        const actualFillColor = Common.getFillColor(totalDailyContributions);
 
         expect(actualFillColor).toEqual(expectedFillColor);
       });
@@ -44,7 +45,7 @@ describe('CalendarUtils', () => {
       it('sets the `#239a3b` color', () => {
         const expectedFillColor = '#239a3b';
 
-        const actualFillColor = CalendarUtils.getFillColor(totalDailyContributions);
+        const actualFillColor = Common.getFillColor(totalDailyContributions);
 
         expect(actualFillColor).toEqual(expectedFillColor);
       });
@@ -56,9 +57,37 @@ describe('CalendarUtils', () => {
       it('sets the `#196127` color', () => {
         const expectedFillColor = '#196127';
 
-        const actualFillColor = CalendarUtils.getFillColor(totalDailyContributions);
+        const actualFillColor = Common.getFillColor(totalDailyContributions);
 
         expect(actualFillColor).toEqual(expectedFillColor);
+      });
+    });
+  });
+
+  describe('getCalendarDataByIndexes', () => {
+    const calendarData = TestUtils.getFakeContributionsObjectWithDailyCounts([12])[0];
+    const weekIndex = 0;
+
+    describe('when the day index is defined', () => {
+      const dayIndex = 0;
+
+      it('returns the week`s daily data', () => {
+        const expectedDailyData = calendarData.children[0]
+          .children[weekIndex].children[dayIndex];
+
+        const actualDailyData = Common.getCalendarDataByIndexes(calendarData, weekIndex, dayIndex);
+
+        expect(actualDailyData).toEqual(expectedDailyData);
+      });
+    });
+
+    describe('when the day index is not defined', () => {
+      it('returns the weekly data', () => {
+        const expectedWeeklyData = calendarData.children[0].children[weekIndex];
+
+        const actualWeeklyData = Common.getCalendarDataByIndexes(calendarData, weekIndex);
+
+        expect(actualWeeklyData).toEqual(expectedWeeklyData);
       });
     });
   });

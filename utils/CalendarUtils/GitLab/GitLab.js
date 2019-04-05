@@ -6,8 +6,13 @@ export const getJsonFormattedCalendar = async (gitLabUsername) => {
   const url = Proxy.getGitLabProxyUrl(gitLabUsername);
   const userCalendar = await fetch(url);
 
+  // Returning an empty object in the `catch` block becuase of the following reasons:
+  // - avoid spamming the test console(`Unhandled promise rejection.`),
+  // - it won't interrupt the whole flow.
+  // We'll refine the error handling later on.
   return userCalendar.json()
-    .then(parsedUserCalendar => parsedUserCalendar);
+    .then(parsedUserCalendar => parsedUserCalendar)
+    .catch(() => {});
 };
 
 const getSpecificDateContributions = (gitLabCalendar, date) => {
