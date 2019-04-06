@@ -1,10 +1,9 @@
 import React, { Component, Fragment } from 'react';
-import { stringify, parse } from 'svgson';
+import { stringify } from 'svgson';
 import HtmlReactParser from 'html-react-parser';
 import GitHubHeader from './GitHubHeader/GitHubHeader';
 import * as Users from '../../../resources/Users/Users';
-import * as GithubContributionsCalendarUtils from '../../../utils/GithubContributionsCalendarUtils/GithubContributionsCalendarUtils';
-import * as SvgUtils from '../../../utils/SvgUtils/SvgUtils';
+import * as CalendarUtils from '../../../utils/CalendarUtils';
 import BasicCalendar from '../../../resources/BasicCalendar/BasicCalendar.json';
 
 class GitHubSvg extends Component {
@@ -19,61 +18,80 @@ class GitHubSvg extends Component {
   }
 
   componentDidMount() {
-    this.fetchFirstUserCalendar();
+    this.fetchFirstGitHubUserCalendar();
   }
 
-  setActualCalendar(gitHubCalendarPromise) {
+  processGitHubCalendar(currentUserJsonCalendar) {
     const { actualCalendar: { ...actualCalendar } } = this.state;
 
-    gitHubCalendarPromise.then((parsedGitHubCalendar) => {
-      const updatedActualCalendar = GithubContributionsCalendarUtils
-        .mergeSvgs(actualCalendar, parsedGitHubCalendar);
+    const updatedActualCalendar = CalendarUtils.GitHub
+      .mergeCalendars(actualCalendar, currentUserJsonCalendar);
 
-      const currentUserTotalContributions = GithubContributionsCalendarUtils
-        .sumGitHubCalendarContributions(parsedGitHubCalendar);
+    const currentUserTotalContributions = CalendarUtils.GitHub
+      .getTotalContributions(currentUserJsonCalendar);
 
-      this.writeState({
-        currentUserTotalContributions,
-        updatedActualCalendar,
-      });
+    this.writeState({
+      currentUserTotalContributions,
+      updatedActualCalendar,
     });
   }
 
-  async fetchFirstUserCalendar() {
-    const firstUser = Users.GithubUsernames[0];
+  processGitLabCalendar(currentUserJsonCalendar) {
+    const { actualCalendar: { ...actualCalendar } } = this.state;
 
-    try {
-      const parsedGitHubCalendar = await GithubContributionsCalendarUtils
-        .getParsedGitHubCalendarSync(firstUser);
+    const updatedActualCalendar = CalendarUtils.GitLab
+      .mergeCalendars(actualCalendar, currentUserJsonCalendar);
 
-      this.setState({
-        isLoading: false,
-      });
+    const currentUserTotalContributions = CalendarUtils.GitLab
+      .getTotalContributions(currentUserJsonCalendar);
 
-      const currentUserTotalContributions = GithubContributionsCalendarUtils
-        .sumGitHubCalendarContributions(parsedGitHubCalendar);
+    this.writeState({
+      currentUserTotalContributions,
+      updatedActualCalendar,
+    });
+  }
+
+  async fetchFirstGitHubUserCalendar() {
+    const firstGitHubUser = Users.GithubUsernames[0];
+
+    const firstUserJsonCalendar = await CalendarUtils.GitHub
+      .getJsonFormattedCalendarSync(firstGitHubUser);
+
+    this.setState({
+      isLoading: false,
+    });
+
+    if (CalendarUtils.GitHub.calendarIsFullWidth(firstUserJsonCalendar)) {
+      const currentUserTotalContributions = CalendarUtils.GitHub
+        .getTotalContributions(firstUserJsonCalendar);
 
       this.writeState({
         currentUserTotalContributions,
-        updatedActualCalendar: parsedGitHubCalendar,
+        updatedActualCalendar: firstUserJsonCalendar,
       });
 
       this.fetchRemainingCalendars();
-    } catch (err) {
-      this.setState({
-        isLoading: false,
-      });
-
+    } else {
       // eslint-disable-next-line no-console
-      console.error(err.message);
+      console.error(
+        CalendarUtils.GitHub.getIncorrectFirstUserCalendarErrorMessage(),
+      );
     }
   }
 
   fetchRemainingCalendars() {
-    Users.GithubUsernames.slice(1).map(async (userName) => {
-      const rawUserSVG = await SvgUtils.getGitHubUserSVG(userName);
+    Users.GithubUsernames.slice(1).map(async (gitHubUsername) => {
+      const currentUserJsonCalendar = await CalendarUtils.GitHub
+        .getJsonFormattedCalendar(gitHubUsername);
 
-      this.setActualCalendar(parse(rawUserSVG.outerHTML));
+      this.processGitHubCalendar(currentUserJsonCalendar);
+    });
+
+    Users.GitlabUsernames.map(async (gitLabUsername) => {
+      const currentUserJsonCalendar = await CalendarUtils.GitLab
+        .getJsonFormattedCalendar(gitLabUsername);
+
+      this.processGitLabCalendar(currentUserJsonCalendar);
     });
   }
 
