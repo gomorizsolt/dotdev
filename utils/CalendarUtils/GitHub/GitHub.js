@@ -67,8 +67,7 @@ export const getJsonFormattedCalendar = async (gitHubUsername) => {
 export const getJsonFormattedCalendarSync = async (gitHubUsername) => {
   const userCalendar = await getCurrentUserSvg(gitHubUsername);
 
-  return parseSync(userCalendar.outerHTML)
-    .catch(err => console.log(err));
+  return parseSync(userCalendar.outerHTML);
 };
 
 export const calendarIsFullWidth = (calendar) => {
