@@ -84,28 +84,29 @@ describe('<GitHubSvg />', () => {
     });
 
     describe('when the first GH user`s calendar is full-width', () => {
+      const firstUserJsonCalendar = TestUtils.getFakeContributionsObjectWithDailyCounts([5])[0];
+
       beforeEach(() => {
         CalendarUtils.GitHub.calendarIsFullWidth.mockImplementationOnce(
           () => true,
+        );
+
+        CalendarUtils.GitHub.getJsonFormattedCalendarSync.mockImplementationOnce(
+          () => firstUserJsonCalendar,
         );
       });
 
       it('calculates the total contributions of the current user', async () => {
         await gitHubSvgWrapper.instance().fetchFirstGitHubUserCalendar();
 
-        expect(CalendarUtils.GitHub.getTotalContributions).toHaveBeenCalled();
+        expect(CalendarUtils.GitHub.getTotalContributions)
+          .toHaveBeenCalledWith(firstUserJsonCalendar);
       });
 
       it('calls `writeState` with the total contributions and the first user`s calendar', async () => {
         const currentUserTotalContributions = 512;
         CalendarUtils.GitHub.getTotalContributions.mockImplementationOnce(
           () => currentUserTotalContributions,
-        );
-
-        const firstUserJsonCalendar = TestUtils.getFakeContributionsObjectWithDailyCounts([5])[0];
-
-        CalendarUtils.GitHub.getJsonFormattedCalendarSync.mockImplementationOnce(
-          () => firstUserJsonCalendar,
         );
 
         const writeStateSpy = jest.spyOn(gitHubSvgWrapper.instance(), 'writeState');
