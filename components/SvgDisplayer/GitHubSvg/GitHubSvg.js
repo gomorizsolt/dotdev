@@ -53,7 +53,6 @@ class GitHubSvg extends Component {
 
   async fetchFirstGitHubUserCalendar() {
     const firstGitHubUser = Users.GithubUsernames[0];
-    const normalSizedCalendarWidth = '669';
 
     const firstUserJsonCalendar = await CalendarUtils.GitHub
       .getJsonFormattedCalendarSync(firstGitHubUser);
@@ -62,14 +61,7 @@ class GitHubSvg extends Component {
       isLoading: false,
     });
 
-    const calendarIsFullWidth = firstUserJsonCalendar.attributes.width === normalSizedCalendarWidth;
-
-    if (!calendarIsFullWidth) {
-      // eslint-disable-next-line no-console
-      console.error(
-        CalendarUtils.GitHub.getIncorrectFirstUserCalendarErrorMessage(),
-      );
-    } else {
+    if (CalendarUtils.GitHub.calendarIsFullWidth(firstUserJsonCalendar)) {
       const currentUserTotalContributions = CalendarUtils.GitHub
         .getTotalContributions(firstUserJsonCalendar);
 
@@ -79,6 +71,11 @@ class GitHubSvg extends Component {
       });
 
       this.fetchRemainingCalendars();
+    } else {
+      // eslint-disable-next-line no-console
+      console.error(
+        CalendarUtils.GitHub.getIncorrectFirstUserCalendarErrorMessage(),
+      );
     }
   }
 

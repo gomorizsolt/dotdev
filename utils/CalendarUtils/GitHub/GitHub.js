@@ -67,3 +67,9 @@ export const getJsonFormattedCalendarSync = async (gitHubUsername) => {
 
   return parseSync(userCalendar.outerHTML);
 };
+
+export const calendarIsFullWidth = (calendar) => {
+  const normalSizedCalendarWidth = '669';
+
+  return calendar.attributes.width === normalSizedCalendarWidth;
+};

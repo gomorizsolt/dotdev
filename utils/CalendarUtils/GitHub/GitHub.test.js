@@ -29,4 +29,34 @@ describe('GitHub', () => {
       expect(actualDataCountValue).toEqual(expectedDataCountValue);
     });
   });
+
+  describe('calendarIsFullWidth', () => {
+    describe('when the given calendar`s width is 669px', () => {
+      const calendar = {
+        attributes: {
+          width: '669',
+        },
+      };
+
+      it('returns true', () => {
+        const returnedValue = GitHub.calendarIsFullWidth(calendar);
+
+        expect(returnedValue).toBeTruthy();
+      });
+    });
+
+    describe('when the given calendar`s width is not 669px', () => {
+      const calendar = {
+        attributes: {
+          width: '563',
+        },
+      };
+
+      it('returns false', () => {
+        const returnedValue = GitHub.calendarIsFullWidth(calendar);
+
+        expect(returnedValue).toBeFalsy();
+      });
+    });
+  });
 });

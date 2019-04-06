@@ -61,22 +61,15 @@ describe('<GitHubSvg />', () => {
   });
 
   describe('fetchFirstGitHubUserCalendar', () => {
-    const firstUserJsonCalendar = TestUtils.getFakeContributionsObjectWithDailyCounts([5])[0];
+    it('sets `isLoading` to false', async () => {
+      await gitHubSvgWrapper.instance().fetchFirstGitHubUserCalendar();
+
+      expect(gitHubSvgWrapper.state('isLoading')).toBeFalsy();
+    });
 
     describe('when the first GH user`s calendar is not full-width', () => {
       beforeEach(() => {
-        const notFullWidthUserCalendar = {
-          ...firstUserJsonCalendar,
-          attributes: {
-            width: '563',
-          },
-        };
-
-        CalendarUtils.GitHub.getJsonFormattedCalendarSync.mockImplementationOnce(
-          () => ({
-            ...notFullWidthUserCalendar,
-          }),
-        );
+        CalendarUtils.GitHub.calendarIsFullWidth.mockImplementationOnce(() => false);
       });
 
       it('logs the returned value of `GithubContributionsCalendar.getIncorrectFirstUserCalendarErrorMessage` as an error', async () => {
@@ -91,18 +84,9 @@ describe('<GitHubSvg />', () => {
     });
 
     describe('when the first GH user`s calendar is full-width', () => {
-      const fullWidthUserCalendar = {
-        ...firstUserJsonCalendar,
-        attributes: {
-          width: '669',
-        },
-      };
-
       beforeEach(() => {
-        CalendarUtils.GitHub.getJsonFormattedCalendarSync.mockImplementationOnce(
-          () => ({
-            ...fullWidthUserCalendar,
-          }),
+        CalendarUtils.GitHub.calendarIsFullWidth.mockImplementationOnce(
+          () => true,
         );
       });
 
@@ -118,10 +102,16 @@ describe('<GitHubSvg />', () => {
           () => currentUserTotalContributions,
         );
 
+        const firstUserJsonCalendar = TestUtils.getFakeContributionsObjectWithDailyCounts([5])[0];
+
+        CalendarUtils.GitHub.getJsonFormattedCalendarSync.mockImplementationOnce(
+          () => firstUserJsonCalendar,
+        );
+
         const writeStateSpy = jest.spyOn(gitHubSvgWrapper.instance(), 'writeState');
         const expectedWriteStateObject = {
           currentUserTotalContributions,
-          updatedActualCalendar: fullWidthUserCalendar,
+          updatedActualCalendar: firstUserJsonCalendar,
         };
 
         await gitHubSvgWrapper.instance().fetchFirstGitHubUserCalendar();
