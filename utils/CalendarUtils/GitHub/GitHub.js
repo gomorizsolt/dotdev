@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { parse, parseSync } from 'svgson';
 import * as JavaScriptUtils from '../../JavaScriptUtils/JavaScriptUtils';
 import * as Common from '../Common/Common';
@@ -16,7 +17,7 @@ const getCurrentUserSvg = async (gitHubUsername) => {
       const rawUserSVG = div.querySelector('.js-calendar-graph-svg');
 
       return rawUserSVG;
-    });
+    }).catch(err => console.log(err));
 };
 
 export const mergeCalendars = (actualCalendar, currentUserJsonCalendar) => {
@@ -59,13 +60,15 @@ export const getJsonFormattedCalendar = async (gitHubUsername) => {
   const rawUserSvg = await getCurrentUserSvg(gitHubUsername);
 
   return parse(rawUserSvg.outerHTML)
-    .then(parsedGitHubCalendar => parsedGitHubCalendar);
+    .then(parsedGitHubCalendar => parsedGitHubCalendar)
+    .catch(err => console.log(err));
 };
 
 export const getJsonFormattedCalendarSync = async (gitHubUsername) => {
   const userCalendar = await getCurrentUserSvg(gitHubUsername);
 
-  return parseSync(userCalendar.outerHTML);
+  return parseSync(userCalendar.outerHTML)
+    .catch(err => console.log(err));
 };
 
 export const calendarIsFullWidth = (calendar) => {

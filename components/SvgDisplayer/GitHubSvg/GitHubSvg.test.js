@@ -18,7 +18,6 @@ jest.mock('../../../utils/CalendarUtils/GitLab/GitLab', () => require
     '../CalendarUtils/GitLab/GitLab',
   ));
 
-
 jest.mock('../../../utils/JavaScriptUtils/JavaScriptUtils', () => require
   .requireActual('../../../utils/TestUtils/TestUtils')
   .mockOriginalFunctionality(

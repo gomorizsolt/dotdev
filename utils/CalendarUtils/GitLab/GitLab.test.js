@@ -7,6 +7,8 @@ jest.mock('../../Proxy/Proxy', () => require
     '../Proxy/Proxy',
   ));
 
+jest.spyOn(console, 'log').mockImplementation(() => jest.fn());
+
 describe('GitLab', () => {
   describe('getJsonFormattedCalendar', () => {
     it('acquires the proxied GL url', () => {

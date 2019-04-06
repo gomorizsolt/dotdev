@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import * as Proxy from '../../Proxy/Proxy';
 import * as JavaScriptUtils from '../../JavaScriptUtils/JavaScriptUtils';
 import * as Common from '../Common/Common';
@@ -6,13 +7,9 @@ export const getJsonFormattedCalendar = async (gitLabUsername) => {
   const url = Proxy.getGitLabProxyUrl(gitLabUsername);
   const userCalendar = await fetch(url);
 
-  // Returning an empty object in the `catch` block because of the following reasons:
-  // - avoid spamming the test console(`Unhandled promise rejection.`),
-  // - it won't interrupt the whole flow.
-  // We'll refine the error handling later on.
   return userCalendar.json()
     .then(parsedUserCalendar => parsedUserCalendar)
-    .catch(() => {});
+    .catch(err => console.log(err));
 };
 
 const getSpecificDateContributions = (gitLabCalendar, date) => {
