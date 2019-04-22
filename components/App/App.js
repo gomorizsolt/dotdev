@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import SvgDisplayer from '../SvgDisplayer/SvgDisplayer';
+import CDNDisplayer from '../CDNDisplayer/CDNDisplayer';
 import Header from '../UI/Header/Header';
 
 const app = () => (
@@ -8,7 +8,7 @@ const app = () => (
       <img src="static/logo/logo.png" alt="C-Hive" />
       <p>C-Hive</p>
     </Header>
-    <SvgDisplayer />
+    <CDNDisplayer />
   </Fragment>
 );
 
