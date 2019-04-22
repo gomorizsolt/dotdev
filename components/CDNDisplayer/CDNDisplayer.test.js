@@ -16,7 +16,7 @@ describe('<CDNDisplayer />', () => {
     expect(cdnDisplayerWrapper.find('.container')).toHaveLength(1);
   });
 
-  it('calls `TeamContributionCalendar`', () => {
+  it('calls `window.TeamContributionCalendar`', () => {
     expect(TeamContributionCalendarSpy).toHaveBeenCalled();
   });
 });
