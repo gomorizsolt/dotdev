@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import * as Users from '../../resources/Users/Users';
 
 // https://stackoverflow.com/a/44877953/9599137
 class CDNDisplayer extends Component {
@@ -9,7 +10,7 @@ class CDNDisplayer extends Component {
   }
 
   componentDidMount() {
-    window.TeamContributionCalendar(this.container, ['gomorizsolt', 'thisismydesign', 'bencefrelli'], ['gomori.zsolt1995', 'csaba.apagyi', 'bencevoros']);
+    window.TeamContributionCalendar(this.container, Users.GithubUsernames, Users.GitlabUsernames);
   }
 
   render() {
