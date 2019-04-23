@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import CDNDisplayer from '../CDNDisplayer/CDNDisplayer';
+import TeamContributionCalendar from '../TeamContributionCalendar/TeamContributionCalendar';
 import Header from '../UI/Header/Header';
 
 const app = () => (
@@ -8,7 +8,7 @@ const app = () => (
       <img src="static/logo/logo.png" alt="C-Hive" />
       <p>C-Hive</p>
     </Header>
-    <CDNDisplayer />
+    <TeamContributionCalendar />
   </Fragment>
 );
 

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import * as Users from '../../resources/Users/Users';
 
-// https://stackoverflow.com/a/44877953/9599137
-class CDNDisplayer extends Component {
+class TeamContributionCalendar extends Component {
   constructor(props) {
     super(props);
 
@@ -10,13 +9,14 @@ class CDNDisplayer extends Component {
   }
 
   componentDidMount() {
+    // https://stackoverflow.com/a/44877953/9599137
     window.TeamContributionCalendar(this.container, Users.GithubUsernames, Users.GitlabUsernames);
   }
 
   render() {
     return (
       <div
-        className="container"
+        className="calendarContainer"
         ref={(el) => {
           this.container = el;
         }}
@@ -25,4 +25,4 @@ class CDNDisplayer extends Component {
   }
 }
 
-export default CDNDisplayer;
+export default TeamContributionCalendar;

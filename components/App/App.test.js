@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import App from './App';
 import Header from '../UI/Header/Header';
-import CDNDisplayer from '../CDNDisplayer/CDNDisplayer';
+import TeamContributionCalendar from '../TeamContributionCalendar/TeamContributionCalendar';
 
 
 describe('<App />', () => {
@@ -16,7 +16,7 @@ describe('<App />', () => {
     expect(appWrapper.find(Header)).toHaveLength(1);
   });
 
-  it('renders CDNDisplayer', () => {
-    expect(appWrapper.find(CDNDisplayer)).toHaveLength(1);
+  it('renders TeamContributionCalendar', () => {
+    expect(appWrapper.find(TeamContributionCalendar)).toHaveLength(1);
   });
 });
