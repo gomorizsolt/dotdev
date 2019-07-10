@@ -10,11 +10,11 @@ export const HeaderContainer = styled.div`
   & > img {
     max-height: 75px;
     max-width: 75px;
-    margin-right: 10px;
+    margin: 20px 15px 20px 40px;
   }
 
   & > p {
-    font-size: 2em;
+    font-size: 1.5em;
     font-weight: bold;
   }
 `;
