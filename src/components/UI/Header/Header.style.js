@@ -10,7 +10,7 @@ export const HeaderContainer = styled.div`
   & > img {
     max-height: 75px;
     max-width: 75px;
-    margin: 20px 15px 20px 40px;
+    margin: 20px 15px 20px 20px;
   }
 
   & > p {

@@ -1,5 +1,4 @@
 import React from "react";
-import { LayoutContainer } from "./Layout.style";
 import Header from "../Header/Header";
 
 const layout = props => {
