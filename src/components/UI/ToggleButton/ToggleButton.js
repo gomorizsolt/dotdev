@@ -1,6 +1,6 @@
 import React from "react";
 import { useTheme } from "../../../utils/useTheme/useTheme";
-import { ToggleButtonContainer } from './ToggleButton.style';
+import { ToggleButtonContainer } from "./ToggleButton.style";
 
 // TODO: missing tests.
 
@@ -16,7 +16,7 @@ const toggleButton = () => {
           onChange={() => themeState.toggle()}
           checked={!themeState.dark}
           name="checkbox"
-          />
+        />
         <span className="slider round" />
       </label>
     </ToggleButtonContainer>

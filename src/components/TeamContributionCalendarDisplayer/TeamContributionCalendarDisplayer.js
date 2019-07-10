@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import TeamContributionCalendar from '@c-hive/team-contribution-calendar';
-import * as Users from '../../../resources/Users/Users';
+import React, { Component } from "react";
+import TeamContributionCalendar from "@c-hive/team-contribution-calendar";
+import * as Users from "../../../resources/Users/Users";
 
 class TeamContributionCalendarDisplayer extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class TeamContributionCalendarDisplayer extends Component {
     return (
       <div
         className="calendarContainer"
-        ref={(el) => {
+        ref={el => {
           this.calendarContainer = el;
         }}
       />

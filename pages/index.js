@@ -1,9 +1,9 @@
-import React from 'react';
-import Head from 'next/head';
+import React from "react";
+import Head from "next/head";
+import { Normalize } from "styled-normalize";
 import GlobalTheme from "../src/components/GlobalTheme/GlobalTheme";
 import { GlobalStyle } from "../src/common/GlobalStyle/GlobalStyle";
-import { Normalize } from 'styled-normalize';
-import App from '../src/components/App/App';
+import App from "../src/components/App/App";
 
 const indexPage = () => (
   <GlobalTheme>
