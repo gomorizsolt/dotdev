@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const ToggleButtonContainer = styled.div`
+  margin: 0px 25px 0px auto;
   .switch {
     position: relative;
     display: inline-block;
