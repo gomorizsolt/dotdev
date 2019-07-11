@@ -2,6 +2,36 @@ import styled from "styled-components";
 
 export const ToggleButtonContainer = styled.div`
   margin: 0px 25px 0px auto;
+
+  .sun {
+    height: 28px;
+    width: 30px;
+    position: relative;
+    margin: 6px 5px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.45s ease 0s;
+  }
+
+  input:checked + .slider .sun {
+    opacity: 1;
+  }
+
+  .moon {
+    height: 28px;
+    width: 30px;
+    position: absolute;
+    opacity: 1;
+    right: -3px;
+    top: 6px;
+    pointer-events: none;
+    transition: opacity 0.45s ease 0s;
+  }
+
+  input:checked + .slider .moon {
+    opacity: 0;
+  }
+
   .switch {
     position: relative;
     display: inline-block;
