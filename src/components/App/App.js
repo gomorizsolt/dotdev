@@ -1,13 +1,11 @@
-import React, { Fragment } from "react";
+import React from "react";
 import TeamContributionCalendarDisplayer from "../TeamContributionCalendarDisplayer/TeamContributionCalendarDisplayer";
 import Layout from "../UI/Layout/Layout";
 
 const app = () => (
-  <Fragment>
-    <Layout>
-      <TeamContributionCalendarDisplayer />
-    </Layout>
-  </Fragment>
+  <Layout>
+    <TeamContributionCalendarDisplayer />
+  </Layout>
 );
 
 export default app;

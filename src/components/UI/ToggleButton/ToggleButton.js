@@ -1,16 +1,19 @@
 import React from "react";
+import styled from "styled-components";
+import { toggleButtonStyle } from "./ToggleButton.style";
 import { useTheme } from "../../../utils/useTheme/useTheme";
-import { ToggleButtonContainer } from "./ToggleButton.style";
 import MoonIcon from "./Icons/MoonIcon";
 import SunIcon from "./Icons/SunIcon";
 
-// TODO: missing tests.
+const ToggleButton = styled.div`
+  ${toggleButtonStyle}
+`;
 
 const toggleButton = () => {
   const themeState = useTheme();
 
   return (
-    <ToggleButtonContainer>
+    <ToggleButton>
       <label id="shifter" htmlFor="shiftercb" className="switch">
         <input
           id="shiftercb"
@@ -28,7 +31,7 @@ const toggleButton = () => {
           </div>
         </span>
       </label>
-    </ToggleButtonContainer>
+    </ToggleButton>
   );
 };
 

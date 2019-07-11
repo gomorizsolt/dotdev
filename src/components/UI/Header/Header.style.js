@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import { css } from "styled-components";
 
-export const HeaderContainer = styled.div`
+export const headerStyle = css`
   display: flex;
   align-items: center;
   max-width: 90vw;

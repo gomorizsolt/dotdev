@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import { css } from "styled-components";
 
-export const ToggleButtonContainer = styled.div`
+export const toggleButtonStyle = css`
   margin: 0px 25px 0px auto;
 
   .sun {

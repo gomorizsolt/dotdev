@@ -1,13 +1,18 @@
 import React from "react";
-import { HeaderContainer } from "./Header.style";
+import styled from "styled-components";
+import { headerStyle } from "./Header.style";
 import ToggleButton from "../ToggleButton/ToggleButton";
 
+const Header = styled.div`
+  ${headerStyle}
+`;
+
 const header = () => (
-  <HeaderContainer>
+  <Header>
     <img src="static/logo/logo.png" alt="C-Hive" />
     <p>C-Hive</p>
     <ToggleButton />
-  </HeaderContainer>
+  </Header>
 );
 
 export default header;

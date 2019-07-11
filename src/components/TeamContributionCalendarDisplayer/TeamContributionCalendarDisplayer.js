@@ -10,7 +10,7 @@ class TeamContributionCalendarDisplayer extends Component {
   }
 
   componentDidMount() {
-    TeamContributionCalendar(this.calendarContainer, Users.GithubUsernames, Users.GitlabUsernames);
+    TeamContributionCalendar(this.calendarContainer, Users.githubUsernames, Users.gitlabUsernames);
   }
 
   render() {
