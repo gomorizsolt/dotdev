@@ -31,6 +31,23 @@ const toggleButton = () => {
           </div>
         </span>
       </label>
+      <div className="divider" />
+      <label id="shifter" htmlFor="shiftercb" className="switch2">
+        <div className="moon2">
+          <MoonIcon />
+        </div>
+        <input
+          id="shiftercb"
+          type="checkbox"
+          onChange={() => themeState.toggle()}
+          checked={!themeState.dark}
+          name="checkbox"
+        />
+        <span className="slider2 round" />
+        <div className="sun2">
+          <SunIcon />
+        </div>
+      </label>
     </ToggleButton>
   );
 };
