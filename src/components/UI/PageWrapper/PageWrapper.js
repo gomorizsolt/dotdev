@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../Header/Header";
 
-const layout = props => {
+const pageWrapper = props => {
   const { children } = props;
 
   return (
@@ -12,4 +12,4 @@ const layout = props => {
   );
 };
 
-export default layout;
+export default pageWrapper;

@@ -1,11 +1,11 @@
 import React from "react";
 import TeamContributionCalendarDisplayer from "../TeamContributionCalendarDisplayer/TeamContributionCalendarDisplayer";
-import Layout from "../UI/Layout/Layout";
+import PageWrapper from "../UI/PageWrapper/PageWrapper";
 
 const app = () => (
-  <Layout>
+  <PageWrapper>
     <TeamContributionCalendarDisplayer />
-  </Layout>
+  </PageWrapper>
 );
 
 export default app;
