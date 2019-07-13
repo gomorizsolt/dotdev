@@ -1,6 +1,7 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
-import GetTheme from "../../utils/GetTheme/GetTheme";
+import LightTheme from "../../../resources/Themes/LightTheme";
+import DarkTheme from "../../../resources/Themes/DarkTheme";
 import Loader from "../UI/Loader/Loader";
 import * as CustomHooks from "../../utils/CustomHooks/CustomHooks";
 import { ThemeContext } from "../../utils/useTheme/useTheme";
@@ -18,7 +19,7 @@ const globalTheme = ({ children }) => {
     setThemeState({ ...themeState, dark });
   };
 
-  const currentTheme = themeState.dark ? GetTheme("dark") : GetTheme("light");
+  const currentTheme = themeState.dark ? DarkTheme : LightTheme;
 
   return (
     <ThemeProvider theme={currentTheme}>
