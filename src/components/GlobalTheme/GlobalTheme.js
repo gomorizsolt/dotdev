@@ -1,7 +1,7 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
-import LightTheme from "../../../resources/Themes/LightTheme";
-import DarkTheme from "../../../resources/Themes/DarkTheme";
+import LightTheme from "../../../resources/Themes/LightTheme.style";
+import DarkTheme from "../../../resources/Themes/DarkTheme.style";
 import Loader from "../UI/Loader/Loader";
 import * as CustomHooks from "../../utils/CustomHooks/CustomHooks";
 import { ThemeContext } from "../../utils/useTheme/useTheme";
