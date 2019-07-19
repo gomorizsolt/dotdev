@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import TeamContributionCalendar from "@c-hive/team-contribution-calendar";
-import * as Users from "../../../resources/Users/Users";
+import * as Users from "../../users/Users";
 
 class TeamContributionCalendarDisplayer extends Component {
   constructor(props) {
