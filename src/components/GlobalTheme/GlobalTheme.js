@@ -1,13 +1,13 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
-import LightTheme from "../../themes/LightTheme.style";
-import DarkTheme from "../../themes/DarkTheme.style";
+import lightTheme from "../../themes/LightTheme.style";
+import darkTheme from "../../themes/DarkTheme.style";
 import Loader from "../UI/Loader/Loader";
-import * as CustomHooks from "../../utils/CustomHooks/CustomHooks";
-import { ThemeContext } from "../../utils/useTheme/useTheme";
+import * as customHooks from "../../utils/CustomHooks/CustomHooks";
+import { themeContext } from "../../utils/useTheme/useTheme";
 
 const globalTheme = ({ children }) => {
-  const [themeState, setThemeState] = CustomHooks.useDarkMode();
+  const [themeState, setThemeState] = customHooks.useDarkMode();
 
   if (!themeState.hasThemeLoaded) {
     return <Loader />;
@@ -19,18 +19,18 @@ const globalTheme = ({ children }) => {
     setThemeState({ ...themeState, dark });
   };
 
-  const currentTheme = themeState.dark ? DarkTheme : LightTheme;
+  const currentTheme = themeState.dark ? darkTheme : lightTheme;
 
   return (
     <ThemeProvider theme={currentTheme}>
-      <ThemeContext.Provider
+      <themeContext.Provider
         value={{
           dark: themeState.dark,
           toggle,
         }}
       >
         {children}
-      </ThemeContext.Provider>
+      </themeContext.Provider>
     </ThemeProvider>
   );
 };

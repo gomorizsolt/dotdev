@@ -5,5 +5,5 @@ const defaultContextData = {
   toggle: () => {},
 };
 
-export const ThemeContext = createContext(defaultContextData);
-export const useTheme = () => useContext(ThemeContext);
+export const themeContext = createContext(defaultContextData);
+export const useTheme = () => useContext(themeContext);
