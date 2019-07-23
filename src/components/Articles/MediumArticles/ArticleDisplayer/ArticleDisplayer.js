@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-// import CategoriesDisplayer from "./CategoriesDisplayer/CategoriesDisplayer";
+import CategoriesDisplayer from "./CategoriesDisplayer/CategoriesDisplayer";
 import { articleDisplayerStyle } from "./ArticleDisplayer.style";
 
 const ArticleDisplayer = styled.div`
@@ -17,7 +17,7 @@ const articleDisplayer = ({ articleData }) => (
     >
       {articleData.title}
     </a>
-    {/* <CategoriesDisplayer categories={articleData.categories} /> */}
+    <CategoriesDisplayer categories={articleData.categories} />
     <p>{new Date(articleData.pubDate).toDateString()}</p>
   </ArticleDisplayer>
 );

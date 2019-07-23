@@ -1,19 +1,21 @@
 import React from "react";
-// import { Badge } from "reactstrap";
-// import BadgeColors from "~/resources/BadgeColors/BadgeColors";
+import styled from "styled-components";
+import { categoriesDisplayerStyle } from "./CategoriesDisplayer.style";
 
-// const badgeStyle = {
-//   marginRight: "7px",
-//   marginBottom: "10px",
-//   padding: "7px",
-// };
+const CategoriesColors = ["#4894ea", "#67ab58", "#b19245", "#6C757D", "#ad2626"];
+
+const CategoriesDisplayer = styled.div`
+  ${categoriesDisplayerStyle}
+`;
 
 const categoriesDisplayer = ({ categories }) => (
   <div>
-    {categories.map(category => {
+    {categories.map((category, index) => {
       return (
         // <Badge style={badgeStyle} color={BadgeColors[index]} key={category}>
-        <div>{category}</div>
+        <CategoriesDisplayer style={{ backgroundColor: CategoriesColors[index] }}>
+          {category}
+        </CategoriesDisplayer>
         // </Badge>
       );
     })}
