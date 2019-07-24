@@ -8,6 +8,20 @@ export const GlobalStyle = createGlobalStyle`
 		font-display: auto;
 		font-style: normal;
 	}
+	@font-face {
+		font-family: 'Apercu Regular';
+		src: url('/static/fonts/apercu/Apercu_Bold.woff');
+		font-weight: 600;
+		font-display: auto;
+		font-style: normal;
+	}
+	@font-face {
+		font-family: 'Apercu Regular';
+		src: url('/static/fonts/apercu/Apercu_Light.woff');
+		font-weight: 200;
+		font-display: auto;
+		font-style: normal;
+	}
 
 	html, body {
 		-webkit-font-smoothing: antialiased;

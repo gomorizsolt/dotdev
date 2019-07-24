@@ -15,6 +15,6 @@ export const headerStyle = css`
 
   & > p {
     font-size: 1.5em;
-    font-weight: bold;
+    font-weight: 600;
   }
 `;

@@ -13,6 +13,7 @@ export const articleDisplayerStyle = css`
   & > p {
     font-size: 0.8em;
     font-style: italic;
-    margin: 1em 0 0;
+    font-weight: 200;
+    margin: 0.6em 0 0;
   }
 `;
