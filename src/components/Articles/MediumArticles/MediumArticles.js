@@ -1,11 +1,11 @@
 import React from "react";
-import * as CustomHooks from "../../../utils/CustomHooks/CustomHooks";
-import * as ArticlesUtils from "../../../utils/ArticlesUtils/ArticlesUtils";
+import * as customHooks from "../../../utils/CustomHooks/CustomHooks";
+import * as articlesUtils from "../../../utils/MediumUtils/MediumUtils";
 import ArticleDisplayer from "./ArticleDisplayer/ArticleDisplayer";
 import Loader from "../../UI/Loader/Loader";
 
 const mediumArticles = () => {
-  const articles = CustomHooks.useGenericFetch(ArticlesUtils.GetCurrentMediumArticles);
+  const articles = customHooks.useGenericFetch(articlesUtils.getMediumArticles);
 
   if (articles.isLoading) {
     return <Loader />;
