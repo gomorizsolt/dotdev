@@ -6,7 +6,6 @@
     "start": "next start -p $PORT",
     "build": "next build",
     "export": "next export",
-    "test": "jest --coverage",
     "lint": "eslint . --ext .js",
     "prettior": "prettier --write src/**/*.js"
   },
