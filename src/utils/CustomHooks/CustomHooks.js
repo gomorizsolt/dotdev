@@ -18,7 +18,7 @@ export const useDarkMode = () => {
   return [themeState, setThemeState];
 };
 
-export const useGenericFetch = fetchFunction => {
+export const useGenericFetch = (fetchFunction, ...args) => {
   const defaultState = {
     data: null,
     isLoading: true,
@@ -27,27 +27,27 @@ export const useGenericFetch = fetchFunction => {
 
   const [data, setData] = useState(defaultState);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const fetchedData = await fetchFunction();
+  async function fetchData() {
+    try {
+      const fetchedData = await fetchFunction(...args);
 
-        setData({
-          ...defaultState,
-          data: fetchedData,
-          isLoading: false,
-          err: false,
-        });
-      } catch (e) {
-        setData({
-          ...defaultState,
-          data: null,
-          isLoading: false,
-          err: true,
-        });
-      }
+      setData({
+        ...defaultState,
+        data: fetchedData,
+        isLoading: false,
+        err: false,
+      });
+    } catch (e) {
+      setData({
+        ...defaultState,
+        data: null,
+        isLoading: false,
+        err: true,
+      });
     }
+  }
 
+  useEffect(() => {
     fetchData();
   }, []);
 

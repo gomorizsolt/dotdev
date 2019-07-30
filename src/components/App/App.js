@@ -4,6 +4,7 @@ import PageWrapper from "../UI/PageWrapper/PageWrapper";
 import Articles from "../Articles/Articles";
 import OneCol from "../UI/PageWrapper/Layouts/OneCol";
 import TwoCol from "../UI/PageWrapper/Layouts/TwoCol";
+import Projects from "../Projects/Projects";
 
 const app = () => (
   <PageWrapper>
@@ -12,6 +13,7 @@ const app = () => (
     </OneCol>
     <TwoCol>
       <Articles />
+      <Projects />
     </TwoCol>
   </PageWrapper>
 );
