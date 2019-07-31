@@ -11,11 +11,10 @@ const ProjectDisplayer = styled.div`
 `;
 
 const projectDisplayer = ({ userName, repositoryName }) => {
-  const githubFetchState = customHooks.useGenericFetch(
-    GithubUtils.getGitHubProjectDetails,
-    userName,
-    repositoryName,
-  );
+  const githubFetchState =
+    Array.isArray(repositoryName) && repositoryName.length < 1
+      ? customHooks.useGenericFetch(GithubUtils.getAllGitHubProjectDetails, userName)
+      : customHooks.useGenericFetch(GithubUtils.getGitHubProjectDetails, userName, repositoryName);
 
   if (githubFetchState.isLoading) {
     return <Loader />;
@@ -23,7 +22,7 @@ const projectDisplayer = ({ userName, repositoryName }) => {
 
   if (githubFetchState.err) {
     const errorMessage =
-      "An error has occurred while loading the Medium articles. Please try again later.";
+      "An error has occurred while loading the Github projects. Please try again later.";
 
     return <div>{errorMessage}</div>;
   }
