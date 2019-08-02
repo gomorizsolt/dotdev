@@ -5,11 +5,25 @@ export const projectDisplayerStyle = css`
   margin-bottom: 1.2em;
 
   .repository_link {
-    /* font-size: 0.8em; */
-    /* font-style: italic; */
-    /* font-weight: 200; */
-    /* margin: 0.6em 0 0; */
+    display: flex;
+    /* justify-content: flex-start; */
+    /* align-items: center; */
     text-decoration: none;
+    flex-direction: column;
+  }
+
+  .project_header {
+    width: 100%;
+
+    .project_star {
+      display: inline-block;
+      margin: 0 8px;
+
+      svg {
+        width: 12px;
+        height: 12px;
+      }
+    }
   }
 
   .user_avatar {

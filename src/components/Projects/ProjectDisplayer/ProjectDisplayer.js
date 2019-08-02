@@ -5,6 +5,7 @@ import * as customHooks from "../../../utils/CustomHooks/CustomHooks";
 import * as GithubUtils from "../../../utils/GithubUtils/GithubUtils";
 import * as javaScriptUtils from "../../../utils/JavaScriptUtils/JavaScriptUtils";
 import { projectDisplayerStyle } from "./ProjectDisplayer.style";
+import StarIcon from "../../UI/Icons/StarIcon";
 
 const ProjectDisplayer = styled.div`
   ${projectDisplayerStyle}
@@ -36,14 +37,21 @@ const projectDisplayer = ({ userName, repositoryName }) => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img
-            className="user_avatar"
-            src={githubFetchState.data.owner.avatar_url}
-            alt={githubFetchState.data.name}
-          />
-          <div className="repository_name">{githubFetchState.data.name}</div>
-          {githubFetchState.data.stargazers_count}
-          <div>{githubFetchState.data.html_url}</div>
+          <div className="project_header">
+            <img
+              className="user_avatar"
+              src={githubFetchState.data.owner.avatar_url}
+              alt={githubFetchState.data.name}
+            />
+            <div className="repository_name">{githubFetchState.data.name}</div>
+            <div className="project_star">
+              <StarIcon />
+              {githubFetchState.data.stargazers_count}
+            </div>
+          </div>
+          <div className="project_description">
+            <div>{githubFetchState.data.description}</div>
+          </div>
         </a>
       )}
     </ProjectDisplayer>

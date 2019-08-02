@@ -6,8 +6,8 @@
   "mediumSource": ["c-hive"],
   "githubProjects": [
     { "userName": "gomorizsolt", "repositoryName": ["react-boilerplate"] },
-    { "userName": "thisismydesign", "repositoryName": [] },
-    { "userName": "megant", "repositoryName": "aktionJS" },
-    { "userName": "nkapolcs", "repositoryName": "poking-holes-demo" }
+    { "userName": "thisismydesign", "repositoryName": ["json-streamer"] },
+    { "userName": "megant", "repositoryName": ["aktionJS"] },
+    { "userName": "nkapolcs", "repositoryName": ["poking-holes-demo"] }
   ]
 }
