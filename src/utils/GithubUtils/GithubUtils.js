@@ -1,4 +1,4 @@
-export const getGitHubProjectDetails = (userName, repositoryName) => {
+export const getUserGitHubProjectDetails = (userName, repositoryName) => {
   const url = `https://api.github.com/repos/${userName}/${repositoryName}`;
 
   return fetch(url, {
@@ -8,7 +8,7 @@ export const getGitHubProjectDetails = (userName, repositoryName) => {
   }).then(fetchedProjectDetails => fetchedProjectDetails.json());
 };
 
-export const getAllGitHubProjectDetails = userName => {
+export const getOrgGitHubProjectDetails = userName => {
   const url = `https://api.github.com/users/${userName}/repos`;
 
   return fetch(url, {
