@@ -8,11 +8,11 @@ stages:
   - verify
   - deploy
 
-test:
+lint:
   stage: verify
   script:
     - yarn install
-    - yarn test
+    - yarn lint
 
 gl-pages-deploy:
   stage: deploy
