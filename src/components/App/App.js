@@ -1,7 +1,7 @@
 import React from "react";
 import TeamContributionCalendarDisplayer from "../TeamContributionCalendarDisplayer/TeamContributionCalendarDisplayer";
 import PageWrapper from "../UI/PageWrapper/PageWrapper";
-import Articles from "../Articles/Articles";
+import Medium from "../Medium/Medium";
 import OneCol from "../UI/PageWrapper/Layouts/OneCol";
 import TwoCol from "../UI/PageWrapper/Layouts/TwoCol";
 
@@ -11,7 +11,7 @@ const app = () => (
       <TeamContributionCalendarDisplayer />
     </OneCol>
     <TwoCol>
-      <Articles />
+      <Medium />
     </TwoCol>
   </PageWrapper>
 );

@@ -1,13 +1,13 @@
-import Parser from "rss-parser";
+import RSSParser from "rss-parser";
 import getProxyURL from "../GetProxyURL/GetProxyURL";
-import settings from "../../../settings/settings.json";
+import { medium } from "../../../settings/settings.json";
 
-export const getMediumArticles = async () => {
-  const rssParser = new Parser();
+export const getArticles = async () => {
+  const rssParser = new RSSParser();
 
-  const proxiedURL = getProxyURL(`https://medium.com/feed/${settings.mediumSource[0]}`);
+  const proxiedURL = getProxyURL(`https://medium.com/feed/${medium}`);
 
-  const currentArticles = await rssParser.parseURL(proxiedURL);
+  const content = await rssParser.parseURL(proxiedURL);
 
-  return currentArticles.items.filter(item => item.categories);
+  return content.items.filter(item => item.categories);
 };
