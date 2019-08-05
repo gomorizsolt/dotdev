@@ -10,13 +10,11 @@ const CategoriesDisplayer = styled.div`
 
 const categoriesDisplayer = ({ categories }) => (
   <div>
-    {categories.map((category, index) => {
-      return (
-        <CategoriesDisplayer style={{ backgroundColor: categoriesColors[index] }} key={category}>
-          {category}
-        </CategoriesDisplayer>
-      );
-    })}
+    {categories.map((category, index) => (
+      <CategoriesDisplayer style={{ backgroundColor: categoriesColors[index] }} key={category}>
+        {category}
+      </CategoriesDisplayer>
+    ))}
   </div>
 );
 

@@ -1,11 +1,12 @@
 import { css } from "styled-components";
 
-export const articleDisplayerStyle = css`
+export const articleStyle = css`
   text-align: left;
   margin-bottom: 1.2em;
 
   & > a {
     text-transform: uppercase;
+    text-decoration: none;
     font-size: 1.4em;
     line-height: 1.3em;
   }
