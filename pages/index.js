@@ -2,7 +2,7 @@ import React from "react";
 import { Normalize } from "styled-normalize";
 import GlobalTheme from "../src/components/GlobalTheme/GlobalTheme";
 import { GlobalStyle } from "../src/common/GlobalStyle/GlobalStyle";
-import App from "../src/containers/App/App";
+import App from "../src/components/App/App";
 
 const indexPage = () => (
   <GlobalTheme>
