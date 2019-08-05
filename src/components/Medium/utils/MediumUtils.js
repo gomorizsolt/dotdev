@@ -1,7 +1,7 @@
 import RSSParser from "rss-parser";
 import getProxyURL from "../../../utils/GetProxyURL/GetProxyURL";
 import settings from "../../../../settings/settings.json";
-import MediumArticlesParseError from "../../../../errors/medium-articles-parse-error";
+import MediumArticlesParseError from "../../../errors/medium-articles-parse-error";
 
 const filterItems = items => items.filter(item => item.categories);
 

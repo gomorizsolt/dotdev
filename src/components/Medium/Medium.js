@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import * as customHooks from "../../utils/CustomHooks/CustomHooks";
-import * as helpers from "./helpers/helpers";
+import * as mediumUtils from "./utils/MediumUtils";
 import Article from "./Article/Article";
 import Loader from "../UI/Loader/Loader";
 import { mediumStyle } from "./Medium.style";
@@ -11,7 +11,7 @@ const Medium = styled.div`
 `;
 
 const medium = () => {
-  const articles = customHooks.useFetch(helpers.getArticles);
+  const articles = customHooks.useFetch(mediumUtils.getArticles);
 
   if (articles.isLoading) {
     return <Loader />;
