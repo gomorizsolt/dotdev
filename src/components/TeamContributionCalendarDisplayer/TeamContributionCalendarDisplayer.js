@@ -13,7 +13,7 @@ class TeamContributionCalendarDisplayer extends Component {
     TeamContributionCalendar(
       this.calendarContainer,
       settings.teamContributionCalendarUsers.github,
-      settings.teamContributionCalendarUsers.gitlab,
+      settings.teamContributionCalendarUsers.gitlab
     );
   }
 

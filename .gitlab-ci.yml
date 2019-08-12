@@ -1,20 +1,34 @@
 image: node:8
 
-pages:
-  stage: deploy
-  cache:
-    paths:
+cache:
+  paths:
     - node_modules/
+
+stages:
+  - verify
+  - deploy
+
+lint:
+  stage: verify
   script:
-  - npm install
-  - npm run build
-  - npm run export
+    - yarn install
+    - yarn lint
+
+gl-pages-deploy:
+  stage: deploy
+  script:
+  - yarn install
+  - yarn run build
+  - yarn run export
   - rm -rf public
   - mv out public
   - cd public && touch .nojekyll
   artifacts:
     paths:
-    - public 
+    - public
   only:
-  - master
-  
+    refs:
+      - master
+    variables:
+      - $DEPLOY_TO_GL_PAGES
+
