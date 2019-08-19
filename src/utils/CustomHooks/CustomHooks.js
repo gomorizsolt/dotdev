@@ -38,6 +38,9 @@ export const useFetch = (fetchFunction, ...args) => {
         err: false,
       });
     } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error(e);
+
       setData({
         ...defaultState,
         data: null,
