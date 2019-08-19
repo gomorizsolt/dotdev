@@ -39,7 +39,7 @@ export const useFetch = (fetchFunction, ...args) => {
       });
     } catch (e) {
       // eslint-disable-next-line no-console
-      console.error(e);
+      console.error(JSON.stringify(e));
 
       setData({
         ...defaultState,
