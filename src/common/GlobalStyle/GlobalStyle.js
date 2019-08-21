@@ -37,10 +37,13 @@ export const GlobalStyle = createGlobalStyle`
 		width: 100%;
 		height: 100%;
 		transition: background 1s;
-		overflow: hidden;
 		background: ${props => props.theme.background};
 		color: ${props => props.theme.color};
-
+		
+		&>div{
+			overflow: hidden;
+		}
+		
 		a {
 			color: ${props => props.theme.color};
 		}
