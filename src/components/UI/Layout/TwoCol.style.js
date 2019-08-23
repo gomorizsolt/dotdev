@@ -1,5 +1,5 @@
 import { css } from "styled-components";
-import { breakpoints } from "../../../common/Breakpoints/Breakpoints";
+import { breakpoints } from "../../../resources/Breakpoints/Breakpoints";
 
 export const twoColStyle = css`
   width: 100%;
