@@ -14,8 +14,15 @@ const ProjectDisplayer = styled.div`
 const projectDisplayer = ({ userName, repositoryName }) => {
   const githubFetchState =
     Array.isArray(repositoryName) && repositoryName.length < 1
-      ? customHooks.useGenericFetch(GithubUtils.getAllGitHubProjectDetails, userName)
-      : customHooks.useGenericFetch(GithubUtils.getGitHubProjectDetails, userName, repositoryName);
+      ? customHooks.useGenericFetch(
+          GithubUtils.getAllGitHubProjectDetails,
+          userName
+        )
+      : customHooks.useGenericFetch(
+          GithubUtils.getGitHubProjectDetails,
+          userName,
+          repositoryName
+        );
 
   if (githubFetchState.isLoading) {
     return <Loader />;

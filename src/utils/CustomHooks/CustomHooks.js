@@ -18,7 +18,7 @@ export const useDarkMode = () => {
   return [themeState, setThemeState];
 };
 
-export const useGenericFetch = (fetchFunction, ...args) => {
+export const useFetch = (fetchFunction, ...args) => {
   const defaultState = {
     data: null,
     isLoading: true,
@@ -38,6 +38,9 @@ export const useGenericFetch = (fetchFunction, ...args) => {
         err: false,
       });
     } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error(JSON.stringify(e));
+
       setData({
         ...defaultState,
         data: null,

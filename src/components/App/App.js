@@ -1,21 +1,30 @@
-import React from "react";
+import React, { Fragment } from "react";
+import styled from "styled-components";
 import TeamContributionCalendarDisplayer from "../TeamContributionCalendarDisplayer/TeamContributionCalendarDisplayer";
-import PageWrapper from "../UI/PageWrapper/PageWrapper";
-import Articles from "../Articles/Articles";
-import OneCol from "../UI/PageWrapper/Layouts/OneCol";
-import TwoCol from "../UI/PageWrapper/Layouts/TwoCol";
-import Projects from "../Projects/Projects";
+import Header from "../Header/Header";
+import Medium from "../Medium/Medium";
+// import Projects from "../Projects/Projects";
+import OneCol from "../UI/Layout/OneCol";
+import TwoCol from "../UI/Layout/TwoCol";
+import { appStyle } from "./App.style";
+
+const App = styled.div`
+  ${appStyle}
+`;
 
 const app = () => (
-  <PageWrapper>
-    <OneCol>
-      <TeamContributionCalendarDisplayer />
-    </OneCol>
-    <TwoCol>
-      <Articles />
-      <Projects />
-    </TwoCol>
-  </PageWrapper>
+  <Fragment>
+    <Header />
+    <App>
+      <OneCol>
+        <TeamContributionCalendarDisplayer />
+      </OneCol>
+      <TwoCol>
+        <Medium />
+        {/* <Projects /> */}
+      </TwoCol>
+    </App>
+  </Fragment>
 );
 
 export default app;

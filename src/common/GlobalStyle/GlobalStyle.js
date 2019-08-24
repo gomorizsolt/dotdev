@@ -8,6 +8,7 @@ export const GlobalStyle = createGlobalStyle`
 		font-display: auto;
 		font-style: normal;
 	}
+
 	@font-face {
 		font-family: 'Apercu Regular';
 		src: url('/static/fonts/apercu/Apercu_Bold.woff');
@@ -15,6 +16,7 @@ export const GlobalStyle = createGlobalStyle`
 		font-display: auto;
 		font-style: normal;
 	}
+
 	@font-face {
 		font-family: 'Apercu Regular';
 		src: url('/static/fonts/apercu/Apercu_Light.woff');
@@ -37,6 +39,10 @@ export const GlobalStyle = createGlobalStyle`
 		transition: background 1s;
 		background: ${props => props.theme.background};
 		color: ${props => props.theme.color};
+		
+		&>div{
+			overflow: hidden;
+		}
 		
 		a {
 			color: ${props => props.theme.color};

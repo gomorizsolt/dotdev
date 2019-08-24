@@ -1,5 +1,7 @@
+import settings from "../../../settings/settings.json";
+
 const getProxyURL = url => {
-  return `https://c-hive-proxy.herokuapp.com/${url}`;
+  return `${settings.proxyURL}/${url}`;
 };
 
 export default getProxyURL;

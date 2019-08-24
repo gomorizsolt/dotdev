@@ -1,4 +1,5 @@
 import { css } from "styled-components";
+import { breakpoints } from "../../../resources/Breakpoints/Breakpoints";
 
 export const twoColStyle = css`
   width: 100%;
@@ -8,5 +9,9 @@ export const twoColStyle = css`
 
   & > div {
     width: 48%;
+
+    @media (max-width: ${breakpoints.large}) {
+      width: 100%;
+    }
   }
 `;
