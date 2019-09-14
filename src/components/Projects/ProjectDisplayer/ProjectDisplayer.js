@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Loader from "../../UI/Loader/Loader";
 import * as customHooks from "../../../utils/CustomHooks/CustomHooks";
-import * as GithubUtils from "../../../utils/GithubUtils/GithubUtils";
+import * as GithubUtils from "../utils/GithubUtils";
 import { projectDisplayerStyle } from "./ProjectDisplayer.style";
 import StarIcon from "../../UI/Icons/StarIcon";
 
