@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import Loader from "../../UI/Loader/Loader";
-import * as customHooks from "../../../utils/CustomHooks/CustomHooks";
-import * as GithubUtils from "../utils/GithubUtils";
 import { projectDisplayerStyle } from "./ProjectDisplayer.style";
+import * as customHooks from "../../../utils/CustomHooks/CustomHooks";
+import * as githubUtils from "../utils/GithubUtils";
+import Loader from "../../UI/Loader/Loader";
 import StarIcon from "../../UI/Icons/StarIcon";
 
 const ProjectDisplayer = styled.div`
@@ -12,7 +12,7 @@ const ProjectDisplayer = styled.div`
 
 const projectDisplayer = ({ userName, repoName }) => {
   const githubFetchState = customHooks.useFetch(
-    GithubUtils.getGitHubRepoDetails,
+    githubUtils.getGitHubRepoDetails,
     userName,
     repoName
   );
