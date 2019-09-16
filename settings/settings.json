@@ -7,7 +7,6 @@
   "medium": "c-hive",
   "github": {
     "name": "c-hive",
-    "type": "org",
     "repos": ["team-contribution-calendar", "guides", "ws-anywhere"]
   }
 }

@@ -17,7 +17,6 @@ const projects = () => {
         <ProjectDisplayer
           key={repo}
           userName={settings.github.name}
-          userType={settings.github.type}
           repoName={repo}
         />
       ))}

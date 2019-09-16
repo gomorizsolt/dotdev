@@ -1,4 +1,4 @@
-export const getGitHubRepoDetails = (userName, repositoryName) => {
+export const fetchRepo = (userName, repositoryName) => {
   const url = `https://api.github.com/repos/${userName}/${repositoryName}`;
 
   return fetch(url, {

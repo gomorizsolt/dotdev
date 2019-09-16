@@ -12,7 +12,7 @@ const ProjectDisplayer = styled.div`
 
 const projectDisplayer = ({ userName, repoName }) => {
   const githubFetchState = customHooks.useFetch(
-    githubUtils.getGitHubRepoDetails,
+    githubUtils.fetchRepo,
     userName,
     repoName
   );
