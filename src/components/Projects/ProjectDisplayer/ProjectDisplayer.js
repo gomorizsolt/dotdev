@@ -46,10 +46,12 @@ const projectDisplayer = ({ userName, repoName }) => {
             src={githubFetchState.data.owner.avatar_url}
             alt={githubFetchState.data.name}
           />
-          <div className="repository_name">{githubFetchState.data.name}</div>
-          <div className="project_star">
-            <StarIcon />
-            {githubFetchState.data.stargazers_count}
+          <div className="project_title">
+            <div className="repository_name">{githubFetchState.data.name}</div>
+            <div className="project_star">
+              <StarIcon />
+              {githubFetchState.data.stargazers_count}
+            </div>
           </div>
         </div>
         <div className="project_description">

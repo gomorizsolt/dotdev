@@ -25,20 +25,23 @@ export const projectDisplayerStyle = css`
         display: inline-block;
       }
 
-      .repository_name {
-        text-transform: uppercase;
-        font-size: 1.4em;
-        line-height: 1.3em;
-        display: inline-block;
-      }
+      .project_title {
+        .repository_name {
+          text-transform: uppercase;
+          font-size: 1.4em;
+          line-height: 1.3em;
+          display: inline-block;
+        }
 
-      .project_star {
-        display: inline-block;
-        margin: 0 12px;
+        .project_star {
+          display: inline-block;
+          margin: 0 12px;
 
-        svg {
-          width: 12px;
-          height: 12px;
+          svg {
+            width: 12px;
+            height: 12px;
+            margin: 0 3px 0 0;
+          }
         }
       }
     }
