@@ -1,9 +1,6 @@
 {
   "name": "with-styled-components",
   "version": "1.0.0",
-  "engines": {
-    "node": "8.11.1"
-  },
   "scripts": {
     "dev": "next",
     "start": "next start -p $PORT",
