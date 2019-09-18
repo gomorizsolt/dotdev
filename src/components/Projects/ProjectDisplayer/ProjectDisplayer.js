@@ -41,11 +41,6 @@ const projectDisplayer = ({ userName, repoName }) => {
         rel="noopener noreferrer"
       >
         <div className="project_header">
-          <img
-            className="user_avatar"
-            src={githubFetchState.data.owner.avatar_url}
-            alt={githubFetchState.data.name}
-          />
           <div className="project_title">
             <div className="repository_name">{githubFetchState.data.name}</div>
             <div className="project_star">
