@@ -16,14 +16,7 @@ export const projectDisplayerStyle = css`
     .project_header {
       width: 100%;
       display: flex;
-      align-items: center;
-
-      .user_avatar {
-        width: 25px;
-        height: 25px;
-        padding: 7px 11px 11px 0;
-        display: inline-block;
-      }
+      align-items: baseline;
 
       .project_title {
         .repository_name {
@@ -40,7 +33,7 @@ export const projectDisplayerStyle = css`
           svg {
             width: 12px;
             height: 12px;
-            margin: 0 3px 0 0;
+            margin: 0 2px 0 0;
           }
         }
       }
