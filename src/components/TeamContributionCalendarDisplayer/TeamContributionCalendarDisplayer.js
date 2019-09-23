@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import TeamContributionCalendar from "@c-hive/team-contribution-calendar";
 import styled from "styled-components";
 import settings from "../../../settings/settings.json";
-import { teamContributionCalendarDisplayersStyle } from "./TeamContributionCalendarDisplayer.style";
+import { teamContributionCalendarDisplayerStyle } from "./TeamContributionCalendarDisplayer.style";
 
 const TeamContributionCalendarDisplayer = styled.div`
-  ${teamContributionCalendarDisplayersStyle}
+  ${teamContributionCalendarDisplayerStyle}
 `;
 
 class teamContributionCalendarDisplayer extends Component {
