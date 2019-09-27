@@ -11,15 +11,15 @@ stages:
 lint:
   stage: verify
   script:
-    - npm install
-    - npm lint
+    - npm run install
+    - npm run lint
 
 gl-pages-deploy:
   stage: deploy
   script:
-  - npm install
-  - npm build
-  - npm export
+  - npm run install
+  - npm run build
+  - npm run export
   - rm -rf public
   - mv out public
   - cd public && touch .nojekyll
