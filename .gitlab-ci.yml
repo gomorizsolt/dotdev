@@ -14,7 +14,7 @@ lint:
     - npm install
     - npm run lint
 
-gl-pages-deploy:
+pages:
   stage: deploy
   script:
   - npm install
