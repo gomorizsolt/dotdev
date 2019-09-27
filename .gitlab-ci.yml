@@ -11,13 +11,13 @@ stages:
 lint:
   stage: verify
   script:
-    - npm run install
+    - npm install
     - npm run lint
 
 gl-pages-deploy:
   stage: deploy
   script:
-  - npm run install
+  - npm install
   - npm run build
   - npm run export
   - rm -rf public
