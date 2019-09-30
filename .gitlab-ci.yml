@@ -18,7 +18,6 @@ pages:
   stage: deploy
   script:
   - yarn install
-  - rm -rf public
   - yarn run build
   - cd public && touch .nojekyll
   artifacts:
