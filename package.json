@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "next",
-    "build": "next build && next export -o public",
+    "build": "next build && next export",
     "start": "next start -p $PORT",
     "lint": "eslint . --ext .js",
     "prettior": "prettier --write src/**/*.js"

@@ -19,6 +19,7 @@ pages:
   script:
   - yarn install
   - yarn run build
+  - mv out public
   - cd public && touch .nojekyll
   artifacts:
     paths:
