@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@c-hive/team-contribution-calendar": "^0.2.0",
-    "next": "^9.0.6",
+    "next": "^9.1.2",
     "react": "16.8.3",
     "react-dom": "16.8.3",
     "rss-parser": "^3.7.2",
