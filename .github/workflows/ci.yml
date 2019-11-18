@@ -1,0 +1,53 @@
+name: CI
+
+on: [push]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js 12
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: Cache JS dependencies
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-js-dependencies-${{ hashFiles('**/package-lock.json') }}
+          restore-key: |
+            ${{ runner.OS }}-js-dependencies-
+      - name: Install JS dependencies
+        run: npm install
+      - name: Lint
+        runs: npm run lint
+
+  deploy:
+    needs: lint
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js 12
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: Cache JS dependencies
+          uses: actions/cache@v1
+          with:
+            path: node_modules
+            key: ${{ runner.OS }}-js-dependencies-${{ hashFiles('**/package-lock.json') }}
+            restore-key: |
+              ${{ runner.OS }}-js-dependencies-
+      - name: Install JS dependencies
+        runs: npm install
+      - name: Build static HTML & Deploy to GitHub pages
+        uses: JamesIves/github-pages-deploy-action@releases/v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: out
+          BUILD_SCRIPT: npm run build
