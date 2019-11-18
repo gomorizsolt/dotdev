@@ -4,8 +4,9 @@
   "scripts": {
     "dev": "next",
     "build": "next build && next export",
-    "start": "next start -p $PORT",
-    "lint": "eslint . --ext .js"
+    "deploy": "npm run build && cd out && touch .nojekyll",
+    "lint": "eslint . --ext .js",
+    "start": "next start -p $PORT"
   },
   "dependencies": {
     "@c-hive/team-contribution-calendar": "^0.2.0",
