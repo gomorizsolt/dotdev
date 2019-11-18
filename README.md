@@ -1,6 +1,6 @@
 # c-hive.dev
 
-A Next.js SPA website to showcase ourselves: https://c-hive.gitlab.io/c-hive.dev/
+A Next.js SPA website to showcase ourselves: https://c-hive.github.io/c-hive.dev/
 
 ## Local development
 

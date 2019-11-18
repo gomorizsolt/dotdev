@@ -5,8 +5,7 @@
     "dev": "next",
     "build": "next build && next export",
     "start": "next start -p $PORT",
-    "lint": "eslint . --ext .js",
-    "prettior": "prettier --write src/**/*.js"
+    "lint": "eslint . --ext .js"
   },
   "dependencies": {
     "@c-hive/team-contribution-calendar": "^0.2.0",
