@@ -26,7 +26,7 @@ jobs:
 
   deploy:
     needs: lint
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/master' && ${{ secrets.DEPLOY_TO_GH_PAGES}} == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -36,7 +36,7 @@ jobs:
         with:
           node-version: 12.x
       - name: Cache JS dependencies
-          uses: actions/cache@v1
+        uses: actions/cache@v1
           with:
             path: node_modules
             key: ${{ runner.OS }}-js-dependencies-${{ hashFiles('**/package-lock.json') }}
