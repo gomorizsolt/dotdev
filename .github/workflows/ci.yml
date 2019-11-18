@@ -22,7 +22,7 @@ jobs:
       - name: Install JS dependencies
         run: npm install
       - name: Lint
-        runs: npm run lint
+        run: npm run lint
 
   deploy:
     needs: lint
