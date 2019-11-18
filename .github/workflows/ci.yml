@@ -50,4 +50,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
           FOLDER: out
-          BUILD_SCRIPT: npm run build
+          BUILD_SCRIPT: npm run build && cd out && touch .nojekyll # https://github.com/zeit/next.js/wiki/Deploying-a-Next.js-app-into-GitHub-Pages
