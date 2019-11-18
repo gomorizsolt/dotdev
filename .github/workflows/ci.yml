@@ -37,11 +37,11 @@ jobs:
           node-version: 12.x
       - name: Cache JS dependencies
         uses: actions/cache@v1
-          with:
-            path: node_modules
-            key: ${{ runner.OS }}-js-dependencies-${{ hashFiles('**/package-lock.json') }}
-            restore-key: |
-              ${{ runner.OS }}-js-dependencies-
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-js-dependencies-${{ hashFiles('**/package-lock.json') }}
+          restore-key: |
+            ${{ runner.OS }}-js-dependencies-
       - name: Install JS dependencies
         runs: npm install
       - name: Build static HTML & Deploy to GitHub pages
