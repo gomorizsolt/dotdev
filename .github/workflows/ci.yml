@@ -31,6 +31,8 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v1
+      - name: overwrite settings/settings.json
+        run: echo '${{ secrets.configJSON }}' > settings/settings.json
       - name: Use Node.js 12
         uses: actions/setup-node@v1
         with:
