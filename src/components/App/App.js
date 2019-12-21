@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import styled from "styled-components";
 import TeamContributionCalendarDisplayer from "../TeamContributionCalendarDisplayer/TeamContributionCalendarDisplayer";
 import Header from "../Header/Header";
+import settings from "../../../settings/settings.json";
 import Medium from "../Medium/Medium";
 import Projects from "../Projects/Projects";
 import OneCol from "../UI/Layout/OneCol";
@@ -17,11 +18,15 @@ const app = () => (
     <Header />
     <App>
       <OneCol>
-        <TeamContributionCalendarDisplayer />
+        {settings.teamContributionCalendarUsers ? (
+          <TeamContributionCalendarDisplayer />
+        ) : (
+          ""
+        )}
       </OneCol>
       <TwoCol>
-        <Medium />
-        <Projects />
+        {settings.medium ? <Medium /> : ""}
+        {settings.github ? <Projects /> : ""}
       </TwoCol>
     </App>
   </Fragment>
