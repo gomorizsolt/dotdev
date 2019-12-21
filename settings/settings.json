@@ -1,12 +1,1 @@
-{
-  "proxyURL": "https://c-hive-proxy.herokuapp.com",
-  "teamContributionCalendarUsers": {
-    "github": ["tccemptyuser"],
-    "gitlab": ["tccemptyuser"]
-  },
-  "medium": "c-hive",
-  "github": {
-    "name": "c-hive",
-    "repos": ["team-contribution-calendar", "guides", "ws-anywhere", "js-boilerplate"]
-  }
-}
+{}
