@@ -33,16 +33,6 @@ jobs:
       - uses: actions/checkout@v1
       - name: overwrite settings/settings.json
         run: echo '${{ secrets.configJSON }}' > settings/settings.json
-      - name: Commit files
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git commit -m "Add changes" -a
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: 'issue-27_reading-configs-in-different-environments'
       - name: Use Node.js 12
         uses: actions/setup-node@v1
         with:
@@ -56,6 +46,11 @@ jobs:
             ${{ runner.OS }}-js-dependencies-
       - name: Install JS dependencies
         run: npm install
+      - name: Commit files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -m "Add changes" -a
       - name: Build static HTML & Deploy to GitHub pages
         uses: JamesIves/github-pages-deploy-action@releases/v2
         env:
