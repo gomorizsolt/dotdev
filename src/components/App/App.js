@@ -20,13 +20,11 @@ const app = () => (
       <OneCol>
         {settings.teamContributionCalendarUsers ? (
           <TeamContributionCalendarDisplayer />
-        ) : (
-          ""
-        )}
+        ) : null}
       </OneCol>
       <TwoCol>
-        {settings.medium ? <Medium /> : ""}
-        {settings.github ? <Projects /> : ""}
+        {settings.medium ? <Medium /> : null}
+        {settings.github ? <Projects /> : null}
       </TwoCol>
     </App>
   </Fragment>
