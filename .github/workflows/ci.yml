@@ -39,7 +39,7 @@ jobs:
           git config --local user.name "GitHub Action"
           git commit -m "Add changes" -a
       - name: Push changes
-        uses: ad-m/github-push-action@master
+        uses: ad-m/github-push-action@issue-27_reading-configs-in-different-environments
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Use Node.js 12
