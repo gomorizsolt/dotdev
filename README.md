@@ -35,9 +35,9 @@ Below you'll find a description of what each option does.
 | Key  | Value Information | Type | Required |
 | ------------- | ------------- | ------------- | ------------- |
 | `proxyURL`  | Your proxy url. | `string / url` | **No** |
-| `teamContributionCalendarUsers`  | Our GitHub-like contribution calendar for the whole team. Supports GitHub and GitLab, **[you can learn more here](https://github.com/c-hive/team-contribution-calendar)**. | `object` | **No** |
-| `medium`  | Display articles from a Medium user  | `string` | **No** |
-| `github`  | Here you can add github repos to your projects | `object` | **no** |
+| `teamContributionCalendarUsers`  | GitHub-like contribution calendar for the whole team. Supports GitHub and GitLab, **[you can learn more here](https://github.com/c-hive/team-contribution-calendar)**. | `object` | **No** |
+| `medium`  | Display articles from a Medium user.  | `string` | **No** |
+| `github`  | Here you can add github repos that you want to show. | `object` | **no** |
 
 
 ## Example SPA website project structure
