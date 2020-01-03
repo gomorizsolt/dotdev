@@ -77,9 +77,6 @@ Below you'll find a description of what each option does.
 - `src/utils`
   - Non-UI / non-component / utility features not tightly linked to the specific project. Reusable, generic purpose functions (e.g. `Api`, `CorsProxy`)
 
-## Grouping
-- Files are grouped by functionality (components) in folders.
-- Each component should contain its related files.
-- Files can be logically groupped into more folders (e.g. `external/users` and `internal/users`).
+---
 
 For Issues and PRs older than 2019.11.16 refer to: https://gitlab.com/c-hive/c-hive.dev and https://github.com/c-hive/c-hive.dev/issues/35#issuecomment-555021380
