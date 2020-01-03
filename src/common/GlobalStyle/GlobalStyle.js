@@ -27,10 +27,10 @@ export const GlobalStyle = createGlobalStyle`
 
 	html, body {
 		-webkit-font-smoothing: antialiased;
-		font: normal 14px 'Apercu Regular';
 		font-feature-settings: "kern" 1,"kern";
 		font-kerning: normal;
 		text-rendering: optimizeLegibility;
+		font: normal 14px 'Apercu Regular';
 	}
 
 	body {
@@ -39,7 +39,10 @@ export const GlobalStyle = createGlobalStyle`
 		transition: background 1s;
 		background: ${props => props.theme.background};
 		color: ${props => props.theme.color};
-		
+		font-family: 'Apercu Regular';
+		font-size: 14px;
+		font-weight: normal;
+
 		&>div{
 			overflow: hidden;
 		}
