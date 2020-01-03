@@ -26,7 +26,7 @@ jobs:
 
   deploy:
     needs: lint
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/issue-27_reading-configs-in-different-environments'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -44,14 +44,10 @@ jobs:
             ${{ runner.OS }}-js-dependencies-
       - name: Install JS dependencies
         run: npm install
-      - name: Commit files
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git commit -m "Add changes" -a
       - name: Build static HTML & Deploy to GitHub pages
         uses: JamesIves/github-pages-deploy-action@releases/v2
         env:
+          CONFIGJSON: ${{ secrets.configJSON }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
           FOLDER: out
