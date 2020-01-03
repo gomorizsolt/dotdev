@@ -8,9 +8,8 @@ A Next.js SPA website to showcase ourselves: https://c-hive.github.io/c-hive.dev
 npm install
 npm run dev
 ```
-## Configuration 📁
 
-Below you'll find a description of what each option does.
+## Configuration 📁
 
 #### Example configuration
 
