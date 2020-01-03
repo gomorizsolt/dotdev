@@ -1,1 +1,7 @@
-{}
+{
+
+  "github": {
+    "name": "nkapolcs",
+    "repos": ["poking-holes-demo"]
+  }
+}

@@ -9,9 +9,9 @@ npm install
 npm run dev
 ```
 
-## Configuration 📁
+## Configuration
 
-#### Example configuration
+### Example
 
 ```
 {
@@ -33,48 +33,14 @@ npm run dev
 
 | Key  | Value Information | Type | Required |
 | ------------- | ------------- | ------------- | ------------- |
-| `proxyURL`  | Your proxy url. | `string / url` | **No** |
-| `teamContributionCalendarUsers`  | GitHub-like contribution calendar for the whole team. Supports GitHub and GitLab, **[you can learn more here](https://github.com/c-hive/team-contribution-calendar)**. | `object` | **No** |
-| `medium`  | Display articles from a Medium user.  | `string` | **No** |
-| `github`  | Here you can add github repos that you want to show. | `object` | **no** |
+| `proxyURL`  | CORS proxy url. Required for Medium API access E.g. https://github.com/c-hive/cors-proxy | `string / url` | **No** |
+| `teamContributionCalendarUsers` | GitHub-like contribution calendar for the whole team. Supports GitHub and GitLab, **[you can learn more here](https://github.com/c-hive/team-contribution-calendar)**. | `object` | **No** |
+| `medium` | Medium user/publication name. | `string` | **No** |
+| `github` | GitHub user/organization name and repository name(s). | `object` | **No** |
 
+## Conventions
 
-## Example SPA website project structure
-
-```
-.
-├── pages
-│   └── _document.js
-│   └── index.js
-├── settings
-│   └── settings.json
-├── src
-│   ├── common
-│   │   └── GlobalStyle
-│   ├── components
-│   │   └── App
-│   │       ├── App.js
-│   │       └── App.style.js
-│   ├── resources
-│   ├── utils
-├── static
-│   └── images, fonts, ...
-├── next.config.js
-├── package.json
-├── README.md
-```
-
-## Special folders
-
-- `settings`
-  - Configuration file for setup the project.
-- `src/common`
-  - style files applied to the whole project
-- `src/components`
-- `src/resources`
-  - Json data files, hardcoded data (e.g. `Themes, Breakpoints`)
-- `src/utils`
-  - Non-UI / non-component / utility features not tightly linked to the specific project. Reusable, generic purpose functions (e.g. `Api`, `CorsProxy`)
+This project follows [C-Hive guides](https://github.com/c-hive/guides) for code style, way of working and other development concerns.
 
 ---
 
