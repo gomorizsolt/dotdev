@@ -36,7 +36,7 @@ npm run dev
 | Key  | Value Information | Type | Required |
 | ------------- | ------------- | ------------- | ------------- |
 | `name`  | Team/user/company name. | `string` | **No** |
-| `logo`  | Team/user/company logo. | `string / img` | **No** |
+| `logo`  | Team/user/company logo. | `string / path to img` | **No** |
 | `proxyURL`  | CORS proxy url. Required for Medium API access E.g. https://github.com/c-hive/cors-proxy | `string / url` | **No** |
 | `teamContributionCalendarUsers` | GitHub-like contribution calendar for the whole team. Supports GitHub and GitLab, **[you can learn more here](https://github.com/c-hive/team-contribution-calendar)**. | `object` | **No** |
 | `medium` | Medium user/publication name. | `string` | **No** |
