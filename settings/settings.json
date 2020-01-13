@@ -6,7 +6,6 @@
     "github": ["nkapolcs"],
     "gitlab": ["nkapolcs"]
   },
-  "medium": "c-hive",
   "github": {
     "name": "c-hive",
     "repos": ["team-contribution-calendar"]
