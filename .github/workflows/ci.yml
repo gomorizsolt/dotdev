@@ -31,8 +31,6 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v1
-      - name: overwrite settings/settings.json
-        run: echo '${{ secrets.configJSON }}' > settings/settings.json
       - name: Use Node.js 12
         uses: actions/setup-node@v1
         with:
@@ -55,6 +53,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@releases/v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CONFIGJSON: ${{ secrets.configJSON }}
           BRANCH: gh-pages
           FOLDER: out
           BUILD_SCRIPT: npm run deploy # https://github.com/zeit/next.js/wiki/Deploying-a-Next.js-app-into-GitHub-Pages
