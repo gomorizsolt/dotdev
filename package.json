@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build && next export",
-    "deploy": "echo ${ CONFIGJSON } > settings/settings.json && npm run build && cd out && touch .nojekyll",
+    "deploy": "cross-env configjson=${env.CONFIGJSON} echo 'configjson' > settings/settings.json && npm run build && cd out && touch .nojekyll",
     "lint": "eslint . --ext .js",
     "start": "next start -p $PORT"
   },
@@ -20,6 +20,7 @@
   "devDependencies": {
     "@babel/core": "^7.6.0",
     "babel-plugin-styled-components": "^1.10.6",
+    "cross-env": "^6.0.3",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.1",
     "eslint-config-prettier": "^4.0.0",
