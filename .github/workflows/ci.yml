@@ -44,11 +44,6 @@ jobs:
             ${{ runner.OS }}-js-dependencies-
       - name: Install JS dependencies
         run: npm install
-      - name: Commit files
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git commit -m "Add changes" -a
       - name: Build static HTML & Deploy to GitHub pages
         uses: JamesIves/github-pages-deploy-action@releases/v2
         env:
