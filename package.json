@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build && next export",
-    "deploy": "echo ${ process.env.CONFIGJSON } > settings/settings.json && npm run build && cd out && touch .nojekyll",
+    "deploy": "echo ${ env.CONFIGJSON } > settings/settings.json && npm run build && cd out && touch .nojekyll",
     "lint": "eslint . --ext .js",
     "start": "next start -p $PORT"
   },
