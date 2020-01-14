@@ -26,7 +26,7 @@ jobs:
 
   deploy:
     needs: lint
-    if: github.ref == 'refs/heads/issue-34_published-site-uses-different-font-style'
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -47,7 +47,7 @@ jobs:
       - name: Build static HTML & Deploy to GitHub pages
         uses: JamesIves/github-pages-deploy-action@releases/v2
         env:
-          CONFIGJSON: ${{ secrets.configJSON }}
+          CONFIG_JSON: ${{ secrets.configJSON }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
           FOLDER: out
