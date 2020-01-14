@@ -39,9 +39,6 @@ export const GlobalStyle = createGlobalStyle`
 		transition: background 1s;
 		background: ${props => props.theme.background};
 		color: ${props => props.theme.color};
-		font-family: 'Apercu Regular';
-		font-size: 14px;
-		font-weight: normal;
 
 		&>div{
 			overflow: hidden;
