@@ -11,6 +11,8 @@ npm run dev
 
 ## Configuration
 
+`settings/settings.json`
+
 ### Example
 
 ```
