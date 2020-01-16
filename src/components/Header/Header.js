@@ -14,9 +14,11 @@ const header = () => (
     {settings.logo ? <img src={settings.logo} alt={settings.name} /> : null}
     {settings.name ? <p>{settings.name}</p> : null}
     <ToggleButton />
-    <div className="icons__container">
-      <TechIcons />
-    </div>
+    {settings.header.technologies ? (
+      <div className="icons__container">
+        <TechIcons />
+      </div>
+    ) : null}
   </Header>
 );
 
