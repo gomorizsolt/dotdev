@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { techIconsStyle } from "./TechIcons.style";
-import ReactIcon from "../../UI/Icons/ReactIcon";
+import IconDisplayer from "../../UI/Icons/IconDisplayer";
 import settings from "../../../../settings/settings";
 
 const TechIcons = styled.div`
@@ -10,16 +10,19 @@ const TechIcons = styled.div`
 
 const techIcons = () => (
   <TechIcons>
-    <div className="TechIcons__content">
-      {settings.header.technologies.map(name => (
-        <div key={name}>{settings.technologyIcons[name]}</div>
-      ))}
-      {/* {console.log(settings.technologyIcons)} */}
-      {/* {settings.technologyIcons.map(name => (
-        <div key={name}>{name}</div>
-      ))} */}
-      <ReactIcon />
-    </div>
+    {settings.header.technologies.map(name =>
+      settings.technologyIcons[name] ? (
+        <IconDisplayer
+          key={name}
+          src={settings.technologyIcons[name][0]}
+          backgroundColor={settings.technologyIcons[name][1]}
+        />
+      ) : (
+        console.warn(
+          `Warning: There is no icon path specified in the settings for ${name} techology`
+        )
+      )
+    )}
   </TechIcons>
 );
 

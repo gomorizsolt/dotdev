@@ -9,13 +9,13 @@ export const headerStyle = css`
   margin: 0px auto;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
-  & > img {
-    max-height: 75px;
-    max-width: 75px;
+  .Logo {
+    max-height: 68px;
+    max-width: 68px;
     margin: 16px 15px 15px 20px;
   }
 
-  & > p {
+  .Logo__text {
     font-size: 1.5em;
     font-weight: 600;
     cursor: default;
@@ -24,5 +24,6 @@ export const headerStyle = css`
   .icons__container {
     flex-basis: 100%;
     width: 100%;
+    margin: -5px 0 10px 20px;
   }
 `;

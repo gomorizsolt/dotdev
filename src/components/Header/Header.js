@@ -4,6 +4,7 @@ import settings from "../../../settings/settings.json";
 import { headerStyle } from "./Header.style";
 import ToggleButton from "./ToggleButton/ToggleButton";
 import TechIcons from "./TechIcons/TechIcons";
+import TechNames from "./TechNames/TechNames";
 
 const Header = styled.div`
   ${headerStyle}
@@ -11,12 +12,14 @@ const Header = styled.div`
 
 const header = () => (
   <Header>
-    {settings.logo ? <img src={settings.logo} alt={settings.name} /> : null}
-    {settings.name ? <p>{settings.name}</p> : null}
+    {settings.logo ? (
+      <img className="Logo" src={settings.logo} alt={settings.name} />
+    ) : null}
+    {settings.name ? <p className="Logo__text">{settings.name}</p> : null}
     <ToggleButton />
-    {settings.header.technologies ? (
+    {settings.header && settings.header.technologies ? (
       <div className="icons__container">
-        <TechIcons />
+        {settings.header.iconOrName === "icon" ? <TechIcons /> : <TechNames />}
       </div>
     ) : null}
   </Header>

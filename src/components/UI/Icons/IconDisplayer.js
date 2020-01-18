@@ -7,41 +7,11 @@ const IconDisplayer = styled.div`
 `;
 
 const iconDisplayer = props => {
-  const { children } = props;
-  console.log(children);
-  // let Icon = "";
-
-  // const path = require("../../../../static/svg/react.svg");
-
-  // async function getComponent() {
-  //   const Icon = await import("../../../../static/svg/react.svg");
-  //   // return icon;
-  // }
-
-  // console.log(getComponent());
-
-  // async function request() {
-  //   try {
-  //     await fetch(children)
-  //       .then(response => {
-  //         return response.json();
-  //       })
-  //       .then(myJson => {
-  //         console.log(myJson);
-  //       });
-  //   } catch (error) {
-  //     // this.handleError(new error.message());
-  //     console.log(error);
-  //   }
-  // }
-  // request();
-  // console.log(Icon);
-
-  // const getConfig = require("../../../../static").default;
+  const { src, backgroundColor } = props;
 
   return (
-    <IconDisplayer>
-      <img src={children} />{" "}
+    <IconDisplayer backgroundColor={backgroundColor}>
+      <img src={src} alt="technology-icons" />
     </IconDisplayer>
   );
 };

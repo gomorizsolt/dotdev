@@ -1,21 +1,21 @@
 import { css } from "styled-components";
 
 export const iconDisplayerStyle = css`
-  background: #61dafb;
-  border-radius: 50%;
-  padding: 7px;
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  padding: 7px;
+  margin-right: 8px;
+  background: ${props => props.backgroundColor};
+  border-radius: 50%;
 
   img {
-    fill: #fff;
     width: 0.8em;
     height: 0.8em;
     display: inline-block;
+    flex-shrink: 0;
     font-size: 24px;
     transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     user-select: none;
-    flex-shrink: 0;
   }
 `;
