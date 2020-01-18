@@ -18,9 +18,9 @@ const techIcons = () => (
           backgroundColor={settings.technologyIcons[name][1]}
         />
       ) : (
-        console.warn(
+        console.error(
           `Warning: There is no icon path specified in the settings for ${name} techology`
-        )
+        ) /* eslint-disable-line no-console */
       )
     )}
   </TechIcons>
