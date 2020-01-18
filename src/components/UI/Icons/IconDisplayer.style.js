@@ -4,14 +4,14 @@ export const iconDisplayerStyle = css`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  padding: 7px;
+  padding: 6px;
   margin-right: 8px;
   background: ${props => props.backgroundColor};
   border-radius: 50%;
 
   img {
-    width: 0.8em;
-    height: 0.8em;
+    width: 0.7em;
+    height: 0.7em;
     display: inline-block;
     flex-shrink: 0;
     font-size: 24px;

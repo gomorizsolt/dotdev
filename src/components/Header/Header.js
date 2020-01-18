@@ -5,6 +5,7 @@ import { headerStyle } from "./Header.style";
 import ToggleButton from "./ToggleButton/ToggleButton";
 import TechIcons from "./TechIcons/TechIcons";
 import TechNames from "./TechNames/TechNames";
+import TeamMembers from "./TeamMembers/TeamMembers";
 
 const Header = styled.div`
   ${headerStyle}
@@ -20,6 +21,7 @@ const header = () => (
     {settings.header && settings.header.technologies ? (
       <div className="icons__container">
         {settings.header.iconOrName === "icon" ? <TechIcons /> : <TechNames />}
+        {settings.header.teamMembers ? <TeamMembers /> : null}
       </div>
     ) : null}
   </Header>
