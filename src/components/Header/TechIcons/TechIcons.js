@@ -19,7 +19,7 @@ const techIcons = () => (
         />
       ) : (
         /* eslint-disable-next-line no-console */
-        console.error(
+        console.warn(
           `Warning: There is no icon path specified in the settings for ${name} techology`
         )
       )
