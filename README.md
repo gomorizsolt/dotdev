@@ -19,7 +19,19 @@ npm run dev
 {
   "name": "Example Name",
   "logo": "static/logo/example-logo.png",
+  "technologyIcons": {
+    "technology1": ["/static/svg/technology-logo1.svg", "#ffffff"],
+    "technology2": ["/static/svg/technology-logo2.png", "#000000"]
+  },
   "proxyURL": "https://example-proxy.com",
+  "header": {
+    "technologies": ["technology1", "technology2"],
+    "iconOrName": "icon",
+    "teamMembers": [
+      { "name": "Example Member1", "link": "https://github.com/examplemember1" },
+      { "name": "Example Member2", "link": "https://github.com/examplemember2" }
+    ]
+  },
   "teamContributionCalendarUsers": {
     "github": ["exampleuser1", "exampleuser2"],
     "gitlab": ["exampleuser1", "exampleuser2"]
@@ -39,7 +51,11 @@ npm run dev
 | ------------- | ------------- | ------------- | ------------- |
 | `name`  | Team/user/company name. | `string` | **No** |
 | `logo`  | Team/user/company logo. | `string / path to img` | **No** |
+| `technologyIcons`  | Path to the used technology icons (img or svg), and their background colors. | `object` | **No** |
 | `proxyURL`  | CORS proxy url. Required for Medium API access E.g. https://github.com/c-hive/cors-proxy | `string / url` | **No** |
+| `header.technologies`  | Technologies used by team/user/company. | `array` | **No** |
+| `header.iconOrName`  | In the header given technologies should be shown by name or by logo. It accepts two states: "icon" or "name" | `string` | **No** |
+| `header.teamMembers`  | Team member(s) name and link. | `object` | **No** |
 | `teamContributionCalendarUsers` | GitHub-like contribution calendar for the whole team. Supports GitHub and GitLab, **[you can learn more here](https://github.com/c-hive/team-contribution-calendar)**. | `object` | **No** |
 | `medium` | Medium user/publication name. | `string` | **No** |
 | `github` | GitHub user/organization name and repository name(s). | `object` | **No** |
