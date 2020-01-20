@@ -25,7 +25,7 @@ npm run dev
   },
   "proxyURL": "https://example-proxy.com",
   "header": {
-    "technologies": ["technology1", "technology2"],
+    "technologies": ["javascript", "react"],
     "iconOrName": "icon",
     "teamMembers": [
       { "name": "Example Member1", "link": "https://github.com/examplemember1" },
