@@ -14,13 +14,5 @@ export const teamMembersStyle = css`
     &:hover {
       text-decoration: underline;
     }
-
-    &::after {
-      content: ", ";
-    }
-
-    &:last-child::after {
-      content: "";
-    }
   }
 `;
