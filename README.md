@@ -20,8 +20,8 @@ npm run dev
   "name": "Example Name",
   "logo": "static/logo/example-logo.png",
   "technologyIcons": {
-    "technology1": ["/static/svg/technology-logo1.svg", "#ffffff"],
-    "technology2": ["/static/svg/technology-logo2.png", "#000000"]
+    "react": ["/static/svg/react-logo.svg", "#ffffff"],
+    "javascript": ["/static/svg/javascript-logo.png", "#000000"]
   },
   "proxyURL": "https://example-proxy.com",
   "header": {
