@@ -20,7 +20,7 @@ const techIcons = () => (
       ) : (
         /* eslint-disable-next-line no-console */
         console.warn(
-          `Warning: There is no icon path specified in the settings for ${name} techology`
+          `There is no icon path specified in the settings for ${name} technology`
         )
       )
     )}
