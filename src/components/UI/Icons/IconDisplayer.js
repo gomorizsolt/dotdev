@@ -7,11 +7,11 @@ const IconDisplayer = styled.div`
 `;
 
 const iconDisplayer = props => {
-  const { src, backgroundColor } = props;
+  const { name, src } = props;
 
   return (
-    <IconDisplayer backgroundColor={backgroundColor}>
-      <img src={src} alt="technology-icons" />
+    <IconDisplayer>
+      <img src={src} alt={name} />
     </IconDisplayer>
   );
 };

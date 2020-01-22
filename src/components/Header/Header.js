@@ -20,7 +20,7 @@ const header = () => (
     <ToggleButton />
     {settings.header && settings.header.technologies ? (
       <div className="icons__container">
-        {settings.header.display === "icon" ? <TechIcons /> : <TechNames />}
+        {settings.display === "icon" ? <TechIcons /> : <TechNames />}
         {settings.header.teamMembers ? <TeamMembers /> : null}
       </div>
     ) : null}

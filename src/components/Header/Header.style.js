@@ -30,7 +30,7 @@ export const headerStyle = css`
 
     .border {
       border-left: 1px solid ${props => props.theme.color};
-      margin: 0 16px 0 8px;
+      margin: 0 10px 0 8px;
       height: 1.3em;
       transition: 0.3s;
       opacity: 0.3;

@@ -14,8 +14,8 @@ const techIcons = () => (
       settings.technologyIcons[name] ? (
         <IconDisplayer
           key={name}
-          src={settings.technologyIcons[name][0]}
-          backgroundColor={settings.technologyIcons[name][1]}
+          name={settings.technologyIcons[name].name}
+          src={settings.technologyIcons[name].icon}
         />
       ) : (
         /* eslint-disable-next-line no-console */

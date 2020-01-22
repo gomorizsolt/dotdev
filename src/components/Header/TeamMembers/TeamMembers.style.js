@@ -5,7 +5,7 @@ export const teamMembersStyle = css`
 
   .TeamMember {
     display: inline-block;
-    padding-right: 8px;
+    padding: 0 1px 0 2px;
     color: ${props => props.theme.color};
     text-decoration: none;
     line-height: 1.4em;

@@ -6,9 +6,6 @@ export const teamContributionCalendarDisplayerStyle = css`
 
   .calendarContainer {
     border: none !important;
-    min-width: 415px !important;
-    max-width: 800px !important;
-    width: 58% !important;
 
     .month,
     .wday {

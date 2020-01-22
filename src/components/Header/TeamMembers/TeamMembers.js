@@ -11,7 +11,8 @@ const teamMembers = () => (
   <Fragment>
     <span className="border" />
     <TeamMembers>
-      {settings.header.teamMembers.map((member, i, arr) => (
+      {settings.header.teamMembers.map((member, i) => [
+        i > 0 && ", ",
         <a
           className="TeamMember"
           key={member.name}
@@ -20,9 +21,8 @@ const teamMembers = () => (
           rel="noopener noreferrer"
         >
           {member.name}
-          {i < arr.length - 1 && ", "}
-        </a>
-      ))}
+        </a>,
+      ])}
     </TeamMembers>
   </Fragment>
 );
