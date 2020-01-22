@@ -10,7 +10,9 @@ const Products = styled.div`
 
 const products = () => (
   <Products>
-    {products ? <ProductDisplayer name={products.name} /> : null}
+    {settings.products ? (
+      <ProductDisplayer name={settings.products[0].name} />
+    ) : null}
   </Products>
 );
 
