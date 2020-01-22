@@ -7,15 +7,19 @@ const ProductDisplayer = styled.div`
   ${productDisplayerStyle}
 `;
 
-const productDisplayer = () => (
-  <ProductDisplayer>
-    <Card className="Card">
-      <CardContent>well meaning and kindly.</CardContent>
-      <CardActions>
-        <Button size="small">Learn More</Button>
-      </CardActions>
-    </Card>
-  </ProductDisplayer>
-);
+const productDisplayer = props => {
+  const { name } = props;
+
+  return (
+    <ProductDisplayer>
+      <Card className="Card">
+        <CardContent>{name}</CardContent>
+        <CardActions>
+          <Button size="small">Learn More</Button>
+        </CardActions>
+      </Card>
+    </ProductDisplayer>
+  );
+};
 
 export default productDisplayer;
