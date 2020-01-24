@@ -4,7 +4,6 @@ export const iconDisplayerStyle = css`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  border-radius: 50%;
 
   img {
     width: 34px;

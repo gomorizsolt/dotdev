@@ -6,14 +6,10 @@ const IconDisplayer = styled.div`
   ${iconDisplayerStyle}
 `;
 
-const iconDisplayer = props => {
-  const { name, src } = props;
-
-  return (
-    <IconDisplayer>
-      <img src={src} alt={name} />
-    </IconDisplayer>
-  );
-};
+const iconDisplayer = ({ name, src }) => (
+  <IconDisplayer>
+    <img src={src} alt={name} />
+  </IconDisplayer>
+);
 
 export default iconDisplayer;
