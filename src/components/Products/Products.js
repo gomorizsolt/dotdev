@@ -10,15 +10,18 @@ const Products = styled.div`
 
 const products = () => (
   <Products>
-    {settings.products ? (
-      <ProductDisplayer
-        name={settings.products[0].name}
-        links={settings.products[0].links}
-        logo={settings.products[0].logo}
-        description={settings.products[0].description}
-        technologies={settings.products[0].technologies}
-      />
-    ) : null}
+    <h2 className="products__title">Products</h2>
+    {settings.products &&
+      settings.products.map(product => (
+        <ProductDisplayer
+          key={product.name}
+          name={product.name}
+          links={product.links}
+          logo={product.logo}
+          description={product.description}
+          technologies={product.technologies}
+        />
+      ))}
   </Products>
 );
 

@@ -4,4 +4,10 @@ export const productsStyle = css`
   display: block;
   margin: 0 auto;
   max-width: 860px;
+
+  .products__title {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 28px;
+  }
 `;

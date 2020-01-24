@@ -2,16 +2,22 @@ import { css } from "styled-components";
 
 export const productDisplayerStyle = css`
   display: flex;
+  margin: 0px 0 40px 0;
 
   .Card {
     color: ${props => props.theme.color};
-    background-color: ${props => props.theme.background};
+    background-color: ${props => props.theme.cardBackground};
+    transition: background 0.9s;
+
+    .MuiButton-root {
+      color: ${props => props.theme.color};
+    }
   }
 
   .product__title {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 16px;
     text-transform: uppercase;
     text-decoration: none;
     font-size: 1.4em;
