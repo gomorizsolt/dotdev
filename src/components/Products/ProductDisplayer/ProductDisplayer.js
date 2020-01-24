@@ -8,14 +8,25 @@ const ProductDisplayer = styled.div`
 `;
 
 const productDisplayer = props => {
-  const { name } = props;
+  const { name, link, logo, description, technologies } = props;
 
   return (
     <ProductDisplayer>
       <Card className="Card">
-        <CardContent>{name}</CardContent>
+        <CardContent>
+          <div className="product__title">
+            <img src={logo} alt={name} />
+            {name}
+          </div>
+          <div>{description}</div>
+        </CardContent>
         <CardActions>
-          <Button size="small">Learn More</Button>
+          <Button size="small" href={link}>
+            Learn More
+          </Button>
+          <div className="action__techIcons">
+            <div>{technologies}</div>
+          </div>
         </CardActions>
       </Card>
     </ProductDisplayer>
