@@ -11,14 +11,12 @@ npm run dev
 
 ## Configuration
 
-`settings/settings.json`
-
 ### Example
 
 ```
 {
   "name": "Example Name",
-  "logo": "static/logo/example-logo.png",
+  "logo": "static/logo/logo.png",
   "technologyIcons": {
     "react": {"name": "React", "icon": "/static/svg/react.svg"},
     "javascript": {"name": "Javascript", "icon": "/static/svg/js.svg"}
@@ -58,6 +56,11 @@ npm run dev
 | `teamContributionCalendarUsers` | GitHub-like contribution calendar for the whole team. Supports GitHub and GitLab, **[you can learn more here](https://github.com/c-hive/team-contribution-calendar)**. | `object`               | **No**   |
 | `medium`                        | Medium user/publication name.                                                                                                                                          | `string`               | **No**   |
 | `github`                        | GitHub user/organization name and repository name(s).                                                                                                                  | `object`               | **No**   |
+
+## Special files
+
+- `settings/settings.json`
+- `public/favicon.ico`
 
 ## Conventions
 
