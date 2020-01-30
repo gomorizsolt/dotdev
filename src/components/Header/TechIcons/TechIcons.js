@@ -10,17 +10,17 @@ const TechIcons = styled.div`
 
 const techIcons = () => (
   <TechIcons>
-    {settings.header.technologies.map(name =>
-      settings.technologyIcons[name] ? (
+    {settings.header.technologies.map(tech =>
+      settings.technologyIcons[tech] ? (
         <IconDisplayer
-          key={name}
-          name={settings.technologyIcons[name].name}
-          src={settings.technologyIcons[name].icon}
+          key={tech}
+          name={settings.technologyIcons[tech].name}
+          src={settings.technologyIcons[tech].icon}
         />
       ) : (
         /* eslint-disable-next-line no-console */
         console.warn(
-          `There is no icon path specified in the settings for ${name} technology`
+          `There is no icon path specified in the settings for ${tech} technology`
         )
       )
     )}

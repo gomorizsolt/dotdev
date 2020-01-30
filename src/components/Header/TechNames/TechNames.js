@@ -9,9 +9,9 @@ const TechNames = styled.div`
 
 const techNames = () => (
   <TechNames>
-    {settings.header.technologies.map(name => (
-      <div className="TechName" key={name}>
-        {name}
+    {settings.header.technologies.map(tech => (
+      <div className="TechName" key={tech}>
+        {settings.technologyIcons[tech].name}
       </div>
     ))}
   </TechNames>
