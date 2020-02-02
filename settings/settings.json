@@ -1,1 +1,9 @@
-{}
+{
+  "name": "C-hive",
+  "logo": "static/logo/logo.png",
+  "proxyURL": "https://c-hive-proxy.herokuapp.com",
+  "teamContributionCalendarUsers": {
+    "github": ["nkapolcs"],
+    "gitlab": ["nkapolcs"]
+  }
+}
