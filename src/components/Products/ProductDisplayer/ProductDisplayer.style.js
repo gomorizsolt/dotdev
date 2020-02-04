@@ -14,23 +14,29 @@ export const productDisplayerStyle = css`
     }
   }
 
-  .product__title {
-    display: flex;
-    align-items: center;
-    margin-bottom: 16px;
-    text-transform: uppercase;
-    text-decoration: none;
-    font-size: 1.4em;
-    line-height: 1.3em;
-
-    img {
-      width: 32px;
-      height: 32px;
-      margin-right: 8px;
-    }
-  }
-
   .MuiCardActions-spacing .action__techIcons {
     margin: 0 8px 0 auto;
+  }
+`;
+
+export const productTitleStyle = css`
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 1.4em;
+  line-height: 1.3em;
+
+  img {
+    width: 32px;
+    height: 32px;
+    margin-right: 8px;
+  }
+`;
+export const actionTechIconsStyle = css`
+  img {
+    width: 28px;
+    height: 28px;
   }
 `;

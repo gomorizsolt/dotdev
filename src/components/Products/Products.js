@@ -16,10 +16,10 @@ const products = () => (
         <ProductDisplayer
           key={product.name}
           name={product.name}
-          links={product.links}
           logo={product.logo}
           description={product.description}
-          technologies={product.technologies}
+          link={product.link}
+          social={product.social}
         />
       ))}
   </Products>
