@@ -19,7 +19,7 @@ const products = () => (
           logo={product.logo}
           description={product.description}
           link={product.link}
-          social={product.social}
+          socialLinks={product.socialLinks}
         />
       ))}
   </Products>

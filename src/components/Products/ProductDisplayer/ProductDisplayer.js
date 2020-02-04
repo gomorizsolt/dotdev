@@ -20,7 +20,7 @@ const ActionTechIcons = styled.div`
   ${actionTechIconsStyle}
 `;
 
-const productDisplayer = ({ name, logo, description, link, social }) => {
+const productDisplayer = ({ name, logo, description, link, socialLinks }) => {
   return (
     <ProductDisplayer>
       <Card className="Card">
@@ -36,17 +36,17 @@ const productDisplayer = ({ name, logo, description, link, social }) => {
             Learn More
           </Button>
           <ActionTechIcons className="action__techIcons">
-            {social.map(l => [
+            {socialLinks.map(social => [
               <a
-                key={l.name}
-                href={l.link}
+                key={social.name}
+                href={social.link}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <IconDisplayer
-                  key={l.name}
-                  name={settings.socialIcons[l.name].name}
-                  src={settings.socialIcons[l.name].icon}
+                  key={social.name}
+                  name={settings.socialIcons[social.name].name}
+                  src={settings.socialIcons[social.name].icon}
                 />
               </a>,
             ])}
