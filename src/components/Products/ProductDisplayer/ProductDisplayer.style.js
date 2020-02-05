@@ -12,6 +12,14 @@ export const productDisplayerStyle = css`
     .MuiCardMedia-root {
       height: 145px;
     }
+    .MuiCardContent-root {
+      padding-bottom: 55px;
+    }
+
+    .MuiCardActions-root {
+      bottom: 8px;
+      position: absolute;
+    }
   }
 `;
 
