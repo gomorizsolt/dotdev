@@ -16,9 +16,9 @@ const products = () => (
         <ProductDisplayer
           key={product.name}
           name={product.name}
-          logo={product.logo}
+          cover={product.cover}
           description={product.description}
-          link={product.link}
+          technologies={product.technologies}
           socialLinks={product.socialLinks}
         />
       ))}

@@ -1,6 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { Card, CardActions, CardContent, Button } from "@material-ui/core/";
+import {
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  IconButton,
+} from "@material-ui/core/";
 import {
   productDisplayerStyle,
   productTitleStyle,
@@ -20,26 +26,47 @@ const ActionTechIcons = styled.div`
   ${actionTechIconsStyle}
 `;
 
-const productDisplayer = ({ name, logo, description, link, socialLinks }) => {
+const productDisplayer = ({
+  name,
+  cover,
+  description,
+  technologies,
+  socialLinks,
+}) => {
   return (
     <ProductDisplayer>
       <Card className="Card">
+        <CardMedia image={cover} title={name} />
         <CardContent>
           <ProductTitle>
-            <img src={logo} alt={name} />
             {name}
+            <div>
+              {technologies.map(tech =>
+                settings.technologyIcons[tech] ? (
+                  <IconDisplayer
+                    key={tech}
+                    name={settings.technologyIcons[tech].name}
+                    src={settings.technologyIcons[tech].icon}
+                  />
+                ) : (
+                  /* eslint-disable-next-line no-console */
+                  console.warn(
+                    `There is no icon path specified in the settings for ${tech} technology`
+                  )
+                )
+              )}
+            </div>
           </ProductTitle>
           <div>{description}</div>
         </CardContent>
         <CardActions>
-          <Button size="small" href={link}>
-            Learn More
-          </Button>
           <ActionTechIcons className="action__techIcons">
             {socialLinks.map(social => [
-              <a
+              <IconButton
                 key={social.name}
                 href={social.link}
+                aria-label={social.name}
+                size="small"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -48,7 +75,7 @@ const productDisplayer = ({ name, logo, description, link, socialLinks }) => {
                   name={settings.socialIcons[social.name].name}
                   src={settings.socialIcons[social.name].icon}
                 />
-              </a>,
+              </IconButton>,
             ])}
           </ActionTechIcons>
         </CardActions>

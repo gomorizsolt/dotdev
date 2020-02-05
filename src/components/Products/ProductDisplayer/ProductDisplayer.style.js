@@ -9,13 +9,9 @@ export const productDisplayerStyle = css`
     background-color: ${props => props.theme.cardBackground};
     transition: background 0.9s;
 
-    .MuiButton-root {
-      color: ${props => props.theme.color};
+    .MuiCardMedia-root {
+      height: 145px;
     }
-  }
-
-  .MuiCardActions-spacing .action__techIcons {
-    margin: 0 8px 0 auto;
   }
 `;
 
@@ -28,12 +24,17 @@ export const productTitleStyle = css`
   font-size: 1.4em;
   line-height: 1.3em;
 
+  & > div {
+    margin-left: auto;
+  }
+
   img {
-    width: 32px;
-    height: 32px;
     margin-right: 8px;
+    height: 28px;
+    width: 28px;
   }
 `;
+
 export const actionTechIconsStyle = css`
   a {
     display: inline-block;
