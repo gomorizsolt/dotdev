@@ -11,6 +11,7 @@ import {
   productDisplayerStyle,
   productTitleStyle,
   actionTechIconsStyle,
+  technologiesIconsContainerStyle,
 } from "./ProductDisplayer.style";
 import IconDisplayer from "../../UI/Icons/IconDisplayer";
 import settings from "../../../../settings/settings";
@@ -22,6 +23,11 @@ const ProductDisplayer = styled.div`
 const ProductTitle = styled.div`
   ${productTitleStyle}
 `;
+
+const TechnologiesIconsContainer = styled.div`
+  ${technologiesIconsContainerStyle}
+`;
+
 const ActionTechIcons = styled.div`
   ${actionTechIconsStyle}
 `;
@@ -40,7 +46,7 @@ const productDisplayer = ({
         <CardContent>
           <ProductTitle>
             {name}
-            <div>
+            <TechnologiesIconsContainer>
               {technologies.map(tech =>
                 settings.technologyIcons[tech] ? (
                   <IconDisplayer
@@ -55,7 +61,7 @@ const productDisplayer = ({
                   )
                 )
               )}
-            </div>
+            </TechnologiesIconsContainer>
           </ProductTitle>
           <div>{description}</div>
         </CardContent>

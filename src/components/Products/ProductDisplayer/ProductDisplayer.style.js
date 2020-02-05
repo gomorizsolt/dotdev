@@ -32,15 +32,15 @@ export const productTitleStyle = css`
   font-size: 1.4em;
   line-height: 1.3em;
 
-  & > div {
-    margin-left: auto;
-  }
-
   img {
     margin-right: 8px;
     height: 28px;
     width: 28px;
   }
+`;
+
+export const technologiesIconsContainerStyle = css`
+  margin-left: auto;
 `;
 
 export const actionTechIconsStyle = css`

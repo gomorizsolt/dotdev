@@ -24,8 +24,9 @@ export const productsStyle = css`
   & > div {
     height: auto;
     flex-basis: 25%;
+    /* flex: 4; */
     -ms-flex: auto;
-    width: 259px;
+    min-width: 250px;
     position: relative;
     padding: 10px;
     box-sizing: border-box;

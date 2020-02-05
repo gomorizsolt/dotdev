@@ -11,17 +11,16 @@ const Products = styled.div`
 const products = () => (
   <Products>
     <h2 className="products__title">Products</h2>
-    {settings.products &&
-      settings.products.map(product => (
-        <ProductDisplayer
-          key={product.name}
-          name={product.name}
-          cover={product.cover}
-          description={product.description}
-          technologies={product.technologies}
-          socialLinks={product.socialLinks}
-        />
-      ))}
+    {settings.products.map(product => (
+      <ProductDisplayer
+        key={product.name}
+        name={product.name}
+        cover={product.cover}
+        description={product.description}
+        technologies={product.technologies}
+        socialLinks={product.socialLinks}
+      />
+    ))}
   </Products>
 );
 
