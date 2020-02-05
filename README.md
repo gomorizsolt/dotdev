@@ -26,6 +26,10 @@ Replace
     "react": {"name": "React", "icon": "static/svg/react.svg"},
     "javascript": {"name": "Javascript", "icon": "static/svg/js.svg"}
   },
+  "socialIcons": {
+    "github": { "name": "Github", "icon": "static/svg/github.svg" },
+    "medium": { "name": "Medium", "icon": "static/svg/medium.svg" }
+  },
   "display": "icon",
   "proxyURL": "https://example-proxy.com",
   "header": {
@@ -35,6 +39,28 @@ Replace
       { "name": "Example Member2", "link": "https://github.com/examplemember2" }
     ]
   },
+  "products": [
+    {
+      "name": "First product",
+      "cover": "static/images/first-cover.jpg",
+      "description": "First product description",
+      "technologies": ["react", "javascript"],
+      "socialLinks": [
+        { "name": "medium", "link": "https://medium.com/" },
+        { "name": "github", "link": "https://github.com/" }}
+      ]
+    },
+    {
+      "name": "Second product",
+      "cover": "static/images/second-cover.jpg",
+      "description": "Second product description",
+      "technologies": ["react", "javascript"],
+      "socialLinks": [
+        { "name": "medium", "link": "https://medium.com/" },
+        { "name": "github", "link": "https://github.com/" }}
+      ]
+    }
+  ],
   "teamContributionCalendarUsers": {
     "github": ["exampleuser1", "exampleuser2"],
     "gitlab": ["exampleuser1", "exampleuser2"]
@@ -54,10 +80,16 @@ Replace
 | `name`                          | Team/user/company name.                                                                                                                                                | `string`               | **No**   |
 | `logo`                          | Team/user/company logo.                                                                                                                                                | `string / path to img` | **No**   |
 | `technologyIcons`               | Path to the used technology icons (img or svg).                                                                                           | `object`               | **No**   |
+| `socialIcons`               | Path to the used social icons (img or svg).                                                                                           | `object`               | **No**   |
 | `display`                       | The given technologies should be shown by name or by logo. It accepts two states: "icon" or "name"                                                                     | `string`               | **No**   |
 | `proxyURL`                      | CORS proxy url. Required for Medium API access E.g. https://github.com/c-hive/cors-proxy                                                                               | `string / url`         | **No**   |
 | `header.technologies`           | Technologies used by team/user/company.                                                                                                                                | `array`                | **No**   |
 | `header.teamMembers`            | Team member(s) name and link.                                                                                                                                          | `object`               | **No**   |
+| `products.name`            | Product name. (This is required if you create a product entry)                                                                                                                                          | `string`               | **Yes**   |
+| `products.cover`            | Product cover image.                                                                                                                                          | `string / path to img`               | **No**   |
+| `products.description`            | Product description                                                                                                                                          | `string`               | **No**   |
+| `products.technologies`            | Technologies used by the product.                                                                                                                                          | `array`               | **No**   |
+| `products.socialLinks`            | Product online presence.                                                                                                                                          | `object`               | **No**   |
 | `teamContributionCalendarUsers` | GitHub-like contribution calendar for the whole team. Supports GitHub and GitLab, **[you can learn more here](https://github.com/c-hive/team-contribution-calendar)**. | `object`               | **No**   |
 | `medium`                        | Medium user/publication name.                                                                                                                                          | `string`               | **No**   |
 | `github`                        | GitHub user/organization name and repository name(s).                                                                                                                  | `object`               | **No**   |
