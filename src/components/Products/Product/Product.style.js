@@ -1,6 +1,6 @@
 import { css } from "styled-components";
 
-export const productDisplayerStyle = css`
+export const productStyle = css`
   display: flex;
   margin: 0px 0 40px 0;
 

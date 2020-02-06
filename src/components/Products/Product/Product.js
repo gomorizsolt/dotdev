@@ -8,16 +8,16 @@ import {
   IconButton,
 } from "@material-ui/core/";
 import {
-  productDisplayerStyle,
+  productStyle,
   productTitleStyle,
   actionTechIconsStyle,
   technologiesIconsContainerStyle,
-} from "./ProductDisplayer.style";
+} from "./Product.style";
 import IconDisplayer from "../../UI/Icons/IconDisplayer";
 import settings from "../../../../settings/settings";
 
-const ProductDisplayer = styled.div`
-  ${productDisplayerStyle}
+const Product = styled.div`
+  ${productStyle}
 `;
 
 const ProductTitle = styled.div`
@@ -32,15 +32,9 @@ const ActionTechIcons = styled.div`
   ${actionTechIconsStyle}
 `;
 
-const productDisplayer = ({
-  name,
-  cover,
-  description,
-  technologies,
-  socialLinks,
-}) => {
+const product = ({ name, cover, description, technologies, socialLinks }) => {
   return (
-    <ProductDisplayer>
+    <Product>
       <Card className="Card">
         {cover !== null ? <CardMedia image={cover} title={name} /> : null}
         <CardContent>
@@ -70,28 +64,35 @@ const productDisplayer = ({
         {socialLinks !== null ? (
           <CardActions>
             <ActionTechIcons className="action__techIcons">
-              {socialLinks.map(social => [
-                <IconButton
-                  key={social.name}
-                  href={social.link}
-                  aria-label={social.name}
-                  size="small"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <IconDisplayer
+              {socialLinks.map(social =>
+                settings.socialIcons[social.name] ? (
+                  <IconButton
                     key={social.name}
-                    name={settings.socialIcons[social.name].name}
-                    src={settings.socialIcons[social.name].icon}
-                  />
-                </IconButton>,
-              ])}
+                    href={social.link}
+                    aria-label={social.name}
+                    size="small"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <IconDisplayer
+                      key={social.name}
+                      name={settings.socialIcons[social.name].name}
+                      src={settings.socialIcons[social.name].icon}
+                    />
+                  </IconButton>
+                ) : (
+                  /* eslint-disable-next-line no-console */
+                  console.warn(
+                    `There is no icon path specified in the settings for ${social.name} social icon`
+                  )
+                )
+              )}
             </ActionTechIcons>
           </CardActions>
         ) : null}
       </Card>
-    </ProductDisplayer>
+    </Product>
   );
 };
 
-export default productDisplayer;
+export default product;
