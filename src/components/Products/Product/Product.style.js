@@ -5,6 +5,7 @@ export const productStyle = css`
   margin: 0px 0 40px 0;
 
   .Card {
+    width: 100%;
     color: ${props => props.theme.color};
     background-color: ${props => props.theme.cardBackground};
     transition: background 0.9s;
@@ -33,9 +34,9 @@ export const productTitleStyle = css`
   line-height: 1.3em;
 
   img {
-    margin-right: 8px;
-    height: 28px;
-    width: 28px;
+    margin-right: 4px;
+    height: 24px;
+    width: 24px;
   }
 `;
 
