@@ -11,6 +11,7 @@ import ToggleButton from "./ToggleButton/ToggleButton";
 import TechIcons from "./TechIcons/TechIcons";
 import TechNames from "./TechNames/TechNames";
 import TeamMembers from "./TeamMembers/TeamMembers";
+import SocialIcons from "./SocialIcons/SocialIcons";
 
 const Header = styled.div`
   ${headerStyle}
@@ -37,6 +38,7 @@ const header = () => (
       <HeaderIconsContainer>
         {settings.display === "icon" ? <TechIcons /> : <TechNames />}
         {settings.header.teamMembers ? <TeamMembers /> : null}
+        {settings.socialIcons ? <SocialIcons /> : null}
       </HeaderIconsContainer>
     ) : null}
   </Header>
