@@ -18,12 +18,12 @@ const app = () => (
   <Fragment>
     <Header />
     <App>
-      <OneCol>{settings.products ? <Products /> : null}</OneCol>
       <OneCol>
         {settings.teamContributionCalendarUsers ? (
           <TeamContributionCalendarDisplayer />
         ) : null}
       </OneCol>
+      <OneCol>{settings.products ? <Products /> : null}</OneCol>
       <TwoCol>
         {settings.medium ? <Medium /> : null}
         {settings.github ? <Projects /> : null}
