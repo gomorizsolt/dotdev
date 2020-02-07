@@ -36,11 +36,11 @@ const product = ({ name, cover, description, technologies, socialLinks }) => {
   return (
     <Product>
       <Card className="Card">
-        {cover !== null ? <CardMedia image={cover} title={name} /> : null}
+        {cover && <CardMedia image={cover} title={name} />}
         <CardContent>
           <ProductTitle>
             {name}
-            {technologies !== null ? (
+            {technologies && (
               <TechnologiesIconsContainer>
                 {technologies.map(tech =>
                   settings.technologyIcons[tech] ? (
@@ -57,11 +57,11 @@ const product = ({ name, cover, description, technologies, socialLinks }) => {
                   )
                 )}
               </TechnologiesIconsContainer>
-            ) : null}
+            )}
           </ProductTitle>
-          {description !== null ? <div>{description}</div> : null}
+          {description && <div>{description}</div>}
         </CardContent>
-        {socialLinks !== null ? (
+        {socialLinks && (
           <CardActions>
             <ActionTechIcons className="action__techIcons">
               {socialLinks.map(social =>
@@ -89,7 +89,7 @@ const product = ({ name, cover, description, technologies, socialLinks }) => {
               )}
             </ActionTechIcons>
           </CardActions>
-        ) : null}
+        )}
       </Card>
     </Product>
   );

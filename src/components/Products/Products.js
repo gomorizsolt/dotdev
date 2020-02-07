@@ -15,10 +15,10 @@ const products = () => (
       <Product
         key={product.name}
         name={product.name}
-        cover={product.cover ? product.cover : null}
-        description={product.description ? product.description : null}
-        technologies={product.technologies ? product.technologies : null}
-        socialLinks={product.socialLinks ? product.socialLinks : null}
+        cover={product.cover}
+        description={product.description}
+        technologies={product.technologies}
+        socialLinks={product.socialLinks}
       />
     ))}
   </Products>
