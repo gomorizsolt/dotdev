@@ -39,6 +39,7 @@ Replace
       { "name": "Example Member2", "link": "https://github.com/examplemember2" }
     ]
   },
+  "productsTitle": "Showcases",
   "products": [
     {
       "name": "First product",
