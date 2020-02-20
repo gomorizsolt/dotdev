@@ -23,7 +23,7 @@ const app = () => (
           <TeamContributionCalendarDisplayer />
         ) : null}
       </OneCol>
-      <OneCol>{settings.products ? <Products /> : null}</OneCol>
+      <OneCol>{settings.products && <Products />}</OneCol>
       <TwoCol>
         {settings.medium ? <Medium /> : null}
         {settings.github ? <Projects /> : null}
