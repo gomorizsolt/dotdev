@@ -37,6 +37,10 @@ Replace
     "teamMembers": [
       { "name": "Example Member1", "link": "https://github.com/examplemember1" },
       { "name": "Example Member2", "link": "https://github.com/examplemember2" }
+    ],
+    "socialLinks": [
+      { "name": "medium", "link": "https://medium.com/" },
+      { "name": "github", "link": "https://github.com/" }
     ]
   },
   "products": [
@@ -85,6 +89,7 @@ Replace
 | `proxyURL`                      | CORS proxy url. Required for Medium API access E.g. https://github.com/c-hive/cors-proxy                                                                               | `string / url`         | **No**   |
 | `header.technologies`           | Technologies used by team/user/company.                                                                                                                                | `array`                | **No**   |
 | `header.teamMembers`            | Team member(s) name and link.                                                                                                                                          | `object`               | **No**   |
+| `header.socialLinks`            | Team online presence.                                                                                                                                          | `object`               | **No**   |
 | `products.name`            | Product name. (This is required if you create a product entry)                                                                                                                                          | `string`               | **Yes**   |
 | `products.cover`            | Product cover image.                                                                                                                                          | `string / path to img`               | **No**   |
 | `products.description`            | Product description                                                                                                                                          | `string`               | **No**   |
