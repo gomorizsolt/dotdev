@@ -5,7 +5,7 @@ export const headerIconsContainerStyle = css`
   align-items: center;
   flex-basis: 100%;
   width: 100%;
-  margin: 0px 0 10px 20px;
+  margin: 0px 20px 10px 20px;
 
   .border {
     border-left: 1px solid ${props => props.theme.color};
