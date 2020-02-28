@@ -38,7 +38,7 @@ const header = () => (
       <HeaderIconsContainer>
         {settings.display === "icon" ? <TechIcons /> : <TechNames />}
         {settings.header.teamMembers ? <TeamMembers /> : null}
-        {settings.socialIcons ? <SocialIcons /> : null}
+        {settings.socialIcons && <SocialIcons />}
       </HeaderIconsContainer>
     ) : null}
   </Header>
