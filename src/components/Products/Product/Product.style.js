@@ -45,10 +45,6 @@ export const technologiesIconsContainerStyle = css`
 `;
 
 export const actionTechIconsStyle = css`
-  a {
-    display: inline-block;
-  }
-
   img {
     width: 28px;
     height: 28px;
