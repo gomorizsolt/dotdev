@@ -39,7 +39,7 @@ Replace
       { "name": "Example Member2", "link": "https://github.com/examplemember2" }
     ]
   },
-  "productsTitle": "Showcases",
+  "productsTitle": "Project showcase",
   "products": [
     {
       "name": "First product",
@@ -86,7 +86,7 @@ Replace
 | `proxyURL`                      | CORS proxy url. Required for Medium API access E.g. https://github.com/c-hive/cors-proxy                                                                               | `string / url`         | **No**   |
 | `header.technologies`           | Technologies used by team/user/company.                                                                                                                                | `array`                | **No**   |
 | `header.teamMembers`            | Team member(s) name and link.                                                                                                                                          | `object`               | **No**   |
-| `productsTitle`                      | Change products block title.                                                                               | `string`         | **No**   |
+| `productsTitle`                      | Change products block title. Default value: "Products"                                                                               | `string`         | **No**   |
 | `products.name`            | Product name. (This is required if you create a product entry)                                                                                                                                          | `string`               | **Yes**   |
 | `products.cover`            | Product cover image.                                                                                                                                          | `string / path to img`               | **No**   |
 | `products.description`            | Product description                                                                                                                                          | `string`               | **No**   |
