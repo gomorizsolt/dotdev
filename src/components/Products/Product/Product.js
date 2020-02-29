@@ -59,7 +59,7 @@ const product = ({ name, cover, description, technologies, socialLinks }) => {
         {socialLinks && (
           <CardActions>
             <ActionTechIcons className="action__techIcons">
-              <SocialIcons data={socialLinks} />
+              <SocialIcons socialLinks={socialLinks} />
             </ActionTechIcons>
           </CardActions>
         )}

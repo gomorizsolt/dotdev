@@ -9,10 +9,10 @@ const SocialIcons = styled.div`
   ${socialIconsStyle}
 `;
 
-const socialIcons = ({ classNames, data }) => {
+const socialIcons = ({ classNames, socialLinks }) => {
   return (
     <SocialIcons className={classNames}>
-      {data.map(social =>
+      {socialLinks.map(social =>
         settings.socialIcons[social.name] ? (
           <IconButton
             key={social.name}
