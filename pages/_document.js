@@ -3,6 +3,7 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
 
+
 export default class MyDocument extends Document {
   static async getInitialProps (ctx) {
     const sheet = new ServerStyleSheet()
@@ -30,7 +31,7 @@ export default class MyDocument extends Document {
         <Head>
           <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
         </Head>
-        <body>
+        <body style={{background: "#3f3f3f"}}>
           <Main />
           <NextScript />
         </body>
