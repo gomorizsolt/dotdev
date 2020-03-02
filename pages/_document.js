@@ -2,6 +2,7 @@
 
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
+import * as themes from "../src/resources/Themes/Themes"
 
 
 export default class MyDocument extends Document {
@@ -31,7 +32,8 @@ export default class MyDocument extends Document {
         <Head>
           <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
         </Head>
-        <body style={{background: "#3f3f3f"}}>
+        {/* We need to use explicit styles here, because of the initial render */}
+        <body style={{background: themes.dark.background}}>
           <Main />
           <NextScript />
         </body>
