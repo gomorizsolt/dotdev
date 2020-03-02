@@ -14,13 +14,13 @@ export const headerIconsContainerStyle = css`
     transition: 0.3s;
     opacity: 0.3;
   }
+`;
 
-  .socialIcons--header {
-    margin-left: auto;
+export const socialIconsWrapperStyle = css`
+  margin-left: auto;
 
-    .MuiIconButton-root {
-      margin-right: 4px;
-    }
+  .MuiIconButton-root {
+    margin-right: 4px;
   }
 `;
 

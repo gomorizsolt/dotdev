@@ -4,6 +4,7 @@ import settings from "../../../settings/settings.json";
 import {
   headerStyle,
   headerIconsContainerStyle,
+  socialIconsWrapperStyle,
   logoTextStyle,
   logoStyle,
 } from "./Header.style";
@@ -19,6 +20,10 @@ const Header = styled.div`
 
 const HeaderIconsContainer = styled.div`
   ${headerIconsContainerStyle}
+`;
+
+const SocialIconsWrapper = styled.div`
+  ${socialIconsWrapperStyle}
 `;
 
 const LogoText = styled.p`
@@ -39,10 +44,9 @@ const header = () => (
         {settings.display === "icon" ? <TechIcons /> : <TechNames />}
         {settings.header.teamMembers ? <TeamMembers /> : null}
         {settings.socialIcons && (
-          <SocialIcons
-            classNames="socialIcons--header"
-            links={settings.header.socialLinks}
-          />
+          <SocialIconsWrapper>
+            <SocialIcons links={settings.header.socialLinks} />
+          </SocialIconsWrapper>
         )}
       </HeaderIconsContainer>
     ) : null}

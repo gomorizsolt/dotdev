@@ -9,9 +9,9 @@ const SocialIcons = styled.div`
   ${socialIconsStyle}
 `;
 
-const socialIcons = ({ classNames, links }) => {
+const socialIcons = ({ links }) => {
   return (
-    <SocialIcons className={classNames}>
+    <SocialIcons>
       {links.map(social =>
         settings.socialIcons[social.name] ? (
           <IconButton
