@@ -41,7 +41,7 @@ const header = () => (
         {settings.socialIcons && (
           <SocialIcons
             classNames="socialIcons--header"
-            socialLinks={settings.header.socialLinks}
+            links={settings.header.socialLinks}
           />
         )}
       </HeaderIconsContainer>
