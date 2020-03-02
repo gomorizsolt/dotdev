@@ -17,6 +17,12 @@ const projectDisplayer = ({ userName, repoName }) => {
     repoName
   );
 
+  // const githubRepoLanguages = customHooks.useFetch(
+  //   githubUtils.fetchRepoLanguages,
+  //   userName,
+  //   repoName
+  // );
+
   if (githubFetchState.isLoading) {
     return (
       <ProjectDisplayer>
@@ -32,6 +38,10 @@ const projectDisplayer = ({ userName, repoName }) => {
     return <div>{errorMessage}</div>;
   }
 
+  // if (!githubRepoLanguages.isLoading) {
+  //   console.log(githubRepoLanguages);
+  // }
+
   return (
     <ProjectDisplayer>
       <a
@@ -46,6 +56,10 @@ const projectDisplayer = ({ userName, repoName }) => {
             <div className="project_star">
               <StarIcon />
               {githubFetchState.data.stargazers_count}
+              {/* {Object.keys(githubRepoLanguages.data).forEach(item => {
+                console.log(item); // key
+                console.log(githubRepoLanguages.data[item]); // value
+              })} */}
             </div>
           </div>
         </div>
