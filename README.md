@@ -43,6 +43,7 @@ Replace
       { "name": "github", "link": "https://github.com/" }
     ]
   },
+  "productsTitle": "Project showcase",
   "products": [
     {
       "name": "First product",
@@ -90,6 +91,7 @@ Replace
 | `header.technologies`           | Technologies used by team/user/company.                                                                                                                                | `array`                | **No**   |
 | `header.teamMembers`            | Team member(s) name and link.                                                                                                                                          | `object`               | **No**   |
 | `header.socialLinks`            | Team online presence.                                                                                                                                          | `object`               | **No**   |
+| `productsTitle`                      | Change products block title. Default value: "Products"                                                                               | `string`         | **No**   |
 | `products.name`            | Product name. (This is required if you create a product entry)                                                                                                                                          | `string`               | **Yes**   |
 | `products.cover`            | Product cover image.                                                                                                                                          | `string / path to img`               | **No**   |
 | `products.description`            | Product description                                                                                                                                          | `string`               | **No**   |
