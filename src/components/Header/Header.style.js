@@ -5,7 +5,7 @@ export const headerIconsContainerStyle = css`
   align-items: center;
   flex-basis: 100%;
   width: 100%;
-  margin: 0px 0 10px 20px;
+  margin: 0px 20px 10px 20px;
 
   .border {
     border-left: 1px solid ${props => props.theme.color};
@@ -13,6 +13,14 @@ export const headerIconsContainerStyle = css`
     height: 1.3em;
     transition: 0.3s;
     opacity: 0.3;
+  }
+`;
+
+export const socialIconsWrapperStyle = css`
+  margin-left: auto;
+
+  .MuiIconButton-root {
+    margin-right: 4px;
   }
 `;
 

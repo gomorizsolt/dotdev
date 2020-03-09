@@ -1,7 +1,7 @@
 import { createContext, useContext } from "react";
 
 const defaultContextData = {
-  darkMode: false,
+  darkMode: true,
   toggle: () => {},
 };
 
