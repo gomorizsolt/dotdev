@@ -37,7 +37,7 @@ const projectDisplayer = ({ userName, repoName, languageThreshold }) => {
     );
   }
 
-  if (githubFetchState.err) {
+  if (githubFetchState.err || githubRepoLanguages.err) {
     const errorMessage =
       "An error has occurred while loading the Github projects. Please try again later.";
 
