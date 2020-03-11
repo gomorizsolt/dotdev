@@ -16,7 +16,7 @@ const RepositoryLanguages = styled.div`
   ${repositoryLanguagesStyle}
 `;
 
-const projectDisplayer = ({ userName, repoName }) => {
+const projectDisplayer = ({ userName, repoName, languageThreshold }) => {
   const githubFetchState = customHooks.useFetch(
     githubUtils.fetchRepo,
     userName,
@@ -80,9 +80,9 @@ const projectDisplayer = ({ userName, repoName }) => {
           {Object.keys(githubRepoLanguages.data).map(item => {
             if (
               githubRepoLanguages.data[item] / githubRepoLanguages.sum >
-              0.1
+              (languageThreshold || 10) / 100
             ) {
-              return <div>{item}</div>;
+              return <div key={item}>{item}</div>;
             }
             return null;
           })}
