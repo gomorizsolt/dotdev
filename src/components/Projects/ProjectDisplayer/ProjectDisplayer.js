@@ -44,17 +44,9 @@ const projectDisplayer = ({ userName, repoName, languageThreshold }) => {
     return <div>{errorMessage}</div>;
   }
 
-  if (!githubRepoLanguages.isLoading) {
-    let sum = 0;
-
-    Object.keys(githubRepoLanguages.data).forEach(item => {
-      // console.log(item); // key
-      // console.log(githubRepoLanguages.data[item]); // value
-      sum += githubRepoLanguages.data[item];
-    });
-
-    githubRepoLanguages.sum = sum;
-  }
+  githubRepoLanguages.repoCharNumber = Object.values(
+    githubRepoLanguages.data
+  ).reduce((x, y) => x + y, 0);
 
   return (
     <ProjectDisplayer>
