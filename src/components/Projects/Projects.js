@@ -18,7 +18,6 @@ const projects = () => {
           key={repo}
           userName={settings.github.name}
           repoName={repo}
-          languageThreshold={settings.github.languageThreshold}
         />
       ))}
     </Projects>
