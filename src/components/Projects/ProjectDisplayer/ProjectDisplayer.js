@@ -94,25 +94,23 @@ const projectDisplayer = ({ userName, repoName }) => {
         <div className="project_description">
           <div>{githubFetchState.data.description}</div>
         </div>
-        {settings.display === "icon" ? (
-          languageBadges && (
-            <LanguageBadgesIconsContainer>
-              {languageBadges.map(tech =>
-                settings.technologyIcons[tech.toLowerCase()] ? (
-                  <IconDisplayer
-                    key={tech.toLowerCase()}
-                    name={settings.technologyIcons[tech.toLowerCase()].name}
-                    src={settings.technologyIcons[tech.toLowerCase()].icon}
-                  />
-                ) : (
-                  /* eslint-disable-next-line no-console */
-                  console.warn(
-                    `There is no icon path specified in the settings for ${tech} technology`
-                  )
+        {languageBadges && settings.display === "icon" ? (
+          <LanguageBadgesIconsContainer>
+            {languageBadges.map(tech =>
+              settings.technologyIcons[tech.toLowerCase()] ? (
+                <IconDisplayer
+                  key={tech.toLowerCase()}
+                  name={settings.technologyIcons[tech.toLowerCase()].name}
+                  src={settings.technologyIcons[tech.toLowerCase()].icon}
+                />
+              ) : (
+                /* eslint-disable-next-line no-console */
+                console.warn(
+                  `There is no icon path specified in the settings for ${tech} technology`
                 )
-              )}
-            </LanguageBadgesIconsContainer>
-          )
+              )
+            )}
+          </LanguageBadgesIconsContainer>
         ) : (
           <RepositoryLanguages>
             {languageBadges.map(language => {
