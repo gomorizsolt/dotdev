@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import {
   projectDisplayerStyle,
   repositoryLanguagesStyle,
+  languageBadgesIconsContainerStyle,
 } from "./ProjectDisplayer.style";
 import * as customHooks from "../../../utils/CustomHooks/CustomHooks";
 import * as githubUtils from "../utils/GithubUtils";
 import Loader from "../../UI/Loader/Loader";
 import StarIcon from "../../UI/Icons/StarIcon";
+import settings from "../../../../settings/settings.json";
+import IconDisplayer from "../../UI/Icons/IconDisplayer";
 
 const ProjectDisplayer = styled.div`
   ${projectDisplayerStyle}
@@ -16,7 +19,13 @@ const RepositoryLanguages = styled.div`
   ${repositoryLanguagesStyle}
 `;
 
+const LanguageBadgesIconsContainer = styled.div`
+  ${languageBadgesIconsContainerStyle}
+`;
+
 const projectDisplayer = ({ userName, repoName }) => {
+  const [languageBadges, setLanguageBadges] = useState([]);
+
   const githubFetchState = customHooks.useFetch(
     githubUtils.fetchRepo,
     userName,
@@ -28,6 +37,27 @@ const projectDisplayer = ({ userName, repoName }) => {
     userName,
     repoName
   );
+
+  useEffect(() => {
+    if (githubRepoLanguages.data == null) {
+      return;
+    }
+
+    githubRepoLanguages.repoCharNumber = Object.values(
+      githubRepoLanguages.data
+    ).reduce((x, y) => x + y, 0);
+
+    Object.keys(githubRepoLanguages.data).forEach(language => {
+      if (
+        githubRepoLanguages.data[language] /
+          githubRepoLanguages.repoCharNumber >
+        (settings.github.languageThreshold || 10) / 100
+      ) {
+        // eslint-disable-next-line no-shadow
+        setLanguageBadges(languageBadges => [...languageBadges, language]);
+      }
+    });
+  }, [githubRepoLanguages.data]);
 
   if (githubFetchState.isLoading || githubRepoLanguages.isLoading) {
     return (
@@ -43,36 +73,6 @@ const projectDisplayer = ({ userName, repoName }) => {
 
     return <div>{errorMessage}</div>;
   }
-
-  // const [githubRepoLanguagesData, setGithubRepoLanguagesData] = useState(
-  // "Hello"
-  // );
-  // const [languageBadges, setLanguageBadges] = useState([]);
-
-  // console.log(githubRepoLanguagesData);
-  // useEffect(() => {
-  //   if (githubRepoLanguages.data == null) {
-  //     return null;
-  //   }
-  // githubRepoLanguages.repoCharNumber = Object.values(
-  //   githubRepoLanguages.data
-  // ).reduce((x, y) => x + y, 0);
-  // // setLanguageBadges(
-  // console.log(
-  //   Object.keys(githubRepoLanguages.data).map(item => {
-  //     if (
-  //       githubRepoLanguages.data[item] /
-  //         githubRepoLanguages.repoCharNumber >
-  //       (languageThreshold || 10) / 100
-  //     ) {
-  //       return item;
-  //     }
-  //     return null;
-  //   })
-  // );
-  // // );
-  // }
-  // }, [githubRepoLanguages.data]);
 
   return (
     <ProjectDisplayer>
@@ -94,9 +94,32 @@ const projectDisplayer = ({ userName, repoName }) => {
         <div className="project_description">
           <div>{githubFetchState.data.description}</div>
         </div>
-        <RepositoryLanguages>
-          {/* {console.log(languageBadges) && null} */}
-        </RepositoryLanguages>
+        {settings.display === "icon" ? (
+          languageBadges && (
+            <LanguageBadgesIconsContainer>
+              {languageBadges.map(tech =>
+                settings.technologyIcons[tech.toLowerCase()] ? (
+                  <IconDisplayer
+                    key={tech.toLowerCase()}
+                    name={settings.technologyIcons[tech.toLowerCase()].name}
+                    src={settings.technologyIcons[tech.toLowerCase()].icon}
+                  />
+                ) : (
+                  /* eslint-disable-next-line no-console */
+                  console.warn(
+                    `There is no icon path specified in the settings for ${tech} technology`
+                  )
+                )
+              )}
+            </LanguageBadgesIconsContainer>
+          )
+        ) : (
+          <RepositoryLanguages>
+            {languageBadges.map(language => {
+              return <div key={language}>{language}</div>;
+            })}
+          </RepositoryLanguages>
+        )}
       </a>
     </ProjectDisplayer>
   );

@@ -47,6 +47,19 @@ export const projectDisplayerStyle = css`
   }
 `;
 
+export const languageBadgesIconsContainerStyle = css`
+  margin-top: 5px;
+
+  & > div {
+    margin-right: 5px;
+
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+`;
+
 export const repositoryLanguagesStyle = css`
   margin: 4px 2px;
 
