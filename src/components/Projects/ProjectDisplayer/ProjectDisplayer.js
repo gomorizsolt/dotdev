@@ -16,7 +16,7 @@ const RepositoryLanguages = styled.div`
   ${repositoryLanguagesStyle}
 `;
 
-const projectDisplayer = ({ userName, repoName, languageThreshold }) => {
+const projectDisplayer = ({ userName, repoName }) => {
   const githubFetchState = customHooks.useFetch(
     githubUtils.fetchRepo,
     userName,
@@ -44,9 +44,35 @@ const projectDisplayer = ({ userName, repoName, languageThreshold }) => {
     return <div>{errorMessage}</div>;
   }
 
-  githubRepoLanguages.repoCharNumber = Object.values(
-    githubRepoLanguages.data
-  ).reduce((x, y) => x + y, 0);
+  // const [githubRepoLanguagesData, setGithubRepoLanguagesData] = useState(
+  // "Hello"
+  // );
+  // const [languageBadges, setLanguageBadges] = useState([]);
+
+  // console.log(githubRepoLanguagesData);
+  // useEffect(() => {
+  //   if (githubRepoLanguages.data == null) {
+  //     return null;
+  //   }
+  // githubRepoLanguages.repoCharNumber = Object.values(
+  //   githubRepoLanguages.data
+  // ).reduce((x, y) => x + y, 0);
+  // // setLanguageBadges(
+  // console.log(
+  //   Object.keys(githubRepoLanguages.data).map(item => {
+  //     if (
+  //       githubRepoLanguages.data[item] /
+  //         githubRepoLanguages.repoCharNumber >
+  //       (languageThreshold || 10) / 100
+  //     ) {
+  //       return item;
+  //     }
+  //     return null;
+  //   })
+  // );
+  // // );
+  // }
+  // }, [githubRepoLanguages.data]);
 
   return (
     <ProjectDisplayer>
@@ -69,15 +95,7 @@ const projectDisplayer = ({ userName, repoName, languageThreshold }) => {
           <div>{githubFetchState.data.description}</div>
         </div>
         <RepositoryLanguages>
-          {Object.keys(githubRepoLanguages.data).map(item => {
-            if (
-              githubRepoLanguages.data[item] / githubRepoLanguages.sum >
-              (languageThreshold || 10) / 100
-            ) {
-              return <div key={item}>{item}</div>;
-            }
-            return null;
-          })}
+          {/* {console.log(languageBadges) && null} */}
         </RepositoryLanguages>
       </a>
     </ProjectDisplayer>
