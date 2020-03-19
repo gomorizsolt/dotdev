@@ -33,7 +33,7 @@ export default class MyDocument extends Document {
           <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
         </Head>
         {/* We need to use explicit styles here, because of the initial render */}
-        <body style={{background: themes.dark.background}}>
+        <body style={{background: themes.dark.loadingScreenBackground}}>
           <Main />
           <NextScript />
         </body>

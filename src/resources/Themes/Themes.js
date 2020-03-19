@@ -1,4 +1,5 @@
 export const dark = {
+  loadingScreenBackground: "#3F3F3F",
   background: "#3F3F3F !important",
   color: "#DBDBDB !important",
   cardBackground: "rgb(75, 75, 75)",
