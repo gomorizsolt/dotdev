@@ -43,18 +43,22 @@ const projectDisplayer = ({ userName, repoName }) => {
       return;
     }
 
-    githubRepoLanguages.repoCharNumber = Object.values(
+    const sumOfNumberOfBytesOfLanguages = Object.values(
       githubRepoLanguages.data
     ).reduce((x, y) => x + y, 0);
 
     Object.keys(githubRepoLanguages.data).forEach(language => {
+      const currentNumberOfBytes = githubRepoLanguages.data[language];
+      const threshold = settings.github.languageThreshold || 10;
+
       if (
-        githubRepoLanguages.data[language] /
-          githubRepoLanguages.repoCharNumber >
-        (settings.github.languageThreshold || 10) / 100
+        (currentNumberOfBytes / sumOfNumberOfBytesOfLanguages) * 100 >
+        threshold
       ) {
-        // eslint-disable-next-line no-shadow
-        setLanguageBadges(languageBadges => [...languageBadges, language]);
+        setLanguageBadges(prevlanguageBadges => [
+          ...prevlanguageBadges,
+          language,
+        ]);
       }
     });
   }, [githubRepoLanguages.data]);
