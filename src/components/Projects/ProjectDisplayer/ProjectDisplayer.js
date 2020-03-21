@@ -39,28 +39,26 @@ const projectDisplayer = ({ userName, repoName }) => {
   );
 
   useEffect(() => {
-    if (githubRepoLanguages.data == null) {
-      return;
+    if (githubRepoLanguages.data) {
+      const sumOfNumberOfBytesOfLanguages = Object.values(
+        githubRepoLanguages.data
+      ).reduce((x, y) => x + y, 0);
+
+      Object.keys(githubRepoLanguages.data).forEach(language => {
+        const currentNumberOfBytes = githubRepoLanguages.data[language];
+        const threshold = settings.github.languageThreshold || 10;
+
+        if (
+          (currentNumberOfBytes / sumOfNumberOfBytesOfLanguages) * 100 >
+          threshold
+        ) {
+          setLanguageBadges(prevlanguageBadges => [
+            ...prevlanguageBadges,
+            language,
+          ]);
+        }
+      });
     }
-
-    const sumOfNumberOfBytesOfLanguages = Object.values(
-      githubRepoLanguages.data
-    ).reduce((x, y) => x + y, 0);
-
-    Object.keys(githubRepoLanguages.data).forEach(language => {
-      const currentNumberOfBytes = githubRepoLanguages.data[language];
-      const threshold = settings.github.languageThreshold || 10;
-
-      if (
-        (currentNumberOfBytes / sumOfNumberOfBytesOfLanguages) * 100 >
-        threshold
-      ) {
-        setLanguageBadges(prevlanguageBadges => [
-          ...prevlanguageBadges,
-          language,
-        ]);
-      }
-    });
   }, [githubRepoLanguages.data]);
 
   if (githubFetchState.isLoading || githubRepoLanguages.isLoading) {
