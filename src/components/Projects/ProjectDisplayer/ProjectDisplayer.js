@@ -39,7 +39,7 @@ const projectDisplayer = ({ userName, repoName }) => {
   );
 
   useEffect(() => {
-    if (githubRepoLanguages.data) {
+    if (!githubRepoLanguages.isLoading && !githubRepoLanguages.err) {
       const sumOfNumberOfBytesOfLanguages = Object.values(
         githubRepoLanguages.data
       ).reduce((x, y) => x + y, 0);
@@ -59,7 +59,7 @@ const projectDisplayer = ({ userName, repoName }) => {
         }
       });
     }
-  }, [githubRepoLanguages.data]);
+  }, [githubRepoLanguages.isLoading, githubRepoLanguages.err]);
 
   if (githubFetchState.isLoading || githubRepoLanguages.isLoading) {
     return (
