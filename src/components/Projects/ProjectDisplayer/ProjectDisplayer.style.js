@@ -47,6 +47,10 @@ export const projectDisplayerStyle = css`
   }
 `;
 
+export const errorContainerStyle = css`
+  margin-bottom: 1.2em;
+`;
+
 export const languageBadgesIconsContainerStyle = css`
   margin-top: 5px;
 

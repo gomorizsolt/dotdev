@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import {
   projectDisplayerStyle,
+  errorContainerStyle,
   repositoryLanguagesStyle,
   languageBadgesIconsContainerStyle,
 } from "./ProjectDisplayer.style";
@@ -15,6 +16,11 @@ import IconDisplayer from "../../UI/Icons/IconDisplayer";
 const ProjectDisplayer = styled.div`
   ${projectDisplayerStyle}
 `;
+
+const ErrorContainer = styled.div`
+  ${errorContainerStyle}
+`;
+
 const RepositoryLanguages = styled.div`
   ${repositoryLanguagesStyle}
 `;
@@ -70,16 +76,15 @@ const projectDisplayer = ({ userName, repoName }) => {
   }
 
   if (githubFetchState.err) {
-    const errorMessage =
-      "An error has occurred while loading the Github projects. Please try again later.";
+    const errorMessage = `An error has occurred while loading the ${repoName} Github project. Please try again later.`;
 
-    return <div>{errorMessage}</div>;
+    return <ErrorContainer>{errorMessage}</ErrorContainer>;
   }
 
   if (githubRepoLanguages.err) {
     /* eslint-disable-next-line no-console */
     console.warn(
-      `An error has occurred while loading the Github project languages. Please try again later.`
+      `An error has occurred while loading the ${repoName} Github project languages. Please try again later.`
     );
   }
 
