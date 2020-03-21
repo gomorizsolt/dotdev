@@ -98,7 +98,7 @@ Replace
 | `products.socialLinks`            | Product online presence.                                                                                                                                          | `object`               | **No**   |
 | `teamContributionCalendarUsers` | GitHub-like contribution calendar for the whole team. Supports GitHub and GitLab, **[you can learn more here](https://github.com/c-hive/team-contribution-calendar)**. | `object`               | **No**   |
 | `medium`                        | Medium user/publication name.                                                                                                                                          | `string`               | **No**   |
-| `github.name`                        | GitHub user/organization name.10%.                                                                                                                  | `string`               | **No**   |
+| `github.name`                        | GitHub user/organization name.                                                                                                                  | `string`               | **No**   |
 | `github.languageThreshold`                        | Displays repository languages which are higher than a percent (by default 10%).                                                                                                                     | `integer`               | **No**   |
 | `github.repos`                        | GitHub user/organization repository name(s).                                                                                                                  | `array`               | **No**   |
 
