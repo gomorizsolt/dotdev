@@ -69,11 +69,18 @@ const projectDisplayer = ({ userName, repoName }) => {
     );
   }
 
-  if (githubFetchState.err || githubRepoLanguages.err) {
+  if (githubFetchState.err) {
     const errorMessage =
       "An error has occurred while loading the Github projects. Please try again later.";
 
     return <div>{errorMessage}</div>;
+  }
+
+  if (githubRepoLanguages.err) {
+    /* eslint-disable-next-line no-console */
+    console.warn(
+      `An error has occurred while loading the Github project languages. Please try again later.`
+    );
   }
 
   return (
