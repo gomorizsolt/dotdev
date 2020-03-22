@@ -52,7 +52,8 @@ const projectDisplayer = ({ userName, repoName }) => {
 
       Object.keys(githubRepoLanguages.data).forEach(language => {
         const currentNumberOfBytes = githubRepoLanguages.data[language];
-        const threshold = settings.github.languageThreshold || 10;
+        const defaultThreshold = 10;
+        const threshold = settings.github.languageThreshold || defaultThreshold;
 
         if (
           (currentNumberOfBytes / sumOfNumberOfBytesOfLanguages) * 100 >
