@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import {
   projectDisplayerStyle,
@@ -6,7 +6,6 @@ import {
   repositoryLanguagesStyle,
   languageBadgesIconsContainerStyle,
 } from "./ProjectDisplayer.style";
-import * as customHooks from "../../../utils/CustomHooks/CustomHooks";
 import * as githubUtils from "../utils/GithubUtils";
 import Loader from "../../UI/Loader/Loader";
 import StarIcon from "../../UI/Icons/StarIcon";
@@ -30,43 +29,11 @@ const LanguageBadgesIconsContainer = styled.div`
 `;
 
 const projectDisplayer = ({ userName, repoName }) => {
-  const [languageBadges, setLanguageBadges] = useState([]);
-
-  const githubFetchState = customHooks.useFetch(
-    githubUtils.fetchRepo,
-    userName,
-    repoName
-  );
-
-  const githubRepoLanguages = customHooks.useFetch(
-    githubUtils.fetchRepoLanguages,
-    userName,
-    repoName
-  );
-
-  useEffect(() => {
-    if (!githubRepoLanguages.isLoading && !githubRepoLanguages.err) {
-      const sumOfNumberOfBytesOfLanguages = Object.values(
-        githubRepoLanguages.data
-      ).reduce((x, y) => x + y, 0);
-
-      Object.keys(githubRepoLanguages.data).forEach(language => {
-        const currentNumberOfBytes = githubRepoLanguages.data[language];
-        const defaultThreshold = 10;
-        const threshold = settings.github.languageThreshold || defaultThreshold;
-
-        if (
-          (currentNumberOfBytes / sumOfNumberOfBytesOfLanguages) * 100 >
-          threshold
-        ) {
-          setLanguageBadges(prevlanguageBadges => [
-            ...prevlanguageBadges,
-            language,
-          ]);
-        }
-      });
-    }
-  }, [githubRepoLanguages.isLoading, githubRepoLanguages.err]);
+  const {
+    githubFetchState,
+    githubRepoLanguages,
+    languageBadges,
+  } = githubUtils.useGithubFetch(userName, repoName);
 
   if (githubFetchState.isLoading || githubRepoLanguages.isLoading) {
     return (
