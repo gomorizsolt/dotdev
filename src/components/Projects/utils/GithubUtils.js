@@ -22,7 +22,7 @@ export const fetchRepoLanguages = (userName, repositoryName) => {
   }).then(fetchedProjectLanguages => fetchedProjectLanguages.json());
 };
 
-export const useGithubFetch = (userName, repoName) => {
+export const useRepoLanguages = (userName, repoName) => {
   const [repoLanguages, setRepoLanguages] = useState([]);
 
   const githubFetchState = customHooks.useFetch(fetchRepo, userName, repoName);

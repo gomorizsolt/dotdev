@@ -33,7 +33,7 @@ const projectDisplayer = ({ userName, repoName }) => {
     githubFetchState,
     githubRepoLanguages,
     repoLanguages,
-  } = githubUtils.useGithubFetch(userName, repoName);
+  } = githubUtils.useRepoLanguages(userName, repoName);
 
   if (githubFetchState.isLoading || githubRepoLanguages.isLoading) {
     return (
