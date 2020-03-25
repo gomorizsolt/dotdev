@@ -10,7 +10,9 @@ const Products = styled.div`
 
 const products = () => (
   <Products>
-    <h2 className="products__title">Products</h2>
+    <h2 className="products__title">
+      {settings.productsTitle ? settings.productsTitle : "Products"}
+    </h2>
     {settings.products.map(product => (
       <Product
         key={product.name}
