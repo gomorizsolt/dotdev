@@ -42,14 +42,16 @@ export const useRepoLanguages = (userName, repoName) => {
       const defaultThreshold = 10;
       const threshold = settings.github.languageThreshold || defaultThreshold;
 
-      const languages = Object.entries(githubRepoLanguages.data)
-        .map(([language, currentNumberOfBytes]) => {
-          return (currentNumberOfBytes / sumOfNumberOfBytesOfLanguages) * 100 >
+      const languages = Object.keys(githubRepoLanguages.data).filter(
+        language => {
+          const currentNumberOfBytes = githubRepoLanguages.data[language];
+
+          return (
+            (currentNumberOfBytes / sumOfNumberOfBytesOfLanguages) * 100 >
             threshold
-            ? language
-            : null;
-        })
-        .filter(language => language != null);
+          );
+        }
+      );
 
       setRepoLanguages(languages);
     }
