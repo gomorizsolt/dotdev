@@ -23,7 +23,7 @@ export const fetchRepoLanguages = (userName, repositoryName) => {
 };
 
 export const useGithubFetch = (userName, repoName) => {
-  const [languageBadges, setLanguageBadges] = useState([]);
+  const [repoLanguages, setRepoLanguages] = useState([]);
 
   const githubFetchState = customHooks.useFetch(fetchRepo, userName, repoName);
 
@@ -39,27 +39,25 @@ export const useGithubFetch = (userName, repoName) => {
         githubRepoLanguages.data
       ).reduce((x, y) => x + y, 0);
 
-      Object.keys(githubRepoLanguages.data).forEach(language => {
-        const currentNumberOfBytes = githubRepoLanguages.data[language];
-        const defaultThreshold = 10;
-        const threshold = settings.github.languageThreshold || defaultThreshold;
+      const defaultThreshold = 10;
+      const threshold = settings.github.languageThreshold || defaultThreshold;
 
-        if (
-          (currentNumberOfBytes / sumOfNumberOfBytesOfLanguages) * 100 >
-          threshold
-        ) {
-          setLanguageBadges(prevlanguageBadges => [
-            ...prevlanguageBadges,
-            language,
-          ]);
-        }
-      });
+      const languages = Object.entries(githubRepoLanguages.data)
+        .map(([language, currentNumberOfBytes]) => {
+          return (currentNumberOfBytes / sumOfNumberOfBytesOfLanguages) * 100 >
+            threshold
+            ? language
+            : null;
+        })
+        .filter(language => language != null);
+
+      setRepoLanguages(languages);
     }
   }, [githubRepoLanguages.isLoading, githubRepoLanguages.err]);
 
   return {
     githubFetchState,
     githubRepoLanguages,
-    languageBadges,
+    repoLanguages,
   };
 };

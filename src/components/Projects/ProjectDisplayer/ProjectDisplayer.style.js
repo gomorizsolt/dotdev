@@ -51,7 +51,7 @@ export const errorContainerStyle = css`
   margin-bottom: 1.2em;
 `;
 
-export const languageBadgesIconsContainerStyle = css`
+export const languagesIconContainerStyle = css`
   margin-top: 5px;
 
   & > div {
@@ -64,7 +64,7 @@ export const languageBadgesIconsContainerStyle = css`
   }
 `;
 
-export const repositoryLanguagesStyle = css`
+export const languagesTextContainerStyle = css`
   margin: 4px 2px;
 
   div {

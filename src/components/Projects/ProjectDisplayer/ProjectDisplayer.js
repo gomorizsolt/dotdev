@@ -3,8 +3,8 @@ import styled from "styled-components";
 import {
   projectDisplayerStyle,
   errorContainerStyle,
-  repositoryLanguagesStyle,
-  languageBadgesIconsContainerStyle,
+  languagesTextContainerStyle,
+  languagesIconContainerStyle,
 } from "./ProjectDisplayer.style";
 import * as githubUtils from "../utils/GithubUtils";
 import Loader from "../../UI/Loader/Loader";
@@ -20,19 +20,19 @@ const ErrorContainer = styled.div`
   ${errorContainerStyle}
 `;
 
-const RepositoryLanguages = styled.div`
-  ${repositoryLanguagesStyle}
+const LanguagesTextContainer = styled.div`
+  ${languagesTextContainerStyle}
 `;
 
-const LanguageBadgesIconsContainer = styled.div`
-  ${languageBadgesIconsContainerStyle}
+const LanguagesIconContainer = styled.div`
+  ${languagesIconContainerStyle}
 `;
 
 const projectDisplayer = ({ userName, repoName }) => {
   const {
     githubFetchState,
     githubRepoLanguages,
-    languageBadges,
+    repoLanguages,
   } = githubUtils.useGithubFetch(userName, repoName);
 
   if (githubFetchState.isLoading || githubRepoLanguages.isLoading) {
@@ -76,9 +76,9 @@ const projectDisplayer = ({ userName, repoName }) => {
         <div className="project_description">
           <div>{githubFetchState.data.description}</div>
         </div>
-        {languageBadges && settings.display === "icon" ? (
-          <LanguageBadgesIconsContainer>
-            {languageBadges.map(tech =>
+        {repoLanguages && settings.display === "icon" ? (
+          <LanguagesIconContainer>
+            {repoLanguages.map(tech =>
               settings.technologyIcons[tech.toLowerCase()] ? (
                 <IconDisplayer
                   key={tech.toLowerCase()}
@@ -92,13 +92,13 @@ const projectDisplayer = ({ userName, repoName }) => {
                 )
               )
             )}
-          </LanguageBadgesIconsContainer>
+          </LanguagesIconContainer>
         ) : (
-          <RepositoryLanguages>
-            {languageBadges.map(language => {
+          <LanguagesTextContainer>
+            {repoLanguages.map(language => {
               return <div key={language}>{language}</div>;
             })}
-          </RepositoryLanguages>
+          </LanguagesTextContainer>
         )}
       </a>
     </ProjectDisplayer>
