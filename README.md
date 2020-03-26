@@ -73,6 +73,7 @@ Replace
   "medium": "examplemediumuser",
   "github": {
     "name": "examplegithubuser",
+    "languageThreshold": 10,
     "repos": ["examplegithubrepo1", "examplegithubrepo2"]
   }
 }
@@ -99,7 +100,9 @@ Replace
 | `products.socialLinks`            | Product online presence.                                                                                                                                          | `object`               | **No**   |
 | `teamContributionCalendarUsers` | GitHub-like contribution calendar for the whole team. Supports GitHub and GitLab, **[you can learn more here](https://github.com/c-hive/team-contribution-calendar)**. | `object`               | **No**   |
 | `medium`                        | Medium user/publication name.                                                                                                                                          | `string`               | **No**   |
-| `github`                        | GitHub user/organization name and repository name(s).                                                                                                                  | `object`               | **No**   |
+| `github.name`                        | GitHub user/organization name.                                                                                                                  | `string`               | **No**   |
+| `github.languageThreshold`                        | Percentage threshold for coding languages in a repository to be displayed for the project (by default 10%).                                                                                                                     | `integer`               | **No**   |
+| `github.repos`                        | GitHub user/organization repository name(s).                                                                                                                  | `array`               | **No**   |
 
 Note:
 - Leading slashes for static resources might work locally but fail in production

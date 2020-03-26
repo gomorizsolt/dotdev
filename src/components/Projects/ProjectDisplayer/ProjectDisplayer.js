@@ -1,23 +1,41 @@
 import React from "react";
 import styled from "styled-components";
-import { projectDisplayerStyle } from "./ProjectDisplayer.style";
-import * as customHooks from "../../../utils/CustomHooks/CustomHooks";
+import {
+  projectDisplayerStyle,
+  errorContainerStyle,
+  languagesTextContainerStyle,
+  languagesIconContainerStyle,
+} from "./ProjectDisplayer.style";
 import * as githubUtils from "../utils/GithubUtils";
 import Loader from "../../UI/Loader/Loader";
 import StarIcon from "../../UI/Icons/StarIcon";
+import settings from "../../../../settings/settings.json";
+import IconDisplayer from "../../UI/Icons/IconDisplayer";
 
 const ProjectDisplayer = styled.div`
   ${projectDisplayerStyle}
 `;
 
-const projectDisplayer = ({ userName, repoName }) => {
-  const githubFetchState = customHooks.useFetch(
-    githubUtils.fetchRepo,
-    userName,
-    repoName
-  );
+const ErrorContainer = styled.div`
+  ${errorContainerStyle}
+`;
 
-  if (githubFetchState.isLoading) {
+const LanguagesTextContainer = styled.div`
+  ${languagesTextContainerStyle}
+`;
+
+const LanguagesIconContainer = styled.div`
+  ${languagesIconContainerStyle}
+`;
+
+const projectDisplayer = ({ userName, repoName }) => {
+  const {
+    githubFetchState,
+    githubRepoLanguages,
+    repoLanguages,
+  } = githubUtils.useRepoLanguages(userName, repoName);
+
+  if (githubFetchState.isLoading || githubRepoLanguages.isLoading) {
     return (
       <ProjectDisplayer>
         <Loader />
@@ -26,10 +44,16 @@ const projectDisplayer = ({ userName, repoName }) => {
   }
 
   if (githubFetchState.err) {
-    const errorMessage =
-      "An error has occurred while loading the Github projects. Please try again later.";
+    const errorMessage = `An error has occurred while loading the ${repoName} Github project. Please try again later.`;
 
-    return <div>{errorMessage}</div>;
+    return <ErrorContainer>{errorMessage}</ErrorContainer>;
+  }
+
+  if (githubRepoLanguages.err) {
+    /* eslint-disable-next-line no-console */
+    console.warn(
+      `An error has occurred while loading the ${repoName} Github project languages. Please try again later.`
+    );
   }
 
   return (
@@ -52,6 +76,30 @@ const projectDisplayer = ({ userName, repoName }) => {
         <div className="project_description">
           <div>{githubFetchState.data.description}</div>
         </div>
+        {repoLanguages && settings.display === "icon" ? (
+          <LanguagesIconContainer>
+            {repoLanguages.map(tech =>
+              settings.technologyIcons[tech.toLowerCase()] ? (
+                <IconDisplayer
+                  key={tech.toLowerCase()}
+                  name={settings.technologyIcons[tech.toLowerCase()].name}
+                  src={settings.technologyIcons[tech.toLowerCase()].icon}
+                />
+              ) : (
+                /* eslint-disable-next-line no-console */
+                console.warn(
+                  `There is no icon path specified in the settings for ${tech} technology`
+                )
+              )
+            )}
+          </LanguagesIconContainer>
+        ) : (
+          <LanguagesTextContainer>
+            {repoLanguages.map(language => {
+              return <div key={language}>{language}</div>;
+            })}
+          </LanguagesTextContainer>
+        )}
       </a>
     </ProjectDisplayer>
   );

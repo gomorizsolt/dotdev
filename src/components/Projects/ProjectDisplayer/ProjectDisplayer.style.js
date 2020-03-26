@@ -46,3 +46,44 @@ export const projectDisplayerStyle = css`
     }
   }
 `;
+
+export const errorContainerStyle = css`
+  margin-bottom: 1.2em;
+`;
+
+export const languagesIconContainerStyle = css`
+  margin-top: 5px;
+
+  & > div {
+    margin-right: 5px;
+
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+`;
+
+export const languagesTextContainerStyle = css`
+  margin: 4px 2px;
+
+  div {
+    display: inline-block;
+    margin: 3px 9px 3px 0;
+    padding: 0.4em 1em;
+    background-color: rgba(247, 176, 84, 1);
+    font-size: 0.8em;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    text-decoration: none;
+    color: #325359;
+    white-space: nowrap;
+    border-radius: 0.25rem;
+    transition: 0.3s;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`;
