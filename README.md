@@ -1,11 +1,12 @@
-# c-hive.dev
+# dotdev
 
-A Next.js SPA website to showcase ourselves: https://c-hive.github.io/c-hive.dev/
+A Next.js SPA professional website template: https://c-hive.github.io/dotdev/
 
 ## Local development
 
 ```bash
 npm install
+npm run lint
 npm run dev
 ```
 
