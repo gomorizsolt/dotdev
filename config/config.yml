@@ -1,0 +1,106 @@
+# Team/user/company name. Type: string. Required: no.
+name: "John Doe"
+
+# Team/user/company logo. Type: string. Required: no.
+logo: "static/logo/logo.png"
+
+# Customize and extend technology icons. Type: object. Required: no.
+technologyIcons:
+    react:
+      name: "React"
+      icon: "static/svg/react.svg"
+    javascript:
+      name: "JavaScript"
+      icon: "static/svg/js.svg"
+
+# Customize and extend social icons. Type: object. Required: no.
+socialIcons:
+  github:
+    name: "GitHub"
+    icon: "static/svg/github.svg"
+  medium:
+    name: "Medium"
+    icon: "static/svg/medium.svg"
+
+# Showcase technologies by their icon or name. Type: string, values: "icon" || "name". Required:
+display: "icon"
+
+# Required for accessing the Medium API. Type: string. Required: no.
+proxyURL: "https://c-hive-proxy.herokuapp.com"
+
+# Site header. Type: object. Required: no.
+header:
+    # Technologies used by team/user/company. Type: array of strings. Required: no.
+    technologies:
+      - javascript
+      - react
+    # Team member(s) name and link. Type: array of objects. Required: no.
+    teamMembers:
+      - name: "Csaba Apagyi"
+        link: "https://github.com/thisismydesign"
+      - name: "Zsolt Gömöri"
+        link: "https://github.com/gomorizsolt"
+    # Team online presence. Type: array of objects. Required:
+    socialLinks:
+      - name: "github"
+        link: "https://github.com/c-hive"
+      - name: "medium"
+        link: "https://medium.com/c-hive"
+
+# Override the default title. Type: string, default: "Products". Required: no.
+productsTitle: "Projects"
+
+# Showcase products. Type: array of objects. Required: no.
+products:
+  # Product's title. Type: string. Required: yes.
+  - name: "PoE Live Search Manager"
+
+    # Product's cover image. Type: string. Required: no.
+    cover: "static/images/cover.jpg"
+
+    # Product description. Type: string. Required: no.
+    description: "This tool lets you run live searches by parsing the latest item data from the Path of Exile API. The main benefit of this tool compared to poe.trade live search is the ability to centralize and save searches within a single window."
+
+    # Technologies used by the product. Type: array. Required: no.
+    technologies:
+      - "javascript"
+
+    # Product online presence. Type. array of objects. Required: no.
+    socialLinks:
+      - name: "github"
+        link: "https://github.com/5k-mirrors/poe-live-search-manager"
+
+# Aggregate contributions: https://github.com/c-hive/team-contribution-calendar. Type: object. Required: no.
+teamContributionCalendarUsers:
+  # GitHub users. Type: array of objects. Required: yes.
+  github:
+    - name: "thisismydesign"
+      from: "2019-09-22"
+    - name: "gomorizsolt"
+      from: "2020-01-01"
+      to: "2020-04-07"
+  # GitLab users. Type: array of objects. Required: yes.
+  gitlab: []
+
+# Medium identifier. Type: string. Required: no.
+medium: "c-hive"
+
+# GitHub identifier. Type: object. Required: no.
+github:
+  # Organization/user. Type: string. Required: no.
+  name: "c-hive"
+
+  # Percentage threshold for coding languages in a repository to be displayed for the project. Type: number, default: 10. Required: no
+  languageThreshold: 10
+
+  # Repository identifiers. Type: array of strings. Required: no.
+  repos:
+    - "team-contribution-calendar"
+    - "ws-anywhere"
+    - "js-boilerplate"
+
+
+
+
+
+

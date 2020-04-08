@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { techNamesStyle } from "./TechNames.style";
-import settings from "../../../../settings/settings";
+import config from "../../../../config/config.yml";
 
 const TechNames = styled.div`
   ${techNamesStyle}
@@ -9,9 +9,9 @@ const TechNames = styled.div`
 
 const techNames = () => (
   <TechNames>
-    {settings.header.technologies.map(tech => (
+    {config.header.technologies.map(tech => (
       <div className="TechName" key={tech}>
-        {settings.technologyIcons[tech].name}
+        {config.technologyIcons[tech].name}
       </div>
     ))}
   </TechNames>

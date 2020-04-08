@@ -1,6 +1,6 @@
 import RSSParser from "rss-parser";
 import getProxyURL from "../../../utils/GetProxyURL/GetProxyURL";
-import settings from "../../../../settings/settings.json";
+import config from "../../../../config/config.yml";
 
 const filterItems = items => items.filter(item => item.categories);
 
@@ -8,7 +8,7 @@ export const getArticles = async () => {
   const rssParser = new RSSParser();
 
   const proxiedFeedURL = getProxyURL(
-    `https://medium.com/feed/${settings.medium}`
+    `https://medium.com/feed/${config.medium}`
   );
 
   return rssParser

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import * as customHooks from "../../../utils/CustomHooks/CustomHooks";
-import settings from "../../../../settings/settings.json";
+import config from "../../../../config/config.yml";
 
 export const fetchRepo = (userName, repositoryName) => {
   const url = `https://api.github.com/repos/${userName}/${repositoryName}`;
@@ -40,7 +40,7 @@ export const useRepoLanguages = (userName, repoName) => {
       ).reduce((x, y) => x + y, 0);
 
       const defaultThreshold = 10;
-      const threshold = settings.github.languageThreshold || defaultThreshold;
+      const threshold = config.github.languageThreshold || defaultThreshold;
 
       const languages = Object.keys(githubRepoLanguages.data).filter(
         language => {

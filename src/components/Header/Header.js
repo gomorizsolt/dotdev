@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import settings from "../../../settings/settings.json";
+import config from "../../../config/config.yml";
 import {
   headerStyle,
   headerIconsContainerStyle,
@@ -36,16 +36,16 @@ const Logo = styled.img`
 
 const header = () => (
   <Header>
-    {settings.logo ? <Logo src={settings.logo} alt={settings.name} /> : null}
-    {settings.name ? <LogoText>{settings.name}</LogoText> : null}
+    {config.logo ? <Logo src={config.logo} alt={config.name} /> : null}
+    {config.name ? <LogoText>{config.name}</LogoText> : null}
     <ToggleButton />
-    {settings.header && settings.header.technologies ? (
+    {config.header && config.header.technologies ? (
       <HeaderIconsContainer>
-        {settings.display === "icon" ? <TechIcons /> : <TechNames />}
-        {settings.header.teamMembers ? <TeamMembers /> : null}
-        {settings.socialIcons && (
+        {config.display === "icon" ? <TechIcons /> : <TechNames />}
+        {config.header.teamMembers ? <TeamMembers /> : null}
+        {config.socialIcons && (
           <SocialIconsWrapper>
-            <SocialIcons links={settings.header.socialLinks} />
+            <SocialIcons links={config.header.socialLinks} />
           </SocialIconsWrapper>
         )}
       </HeaderIconsContainer>

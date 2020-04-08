@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import TeamContributionCalendar from "@c-hive/team-contribution-calendar";
 import styled from "styled-components";
-import settings from "../../../settings/settings.json";
+import config from "../../../config/config.yml";
 import { teamContributionCalendarDisplayerStyle } from "./TeamContributionCalendarDisplayer.style";
 
 const TeamContributionCalendarDisplayer = styled.div`
@@ -18,8 +18,8 @@ class teamContributionCalendarDisplayer extends Component {
   componentDidMount() {
     TeamContributionCalendar(
       this.calendarContainer,
-      settings.teamContributionCalendarUsers.github,
-      settings.teamContributionCalendarUsers.gitlab
+      config.teamContributionCalendarUsers.github,
+      config.teamContributionCalendarUsers.gitlab
     );
   }
 

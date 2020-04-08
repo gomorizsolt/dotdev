@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import styled from "styled-components";
 import { teamMembersStyle } from "./TeamMembers.style";
-import settings from "../../../../settings/settings";
+import config from "../../../../config/config.yml";
 
 const TeamMembers = styled.div`
   ${teamMembersStyle}
@@ -11,7 +11,7 @@ const teamMembers = () => (
   <Fragment>
     <span className="border" />
     <TeamMembers>
-      {settings.header.teamMembers.map((member, i) => [
+      {config.header.teamMembers.map((member, i) => [
         i > 0 && ", ",
         <a
           className="TeamMember"

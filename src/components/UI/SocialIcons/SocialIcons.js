@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { IconButton } from "@material-ui/core/";
 import { socialIconsStyle } from "./SocialIcons.style";
 import IconDisplayer from "../Icons/IconDisplayer";
-import settings from "../../../../settings/settings";
+import config from "../../../../config/config.yml";
 
 const SocialIcons = styled.div`
   ${socialIconsStyle}
@@ -13,7 +13,7 @@ const socialIcons = ({ links }) => {
   return (
     <SocialIcons>
       {links.map(social =>
-        settings.socialIcons[social.name] ? (
+        config.socialIcons[social.name] ? (
           <IconButton
             key={social.name}
             href={social.link}
@@ -24,8 +24,8 @@ const socialIcons = ({ links }) => {
           >
             <IconDisplayer
               key={social.name}
-              name={settings.socialIcons[social.name].name}
-              src={settings.socialIcons[social.name].icon}
+              name={config.socialIcons[social.name].name}
+              src={config.socialIcons[social.name].icon}
             />
           </IconButton>
         ) : (

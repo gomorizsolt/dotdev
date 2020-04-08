@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import settings from "../../../settings/settings.json";
+import config from "../../../config/config.yml";
 import { productsStyle } from "./Products.style";
 import Product from "./Product/Product";
 
@@ -11,9 +11,9 @@ const Products = styled.div`
 const products = () => (
   <Products>
     <h2 className="products__title">
-      {settings.productsTitle ? settings.productsTitle : "Products"}
+      {config.productsTitle ? config.productsTitle : "Products"}
     </h2>
-    {settings.products.map(product => (
+    {config.products.map(product => (
       <Product
         key={product.name}
         name={product.name}

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { appStyle } from "./App.style";
 import TeamContributionCalendarDisplayer from "../TeamContributionCalendarDisplayer/TeamContributionCalendarDisplayer";
 import Header from "../Header/Header";
-import settings from "../../../settings/settings.json";
+import config from "../../../config/config.yml";
 import Medium from "../Medium/Medium";
 import Projects from "../Projects/Projects";
 import OneCol from "../UI/Layout/OneCol";
@@ -14,22 +14,20 @@ const App = styled.div`
   ${appStyle}
 `;
 
-const app = () => (
+export default () => (
   <Fragment>
     <Header />
     <App>
       <OneCol>
-        {settings.teamContributionCalendarUsers ? (
+        {config.teamContributionCalendarUsers ? (
           <TeamContributionCalendarDisplayer />
         ) : null}
       </OneCol>
-      <OneCol>{settings.products && <Products />}</OneCol>
+      <OneCol>{config.products && <Products />}</OneCol>
       <TwoCol>
-        {settings.medium ? <Medium /> : null}
-        {settings.github ? <Projects /> : null}
+        {config.medium ? <Medium /> : null}
+        {config.github ? <Projects /> : null}
       </TwoCol>
     </App>
   </Fragment>
 );
-
-export default app;

@@ -1,7 +1,7 @@
-import settings from "../../../settings/settings.json";
+import config from "../../../config/config.yml";
 
 const getProxyURL = url => {
-  return `${settings.proxyURL}/${url}`;
+  return `${config.proxyURL}/${url}`;
 };
 
 export default getProxyURL;
