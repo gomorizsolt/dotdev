@@ -36,10 +36,8 @@ header:
       - react
     # Team member(s) name and link. Type: array of objects. Required: no.
     teamMembers:
-      - name: "Csaba Apagyi"
-        link: "https://github.com/thisismydesign"
-      - name: "Zsolt Gömöri"
-        link: "https://github.com/gomorizsolt"
+      - name: "Arunoda Susiripala"
+        link: "https://twitter.com/arunoda"
     # Team online presence. Type: array of objects. Required:
     socialLinks:
       - name: "github"
