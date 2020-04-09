@@ -88,11 +88,11 @@ github:
   # Organization/user. Type: string. Required: no.
   name: "c-hive"
 
-  # Percentage threshold for coding languages in a repository to be displayed for the project. Type: number, default: 15. Required: no
-  # languageThreshold: 15
-
   # Repository identifiers. Type: array of strings. Required: no.
   repos:
     - "team-contribution-calendar"
-    - "ws-anywhere"
+    - "c-hive/ws-anywhere"
     - "js-boilerplate"
+
+  # Percentage threshold for coding languages in a repository to be displayed for the project. Type: number, default: 15. Required: no
+  # languageThreshold: 15
