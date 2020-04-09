@@ -37,9 +37,9 @@ export const useFetch = (fetchFunction, ...args) => {
         isLoading: false,
         err: false,
       });
-    } catch (e) {
+    } catch (err) {
       // eslint-disable-next-line no-console
-      console.error(JSON.stringify(e));
+      console.error("Error while fetching: ", err);
 
       setData({
         ...defaultState,
