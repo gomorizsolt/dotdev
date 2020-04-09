@@ -22,7 +22,7 @@ socialIcons:
     name: "Medium"
     icon: "static/svg/medium.svg"
 
-# Showcase technologies by their icon or name. Type: string, values: "icon" || "name". Required:
+# Showcase technologies by their icon or name. Type: string, values: "icon" || "name". Required: no.
 display: "icon"
 
 # Required for accessing the Medium API. Type: string. Required: no.
@@ -56,7 +56,7 @@ products:
   - name: "PoE Live Search Manager"
 
     # Product's cover image. Type: string. Required: no.
-    cover: "static/images/cover.jpg"
+    cover: ""
 
     # Product description. Type: string. Required: no.
     description: "This tool lets you run live searches by parsing the latest item data from the Path of Exile API. The main benefit of this tool compared to poe.trade live search is the ability to centralize and save searches within a single window."
