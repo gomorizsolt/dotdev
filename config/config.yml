@@ -53,22 +53,22 @@ productsTitle: "Projects"
 # Showcase products. Type: array of objects. Required: no.
 products:
   # Product's title. Type: string. Required: yes.
-  - name: "PoE Live Search Manager"
+  - name: "Next.JS"
 
     # Product's cover image. Type: string. Required: no.
     cover: ""
 
     # Product description. Type: string. Required: no.
-    description: "This tool lets you run live searches by parsing the latest item data from the Path of Exile API. The main benefit of this tool compared to poe.trade live search is the ability to centralize and save searches within a single window."
+    description: "The React Framework"
 
     # Technologies used by the product. Type: array. Required: no.
     technologies:
-      - "javascript"
+      - "react"
 
     # Product online presence. Type. array of objects. Required: no.
     socialLinks:
       - name: "github"
-        link: "https://github.com/5k-mirrors/poe-live-search-manager"
+        link: "https://github.com/zeit/next.js/"
 
 # Aggregate contributions: https://github.com/c-hive/team-contribution-calendar. Type: object. Required: no.
 teamContributionCalendarUsers:
