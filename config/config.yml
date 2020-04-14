@@ -25,8 +25,8 @@ socialIcons:
 # Showcase technologies by their icon or name. Type: string, values: "icon" || "name". Required: no.
 display: "icon"
 
-# Required for accessing the Medium API: https://github.com/Rob--W/cors-anywhere. Type: string. Required: no.
-proxyURL: ""
+# CORS proxy. Required for accessing the Medium API. Use your own! E.g. https://github.com/Rob--W/cors-anywhere. Type: string. Required: no.
+proxyURL: "https://cors-anywhere.herokuapp.com/"
 
 # Site header. Type: object. Required: no.
 header:
