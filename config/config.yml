@@ -94,5 +94,5 @@ github:
     - "ws-anywhere"
     - "js-boilerplate"
 
-  # Percentage threshold for coding languages in a repository to be displayed for the project. Type: number, default: 15. Required: no
+  # Percentage threshold for coding languages in a repository to be displayed for the project. Type: number, default: 10. Required: no
   # languageThreshold: 15
