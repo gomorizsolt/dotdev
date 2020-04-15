@@ -1,15 +1,15 @@
 import React from "react";
 import { Normalize } from "styled-normalize";
-import GlobalTheme from "../src/components/GlobalTheme/GlobalTheme";
+import { ThemeProvider } from "../src/contexts/Theme";
 import { GlobalStyle } from "../src/common/GlobalStyle/GlobalStyle";
 import App from "../src/components/App/App";
 
 const indexPage = () => (
-  <GlobalTheme>
+  <ThemeProvider>
     <Normalize />
     <GlobalStyle />
     <App />
-  </GlobalTheme>
+  </ThemeProvider>
 );
 
 export default indexPage;
