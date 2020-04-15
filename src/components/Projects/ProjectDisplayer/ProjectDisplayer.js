@@ -9,7 +9,7 @@ import {
 import * as githubUtils from "../utils/GithubUtils";
 import Loader from "../../UI/Loader/Loader";
 import StarIcon from "../../UI/Icons/StarIcon";
-import config from "../../../../config/config.yml";
+import { useConfig } from "../../../contexts/Config";
 import IconDisplayer from "../../UI/Icons/IconDisplayer";
 
 const ProjectDisplayer = styled.div`
@@ -29,6 +29,7 @@ const LanguagesIconContainer = styled.div`
 `;
 
 const projectDisplayer = ({ userName, repoName }) => {
+  const config = useConfig();
   const {
     githubFetchState,
     githubRepoLanguages,

@@ -39,7 +39,7 @@ export const useFetch = (fetchFunction, ...args) => {
       });
     } catch (err) {
       // eslint-disable-next-line no-console
-      console.error("Error while fetching: ", err);
+      console.error("Error while fetching:", fetchFunction.name, err);
 
       setData({
         ...defaultState,
