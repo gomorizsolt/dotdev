@@ -70,14 +70,14 @@ products:
 
 # Aggregate contributions: https://github.com/c-hive/team-contribution-calendar. Type: object. Required: no.
 teamContributionCalendarUsers:
-  # GitHub users. Type: array of objects. Required: yes.
+  # GitHub users. Type: array of objects. Required: no.
   github:
     - name: "thisismydesign"
       from: "2019-09-22"
     - name: "gomorizsolt"
       from: "2020-01-01"
       to: "2020-04-07"
-  # GitLab users. Type: array of objects. Required: yes.
+  # GitLab users. Type: array of objects. Required: no.
   gitlab: []
 
 # Medium identifier. Type: string. Required: no.
