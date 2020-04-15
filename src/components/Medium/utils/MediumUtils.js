@@ -4,7 +4,7 @@ const filterItems = items => items.filter(item => item.categories);
 
 export const getArticles = async (proxy, username) => {
   const rssParser = new RSSParser();
-  const feedUrl = `${proxy}/https://medium.com/feed/${username}`;
+  const feedUrl = `${proxy}https://medium.com/feed/${username}`;
 
   return rssParser
     .parseURL(feedUrl)
