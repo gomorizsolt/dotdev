@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createContext } from "react";
-import { ThemeProvider as GlobalThemeProvider } from "styled-components";
+import { ThemeProvider as StyleProvider } from "styled-components";
 import { useFactoryContext } from "../utils/ReactUtils/ReactUtils";
 import {
   light as lightTheme,
@@ -44,13 +44,11 @@ export const ThemeProvider = ({ children }) => {
   }
 
   return (
-    <GlobalThemeProvider
-      theme={theme.current === "dark" ? darkTheme : lightTheme}
-    >
+    <StyleProvider theme={theme.current === "dark" ? darkTheme : lightTheme}>
       <ThemeContext.Provider value={{ theme: theme.current, toggle }}>
         {children}
       </ThemeContext.Provider>
-    </GlobalThemeProvider>
+    </StyleProvider>
   );
 };
 
