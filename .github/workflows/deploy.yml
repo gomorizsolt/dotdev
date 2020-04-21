@@ -28,6 +28,8 @@ jobs:
       - name: Install JS dependencies
         run: npm install
       - name: Build & Prepare files for deployment
+        env:
+          CONFIG: ${{ secrets.CONFIG }}
         run: npm run pre:deploy
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
@@ -35,5 +37,3 @@ jobs:
           BRANCH: gh-pages
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FOLDER: out
-        env:
-          CONFIG: ${{ secrets.CONFIG }}
