@@ -19,7 +19,7 @@ Refer to the [example](./config/config.yml) file for the available options.
 The site comes with [automated deployment](./.github/workflows/deploy.yml) to GitHub Pages out-of-the-box.
 
 ## Caveats
-- Note that leading slashes for static resources might work locally but fail in production.
+- Leading slashes for static resources might work locally but fail in production.
 
 ## Conventions
 
