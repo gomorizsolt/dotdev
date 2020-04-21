@@ -31,9 +31,13 @@ jobs:
         env:
           CONFIG: ${{ secrets.CONFIG }}
         run: npm run pre:deploy
+      - name: Install SSH Client
+        uses: webfactory/ssh-agent@v0.2.0
+        with:
+          ssh-private-key: ${{ secrets.DEPLOY_KEY }}
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
+          SSH: true
           BRANCH: gh-pages
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FOLDER: out
