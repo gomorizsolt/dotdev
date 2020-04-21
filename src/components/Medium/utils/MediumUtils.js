@@ -8,7 +8,7 @@ const proxify = (proxy, url) => {
 
   proxifiedUrl.set("pathname", url);
 
-  return proxifiedUrl;
+  return proxifiedUrl.toString();
 };
 
 export const getArticles = async (proxy, username) => {
