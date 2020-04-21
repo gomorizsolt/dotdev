@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build && next export",
-    "pre:deploy": "echo $CONFIG > config/config.yml && npm run build && cd out && touch .nojekyll",
+    "pre:deploy": "echo $CONFIG > config/config.yml && npm run build",
     "lint": "eslint . --ext .js",
     "start": "next start -p $PORT"
   },
