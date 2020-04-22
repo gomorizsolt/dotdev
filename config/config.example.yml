@@ -1,3 +1,6 @@
+# NOTES
+# - Avoid leading slashes for static resources.
+
 # Team/user/company name. Type: string. Required: no.
 name: "John Doe"
 
