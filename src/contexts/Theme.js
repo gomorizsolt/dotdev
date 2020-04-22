@@ -23,7 +23,7 @@ export const ThemeProvider = ({ children }) => {
     // Due to sever-side rendering, the theme cannot be initialized outside of the effect: https://github.com/zeit/next.js/issues/1043
     setTheme(prevTheme => ({
       ...prevTheme,
-      current: localStorage.getItem("theme") || "dark",
+      current: localStorage.getItem("theme"),
       loading: false,
     }));
   }, []);
