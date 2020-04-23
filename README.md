@@ -25,9 +25,6 @@ Refer to the [example](./config/config.example.yml) file for the available optio
 - Set up custom deployment workflow
 - Store the configuration in the `CONFIG` environment variable
 
-#### Caveats
-- Leading slashes for static resources might work locally but fail in production.
-
 ## Conventions
 
 This project follows [C-Hive guides](https://github.com/c-hive/guides) for code style, way of working and other development concerns.
