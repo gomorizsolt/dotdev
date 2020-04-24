@@ -1,65 +1,86 @@
-import { useState, useEffect } from "react";
-import * as customHooks from "../../../utils/CustomHooks/CustomHooks";
+import { useState, useEffect, useCallback } from "react";
+// import * as customHooks from "../../../utils/CustomHooks/CustomHooks";
+import { useFetch } from "../../../utils/ReactUtils/ReactUtils";
 import settings from "../../../../settings/settings.json";
 
-export const fetchRepo = (userName, repositoryName) => {
-  const url = `https://api.github.com/repos/${userName}/${repositoryName}`;
+const useRepoInfo = (username, repo) => {
+  const fetchRepoInfo = useCallback(() => {
+    const url = `https://api.github.com/repos/${username}/${repo}`;
 
-  return fetch(url, {
-    headers: {
-      Accept: "application/vnd.github.baptiste-preview+json",
+    return fetch(url, {
+      headers: {
+        Accept: "application/vnd.github.baptiste-preview+json",
+      },
+    }).then(res => res.json());
+  }, [username, repo]);
+
+  const { data, loading, err } = useFetch(fetchRepoInfo);
+
+  return {
+    repoInfo: {
+      url: data && data.html_url,
+      name: data && data.name,
+      stars: data && data.stargazers_count,
+      description: data && data.description,
     },
-  }).then(fetchedProjectDetails => fetchedProjectDetails.json());
+    loading,
+    err,
+  };
 };
 
-export const fetchRepoLanguages = (userName, repositoryName) => {
-  const url = `https://api.github.com/repos/${userName}/${repositoryName}/languages`;
+const useLanguages = (username, repo) => {
+  const fetchRepoLanguages = useCallback(() => {
+    const url = `https://api.github.com/repos/${username}/${repo}/languages`;
 
-  return fetch(url, {
-    headers: {
-      Accept: "application/vnd.github.baptiste-preview+json",
-    },
-  }).then(fetchedProjectLanguages => fetchedProjectLanguages.json());
-};
+    return fetch(url, {
+      headers: {
+        Accept: "application/vnd.github.baptiste-preview+json",
+      },
+    }).then(res => res.json());
+  }, [username, repo]);
 
-export const useRepoLanguages = (userName, repoName) => {
-  const [repoLanguages, setRepoLanguages] = useState([]);
-
-  const githubFetchState = customHooks.useFetch(fetchRepo, userName, repoName);
-
-  const githubRepoLanguages = customHooks.useFetch(
-    fetchRepoLanguages,
-    userName,
-    repoName
-  );
+  const { data, loading, err } = useFetch(fetchRepoLanguages);
+  const [languages, setLanguages] = useState();
 
   useEffect(() => {
-    if (!githubRepoLanguages.isLoading && !githubRepoLanguages.err) {
-      const sumOfNumberOfBytesOfLanguages = Object.values(
-        githubRepoLanguages.data
-      ).reduce((x, y) => x + y, 0);
-
+    if (!loading && !err) {
+      const sumOfNumberOfBytes = Object.values(data).reduce((x, y) => x + y, 0);
       const defaultThreshold = 10;
       const threshold = settings.github.languageThreshold || defaultThreshold;
 
-      const languages = Object.keys(githubRepoLanguages.data).filter(
-        language => {
-          const currentNumberOfBytes = githubRepoLanguages.data[language];
+      const filteredLanguages = Object.keys(data).filter(language => {
+        const currentNumberOfBytes = data[language];
 
-          return (
-            (currentNumberOfBytes / sumOfNumberOfBytesOfLanguages) * 100 >
-            threshold
-          );
-        }
-      );
+        return (currentNumberOfBytes / sumOfNumberOfBytes) * 100 > threshold;
+      });
 
-      setRepoLanguages(languages);
+      setLanguages(filteredLanguages);
     }
-  }, [githubRepoLanguages.isLoading, githubRepoLanguages.err]);
+  }, [data, loading, err]);
 
   return {
-    githubFetchState,
-    githubRepoLanguages,
-    repoLanguages,
+    loading,
+    err,
+    languages,
+  };
+};
+
+export const useGitHub = (username, repo) => {
+  const {
+    loading: languagesLoading,
+    err: languagesErr,
+    languages,
+  } = useLanguages(username, repo);
+  const { loading: repoInfoLoading, err: repoInfoErr, repoInfo } = useRepoInfo(
+    username,
+    repo
+  );
+
+  return {
+    loading: languagesLoading || repoInfoLoading,
+    languagesErr,
+    repoInfoErr,
+    languages,
+    repoInfo,
   };
 };

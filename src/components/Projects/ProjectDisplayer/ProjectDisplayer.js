@@ -6,7 +6,7 @@ import {
   languagesTextContainerStyle,
   languagesIconContainerStyle,
 } from "./ProjectDisplayer.style";
-import * as githubUtils from "../utils/GithubUtils";
+import { useGitHub } from "../utils/GithubUtils";
 import Loader from "../../UI/Loader/Loader";
 import StarIcon from "../../UI/Icons/StarIcon";
 import settings from "../../../../settings/settings.json";
@@ -28,14 +28,13 @@ const LanguagesIconContainer = styled.div`
   ${languagesIconContainerStyle}
 `;
 
-const projectDisplayer = ({ userName, repoName }) => {
-  const {
-    githubFetchState,
-    githubRepoLanguages,
-    repoLanguages,
-  } = githubUtils.useRepoLanguages(userName, repoName);
+export default ({ userName, repoName }) => {
+  const { loading, languagesErr, repoInfoErr, languages, repoInfo } = useGitHub(
+    userName,
+    repoName
+  );
 
-  if (githubFetchState.isLoading || githubRepoLanguages.isLoading) {
+  if (loading) {
     return (
       <ProjectDisplayer>
         <Loader />
@@ -43,16 +42,50 @@ const projectDisplayer = ({ userName, repoName }) => {
     );
   }
 
-  if (githubFetchState.err) {
+  if (repoInfoErr) {
     const errorMessage = `An error has occurred while loading the ${repoName} Github project. Please try again later.`;
 
     return <ErrorContainer>{errorMessage}</ErrorContainer>;
   }
 
-  if (githubRepoLanguages.err) {
-    /* eslint-disable-next-line no-console */
+  if (languagesErr) {
+    // eslint-disable-next-line no-console
     console.warn(
       `An error has occurred while loading the ${repoName} Github project languages. Please try again later.`
+    );
+  }
+
+  function renderLanguages() {
+    if (languages && settings.display === "icon") {
+      return (
+        <LanguagesIconContainer>
+          {languages.map(language => {
+            const icon = settings.technologyIcons[language.toLowerCase()];
+
+            return icon ? (
+              <IconDisplayer
+                key={language.toLowerCase()}
+                name={icon.name}
+                src={icon.icon}
+              />
+            ) : (
+              [
+                /* eslint-disable-next-line no-console */
+                console.warn(
+                  `There is no icon path specified in the settings for ${language}`
+                ),
+              ]
+            );
+          })}
+        </LanguagesIconContainer>
+      );
+    }
+    return (
+      <LanguagesTextContainer>
+        {languages.map(language => {
+          return <div key={language}>{language}</div>;
+        })}
+      </LanguagesTextContainer>
     );
   }
 
@@ -60,49 +93,24 @@ const projectDisplayer = ({ userName, repoName }) => {
     <ProjectDisplayer>
       <a
         className="repository_link"
-        href={githubFetchState.data.html_url}
+        href={repoInfo.url}
         target="_blank"
         rel="noopener noreferrer"
       >
         <div className="project_header">
           <div className="project_title">
-            <div className="repository_name">{githubFetchState.data.name}</div>
+            <div className="repository_name">{repoInfo.name}</div>
             <div className="project_star">
               <StarIcon />
-              {githubFetchState.data.stargazers_count}
+              {repoInfo.stars}
             </div>
           </div>
         </div>
         <div className="project_description">
-          <div>{githubFetchState.data.description}</div>
+          <div>{repoInfo.description}</div>
         </div>
-        {repoLanguages && settings.display === "icon" ? (
-          <LanguagesIconContainer>
-            {repoLanguages.map(tech =>
-              settings.technologyIcons[tech.toLowerCase()] ? (
-                <IconDisplayer
-                  key={tech.toLowerCase()}
-                  name={settings.technologyIcons[tech.toLowerCase()].name}
-                  src={settings.technologyIcons[tech.toLowerCase()].icon}
-                />
-              ) : (
-                /* eslint-disable-next-line no-console */
-                console.warn(
-                  `There is no icon path specified in the settings for ${tech} technology`
-                )
-              )
-            )}
-          </LanguagesIconContainer>
-        ) : (
-          <LanguagesTextContainer>
-            {repoLanguages.map(language => {
-              return <div key={language}>{language}</div>;
-            })}
-          </LanguagesTextContainer>
-        )}
+        {renderLanguages()}
       </a>
     </ProjectDisplayer>
   );
 };
-
-export default projectDisplayer;
