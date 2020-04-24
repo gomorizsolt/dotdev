@@ -11,10 +11,10 @@ const Medium = styled.div`
   ${mediumStyle}
 `;
 
-const medium = () => {
-  const config = useConfig();
+export default () => {
+  const { proxyURL, medium } = useConfig();
   const articles = customHooks.useFetch(() =>
-    mediumUtils.getArticles(config.proxyURL, config.medium)
+    mediumUtils.getArticles(proxyURL, medium)
   );
 
   if (articles.isLoading) {
@@ -41,5 +41,3 @@ const medium = () => {
     </Medium>
   );
 };
-
-export default medium;

@@ -7,18 +7,16 @@ const TechNames = styled.div`
   ${techNamesStyle}
 `;
 
-const techNames = () => {
-  const config = useConfig();
+export default () => {
+  const { header, techIcons } = useConfig();
 
   return (
     <TechNames>
-      {config.header.technologies.map(tech => (
+      {header.technologies.map(tech => (
         <div className="TechName" key={tech}>
-          {config.technologyIcons[tech].name}
+          {techIcons[tech].name}
         </div>
       ))}
     </TechNames>
   );
 };
-
-export default techNames;

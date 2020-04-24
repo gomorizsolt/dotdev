@@ -12,7 +12,7 @@ const fetchRepo = (userName, repositoryName) => {
   }).then(fetchedProjectDetails => fetchedProjectDetails.json());
 };
 
-export const fetchRepoLanguages = (userName, repositoryName) => {
+const fetchRepoLanguages = (userName, repositoryName) => {
   const url = `https://api.github.com/repos/${userName}/${repositoryName}/languages`;
 
   return fetch(url, {

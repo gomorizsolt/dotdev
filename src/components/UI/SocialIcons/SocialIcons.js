@@ -9,13 +9,15 @@ const SocialIcons = styled.div`
   ${socialIconsStyle}
 `;
 
-const socialIcons = ({ links }) => {
-  const config = useConfig();
+export default ({ links }) => {
+  const { socialIcons } = useConfig();
 
   return (
     <SocialIcons>
-      {links.map(social =>
-        config.socialIcons[social.name] ? (
+      {links.map(social => {
+        const icon = socialIcons[social.name];
+
+        return icon ? (
           <IconButton
             key={social.name}
             href={social.link}
@@ -24,21 +26,15 @@ const socialIcons = ({ links }) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <IconDisplayer
-              key={social.name}
-              name={config.socialIcons[social.name].name}
-              src={config.socialIcons[social.name].icon}
-            />
+            <IconDisplayer key={social.name} name={icon.name} src={icon.path} />
           </IconButton>
         ) : (
           /* eslint-disable-next-line no-console */
           console.warn(
             `There is no icon path specified in the settings for ${social.name} social icon`
           )
-        )
-      )}
+        );
+      })}
     </SocialIcons>
   );
 };
-
-export default socialIcons;

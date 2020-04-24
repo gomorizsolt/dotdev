@@ -29,7 +29,7 @@ const LanguagesIconContainer = styled.div`
 `;
 
 const projectDisplayer = ({ userName, repoName }) => {
-  const config = useConfig();
+  const { display, techIcons } = useConfig();
   const {
     githubFetchState,
     githubRepoLanguages,
@@ -57,6 +57,39 @@ const projectDisplayer = ({ userName, repoName }) => {
     );
   }
 
+  function renderLanguages() {
+    if (repoLanguages && display === "icon") {
+      return (
+        <LanguagesIconContainer>
+          {repoLanguages.map(tech => {
+            const icon = techIcons[tech.toLowerCase()];
+
+            return icon ? (
+              <IconDisplayer
+                key={tech.toLowerCase()}
+                name={icon.name}
+                src={icon.path}
+              />
+            ) : (
+              /* eslint-disable-next-line no-console */
+              console.warn(
+                `There is no icon path specified in the settings for ${tech} technology`
+              )
+            );
+          })}
+        </LanguagesIconContainer>
+      );
+    }
+
+    return (
+      <LanguagesTextContainer>
+        {repoLanguages.map(language => {
+          return <div key={language}>{language}</div>;
+        })}
+      </LanguagesTextContainer>
+    );
+  }
+
   return (
     <ProjectDisplayer>
       <a
@@ -77,30 +110,7 @@ const projectDisplayer = ({ userName, repoName }) => {
         <div className="project_description">
           <div>{githubFetchState.data.description}</div>
         </div>
-        {repoLanguages && config.display === "icon" ? (
-          <LanguagesIconContainer>
-            {repoLanguages.map(tech =>
-              config.technologyIcons[tech.toLowerCase()] ? (
-                <IconDisplayer
-                  key={tech.toLowerCase()}
-                  name={config.technologyIcons[tech.toLowerCase()].name}
-                  src={config.technologyIcons[tech.toLowerCase()].icon}
-                />
-              ) : (
-                /* eslint-disable-next-line no-console */
-                console.warn(
-                  `There is no icon path specified in the settings for ${tech} technology`
-                )
-              )
-            )}
-          </LanguagesIconContainer>
-        ) : (
-          <LanguagesTextContainer>
-            {repoLanguages.map(language => {
-              return <div key={language}>{language}</div>;
-            })}
-          </LanguagesTextContainer>
-        )}
+        {renderLanguages()}
       </a>
     </ProjectDisplayer>
   );

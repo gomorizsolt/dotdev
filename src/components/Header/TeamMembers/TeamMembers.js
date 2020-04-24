@@ -7,14 +7,14 @@ const TeamMembers = styled.div`
   ${teamMembersStyle}
 `;
 
-const teamMembers = () => {
-  const config = useConfig();
+export default () => {
+  const { header } = useConfig();
 
   return (
     <Fragment>
       <span className="border" />
       <TeamMembers>
-        {config.header.teamMembers.map((member, i) => [
+        {header.teamMembers.map((member, i) => [
           i > 0 && ", ",
           <a
             className="TeamMember"
@@ -30,5 +30,3 @@ const teamMembers = () => {
     </Fragment>
   );
 };
-
-export default teamMembers;

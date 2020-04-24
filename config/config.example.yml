@@ -8,22 +8,25 @@ name: "John Doe"
 logo: "static/logo/logo.png"
 
 # Customize and extend technology icons. Type: object. Required: no.
-technologyIcons:
+techIcons:
     react:
       name: "React"
-      icon: "static/svg/react.svg"
+      path: "static/svg/react.svg"
     javascript:
       name: "JavaScript"
-      icon: "static/svg/js.svg"
+      path: "static/svg/js.svg"
+    html:
+      name: "HTML"
+      path: "static/svg/html.svg"
 
 # Customize and extend social icons. Type: object. Required: no.
 socialIcons:
   github:
     name: "GitHub"
-    icon: "static/svg/github.svg"
+    path: "static/svg/github.svg"
   medium:
     name: "Medium"
-    icon: "static/svg/medium.svg"
+    path: "static/svg/medium.svg"
 
 # Showcase technologies by their icon or name. Type: string, values: "icon" || "name". Required: no.
 display: "icon"

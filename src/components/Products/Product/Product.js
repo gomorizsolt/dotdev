@@ -27,47 +27,49 @@ const ActionTechIcons = styled.div`
   ${actionTechIconsStyle}
 `;
 
-const product = ({ name, cover, description, technologies, socialLinks }) => {
-  const config = useConfig();
+export default ({ name, cover, description, technologies, socialLinks }) => {
+  const { techIcons } = useConfig();
+
+  function renderProductTitle() {
+    return (
+      <ProductTitle>
+        {name}
+        {technologies && (
+          <TechnologiesIconsContainer>
+            {technologies.map(tech => {
+              const icon = techIcons[tech];
+
+              return icon ? (
+                <IconDisplayer key={tech} name={icon.name} src={icon.path} />
+              ) : (
+                // eslint-disable-next-line no-console
+                console.error(
+                  `There is no icon path specified in the settings for ${tech} technology`
+                )
+              );
+            })}
+          </TechnologiesIconsContainer>
+        )}
+      </ProductTitle>
+    );
+  }
 
   return (
     <Product>
       <Card className="Card">
         {cover && <CardMedia image={cover} title={name} />}
         <CardContent>
-          <ProductTitle>
-            {name}
-            {technologies && (
-              <TechnologiesIconsContainer>
-                {technologies.map(tech =>
-                  config.technologyIcons[tech] ? (
-                    <IconDisplayer
-                      key={tech}
-                      name={config.technologyIcons[tech].name}
-                      src={config.technologyIcons[tech].icon}
-                    />
-                  ) : (
-                    /* eslint-disable-next-line no-console */
-                    console.warn(
-                      `There is no icon path specified in the settings for ${tech} technology`
-                    )
-                  )
-                )}
-              </TechnologiesIconsContainer>
-            )}
-          </ProductTitle>
+          {renderProductTitle()}
           {description && <div>{description}</div>}
+          {socialLinks && (
+            <CardActions>
+              <ActionTechIcons className="action__techIcons">
+                <SocialIcons links={socialLinks} />
+              </ActionTechIcons>
+            </CardActions>
+          )}
         </CardContent>
-        {socialLinks && (
-          <CardActions>
-            <ActionTechIcons className="action__techIcons">
-              <SocialIcons links={socialLinks} />
-            </ActionTechIcons>
-          </CardActions>
-        )}
       </Card>
     </Product>
   );
 };
-
-export default product;

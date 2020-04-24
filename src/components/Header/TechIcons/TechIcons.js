@@ -8,27 +8,23 @@ const TechIcons = styled.div`
   ${techIconsStyle}
 `;
 
-const techIcons = () => {
-  const config = useConfig();
+export default () => {
+  const { header, techIcons } = useConfig();
 
   return (
     <TechIcons>
-      {config.header.technologies.map(tech =>
-        config.technologyIcons[tech] ? (
-          <IconDisplayer
-            key={tech}
-            name={config.technologyIcons[tech].name}
-            src={config.technologyIcons[tech].icon}
-          />
+      {header.technologies.map(tech => {
+        const icon = techIcons[tech];
+
+        return icon ? (
+          <IconDisplayer key={tech} name={icon.name} src={icon.path} />
         ) : (
-          /* eslint-disable-next-line no-console */
+          // eslint-disable-next-line no-console
           console.warn(
             `There is no icon path specified in the settings for ${tech} technology`
           )
-        )
-      )}
+        );
+      })}
     </TechIcons>
   );
 };
-
-export default techIcons;
