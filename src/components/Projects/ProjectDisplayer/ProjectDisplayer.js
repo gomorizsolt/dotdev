@@ -28,7 +28,7 @@ const LanguagesIconContainer = styled.div`
   ${languagesIconContainerStyle}
 `;
 
-const projectDisplayer = ({ userName, repoName }) => {
+export default ({ userName, repoName }) => {
   const { display, techIcons } = useConfig();
   const {
     githubFetchState,
@@ -115,5 +115,3 @@ const projectDisplayer = ({ userName, repoName }) => {
     </ProjectDisplayer>
   );
 };
-
-export default projectDisplayer;

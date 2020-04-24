@@ -9,7 +9,7 @@ const ToggleButton = styled.div`
   ${toggleButtonStyle}
 `;
 
-const toggleButton = () => {
+export default () => {
   const themeState = useTheme();
 
   return (
@@ -33,5 +33,3 @@ const toggleButton = () => {
     </ToggleButton>
   );
 };
-
-export default toggleButton;

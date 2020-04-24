@@ -5,7 +5,7 @@ import * as customHooks from "../../utils/CustomHooks/CustomHooks";
 import * as themes from "../../resources/Themes/Themes";
 import { themeContext } from "../../utils/useTheme/useTheme";
 
-const globalTheme = ({ children }) => {
+export default ({ children }) => {
   const [themeState, setThemeState] = customHooks.useDarkMode();
 
   if (!themeState.hasThemeLoaded) {
@@ -35,5 +35,3 @@ const globalTheme = ({ children }) => {
     </ThemeProvider>
   );
 };
-
-export default globalTheme;
