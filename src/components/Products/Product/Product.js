@@ -8,7 +8,7 @@ import {
   technologiesIconsContainerStyle,
 } from "./Product.style";
 import IconDisplayer from "../../UI/Icons/IconDisplayer";
-import settings from "../../../../settings/settings";
+import { useConfig } from "../../../contexts/Config";
 import SocialIcons from "../../UI/SocialIcons/SocialIcons";
 
 const Product = styled.div`
@@ -28,6 +28,8 @@ const ActionTechIcons = styled.div`
 `;
 
 const product = ({ name, cover, description, technologies, socialLinks }) => {
+  const config = useConfig();
+
   return (
     <Product>
       <Card className="Card">
@@ -38,11 +40,11 @@ const product = ({ name, cover, description, technologies, socialLinks }) => {
             {technologies && (
               <TechnologiesIconsContainer>
                 {technologies.map(tech =>
-                  settings.technologyIcons[tech] ? (
+                  config.technologyIcons[tech] ? (
                     <IconDisplayer
                       key={tech}
-                      name={settings.technologyIcons[tech].name}
-                      src={settings.technologyIcons[tech].icon}
+                      name={config.technologyIcons[tech].name}
+                      src={config.technologyIcons[tech].icon}
                     />
                   ) : (
                     /* eslint-disable-next-line no-console */

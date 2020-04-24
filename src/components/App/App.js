@@ -3,33 +3,35 @@ import styled from "styled-components";
 import { appStyle } from "./App.style";
 import TeamContributionCalendarDisplayer from "../TeamContributionCalendarDisplayer/TeamContributionCalendarDisplayer";
 import Header from "../Header/Header";
-import settings from "../../../settings/settings.json";
 import Medium from "../Medium/Medium";
 import Projects from "../Projects/Projects";
 import OneCol from "../UI/Layout/OneCol";
 import TwoCol from "../UI/Layout/TwoCol";
 import Products from "../Products/Products";
+import { useConfig } from "../../contexts/Config";
 
 const App = styled.div`
   ${appStyle}
 `;
 
-const app = () => (
-  <Fragment>
-    <Header />
-    <App>
-      <OneCol>
-        {settings.teamContributionCalendarUsers ? (
-          <TeamContributionCalendarDisplayer />
-        ) : null}
-      </OneCol>
-      <OneCol>{settings.products && <Products />}</OneCol>
-      <TwoCol>
-        {settings.medium ? <Medium /> : null}
-        {settings.github ? <Projects /> : null}
-      </TwoCol>
-    </App>
-  </Fragment>
-);
+export default () => {
+  const config = useConfig();
 
-export default app;
+  return (
+    <Fragment>
+      <Header />
+      <App>
+        <OneCol>
+          {config.teamContributionCalendarUsers ? (
+            <TeamContributionCalendarDisplayer />
+          ) : null}
+        </OneCol>
+        <OneCol>{config.products && <Products />}</OneCol>
+        <TwoCol>
+          {config.medium ? <Medium /> : null}
+          {config.github ? <Projects /> : null}
+        </TwoCol>
+      </App>
+    </Fragment>
+  );
+};

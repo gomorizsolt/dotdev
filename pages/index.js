@@ -3,12 +3,15 @@ import { Normalize } from "styled-normalize";
 import GlobalTheme from "../src/components/GlobalTheme/GlobalTheme";
 import { GlobalStyle } from "../src/common/GlobalStyle/GlobalStyle";
 import App from "../src/components/App/App";
+import { ConfigProvider } from "../src/contexts/Config";
 
 const indexPage = () => (
   <GlobalTheme>
     <Normalize />
     <GlobalStyle />
-    <App />
+    <ConfigProvider>
+      <App />
+    </ConfigProvider>
   </GlobalTheme>
 );
 

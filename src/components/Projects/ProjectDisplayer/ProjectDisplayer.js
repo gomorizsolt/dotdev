@@ -9,7 +9,7 @@ import {
 import * as githubUtils from "../utils/GithubUtils";
 import Loader from "../../UI/Loader/Loader";
 import StarIcon from "../../UI/Icons/StarIcon";
-import settings from "../../../../settings/settings.json";
+import { useConfig } from "../../../contexts/Config";
 import IconDisplayer from "../../UI/Icons/IconDisplayer";
 
 const ProjectDisplayer = styled.div`
@@ -29,6 +29,7 @@ const LanguagesIconContainer = styled.div`
 `;
 
 const projectDisplayer = ({ userName, repoName }) => {
+  const config = useConfig();
   const {
     githubFetchState,
     githubRepoLanguages,
@@ -76,14 +77,14 @@ const projectDisplayer = ({ userName, repoName }) => {
         <div className="project_description">
           <div>{githubFetchState.data.description}</div>
         </div>
-        {repoLanguages && settings.display === "icon" ? (
+        {repoLanguages && config.display === "icon" ? (
           <LanguagesIconContainer>
             {repoLanguages.map(tech =>
-              settings.technologyIcons[tech.toLowerCase()] ? (
+              config.technologyIcons[tech.toLowerCase()] ? (
                 <IconDisplayer
                   key={tech.toLowerCase()}
-                  name={settings.technologyIcons[tech.toLowerCase()].name}
-                  src={settings.technologyIcons[tech.toLowerCase()].icon}
+                  name={config.technologyIcons[tech.toLowerCase()].name}
+                  src={config.technologyIcons[tech.toLowerCase()].icon}
                 />
               ) : (
                 /* eslint-disable-next-line no-console */

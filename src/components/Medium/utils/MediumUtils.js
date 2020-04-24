@@ -1,17 +1,21 @@
 import RSSParser from "rss-parser";
-import getProxyURL from "../../../utils/GetProxyURL/GetProxyURL";
-import settings from "../../../../settings/settings.json";
+import Url from "url-parse";
 
 const filterItems = items => items.filter(item => item.categories);
 
-export const getArticles = async () => {
-  const rssParser = new RSSParser();
+const proxify = (proxy, url) => {
+  const proxifiedUrl = new Url(proxy);
 
-  const proxiedFeedURL = getProxyURL(
-    `https://medium.com/feed/${settings.medium}`
-  );
+  proxifiedUrl.set("pathname", url);
+
+  return proxifiedUrl.toString();
+};
+
+export const getArticles = async (proxy, username) => {
+  const rssParser = new RSSParser();
+  const feedUrl = proxify(proxy, `https://medium.com/feed/${username}`);
 
   return rssParser
-    .parseURL(proxiedFeedURL)
+    .parseURL(feedUrl)
     .then(content => filterItems(content.items));
 };
