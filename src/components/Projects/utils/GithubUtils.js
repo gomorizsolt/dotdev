@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback } from "react";
-// import * as customHooks from "../../../utils/CustomHooks/CustomHooks";
 import { useFetch } from "../../../utils/ReactUtils/ReactUtils";
 import settings from "../../../../settings/settings.json";
 
