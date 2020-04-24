@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build && next export",
-    "deploy": "echo $CONFIG_JSON > settings/settings.json && npm run build && cd out && touch .nojekyll",
+    "pre:deploy": "echo $CONFIG > config/config.yml && npm run build",
     "lint": "eslint . --ext .js",
     "start": "next start -p $PORT"
   },
@@ -16,7 +16,8 @@
     "react-dom": "16.8.3",
     "rss-parser": "^3.7.2",
     "styled-components": "^4.3.2",
-    "styled-normalize": "^8.0.6"
+    "styled-normalize": "^8.0.6",
+    "url-parse": "^1.4.7"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",
@@ -29,6 +30,7 @@
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-hooks": "^3.0.0",
+    "js-yaml-loader": "^1.2.2",
     "pre-commit": "^1.2.2",
     "prettier": "^1.16.4"
   },

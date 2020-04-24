@@ -9,7 +9,7 @@ import {
 import { useGitHub } from "../utils/GithubUtils";
 import Loader from "../../UI/Loader/Loader";
 import StarIcon from "../../UI/Icons/StarIcon";
-import settings from "../../../../settings/settings.json";
+import { useConfig } from "../../../contexts/Config";
 import IconDisplayer from "../../UI/Icons/IconDisplayer";
 
 const ProjectDisplayer = styled.div`
@@ -33,6 +33,7 @@ export default ({ userName, repoName }) => {
     userName,
     repoName
   );
+  const config = useConfig();
 
   if (loading) {
     return (
@@ -56,11 +57,11 @@ export default ({ userName, repoName }) => {
   }
 
   function renderLanguages() {
-    if (languages && settings.display === "icon") {
+    if (languages && config.display === "icon") {
       return (
         <LanguagesIconContainer>
           {languages.map(language => {
-            const icon = settings.technologyIcons[language.toLowerCase()];
+            const icon = config.technologyIcons[language.toLowerCase()];
 
             return icon ? (
               <IconDisplayer

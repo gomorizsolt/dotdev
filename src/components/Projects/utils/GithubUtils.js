@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { useFetch } from "../../../utils/ReactUtils/ReactUtils";
-import settings from "../../../../settings/settings.json";
+import { useConfig } from "../../../contexts/Config";
 
 const useRepoInfo = (username, repo) => {
   const fetchRepoInfo = useCallback(() => {
@@ -40,12 +40,13 @@ const useLanguages = (username, repo) => {
 
   const { data, loading, err } = useFetch(fetchRepoLanguages);
   const [languages, setLanguages] = useState();
+  const { github } = useConfig();
 
   useEffect(() => {
     if (!loading && !err) {
       const sumOfNumberOfBytes = Object.values(data).reduce((x, y) => x + y, 0);
       const defaultThreshold = 10;
-      const threshold = settings.github.languageThreshold || defaultThreshold;
+      const threshold = github.languageThreshold || defaultThreshold;
 
       const filteredLanguages = Object.keys(data).filter(language => {
         const currentNumberOfBytes = data[language];
@@ -55,7 +56,7 @@ const useLanguages = (username, repo) => {
 
       setLanguages(filteredLanguages);
     }
-  }, [data, loading, err]);
+  }, [data, loading, err, github.languageThreshold]);
 
   return {
     loading,

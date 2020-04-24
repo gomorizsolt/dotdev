@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import settings from "../../../settings/settings.json";
+import { useConfig } from "../../contexts/Config";
 import {
   headerStyle,
   headerIconsContainerStyle,
@@ -34,23 +34,25 @@ const Logo = styled.img`
   ${logoStyle}
 `;
 
-const header = () => (
-  <Header>
-    {settings.logo ? <Logo src={settings.logo} alt={settings.name} /> : null}
-    {settings.name ? <LogoText>{settings.name}</LogoText> : null}
-    <ToggleButton />
-    {settings.header && settings.header.technologies ? (
-      <HeaderIconsContainer>
-        {settings.display === "icon" ? <TechIcons /> : <TechNames />}
-        {settings.header.teamMembers ? <TeamMembers /> : null}
-        {settings.socialIcons && (
-          <SocialIconsWrapper>
-            <SocialIcons links={settings.header.socialLinks} />
-          </SocialIconsWrapper>
-        )}
-      </HeaderIconsContainer>
-    ) : null}
-  </Header>
-);
+export default () => {
+  const config = useConfig();
 
-export default header;
+  return (
+    <Header>
+      {config.logo ? <Logo src={config.logo} alt={config.name} /> : null}
+      {config.name ? <LogoText>{config.name}</LogoText> : null}
+      <ToggleButton />
+      {config.header && config.header.technologies ? (
+        <HeaderIconsContainer>
+          {config.display === "icon" ? <TechIcons /> : <TechNames />}
+          {config.header.teamMembers ? <TeamMembers /> : null}
+          {config.socialIcons && (
+            <SocialIconsWrapper>
+              <SocialIcons links={config.header.socialLinks} />
+            </SocialIconsWrapper>
+          )}
+        </HeaderIconsContainer>
+      ) : null}
+    </Header>
+  );
+};

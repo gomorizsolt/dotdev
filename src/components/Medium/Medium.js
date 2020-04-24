@@ -1,26 +1,36 @@
 import React, { useCallback } from "react";
 import RSSParser from "rss-parser";
+import Url from "url-parse";
 import styled from "styled-components";
-import settings from "../../../settings/settings.json";
-import getProxyURL from "../../utils/GetProxyURL/GetProxyURL";
 import { useFetch } from "../../utils/ReactUtils/ReactUtils";
 import Article from "./Article/Article";
 import Loader from "../UI/Loader/Loader";
+import { useConfig } from "../../contexts/Config";
 import { mediumStyle } from "./Medium.style";
 
 const Medium = styled.div`
   ${mediumStyle}
 `;
 
+const proxify = (proxy, url) => {
+  const proxifiedUrl = new Url(proxy);
+
+  proxifiedUrl.set("pathname", url);
+
+  return proxifiedUrl.toString();
+};
+
 export default () => {
+  const { proxyURL, medium: username } = useConfig();
+
   const fetchArticles = useCallback(() => {
     const parser = new RSSParser();
-    const url = getProxyURL(`https://medium.com/feed/${settings.medium}`);
+    const url = proxify(proxyURL, `https://medium.com/feed/${username}`);
 
     return parser
       .parseURL(url)
       .then(({ items }) => items.filter(item => item.categories));
-  }, []);
+  }, [proxyURL, username]);
 
   const { loading, err, data: articles } = useFetch(fetchArticles);
 
