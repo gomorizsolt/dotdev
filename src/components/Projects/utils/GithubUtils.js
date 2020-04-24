@@ -23,7 +23,7 @@ const fetchRepoLanguages = (userName, repositoryName) => {
 };
 
 export const useRepoLanguages = (userName, repoName) => {
-  const config = useConfig();
+  const { github } = useConfig();
   const [repoLanguages, setRepoLanguages] = useState([]);
 
   const githubFetchState = customHooks.useFetch(fetchRepo, userName, repoName);
@@ -41,7 +41,7 @@ export const useRepoLanguages = (userName, repoName) => {
       ).reduce((x, y) => x + y, 0);
 
       const defaultThreshold = 10;
-      const threshold = config.github.languageThreshold || defaultThreshold;
+      const threshold = github.languageThreshold || defaultThreshold;
 
       const languages = Object.keys(githubRepoLanguages.data).filter(
         language => {
