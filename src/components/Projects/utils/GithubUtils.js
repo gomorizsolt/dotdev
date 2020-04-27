@@ -2,16 +2,16 @@ import { useState, useEffect, useCallback } from "react";
 import { useFetch } from "../../../utils/ReactUtils/ReactUtils";
 import { useConfig } from "../../../contexts/Config";
 
-const useRepoInfo = (username, repo) => {
+const useRepoInfo = (org, repo) => {
   const fetchRepoInfo = useCallback(() => {
-    const url = `https://api.github.com/repos/${username}/${repo}`;
+    const url = `https://api.github.com/repos/${org}/${repo}`;
 
     return fetch(url, {
       headers: {
         Accept: "application/vnd.github.baptiste-preview+json",
       },
     }).then(res => res.json());
-  }, [username, repo]);
+  }, [org, repo]);
 
   const { data, loading, err } = useFetch(fetchRepoInfo);
 
@@ -27,16 +27,16 @@ const useRepoInfo = (username, repo) => {
   };
 };
 
-const useLanguages = (username, repo) => {
+const useLanguages = (org, repo) => {
   const fetchRepoLanguages = useCallback(() => {
-    const url = `https://api.github.com/repos/${username}/${repo}/languages`;
+    const url = `https://api.github.com/repos/${org}/${repo}/languages`;
 
     return fetch(url, {
       headers: {
         Accept: "application/vnd.github.baptiste-preview+json",
       },
     }).then(res => res.json());
-  }, [username, repo]);
+  }, [org, repo]);
 
   const { data, loading, err } = useFetch(fetchRepoLanguages);
   const [languages, setLanguages] = useState();
@@ -65,14 +65,14 @@ const useLanguages = (username, repo) => {
   };
 };
 
-export const useGitHub = (username, repo) => {
+export const useGitHub = (org, repo) => {
   const {
     loading: languagesLoading,
     err: languagesErr,
     languages,
-  } = useLanguages(username, repo);
+  } = useLanguages(org, repo);
   const { loading: repoInfoLoading, err: repoInfoErr, repoInfo } = useRepoInfo(
-    username,
+    org,
     repo
   );
 
