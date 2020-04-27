@@ -11,7 +11,6 @@ import { mediumStyle } from "./Medium.style";
 const Medium = styled.div`
   ${mediumStyle}
 `;
-x;
 
 export default () => {
   const { proxyURL, medium: username } = useConfig();
