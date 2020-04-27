@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import RSSParser from "rss-parser";
-import Url from "url-parse";
 import styled from "styled-components";
+import proxify from "../../utils/Proxify/Proxify";
 import { useFetch } from "../../utils/ReactUtils/ReactUtils";
 import Article from "./Article/Article";
 import Loader from "../UI/Loader/Loader";
@@ -11,14 +11,7 @@ import { mediumStyle } from "./Medium.style";
 const Medium = styled.div`
   ${mediumStyle}
 `;
-
-const proxify = (proxy, url) => {
-  const proxifiedUrl = new Url(proxy);
-
-  proxifiedUrl.set("pathname", url);
-
-  return proxifiedUrl.toString();
-};
+x;
 
 export default () => {
   const { proxyURL, medium: username } = useConfig();
