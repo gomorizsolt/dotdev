@@ -34,7 +34,7 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <title>{config.name || "dotdev"}</title>
+          <title>{config.name}</title>
           <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
         </Head>
         {/* We need to use explicit styles here, because of the initial render */}
