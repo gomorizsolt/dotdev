@@ -7,8 +7,7 @@ import {
   actionTechIconsStyle,
   technologiesIconsContainerStyle,
 } from "./Product.style";
-import IconDisplayer from "../../UI/Icons/IconDisplayer";
-import { useConfig } from "../../../contexts/Config";
+import TechIconsDisplayer from "../../TechIconsDisplayer/TechIconsDisplayer";
 import SocialIcons from "../../UI/SocialIcons/SocialIcons";
 
 const Product = styled.div`
@@ -28,26 +27,13 @@ const ActionTechIcons = styled.div`
 `;
 
 export default ({ name, cover, description, technologies, socialLinks }) => {
-  const { techIcons } = useConfig();
-
   function renderProductTitle() {
     return (
       <ProductTitle>
         {name}
         {technologies && (
           <TechnologiesIconsContainer>
-            {technologies.map(tech => {
-              const icon = techIcons[tech];
-
-              return icon ? (
-                <IconDisplayer key={tech} name={icon.name} src={icon.path} />
-              ) : (
-                // eslint-disable-next-line no-console
-                console.error(
-                  `There is no icon path specified in the settings for ${tech} technology`
-                )
-              );
-            })}
+            <TechIconsDisplayer technologies={technologies} />
           </TechnologiesIconsContainer>
         )}
       </ProductTitle>

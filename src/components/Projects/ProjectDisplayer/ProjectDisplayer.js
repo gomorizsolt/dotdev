@@ -10,7 +10,7 @@ import * as githubUtils from "../utils/GithubUtils";
 import Loader from "../../UI/Loader/Loader";
 import StarIcon from "../../UI/Icons/StarIcon";
 import { useConfig } from "../../../contexts/Config";
-import IconDisplayer from "../../UI/Icons/IconDisplayer";
+import TechIconsDisplayer from "../../TechIconsDisplayer/TechIconsDisplayer";
 
 const ProjectDisplayer = styled.div`
   ${projectDisplayerStyle}
@@ -29,7 +29,7 @@ const LanguagesIconContainer = styled.div`
 `;
 
 export default ({ userName, repoName }) => {
-  const { display, techIcons } = useConfig();
+  const { display } = useConfig();
   const {
     githubFetchState,
     githubRepoLanguages,
@@ -61,22 +61,7 @@ export default ({ userName, repoName }) => {
     if (repoLanguages && display === "icon") {
       return (
         <LanguagesIconContainer>
-          {repoLanguages.map(tech => {
-            const icon = techIcons[tech.toLowerCase()];
-
-            return icon ? (
-              <IconDisplayer
-                key={tech.toLowerCase()}
-                name={icon.name}
-                src={icon.path}
-              />
-            ) : (
-              /* eslint-disable-next-line no-console */
-              console.warn(
-                `There is no icon path specified in the settings for ${tech} technology`
-              )
-            );
-          })}
+          <TechIconsDisplayer technologies={repoLanguages} />
         </LanguagesIconContainer>
       );
     }
