@@ -5,7 +5,7 @@ import {
   productStyle,
   productTitleStyle,
   actionTechIconsStyle,
-  technologiesIconsContainerStyle,
+  technIconsWrapperStyle,
 } from "./Product.style";
 import TechIconsDisplayer from "../../TechIconsDisplayer/TechIconsDisplayer";
 import SocialIcons from "../../UI/SocialIcons/SocialIcons";
@@ -18,8 +18,8 @@ const ProductTitle = styled.div`
   ${productTitleStyle}
 `;
 
-const TechnologiesIconsContainer = styled.div`
-  ${technologiesIconsContainerStyle}
+const TechIconsWrapper = styled.div`
+  ${technIconsWrapperStyle}
 `;
 
 const ActionTechIcons = styled.div`
@@ -32,9 +32,9 @@ export default ({ name, cover, description, technologies, socialLinks }) => {
       <ProductTitle>
         {name}
         {technologies && (
-          <TechnologiesIconsContainer>
+          <TechIconsWrapper>
             <TechIconsDisplayer technologies={technologies} />
-          </TechnologiesIconsContainer>
+          </TechIconsWrapper>
         )}
       </ProductTitle>
     );
