@@ -33,7 +33,7 @@ export default ({ name, cover, description, technologies, socialLinks }) => {
         {name}
         {technologies && (
           <TechIconsWrapper>
-            <TechIconsDisplayer technologies={technologies} />
+            <TechIconsDisplayer collection={technologies} />
           </TechIconsWrapper>
         )}
       </ProductTitle>

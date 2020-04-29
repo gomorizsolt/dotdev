@@ -61,7 +61,7 @@ export default ({ userName, repoName }) => {
     if (repoLanguages && display === "icon") {
       return (
         <LanguageIconsWrapper>
-          <TechIconsDisplayer technologies={repoLanguages} />
+          <TechIconsDisplayer collection={repoLanguages} />
         </LanguageIconsWrapper>
       );
     }

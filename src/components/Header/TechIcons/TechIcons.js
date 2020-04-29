@@ -13,7 +13,7 @@ export default () => {
 
   return (
     <TechIconsWrapper>
-      <TechIconsDisplayer technologies={header.technologies} />
+      <TechIconsDisplayer collection={header.technologies} />
     </TechIconsWrapper>
   );
 };
