@@ -3,8 +3,8 @@ import styled from "styled-components";
 import {
   projectDisplayerStyle,
   errorContainerStyle,
-  languagesTextContainerStyle,
-  languagesIconContainerStyle,
+  languageTextsWrapperStyle,
+  languageIconsWrapperStyle,
 } from "./ProjectDisplayer.style";
 import * as githubUtils from "../utils/GithubUtils";
 import Loader from "../../UI/Loader/Loader";
@@ -20,12 +20,12 @@ const ErrorContainer = styled.div`
   ${errorContainerStyle}
 `;
 
-const LanguagesTextContainer = styled.div`
-  ${languagesTextContainerStyle}
+const LanguageTextsWrapper = styled.div`
+  ${languageTextsWrapperStyle}
 `;
 
-const LanguagesIconContainer = styled.div`
-  ${languagesIconContainerStyle}
+const LanguageIconsWrapper = styled.div`
+  ${languageIconsWrapperStyle}
 `;
 
 export default ({ userName, repoName }) => {
@@ -60,18 +60,18 @@ export default ({ userName, repoName }) => {
   function renderLanguages() {
     if (repoLanguages && display === "icon") {
       return (
-        <LanguagesIconContainer>
+        <LanguageIconsWrapper>
           <TechIconsDisplayer technologies={repoLanguages} />
-        </LanguagesIconContainer>
+        </LanguageIconsWrapper>
       );
     }
 
     return (
-      <LanguagesTextContainer>
+      <LanguageTextsWrapper>
         {repoLanguages.map(language => {
           return <div key={language}>{language}</div>;
         })}
-      </LanguagesTextContainer>
+      </LanguageTextsWrapper>
     );
   }
 
