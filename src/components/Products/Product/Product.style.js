@@ -40,7 +40,7 @@ export const productTitleStyle = css`
   }
 `;
 
-export const technologiesIconsContainerStyle = css`
+export const technIconsWrapperStyle = css`
   margin-left: auto;
 `;
 

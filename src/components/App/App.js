@@ -15,21 +15,26 @@ const App = styled.div`
 `;
 
 export default () => {
-  const config = useConfig();
+  const {
+    teamContributionCalendarUsers,
+    products,
+    medium,
+    github,
+  } = useConfig();
 
   return (
     <Fragment>
       <Header />
       <App>
         <OneCol>
-          {config.teamContributionCalendarUsers ? (
+          {teamContributionCalendarUsers && (
             <TeamContributionCalendarDisplayer />
-          ) : null}
+          )}
         </OneCol>
-        <OneCol>{config.products && <Products />}</OneCol>
+        <OneCol>{products && <Products />}</OneCol>
         <TwoCol>
-          {config.medium ? <Medium /> : null}
-          {config.github ? <Projects /> : null}
+          {medium && <Medium />}
+          {github && <Projects />}
         </TwoCol>
       </App>
     </Fragment>

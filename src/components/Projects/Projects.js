@@ -8,22 +8,16 @@ const Projects = styled.div`
   ${projectsStyle}
 `;
 
-const projects = () => {
-  const config = useConfig();
+export default () => {
+  const { github } = useConfig();
 
   return (
     <Projects>
       <h2 className="title">Projects</h2>
 
-      {config.github.repos.map(repo => (
-        <ProjectDisplayer
-          key={repo}
-          userName={config.github.name}
-          repoName={repo}
-        />
+      {github.repos.map(repo => (
+        <ProjectDisplayer key={repo} userName={github.name} repoName={repo} />
       ))}
     </Projects>
   );
 };
-
-export default projects;

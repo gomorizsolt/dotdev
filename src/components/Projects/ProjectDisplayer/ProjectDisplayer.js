@@ -3,14 +3,14 @@ import styled from "styled-components";
 import {
   projectDisplayerStyle,
   errorContainerStyle,
-  languagesTextContainerStyle,
-  languagesIconContainerStyle,
+  languageTextsWrapperStyle,
+  languageIconsWrapperStyle,
 } from "./ProjectDisplayer.style";
 import * as githubUtils from "../utils/GithubUtils";
 import Loader from "../../UI/Loader/Loader";
 import StarIcon from "../../UI/Icons/StarIcon";
 import { useConfig } from "../../../contexts/Config";
-import IconDisplayer from "../../UI/Icons/IconDisplayer";
+import TechIconsDisplayer from "../../TechIconsDisplayer/TechIconsDisplayer";
 
 const ProjectDisplayer = styled.div`
   ${projectDisplayerStyle}
@@ -20,16 +20,16 @@ const ErrorContainer = styled.div`
   ${errorContainerStyle}
 `;
 
-const LanguagesTextContainer = styled.div`
-  ${languagesTextContainerStyle}
+const LanguageTextsWrapper = styled.div`
+  ${languageTextsWrapperStyle}
 `;
 
-const LanguagesIconContainer = styled.div`
-  ${languagesIconContainerStyle}
+const LanguageIconsWrapper = styled.div`
+  ${languageIconsWrapperStyle}
 `;
 
-const projectDisplayer = ({ userName, repoName }) => {
-  const config = useConfig();
+export default ({ userName, repoName }) => {
+  const { display } = useConfig();
   const {
     githubFetchState,
     githubRepoLanguages,
@@ -57,6 +57,24 @@ const projectDisplayer = ({ userName, repoName }) => {
     );
   }
 
+  function renderLanguages() {
+    if (repoLanguages && display === "icon") {
+      return (
+        <LanguageIconsWrapper>
+          <TechIconsDisplayer collection={repoLanguages} />
+        </LanguageIconsWrapper>
+      );
+    }
+
+    return (
+      <LanguageTextsWrapper>
+        {repoLanguages.map(language => {
+          return <div key={language}>{language}</div>;
+        })}
+      </LanguageTextsWrapper>
+    );
+  }
+
   return (
     <ProjectDisplayer>
       <a
@@ -77,33 +95,8 @@ const projectDisplayer = ({ userName, repoName }) => {
         <div className="project_description">
           <div>{githubFetchState.data.description}</div>
         </div>
-        {repoLanguages && config.display === "icon" ? (
-          <LanguagesIconContainer>
-            {repoLanguages.map(tech =>
-              config.technologyIcons[tech.toLowerCase()] ? (
-                <IconDisplayer
-                  key={tech.toLowerCase()}
-                  name={config.technologyIcons[tech.toLowerCase()].name}
-                  src={config.technologyIcons[tech.toLowerCase()].icon}
-                />
-              ) : (
-                /* eslint-disable-next-line no-console */
-                console.warn(
-                  `There is no icon path specified in the settings for ${tech} technology`
-                )
-              )
-            )}
-          </LanguagesIconContainer>
-        ) : (
-          <LanguagesTextContainer>
-            {repoLanguages.map(language => {
-              return <div key={language}>{language}</div>;
-            })}
-          </LanguagesTextContainer>
-        )}
+        {renderLanguages()}
       </a>
     </ProjectDisplayer>
   );
 };
-
-export default projectDisplayer;
