@@ -9,14 +9,12 @@ const Products = styled.div`
 `;
 
 export default () => {
-  const config = useConfig();
+  const { products, productsTitle } = useConfig();
 
   return (
     <Products>
-      <h2 className="products__title">
-        {config.productsTitle ? config.productsTitle : "Products"}
-      </h2>
-      {config.products.map(product => (
+      <h2 className="products__title">{productsTitle || "Products"}</h2>
+      {products.map(product => (
         <Product
           key={product.name}
           name={product.name}

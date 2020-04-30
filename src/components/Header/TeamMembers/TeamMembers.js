@@ -8,13 +8,13 @@ const TeamMembers = styled.div`
 `;
 
 export default () => {
-  const config = useConfig();
+  const { header } = useConfig();
 
   return (
     <Fragment>
       <span className="border" />
       <TeamMembers>
-        {config.header.teamMembers.map((member, i) => [
+        {header.teamMembers.map((member, i) => [
           i > 0 && ", ",
           <a
             className="TeamMember"

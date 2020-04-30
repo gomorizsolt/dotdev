@@ -7,7 +7,7 @@ const Article = styled.div`
   ${articleStyle}
 `;
 
-const article = ({ articleDetails }) => (
+export default ({ articleDetails }) => (
   <Article>
     <a href={articleDetails.link} target="_blank" rel="noopener noreferrer">
       {articleDetails.title}
@@ -16,5 +16,3 @@ const article = ({ articleDetails }) => (
     <p>{new Date(articleDetails.pubDate).toDateString()}</p>
   </Article>
 );
-
-export default article;

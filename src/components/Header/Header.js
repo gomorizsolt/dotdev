@@ -35,24 +35,24 @@ const Logo = styled.img`
 `;
 
 export default () => {
-  const config = useConfig();
+  const { logo, name, header, display, socialIcons } = useConfig();
 
   return (
     <Header>
-      {config.logo ? <Logo src={config.logo} alt={config.name} /> : null}
-      {config.name ? <LogoText>{config.name}</LogoText> : null}
+      {logo && <Logo src={logo} alt={name} />}
+      {name && <LogoText>{name}</LogoText>}
       <ToggleButton />
-      {config.header && config.header.technologies ? (
+      {header && header.technologies && (
         <HeaderIconsContainer>
-          {config.display === "icon" ? <TechIcons /> : <TechNames />}
-          {config.header.teamMembers ? <TeamMembers /> : null}
-          {config.socialIcons && (
+          {display === "icon" ? <TechIcons /> : <TechNames />}
+          {header.teamMembers && <TeamMembers />}
+          {socialIcons && (
             <SocialIconsWrapper>
-              <SocialIcons links={config.header.socialLinks} />
+              <SocialIcons links={header.socialLinks} />
             </SocialIconsWrapper>
           )}
         </HeaderIconsContainer>
-      ) : null}
+      )}
     </Header>
   );
 };
