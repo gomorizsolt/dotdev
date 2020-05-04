@@ -89,16 +89,12 @@ teamContributionCalendarUsers:
 # Medium identifier. Type: string. Required: no.
 medium: "c-hive"
 
-# GitHub identifier. Type: object. Required: no.
+# GitHub repositories. Type: string (org/repo format). Required: no.
 github:
-  # Organization/user. Type: string. Required: no.
-  name: "c-hive"
-
-  # Repository identifiers. Type: array of strings. Required: no.
   repos:
-    - "team-contribution-calendar"
-    - "ws-anywhere"
-    - "js-boilerplate"
+    - "c-hive/team-contribution-calendar"
+    - "c-hive/ws-anywhere"
+    - "c-hive/js-boilerplate"
 
   # Percentage threshold for coding languages in a repository to be displayed for the project. Type: number, default: 10. Required: no
   # languageThreshold: 15
