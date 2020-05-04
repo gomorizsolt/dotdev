@@ -6,12 +6,10 @@ const CategoriesDisplayer = styled.div`
   ${categoriesDisplayerStyle}
 `;
 
-const categoriesDisplayer = ({ categories }) => (
+export default ({ categories }) => (
   <div>
     {categories.map(category => (
       <CategoriesDisplayer key={category}>{category}</CategoriesDisplayer>
     ))}
   </div>
 );
-
-export default categoriesDisplayer;

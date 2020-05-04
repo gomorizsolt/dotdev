@@ -9,18 +9,18 @@ const TeamContributionCalendarDisplayer = styled.div`
 `;
 
 export default () => {
-  const config = useConfig();
+  const { teamContributionCalendarUsers } = useConfig();
   const calendarRef = useRef();
 
   useEffect(() => {
     TeamContributionCalendar(
       calendarRef.current,
-      config.teamContributionCalendarUsers.github,
-      config.teamContributionCalendarUsers.gitlab
+      teamContributionCalendarUsers.github,
+      teamContributionCalendarUsers.gitlab
     );
   }, [
-    config.teamContributionCalendarUsers.github,
-    config.teamContributionCalendarUsers.gitlab,
+    teamContributionCalendarUsers.github,
+    teamContributionCalendarUsers.gitlab,
   ]);
 
   return (

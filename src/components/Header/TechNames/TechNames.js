@@ -8,13 +8,13 @@ const TechNames = styled.div`
 `;
 
 export default () => {
-  const config = useConfig();
+  const { header, techIcons } = useConfig();
 
   return (
     <TechNames>
-      {config.header.technologies.map(tech => (
+      {header.technologies.map(tech => (
         <div className="TechName" key={tech}>
-          {config.technologyIcons[tech].name}
+          {techIcons[tech].name}
         </div>
       ))}
     </TechNames>

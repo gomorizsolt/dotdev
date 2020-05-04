@@ -3,14 +3,14 @@ import styled from "styled-components";
 import {
   projectDisplayerStyle,
   errorContainerStyle,
-  languagesTextContainerStyle,
-  languagesIconContainerStyle,
+  languageTextsWrapperStyle,
+  languageIconsWrapperStyle,
 } from "./ProjectDisplayer.style";
 import { useGitHub } from "../utils/GithubUtils";
 import Loader from "../../UI/Loader/Loader";
 import StarIcon from "../../UI/Icons/StarIcon";
 import { useConfig } from "../../../contexts/Config";
-import IconDisplayer from "../../UI/Icons/IconDisplayer";
+import TechIconsDisplayer from "../../TechIconsDisplayer/TechIconsDisplayer";
 
 const ProjectDisplayer = styled.div`
   ${projectDisplayerStyle}
@@ -20,12 +20,12 @@ const ErrorContainer = styled.div`
   ${errorContainerStyle}
 `;
 
-const LanguagesTextContainer = styled.div`
-  ${languagesTextContainerStyle}
+const LanguageTextsWrapper = styled.div`
+  ${languageTextsWrapperStyle}
 `;
 
-const LanguagesIconContainer = styled.div`
-  ${languagesIconContainerStyle}
+const LanguageIconsWrapper = styled.div`
+  ${languageIconsWrapperStyle}
 `;
 
 export default ({ userName, repoName }) => {
@@ -33,7 +33,7 @@ export default ({ userName, repoName }) => {
     userName,
     repoName
   );
-  const config = useConfig();
+  const { display } = useConfig();
 
   if (loading) {
     return (
@@ -57,36 +57,20 @@ export default ({ userName, repoName }) => {
   }
 
   function renderLanguages() {
-    if (languages && config.display === "icon") {
+    if (languages && display === "icon") {
       return (
-        <LanguagesIconContainer>
-          {languages.map(language => {
-            const icon = config.technologyIcons[language.toLowerCase()];
-
-            return icon ? (
-              <IconDisplayer
-                key={language.toLowerCase()}
-                name={icon.name}
-                src={icon.icon}
-              />
-            ) : (
-              [
-                /* eslint-disable-next-line no-console */
-                console.warn(
-                  `There is no icon path specified in the settings for ${language}`
-                ),
-              ]
-            );
-          })}
-        </LanguagesIconContainer>
+        <LanguageIconsWrapper>
+          <TechIconsDisplayer collection={languages} />
+        </LanguageIconsWrapper>
       );
     }
+
     return (
-      <LanguagesTextContainer>
+      <LanguageTextsWrapper>
         {languages.map(language => {
           return <div key={language}>{language}</div>;
         })}
-      </LanguagesTextContainer>
+      </LanguageTextsWrapper>
     );
   }
 

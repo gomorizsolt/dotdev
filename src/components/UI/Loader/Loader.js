@@ -6,10 +6,8 @@ const Loader = styled.div`
   ${loaderStyle}
 `;
 
-const loader = () => (
+export default () => (
   <Loader>
     <div className="loader" />
   </Loader>
 );
-
-export default loader;

@@ -6,10 +6,8 @@ const OneCol = styled.div`
   ${oneColStyle}
 `;
 
-const oneCol = props => {
+export default props => {
   const { children } = props;
 
   return <OneCol>{children}</OneCol>;
 };
-
-export default oneCol;
