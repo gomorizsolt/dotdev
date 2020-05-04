@@ -2,7 +2,6 @@ import React from "react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import { ServerStyleSheet } from "styled-components";
 import { dark as darkTheme } from "../src/resources/Themes/Themes";
-import config from "../config/config.example.yml";
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -34,7 +33,6 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <title>{config.name}</title>
           <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
         </Head>
         {/* We need to use explicit styles here, because of the initial render */}
