@@ -18,7 +18,10 @@ export default () => {
       teamContributionCalendarUsers.github,
       teamContributionCalendarUsers.gitlab
     );
-  }, []);
+  }, [
+    teamContributionCalendarUsers.github,
+    teamContributionCalendarUsers.gitlab,
+  ]);
 
   return (
     <TeamContributionCalendarDisplayer>

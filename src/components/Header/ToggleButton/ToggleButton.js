@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { toggleButtonStyle } from "./ToggleButton.style";
-import { useTheme } from "../../../utils/useTheme/useTheme";
+import { useTheme } from "../../../contexts/Theme";
 import MoonIcon from "./Icons/MoonIcon";
 import SunIcon from "./Icons/SunIcon";
 
@@ -10,7 +10,7 @@ const ToggleButton = styled.div`
 `;
 
 export default () => {
-  const themeState = useTheme();
+  const { theme, toggle } = useTheme();
 
   return (
     <ToggleButton>
@@ -21,8 +21,8 @@ export default () => {
         <input
           id="shiftercb"
           type="checkbox"
-          onChange={() => themeState.toggle()}
-          checked={!themeState.dark}
+          onChange={toggle}
+          checked={theme !== "dark"}
           name="checkbox"
         />
         <span className="slider round" />

@@ -1,18 +1,18 @@
 import React from "react";
 import { Normalize } from "styled-normalize";
-import GlobalTheme from "../src/components/GlobalTheme/GlobalTheme";
 import { GlobalStyle } from "../src/common/GlobalStyle/GlobalStyle";
 import App from "../src/components/App/App";
+import { ThemeProvider } from "../src/contexts/Theme";
 import { ConfigProvider } from "../src/contexts/Config";
 
 const indexPage = () => (
-  <GlobalTheme>
+  <ThemeProvider>
     <Normalize />
     <GlobalStyle />
     <ConfigProvider>
       <App />
     </ConfigProvider>
-  </GlobalTheme>
+  </ThemeProvider>
 );
 
 export default indexPage;

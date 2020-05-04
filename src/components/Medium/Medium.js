@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useCallback } from "react";
+import RSSParser from "rss-parser";
+import Url from "url-parse";
 import styled from "styled-components";
-import * as customHooks from "../../utils/CustomHooks/CustomHooks";
-import * as mediumUtils from "./utils/MediumUtils";
+import { useFetch } from "../../utils/ReactUtils/ReactUtils";
 import Article from "./Article/Article";
 import Loader from "../UI/Loader/Loader";
 import { useConfig } from "../../contexts/Config";
@@ -11,13 +12,29 @@ const Medium = styled.div`
   ${mediumStyle}
 `;
 
-export default () => {
-  const { proxyURL, medium } = useConfig();
-  const articles = customHooks.useFetch(() =>
-    mediumUtils.getArticles(proxyURL, medium)
-  );
+const proxify = (proxy, url) => {
+  const proxifiedUrl = new Url(proxy);
 
-  if (articles.isLoading) {
+  proxifiedUrl.set("pathname", url);
+
+  return proxifiedUrl.toString();
+};
+
+export default () => {
+  const { proxyURL, medium: username } = useConfig();
+
+  const fetchArticles = useCallback(() => {
+    const parser = new RSSParser();
+    const url = proxify(proxyURL, `https://medium.com/feed/${username}`);
+
+    return parser
+      .parseURL(url)
+      .then(({ items }) => items.filter(item => item.categories));
+  }, [proxyURL, username]);
+
+  const { loading, err, data: articles } = useFetch(fetchArticles);
+
+  if (loading) {
     return (
       <Medium>
         <Loader />
@@ -25,7 +42,7 @@ export default () => {
     );
   }
 
-  if (articles.err) {
+  if (err) {
     const errorMessage =
       "An error has occurred while loading the Medium articles. Please try again later.";
 
@@ -35,8 +52,8 @@ export default () => {
   return (
     <Medium>
       <h2 className="title">Articles</h2>
-      {articles.data.map(articleDetails => (
-        <Article key={articleDetails.guid} articleDetails={articleDetails} />
+      {articles.map(article => (
+        <Article key={article.guid} articleDetails={article} />
       ))}
     </Medium>
   );
