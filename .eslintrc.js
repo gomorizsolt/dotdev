@@ -13,6 +13,6 @@ module.exports = {
     "linebreak-style": ["error", process.platform === "win32" ? "windows" : "unix"], // // https://stackoverflow.com/q/39114446/2771889
     "import/prefer-default-export": 0,
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn"
+    "react-hooks/exhaustive-deps": "error"
   },
 };

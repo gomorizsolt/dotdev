@@ -1,6 +1,6 @@
 # dotdev
 
-A Next.js SPA professional website template: https://c-hive.github.io/dotdev/
+Next.js SPA professional website template: https://c-hive.github.io/dotdev/
 
 ## Local development
 
