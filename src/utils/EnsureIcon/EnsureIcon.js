@@ -1,4 +1,4 @@
-export default (collection, identifier, cb) => {
+const ensureIcon = (collection, identifier, cb) => {
   const icon = collection[identifier.toLowerCase()];
 
   if (!icon) {
@@ -10,3 +10,5 @@ export default (collection, identifier, cb) => {
 
   return cb(icon);
 };
+
+export default ensureIcon;

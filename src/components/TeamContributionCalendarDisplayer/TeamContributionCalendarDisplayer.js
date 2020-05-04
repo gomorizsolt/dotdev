@@ -2,13 +2,13 @@ import React, { useEffect, useRef } from "react";
 import TeamContributionCalendar from "@c-hive/team-contribution-calendar";
 import styled from "styled-components";
 import { useConfig } from "../../contexts/Config";
-import { teamContributionCalendarDisplayerStyle } from "./TeamContributionCalendarDisplayer.style";
+import { calendarContainerStyle } from "./TeamContributionCalendarDisplayer.style";
 
-const TeamContributionCalendarDisplayer = styled.div`
-  ${teamContributionCalendarDisplayerStyle}
+const CalendarContainer = styled.div`
+  ${calendarContainerStyle}
 `;
 
-export default () => {
+const TeamContributionCalendarDisplayer = () => {
   const { teamContributionCalendarUsers } = useConfig();
   const calendarRef = useRef();
 
@@ -24,8 +24,10 @@ export default () => {
   ]);
 
   return (
-    <TeamContributionCalendarDisplayer>
+    <CalendarContainer>
       <div className="calendarContainer" ref={calendarRef} />
-    </TeamContributionCalendarDisplayer>
+    </CalendarContainer>
   );
 };
+
+export default TeamContributionCalendarDisplayer;

@@ -1,6 +1,6 @@
 import { css } from "styled-components";
 
-export const techNamesStyle = css`
+export const techNamesContainerStyle = css`
   display: inline-block;
 
   .TechName {

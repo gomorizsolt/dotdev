@@ -2,13 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import ProjectDisplayer from "./ProjectDisplayer/ProjectDisplayer";
 import { useConfig } from "../../contexts/Config";
-import { projectsStyle } from "./Projects.style";
+import { projectsContainerStyle } from "./Projects.style";
 
-const Projects = styled.div`
-  ${projectsStyle}
+const ProjectsContainer = styled.div`
+  ${projectsContainerStyle}
 `;
 
-export default () => {
+const Projects = () => {
   const { github } = useConfig();
 
   function processEntry(entry) {
@@ -25,9 +25,11 @@ export default () => {
   }
 
   return (
-    <Projects>
+    <ProjectsContainer>
       <h2 className="title">Projects</h2>
       {github.repos.map(processEntry)}
-    </Projects>
+    </ProjectsContainer>
   );
 };
+
+export default Projects;

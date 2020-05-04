@@ -1,6 +1,6 @@
 import { css } from "styled-components";
 
-export const projectsStyle = css`
+export const projectsContainerStyle = css`
   padding: 0 15px 0 0;
   margin: 40px 0;
 

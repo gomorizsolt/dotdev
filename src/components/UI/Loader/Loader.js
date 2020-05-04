@@ -1,13 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import { loaderStyle } from "./Loader.style";
+import { loaderContainerStyle } from "./Loader.style";
 
-const Loader = styled.div`
-  ${loaderStyle}
+const LoaderContainer = styled.div`
+  ${loaderContainerStyle}
 `;
 
-export default () => (
-  <Loader>
+const Loader = () => (
+  <LoaderContainer>
     <div className="loader" />
-  </Loader>
+  </LoaderContainer>
 );
+
+export default Loader;

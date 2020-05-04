@@ -1,19 +1,19 @@
 import React from "react";
 import styled from "styled-components";
-import { toggleButtonStyle } from "./ToggleButton.style";
+import { toggleButtonContainerStyle } from "./ToggleButton.style";
 import { useTheme } from "../../../contexts/Theme";
 import MoonIcon from "./Icons/MoonIcon";
 import SunIcon from "./Icons/SunIcon";
 
-const ToggleButton = styled.div`
-  ${toggleButtonStyle}
+const ToggleButtonContainer = styled.div`
+  ${toggleButtonContainerStyle}
 `;
 
-export default () => {
+const ToggleButton = () => {
   const { theme, toggle } = useTheme();
 
   return (
-    <ToggleButton>
+    <ToggleButtonContainer>
       <label id="shifter" htmlFor="shiftercb" className="switch">
         <div className="moon">
           <MoonIcon />
@@ -30,6 +30,8 @@ export default () => {
           <SunIcon />
         </div>
       </label>
-    </ToggleButton>
+    </ToggleButtonContainer>
   );
 };
+
+export default ToggleButton;

@@ -1,19 +1,19 @@
 import React, { Fragment } from "react";
 import styled from "styled-components";
-import { teamMembersStyle } from "./TeamMembers.style";
+import { teamMembersContainerStyle } from "./TeamMembers.style";
 import { useConfig } from "../../../contexts/Config";
 
-const TeamMembers = styled.div`
-  ${teamMembersStyle}
+const TeamMembersContainer = styled.div`
+  ${teamMembersContainerStyle}
 `;
 
-export default () => {
+const TeamMembers = () => {
   const { header } = useConfig();
 
   return (
     <Fragment>
       <span className="border" />
-      <TeamMembers>
+      <TeamMembersContainer>
         {header.teamMembers.map((member, i) => [
           i > 0 && ", ",
           <a
@@ -26,7 +26,9 @@ export default () => {
             {member.name}
           </a>,
         ])}
-      </TeamMembers>
+      </TeamMembersContainer>
     </Fragment>
   );
 };
+
+export default TeamMembers;

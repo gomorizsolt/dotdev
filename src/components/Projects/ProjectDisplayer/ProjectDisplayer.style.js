@@ -1,6 +1,6 @@
 import { css } from "styled-components";
 
-export const projectDisplayerStyle = css`
+export const projectDisplayerContainerStyle = css`
   text-align: left;
   margin-bottom: 1.2em;
 
