@@ -13,16 +13,22 @@ const Medium = styled.div`
 `;
 
 export default () => {
-  const { proxyURL, medium: username } = useConfig();
+  const { proxyURL: proxy, medium: username } = useConfig();
 
   const fetchArticles = useCallback(() => {
+    if (!proxy) {
+      throw new Error(
+        "Insufficient config: CORS proxy is mandatory for accessing Medium articles."
+      );
+    }
+
     const parser = new RSSParser();
-    const url = proxify(proxyURL, `https://medium.com/feed/${username}`);
+    const url = proxify(proxy, `https://medium.com/feed/${username}`);
 
     return parser
       .parseURL(url)
       .then(({ items }) => items.filter(item => item.categories));
-  }, [proxyURL, username]);
+  }, [proxy, username]);
 
   const { loading, err, data: articles } = useFetch(fetchArticles);
 
