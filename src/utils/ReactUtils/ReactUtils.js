@@ -12,9 +12,9 @@ export const useFactoryContext = context => {
   return ctx;
 };
 
-export const useFetch = fetchFn => {
+export const useFetch = (fetchFn, initialData) => {
   const [response, setResponse] = useState({
-    data: null,
+    data: initialData,
     loading: true,
     err: false,
   });
