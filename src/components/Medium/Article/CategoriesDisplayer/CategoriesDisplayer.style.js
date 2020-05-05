@@ -1,6 +1,6 @@
 import { css } from "styled-components";
 
-export const categoriesDisplayerStyle = css`
+export const categoryStyle = css`
   display: inline-block;
   padding: 0.4em 1em;
   color: #325359;

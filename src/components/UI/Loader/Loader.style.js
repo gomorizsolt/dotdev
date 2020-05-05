@@ -1,6 +1,6 @@
 import { css } from "styled-components";
 
-export const loaderStyle = css`
+export const loaderContainerStyle = css`
   .loader {
     display: block;
     width: 58px;

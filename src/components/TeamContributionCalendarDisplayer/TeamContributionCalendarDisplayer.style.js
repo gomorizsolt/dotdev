@@ -1,6 +1,6 @@
 import { css } from "styled-components";
 
-export const teamContributionCalendarDisplayerStyle = css`
+export const calendarContainerStyle = css`
   margin: 40px 0 0;
   text-align: center;
 

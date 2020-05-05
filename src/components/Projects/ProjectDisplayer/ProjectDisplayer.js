@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import {
-  projectDisplayerStyle,
+  projectDisplayerContainerStyle,
   errorContainerStyle,
   languageTextsWrapperStyle,
   languageIconsWrapperStyle,
@@ -12,8 +12,8 @@ import StarIcon from "../../UI/Icons/StarIcon";
 import { useConfig } from "../../../contexts/Config";
 import TechIconsDisplayer from "../../TechIconsDisplayer/TechIconsDisplayer";
 
-const ProjectDisplayer = styled.div`
-  ${projectDisplayerStyle}
+const ProjectDisplayerContainer = styled.div`
+  ${projectDisplayerContainerStyle}
 `;
 
 const ErrorContainer = styled.div`
@@ -28,7 +28,7 @@ const LanguageIconsWrapper = styled.div`
   ${languageIconsWrapperStyle}
 `;
 
-export default ({ org, repo }) => {
+const ProjectDisplayer = ({ org, repo }) => {
   const { loading, languagesErr, repoInfoErr, languages, repoInfo } = useGitHub(
     org,
     repo
@@ -37,9 +37,9 @@ export default ({ org, repo }) => {
 
   if (loading) {
     return (
-      <ProjectDisplayer>
+      <ProjectDisplayerContainer>
         <Loader />
-      </ProjectDisplayer>
+      </ProjectDisplayerContainer>
     );
   }
 
@@ -75,7 +75,7 @@ export default ({ org, repo }) => {
   }
 
   return (
-    <ProjectDisplayer>
+    <ProjectDisplayerContainer>
       <a
         className="repository_link"
         href={repoInfo.url}
@@ -96,6 +96,8 @@ export default ({ org, repo }) => {
         </div>
         {renderLanguages()}
       </a>
-    </ProjectDisplayer>
+    </ProjectDisplayerContainer>
   );
 };
+
+export default ProjectDisplayer;

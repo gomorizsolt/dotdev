@@ -24,7 +24,7 @@ export const socialIconsWrapperStyle = css`
   }
 `;
 
-export const headerStyle = css`
+export const headerContainerStyle = css`
   display: flex;
   flex-wrap: wrap;
   align-items: center;

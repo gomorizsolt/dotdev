@@ -1,20 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 import { IconButton } from "@material-ui/core/";
-import { socialIconsStyle } from "./SocialIcons.style";
+import { socialIconsContainerStyle } from "./SocialIcons.style";
 import IconDisplayer from "../Icons/IconDisplayer";
 import { useConfig } from "../../../contexts/Config";
 import ensureIcon from "../../../utils/EnsureIcon/EnsureIcon";
 
-const SocialIcons = styled.div`
-  ${socialIconsStyle}
+const SocialIconsContainer = styled.div`
+  ${socialIconsContainerStyle}
 `;
 
-export default ({ links }) => {
+const SocialIcons = ({ links }) => {
   const { socialIcons } = useConfig();
 
   return (
-    <SocialIcons>
+    <SocialIconsContainer>
       {links.map(social =>
         ensureIcon(
           socialIcons,
@@ -38,6 +38,8 @@ export default ({ links }) => {
             )
         )
       )}
-    </SocialIcons>
+    </SocialIconsContainer>
   );
 };
+
+export default SocialIcons;

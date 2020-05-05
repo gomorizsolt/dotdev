@@ -1,6 +1,6 @@
 import { css } from "styled-components";
 
-export const iconDisplayerStyle = css`
+export const iconDisplayerContainerStyle = css`
   display: inline-flex;
   justify-content: center;
   align-items: center;

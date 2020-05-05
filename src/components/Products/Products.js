@@ -1,18 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import { useConfig } from "../../contexts/Config";
-import { productsStyle } from "./Products.style";
+import { productsContainerStyle } from "./Products.style";
 import Product from "./Product/Product";
 
-const Products = styled.div`
-  ${productsStyle}
+const ProductsContainer = styled.div`
+  ${productsContainerStyle}
 `;
 
-export default () => {
+const Products = () => {
   const { products, productsTitle } = useConfig();
 
   return (
-    <Products>
+    <ProductsContainer>
       <h2 className="products__title">{productsTitle || "Products"}</h2>
       {products.map(product => (
         <Product
@@ -24,6 +24,8 @@ export default () => {
           socialLinks={product.socialLinks}
         />
       ))}
-    </Products>
+    </ProductsContainer>
   );
 };
+
+export default Products;

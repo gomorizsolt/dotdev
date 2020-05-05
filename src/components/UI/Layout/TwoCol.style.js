@@ -1,7 +1,7 @@
 import { css } from "styled-components";
 import { breakpoints } from "../../../resources/Breakpoints/Breakpoints";
 
-export const twoColStyle = css`
+export const twoColContainerStyle = css`
   width: 100%;
   display: flex;
   flex-wrap: wrap;

@@ -1,6 +1,6 @@
 import { css } from "styled-components";
 
-export const toggleButtonStyle = css`
+export const toggleButtonContainerStyle = css`
   margin: 0px 25px 0px auto;
 
   .switch {
