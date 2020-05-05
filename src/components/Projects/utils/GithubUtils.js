@@ -51,7 +51,7 @@ const useLanguages = (org, repo) => {
     }).then(res => res.json());
   }, [org, repo, proxyURL]);
 
-  const { data, loading, err } = useFetch(fetchRepoLanguages, []);
+  const { data, loading, err } = useFetch(fetchRepoLanguages);
   const [languages, setLanguages] = useState();
 
   useEffect(() => {
