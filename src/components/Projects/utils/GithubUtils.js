@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useFetch } from "../../../utils/ReactUtils/ReactUtils";
 import { useConfig } from "../../../contexts/Config";
 import proxify from "../../../utils/Proxify/Proxify";
+import safeJsonResponse from "../../../utils/SafeJsonResponse/SafeJsonResponse";
 
 const proxifyUrlInDev = (proxy, baseUrl) => {
   if (process.env.NODE_ENV === "development") {
@@ -21,7 +22,7 @@ const useRepoInfo = (org, repo) => {
       headers: {
         Accept: "application/vnd.github.baptiste-preview+json",
       },
-    }).then(res => res.json());
+    }).then(res => safeJsonResponse(res));
   }, [org, proxyURL, repo]);
 
   const { data, loading, err } = useFetch(fetchRepoInfo);
@@ -48,7 +49,7 @@ const useLanguages = (org, repo) => {
       headers: {
         Accept: "application/vnd.github.baptiste-preview+json",
       },
-    }).then(res => res.json());
+    }).then(res => safeJsonResponse(res));
   }, [org, repo, proxyURL]);
 
   const { data, loading, err } = useFetch(fetchRepoLanguages, []);
