@@ -1,6 +1,6 @@
 import { css } from "styled-components";
 
-export const socialIconsStyle = css`
+export const socialIconsContainerStyle = css`
   a {
     display: inline-block;
   }

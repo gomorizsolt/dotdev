@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import styled from "styled-components";
-import { appStyle } from "./App.style";
+import { appContainerStyle } from "./App.style";
 import TeamContributionCalendarDisplayer from "../TeamContributionCalendarDisplayer/TeamContributionCalendarDisplayer";
 import Header from "../Header/Header";
 import Medium from "../Medium/Medium";
@@ -10,11 +10,11 @@ import TwoCol from "../UI/Layout/TwoCol";
 import Products from "../Products/Products";
 import { useConfig } from "../../contexts/Config";
 
-const App = styled.div`
-  ${appStyle}
+const AppContainer = styled.div`
+  ${appContainerStyle}
 `;
 
-export default () => {
+const App = () => {
   const {
     teamContributionCalendarUsers,
     products,
@@ -25,7 +25,7 @@ export default () => {
   return (
     <Fragment>
       <Header />
-      <App>
+      <AppContainer>
         <OneCol>
           {teamContributionCalendarUsers && (
             <TeamContributionCalendarDisplayer />
@@ -36,7 +36,9 @@ export default () => {
           {medium && <Medium />}
           {github && <Projects />}
         </TwoCol>
-      </App>
+      </AppContainer>
     </Fragment>
   );
 };
+
+export default App;

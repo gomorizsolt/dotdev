@@ -1,13 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import { twoColStyle } from "./TwoCol.style";
+import { twoColContainerStyle } from "./TwoCol.style";
 
-const TwoCol = styled.div`
-  ${twoColStyle}
+const TwoColContainer = styled.div`
+  ${twoColContainerStyle}
 `;
 
-export default props => {
+const TwoCol = props => {
   const { children } = props;
 
-  return <TwoCol>{children}</TwoCol>;
+  return <TwoColContainer>{children}</TwoColContainer>;
 };
+
+export default TwoCol;

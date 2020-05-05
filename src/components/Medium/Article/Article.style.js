@@ -1,6 +1,6 @@
 import { css } from "styled-components";
 
-export const articleStyle = css`
+export const articleContainerStyle = css`
   text-align: left;
   margin-bottom: 1.2em;
 

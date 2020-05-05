@@ -1,7 +1,7 @@
 import { css } from "styled-components";
 import { breakpoints } from "../../resources/Breakpoints/Breakpoints";
 
-export const productsStyle = css`
+export const productsContainerStyle = css`
   margin: 0 auto;
   max-width: 1300px;
   display: flex;

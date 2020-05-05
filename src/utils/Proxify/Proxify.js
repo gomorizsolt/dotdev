@@ -1,9 +1,11 @@
 import Url from "url-parse";
 
-export default (proxy, url) => {
+const proxify = (proxy, url) => {
   const proxifiedUrl = new Url(proxy);
 
   proxifiedUrl.set("pathname", url);
 
   return proxifiedUrl.toString();
 };
+
+export default proxify;

@@ -1,18 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 import CategoriesDisplayer from "./CategoriesDisplayer/CategoriesDisplayer";
-import { articleStyle } from "./Article.style";
+import { articleContainerStyle } from "./Article.style";
 
-const Article = styled.div`
-  ${articleStyle}
+const ArticleContainer = styled.div`
+  ${articleContainerStyle}
 `;
 
-export default ({ articleDetails }) => (
-  <Article>
+const Article = ({ articleDetails }) => (
+  <ArticleContainer>
     <a href={articleDetails.link} target="_blank" rel="noopener noreferrer">
       {articleDetails.title}
     </a>
     <CategoriesDisplayer categories={articleDetails.categories} />
     <p>{new Date(articleDetails.pubDate).toDateString()}</p>
-  </Article>
+  </ArticleContainer>
 );
+
+export default Article;

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useConfig } from "../../contexts/Config";
 import {
-  headerStyle,
+  headerContainerStyle,
   headerIconsContainerStyle,
   socialIconsWrapperStyle,
   logoTextStyle,
@@ -14,8 +14,8 @@ import TechNames from "./TechNames/TechNames";
 import TeamMembers from "./TeamMembers/TeamMembers";
 import SocialIcons from "../UI/SocialIcons/SocialIcons";
 
-const Header = styled.div`
-  ${headerStyle}
+const HeaderContainer = styled.div`
+  ${headerContainerStyle}
 `;
 
 const HeaderIconsContainer = styled.div`
@@ -34,11 +34,11 @@ const Logo = styled.img`
   ${logoStyle}
 `;
 
-export default () => {
+const Header = () => {
   const { logo, name, header, display, socialIcons } = useConfig();
 
   return (
-    <Header>
+    <HeaderContainer>
       {logo && <Logo src={logo} alt={name} />}
       {name && <LogoText>{name}</LogoText>}
       <ToggleButton />
@@ -53,6 +53,8 @@ export default () => {
           )}
         </HeaderIconsContainer>
       )}
-    </Header>
+    </HeaderContainer>
   );
 };
+
+export default Header;

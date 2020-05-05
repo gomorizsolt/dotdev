@@ -1,6 +1,6 @@
 import { css } from "styled-components";
 
-export const teamMembersStyle = css`
+export const teamMembersContainerStyle = css`
   display: inline-block;
 
   .TeamMember {

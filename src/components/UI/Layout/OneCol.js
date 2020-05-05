@@ -1,13 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import { oneColStyle } from "./OneCol.style";
+import { oneColContainerStyle } from "./OneCol.style";
 
-const OneCol = styled.div`
-  ${oneColStyle}
+const OneColContainer = styled.div`
+  ${oneColContainerStyle}
 `;
 
-export default props => {
+const OneCol = props => {
   const { children } = props;
 
-  return <OneCol>{children}</OneCol>;
+  return <OneColContainer>{children}</OneColContainer>;
 };
+
+export default OneCol;

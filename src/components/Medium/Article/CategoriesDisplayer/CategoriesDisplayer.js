@@ -1,15 +1,17 @@
 import React from "react";
 import styled from "styled-components";
-import { categoriesDisplayerStyle } from "./CategoriesDisplayer.style";
+import { categoryStyle } from "./CategoriesDisplayer.style";
 
-const CategoriesDisplayer = styled.div`
-  ${categoriesDisplayerStyle}
+const Category = styled.div`
+  ${categoryStyle}
 `;
 
-export default ({ categories }) => (
+const CategoriesDisplayer = ({ categories }) => (
   <div>
     {categories.map(category => (
-      <CategoriesDisplayer key={category}>{category}</CategoriesDisplayer>
+      <Category key={category}>{category}</Category>
     ))}
   </div>
 );
+
+export default CategoriesDisplayer;

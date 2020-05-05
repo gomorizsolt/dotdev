@@ -1,6 +1,6 @@
 import { css } from "styled-components";
 
-export const appStyle = css`
+export const appContainerStyle = css`
   max-width: 90vw;
   display: flex;
   flex-wrap: wrap;

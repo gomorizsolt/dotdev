@@ -3,7 +3,7 @@ import { useConfig } from "../../contexts/Config";
 import IconDisplayer from "../UI/Icons/IconDisplayer";
 import ensureIcon from "../../utils/EnsureIcon/EnsureIcon";
 
-export default ({ collection }) => {
+const TechIconsDisplayer = ({ collection }) => {
   const { techIcons } = useConfig();
 
   return collection.map(tech =>
@@ -15,3 +15,5 @@ export default ({ collection }) => {
     )
   );
 };
+
+export default TechIconsDisplayer;

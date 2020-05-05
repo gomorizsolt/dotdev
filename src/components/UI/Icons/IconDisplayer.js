@@ -1,13 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import { iconDisplayerStyle } from "./IconDisplayer.style";
+import { iconDisplayerContainerStyle } from "./IconDisplayer.style";
 
-const IconDisplayer = styled.div`
-  ${iconDisplayerStyle}
+const IconDisplayerContainer = styled.div`
+  ${iconDisplayerContainerStyle}
 `;
 
-export default ({ name, src }) => (
-  <IconDisplayer>
+const IconDisplayer = ({ name, src }) => (
+  <IconDisplayerContainer>
     <img src={src} alt={name} />
-  </IconDisplayer>
+  </IconDisplayerContainer>
 );
+
+export default IconDisplayer;

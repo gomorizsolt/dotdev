@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Card, CardActions, CardContent, CardMedia } from "@material-ui/core/";
 import {
-  productStyle,
+  productContainerStyle,
   productTitleStyle,
   actionTechIconsStyle,
   technIconsWrapperStyle,
@@ -10,8 +10,8 @@ import {
 import TechIconsDisplayer from "../../TechIconsDisplayer/TechIconsDisplayer";
 import SocialIcons from "../../UI/SocialIcons/SocialIcons";
 
-const Product = styled.div`
-  ${productStyle}
+const ProductContainer = styled.div`
+  ${productContainerStyle}
 `;
 
 const ProductTitle = styled.div`
@@ -26,7 +26,7 @@ const ActionTechIcons = styled.div`
   ${actionTechIconsStyle}
 `;
 
-export default ({ name, cover, description, technologies, socialLinks }) => {
+const Product = ({ name, cover, description, technologies, socialLinks }) => {
   function renderProductTitle() {
     return (
       <ProductTitle>
@@ -41,7 +41,7 @@ export default ({ name, cover, description, technologies, socialLinks }) => {
   }
 
   return (
-    <Product>
+    <ProductContainer>
       <Card className="Card">
         {cover && <CardMedia image={cover} title={name} />}
         <CardContent>
@@ -56,6 +56,8 @@ export default ({ name, cover, description, technologies, socialLinks }) => {
           )}
         </CardContent>
       </Card>
-    </Product>
+    </ProductContainer>
   );
 };
+
+export default Product;

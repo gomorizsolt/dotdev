@@ -1,19 +1,21 @@
 import React from "react";
 import styled from "styled-components";
 import TechIconsDisplayer from "../../TechIconsDisplayer/TechIconsDisplayer";
-import { techIconsWrapperStyle } from "./TechIcons.style";
+import { techIconsContainerStyle } from "./TechIcons.style";
 import { useConfig } from "../../../contexts/Config";
 
-const TechIconsWrapper = styled.div`
-  ${techIconsWrapperStyle}
+const TechIconsContainer = styled.div`
+  ${techIconsContainerStyle}
 `;
 
-export default () => {
+const TechIcons = () => {
   const { header } = useConfig();
 
   return (
-    <TechIconsWrapper>
+    <TechIconsContainer>
       <TechIconsDisplayer collection={header.technologies} />
-    </TechIconsWrapper>
+    </TechIconsContainer>
   );
 };
+
+export default TechIcons;

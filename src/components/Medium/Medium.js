@@ -6,13 +6,13 @@ import { useFetch } from "../../utils/ReactUtils/ReactUtils";
 import Article from "./Article/Article";
 import Loader from "../UI/Loader/Loader";
 import { useConfig } from "../../contexts/Config";
-import { mediumStyle } from "./Medium.style";
+import { mediumContainerStyle } from "./Medium.style";
 
-const Medium = styled.div`
-  ${mediumStyle}
+const MediumContainer = styled.div`
+  ${mediumContainerStyle}
 `;
 
-export default () => {
+const Medium = () => {
   const { proxyURL: proxy, medium: username } = useConfig();
 
   const fetchArticles = useCallback(() => {
@@ -34,9 +34,9 @@ export default () => {
 
   if (loading) {
     return (
-      <Medium>
+      <MediumContainer>
         <Loader />
-      </Medium>
+      </MediumContainer>
     );
   }
 
@@ -48,11 +48,13 @@ export default () => {
   }
 
   return (
-    <Medium>
+    <MediumContainer>
       <h2 className="title">Articles</h2>
       {articles.map(article => (
         <Article key={article.guid} articleDetails={article} />
       ))}
-    </Medium>
+    </MediumContainer>
   );
 };
+
+export default Medium;
