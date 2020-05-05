@@ -57,7 +57,7 @@ const ProjectDisplayer = ({ org, repo }) => {
   }
 
   function renderLanguages() {
-    if (languages && display === "icon") {
+    if (!languagesErr && languages && display === "icon") {
       return (
         <LanguageIconsWrapper>
           <TechIconsDisplayer collection={languages} />
