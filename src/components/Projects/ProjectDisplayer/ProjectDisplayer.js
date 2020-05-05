@@ -28,10 +28,10 @@ const LanguageIconsWrapper = styled.div`
   ${languageIconsWrapperStyle}
 `;
 
-export default ({ userName, repoName }) => {
+export default ({ org, repo }) => {
   const { loading, languagesErr, repoInfoErr, languages, repoInfo } = useGitHub(
-    userName,
-    repoName
+    org,
+    repo
   );
   const { display } = useConfig();
 
@@ -44,7 +44,7 @@ export default ({ userName, repoName }) => {
   }
 
   if (repoInfoErr) {
-    const errorMessage = `An error has occurred while loading the ${repoName} Github project. Please try again later.`;
+    const errorMessage = `An error has occurred while loading the ${repo} Github project. Please try again later.`;
 
     return <ErrorContainer>{errorMessage}</ErrorContainer>;
   }
@@ -52,7 +52,7 @@ export default ({ userName, repoName }) => {
   if (languagesErr) {
     // eslint-disable-next-line no-console
     console.warn(
-      `An error has occurred while loading the ${repoName} Github project languages. Please try again later.`
+      `An error has occurred while loading the ${repo} Github project languages. Please try again later.`
     );
   }
 

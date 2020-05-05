@@ -11,13 +11,23 @@ const Projects = styled.div`
 export default () => {
   const { github } = useConfig();
 
+  function processEntry(entry) {
+    const [org, repo] = entry.split("/");
+
+    if (!org || !repo) {
+      // eslint-disable-next-line no-console
+      console.error("Missing organization or repository name.");
+
+      return null;
+    }
+
+    return <ProjectDisplayer key={repo} org={org} repo={repo} />;
+  }
+
   return (
     <Projects>
       <h2 className="title">Projects</h2>
-
-      {github.repos.map(repo => (
-        <ProjectDisplayer key={repo} userName={github.name} repoName={repo} />
-      ))}
+      {github.repos.map(processEntry)}
     </Projects>
   );
 };

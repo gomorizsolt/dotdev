@@ -11,18 +11,18 @@ const proxifyInDev = (proxy, baseUrl) => {
   return baseUrl;
 };
 
-const useRepoInfo = (username, repo) => {
+const useRepoInfo = (org, repo) => {
   const { proxyURL } = useConfig();
 
   const fetchRepoInfo = useCallback(() => {
-    const baseUrl = `https://api.github.com/repos/${username}/${repo}`;
+    const baseUrl = `https://api.github.com/repos/${org}/${repo}`;
 
     return fetch(proxifyInDev(proxyURL, baseUrl), {
       headers: {
         Accept: "application/vnd.github.baptiste-preview+json",
       },
     }).then(res => res.json());
-  }, [username, repo, proxyURL]);
+  }, [org, proxyURL, repo]);
 
   const { data, loading, err } = useFetch(fetchRepoInfo);
 
@@ -38,18 +38,18 @@ const useRepoInfo = (username, repo) => {
   };
 };
 
-const useLanguages = (username, repo) => {
+const useLanguages = (org, repo) => {
   const { github, proxyURL } = useConfig();
 
   const fetchRepoLanguages = useCallback(() => {
-    const baseUrl = `https://api.github.com/repos/${username}/${repo}/languages`;
+    const baseUrl = `https://api.github.com/repos/${org}/${repo}/languages`;
 
     return fetch(proxifyInDev(proxyURL, baseUrl), {
       headers: {
         Accept: "application/vnd.github.baptiste-preview+json",
       },
     }).then(res => res.json());
-  }, [username, repo, proxyURL]);
+  }, [org, repo, proxyURL]);
 
   const { data, loading, err } = useFetch(fetchRepoLanguages);
   const [languages, setLanguages] = useState();
@@ -77,14 +77,14 @@ const useLanguages = (username, repo) => {
   };
 };
 
-export const useGitHub = (username, repo) => {
+export const useGitHub = (org, repo) => {
   const {
     loading: languagesLoading,
     err: languagesErr,
     languages,
-  } = useLanguages(username, repo);
+  } = useLanguages(org, repo);
   const { loading: repoInfoLoading, err: repoInfoErr, repoInfo } = useRepoInfo(
-    username,
+    org,
     repo
   );
 
