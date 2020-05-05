@@ -1,17 +1,28 @@
 import { useState, useEffect, useCallback } from "react";
 import { useFetch } from "../../../utils/ReactUtils/ReactUtils";
 import { useConfig } from "../../../contexts/Config";
+import proxify from "../../../utils/Proxify/Proxify";
+
+const proxifyUrlInDev = (proxy, baseUrl) => {
+  if (process.env.NODE_ENV === "development") {
+    return proxify(proxy, baseUrl);
+  }
+
+  return baseUrl;
+};
 
 const useRepoInfo = (org, repo) => {
-  const fetchRepoInfo = useCallback(() => {
-    const url = `https://api.github.com/repos/${org}/${repo}`;
+  const { proxyURL } = useConfig();
 
-    return fetch(url, {
+  const fetchRepoInfo = useCallback(() => {
+    const baseUrl = `https://api.github.com/repos/${org}/${repo}`;
+
+    return fetch(proxifyUrlInDev(proxyURL, baseUrl), {
       headers: {
         Accept: "application/vnd.github.baptiste-preview+json",
       },
     }).then(res => res.json());
-  }, [org, repo]);
+  }, [org, proxyURL, repo]);
 
   const { data, loading, err } = useFetch(fetchRepoInfo);
 
@@ -28,19 +39,20 @@ const useRepoInfo = (org, repo) => {
 };
 
 const useLanguages = (org, repo) => {
-  const fetchRepoLanguages = useCallback(() => {
-    const url = `https://api.github.com/repos/${org}/${repo}/languages`;
+  const { github, proxyURL } = useConfig();
 
-    return fetch(url, {
+  const fetchRepoLanguages = useCallback(() => {
+    const baseUrl = `https://api.github.com/repos/${org}/${repo}/languages`;
+
+    return fetch(proxifyUrlInDev(proxyURL, baseUrl), {
       headers: {
         Accept: "application/vnd.github.baptiste-preview+json",
       },
     }).then(res => res.json());
-  }, [org, repo]);
+  }, [org, repo, proxyURL]);
 
   const { data, loading, err } = useFetch(fetchRepoLanguages);
   const [languages, setLanguages] = useState();
-  const { github } = useConfig();
 
   useEffect(() => {
     if (!loading && !err) {
