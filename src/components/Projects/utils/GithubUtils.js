@@ -3,7 +3,7 @@ import { useFetch } from "../../../utils/ReactUtils/ReactUtils";
 import { useConfig } from "../../../contexts/Config";
 import proxify from "../../../utils/Proxify/Proxify";
 
-const proxifyInDev = (proxy, baseUrl) => {
+const proxifyUrlInDev = (proxy, baseUrl) => {
   if (process.env.NODE_ENV === "development") {
     return proxify(proxy, baseUrl);
   }
@@ -17,7 +17,7 @@ const useRepoInfo = (org, repo) => {
   const fetchRepoInfo = useCallback(() => {
     const baseUrl = `https://api.github.com/repos/${org}/${repo}`;
 
-    return fetch(proxifyInDev(proxyURL, baseUrl), {
+    return fetch(proxifyUrlInDev(proxyURL, baseUrl), {
       headers: {
         Accept: "application/vnd.github.baptiste-preview+json",
       },
@@ -44,7 +44,7 @@ const useLanguages = (org, repo) => {
   const fetchRepoLanguages = useCallback(() => {
     const baseUrl = `https://api.github.com/repos/${org}/${repo}/languages`;
 
-    return fetch(proxifyInDev(proxyURL, baseUrl), {
+    return fetch(proxifyUrlInDev(proxyURL, baseUrl), {
       headers: {
         Accept: "application/vnd.github.baptiste-preview+json",
       },
