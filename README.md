@@ -6,6 +6,7 @@ Next.js SPA professional website template: https://c-hive.github.io/dotdev/
 
 ```bash
 npm install
+cp config/config.example.yml config/config.yml
 npm run lint
 npm run dev
 ```

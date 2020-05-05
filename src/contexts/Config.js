@@ -1,6 +1,6 @@
 import React, { createContext } from "react";
 import { useFactoryContext } from "../utils/ReactUtils/ReactUtils";
-import config from "../../config/config.example.yml";
+import config from "../../config/config.yml";
 
 const ConfigContext = createContext();
 ConfigContext.displayName = "ConfigContext";
