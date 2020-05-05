@@ -35,20 +35,6 @@ const ProjectDisplayer = ({ org, repo }) => {
   );
   const { display } = useConfig();
 
-  if (loading) {
-    return (
-      <ProjectDisplayerContainer>
-        <Loader />
-      </ProjectDisplayerContainer>
-    );
-  }
-
-  if (repoInfoErr) {
-    const errorMessage = `An error has occurred while loading the ${repo} Github project. Please try again later.`;
-
-    return <ErrorContainer>{errorMessage}</ErrorContainer>;
-  }
-
   function renderLanguages() {
     if (languagesErr || !languages) {
       // eslint-disable-next-line no-console
@@ -74,6 +60,19 @@ const ProjectDisplayer = ({ org, repo }) => {
         })}
       </LanguageTextsWrapper>
     );
+  }
+  if (loading) {
+    return (
+      <ProjectDisplayerContainer>
+        <Loader />
+      </ProjectDisplayerContainer>
+    );
+  }
+
+  if (repoInfoErr) {
+    const errorMessage = `An error has occurred while loading the ${repo} Github project. Please try again later.`;
+
+    return <ErrorContainer>{errorMessage}</ErrorContainer>;
   }
 
   return (
