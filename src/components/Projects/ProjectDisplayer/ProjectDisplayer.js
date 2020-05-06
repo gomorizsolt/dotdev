@@ -36,7 +36,7 @@ const ProjectDisplayer = ({ org, repo }) => {
   const { display } = useConfig();
 
   function renderLanguages() {
-    if (languagesErr || !languages) {
+    if (languagesErr) {
       // eslint-disable-next-line no-console
       console.warn(
         `An error has occurred while loading the ${repo} Github project languages. Please try again later.`
@@ -61,6 +61,7 @@ const ProjectDisplayer = ({ org, repo }) => {
       </LanguageTextsWrapper>
     );
   }
+
   if (loading) {
     return (
       <ProjectDisplayerContainer>
