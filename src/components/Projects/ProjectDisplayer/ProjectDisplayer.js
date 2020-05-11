@@ -35,29 +35,17 @@ const ProjectDisplayer = ({ org, repo }) => {
   );
   const { display } = useConfig();
 
-  if (loading) {
-    return (
-      <ProjectDisplayerContainer>
-        <Loader />
-      </ProjectDisplayerContainer>
-    );
-  }
-
-  if (repoInfoErr) {
-    const errorMessage = `An error has occurred while loading the ${repo} Github project. Please try again later.`;
-
-    return <ErrorContainer>{errorMessage}</ErrorContainer>;
-  }
-
-  if (languagesErr) {
-    // eslint-disable-next-line no-console
-    console.warn(
-      `An error has occurred while loading the ${repo} Github project languages. Please try again later.`
-    );
-  }
-
   function renderLanguages() {
-    if (languages && display === "icon") {
+    if (languagesErr) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        `An error has occurred while loading the ${repo} Github project languages. Please try again later.`
+      );
+
+      return null;
+    }
+
+    if (display === "icon") {
       return (
         <LanguageIconsWrapper>
           <TechIconsDisplayer collection={languages} />
@@ -72,6 +60,20 @@ const ProjectDisplayer = ({ org, repo }) => {
         })}
       </LanguageTextsWrapper>
     );
+  }
+
+  if (loading) {
+    return (
+      <ProjectDisplayerContainer>
+        <Loader />
+      </ProjectDisplayerContainer>
+    );
+  }
+
+  if (repoInfoErr) {
+    const errorMessage = `An error has occurred while loading the ${repo} Github project. Please try again later.`;
+
+    return <ErrorContainer>{errorMessage}</ErrorContainer>;
   }
 
   return (
