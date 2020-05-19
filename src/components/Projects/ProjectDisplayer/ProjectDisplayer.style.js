@@ -47,10 +47,6 @@ export const projectDisplayerContainerStyle = css`
   }
 `;
 
-export const errorContainerStyle = css`
-  margin-bottom: 1.2em;
-`;
-
 export const languageIconsWrapperStyle = css`
   margin-top: 5px;
 
