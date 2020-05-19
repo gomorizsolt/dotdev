@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import {
   projectDisplayerContainerStyle,
-  errorContainerStyle,
   languageTextsWrapperStyle,
   languageIconsWrapperStyle,
 } from "./ProjectDisplayer.style";
@@ -14,10 +13,6 @@ import TechIconsDisplayer from "../../TechIconsDisplayer/TechIconsDisplayer";
 
 const ProjectDisplayerContainer = styled.div`
   ${projectDisplayerContainerStyle}
-`;
-
-const ErrorContainer = styled.div`
-  ${errorContainerStyle}
 `;
 
 const LanguageTextsWrapper = styled.div`
@@ -71,9 +66,12 @@ const ProjectDisplayer = ({ org, repo }) => {
   }
 
   if (repoInfoErr) {
-    const errorMessage = `An error has occurred while loading the ${repo} Github project. Please try again later.`;
+    // eslint-disable-next-line no-console
+    console.warn(
+      `An error has occurred while loading the '${repo}' Github project. Please try again later.`
+    );
 
-    return <ErrorContainer>{errorMessage}</ErrorContainer>;
+    return null;
   }
 
   return (
