@@ -20,11 +20,11 @@ Refer to the [example](./config/config.example.yml) file for the available optio
 #### Deploy to GitHub Pages
 - [Fork me](/../../fork)
 - Store a [deployment key](https://github.com/JamesIves/github-pages-deploy-action/tree/dev#using-an-ssh-deploy-key-) in the `DEPLOY_KEY` secret
-- Store config in `CONFIG` secret
+- Store the output of `npm run print-config` in the `CONFIG` environment variable
 #### Deploy elsewhere
 - [Fork me](/../../fork)
 - Set up custom deployment workflow
-- Store the configuration in the `CONFIG` environment variable
+- Store the output of `npm run print-config` in the `CONFIG` environment variable
 
 ## Conventions
 

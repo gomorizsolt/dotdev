@@ -30,7 +30,7 @@ jobs:
       - name: Build & Prepare files for deployment
         env:
           CONFIG: ${{ secrets.CONFIG }}
-        run: npm run pre:deploy
+        run: npm run build:prod
       - name: Install SSH Client
         uses: webfactory/ssh-agent@v0.2.0
         with:
