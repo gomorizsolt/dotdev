@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "next",
     "build:dev": "cross-env TARGET=development next build",
-    "build:prod": "cross-env TARGET=production next build && next export",
+    "build:prod": "cross-env TARGET=production next build && npm run export",
     "export": "next export",
     "lint": "eslint . --ext .js",
     "start": "npm run build:dev && next start",
