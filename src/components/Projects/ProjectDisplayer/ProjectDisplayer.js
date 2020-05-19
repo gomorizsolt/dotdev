@@ -67,7 +67,7 @@ const ProjectDisplayer = ({ org, repo }) => {
 
   if (repoInfoErr) {
     // eslint-disable-next-line no-console
-    console.warn(
+    console.error(
       `An error has occurred while loading the '${repo}' Github project. Please try again later.`
     );
 
