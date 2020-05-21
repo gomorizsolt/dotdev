@@ -10,7 +10,7 @@ import { ConfigProvider } from "../src/contexts/Config";
 const indexPage = ({ config }) => (
   <>
     <Head>
-      <title>title</title>
+      <title>{config.name}</title>
     </Head>
     <ThemeProvider>
       <Normalize />
