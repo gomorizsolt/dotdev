@@ -25,7 +25,6 @@ const readConfig = () => {
   const configPath = path.join(process.cwd(), "config", "config.yml");
 
   try {
-    // Parses the YAML configuration to JSON and removes lintering comments.
     const config = yaml.safeLoad(fs.readFileSync(configPath, "utf8"));
 
     return config;
