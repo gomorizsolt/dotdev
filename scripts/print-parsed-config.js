@@ -1,6 +1,6 @@
-import path from "path";
-import fs from "fs";
-import yaml from "js-yaml";
+const path = require("path");
+const fs = require("fs");
+const yaml = require("js-yaml");
 
 (() => {
   const configPath = path.join(process.cwd(), "config", "config.yml");
