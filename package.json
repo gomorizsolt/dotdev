@@ -3,11 +3,9 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "next",
-    "build:dev": "cross-env TARGET=development next build",
-    "build:prod": "cross-env TARGET=production next build && npm run export",
-    "export": "next export",
+    "build": "next build && next export",
     "lint": "eslint . --ext .js",
-    "start": "npm run build:dev && next start",
+    "start": "npm run build && next start",
     "print-config": "node ./scripts/print-parsed-config.js"
   },
   "dependencies": {
@@ -25,7 +23,6 @@
   "devDependencies": {
     "@babel/core": "^7.6.0",
     "babel-plugin-styled-components": "^1.10.6",
-    "cross-env": "^7.0.2",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.1",
     "eslint-config-prettier": "^4.0.0",

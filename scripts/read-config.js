@@ -3,7 +3,7 @@ import fs from "fs";
 import yaml from "js-yaml";
 
 const readConfig = () => {
-  if (process.env.TARGET === "production") {
+  if (process.env.NODE_ENV === "production") {
     if (!process.env.CONFIG) {
       throw new Error(
         "Cannot find `CONFIG` environment variable. Make sure it's configured and exposed from the secrets."
