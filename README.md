@@ -28,7 +28,7 @@ Refer to the [example](./config/config.example.yml) file for the available optio
 - Set up custom deployment workflow
 - Edit `config/config.yml`
 - Run `npm run print-config`
-- Store the output in the `CONFIG` secret
+- Store the output in the `CONFIG` environment variable
 
 ## Conventions
 
