@@ -6,7 +6,7 @@
     "build": "next build && next export",
     "lint": "eslint . --ext .js",
     "start": "npm run build && next start",
-    "print-config": "node ./scripts/print-parsed-config.js"
+    "print-config": "node ./scripts/print-config.js"
   },
   "dependencies": {
     "@c-hive/team-contribution-calendar": "^0.3.0",
