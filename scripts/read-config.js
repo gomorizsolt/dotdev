@@ -4,9 +4,7 @@ import yaml from "js-yaml";
 
 const readProductionConfig = () => {
   if (!process.env.CONFIG) {
-    throw new Error(
-      "Cannot find `CONFIG` environment variable. Make sure it's configured and exposed."
-    );
+    throw new Error("`CONFIG` environment variable is not set.");
   }
 
   try {
