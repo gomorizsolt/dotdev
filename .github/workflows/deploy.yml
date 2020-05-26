@@ -21,10 +21,10 @@ jobs:
       - uses: c-hive/gha-npm-cache@v1
       - name: Install JS dependencies
         run: npm install
-      - name: Build & Prepare files for deployment
+      - name: Build
         env:
           CONFIG: ${{ secrets.CONFIG }}
-        run: npm run pre:deploy
+        run: npm run build
       - name: Install SSH Client
         uses: webfactory/ssh-agent@v0.2.0
         with:
