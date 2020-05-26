@@ -18,7 +18,13 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ env.node_version }}
-      - uses: c-hive/gha-npm-cache@v1
+      - name: Cache JS dependencies
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-js-dependencies-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-js-dependencies-
       - name: Install JS dependencies
         run: npm install
       - name: Build
